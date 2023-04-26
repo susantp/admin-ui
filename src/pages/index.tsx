@@ -1,6 +1,6 @@
-import React from "react";
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
+import Image from 'next/image';
+import React from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
