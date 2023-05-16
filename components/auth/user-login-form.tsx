@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useRef } from "react"
+import { ApiClient, ApiResponse } from "@/src/api-client"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -16,7 +17,9 @@ export default function UserLoginForm(): JSX.Element {
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    console.log({ username, password })
+    ApiClient.post<unknown>("/api/v1/user/login/", { username, password })
+      .then((res: ApiResponse<unknown>) => console.log(res))
+      .catch((err: unknown) => console.error(err))
   }
 
   return (
@@ -44,7 +47,7 @@ export default function UserLoginForm(): JSX.Element {
             placeholder="Password"
           />
         </div>
-        <Button>Register</Button>
+        <Button>Login</Button>
       </div>
     </form>
   )
