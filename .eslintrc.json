@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "filenames"],
   "extends": [
     "next/core-web-vitals",
     "airbnb",
@@ -14,7 +14,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["/*.config.js"],
+  "ignorePatterns": ["/*.config.js", "/*-generator.js"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
 
@@ -41,6 +41,8 @@
         "propertyDeclaration": true,
         "variableDeclaration": true
       }
-    ]
+    ],
+
+    "filenames/match-regex": [2, "^[a-z]+(-[a-z]+)*$", true]
   }
 }
