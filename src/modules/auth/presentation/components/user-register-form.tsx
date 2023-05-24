@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useRef } from "react"
+import useAuth from "@/auth/presentation/hooks/use-auth"
+import { AuthState } from "@/auth/presentation/state/auth-atom"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,7 +14,20 @@ export default function UserRegisterForm(): JSX.Element {
   const emailRef: React.RefObject<HTMLInputElement> = useRef(null)
   const phoneRef: React.RefObject<HTMLInputElement> = useRef(null)
 
-  function onSubmit(event: React.SyntheticEvent): void {
+  const {
+    register,
+    authState,
+  }: {
+    authState: AuthState
+    register: (
+      username: string,
+      password: string,
+      email: string,
+      phone: string
+    ) => Promise<void>
+  } = useAuth()
+
+  async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault()
 
     const username: string = usernameRef.current?.value ?? ""
@@ -20,10 +35,11 @@ export default function UserRegisterForm(): JSX.Element {
     const email: string = emailRef.current?.value ?? ""
     const phone: string = phoneRef.current?.value ?? ""
 
-    console.log({ username, password, email, phone })
+    await register(username, password, email, phone)
   }
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={onSubmit}>
       <div className="grid gap-2">
         <div className="grid gap-1">
@@ -81,6 +97,11 @@ export default function UserRegisterForm(): JSX.Element {
           />
         </div>
         <Button>Register</Button>
+        <p className="text-sm text-center">
+          {authState.loading && "Loading..."}
+          {authState.error}
+          {authState.data && "Authenticated"}
+        </p>
       </div>
     </form>
   )

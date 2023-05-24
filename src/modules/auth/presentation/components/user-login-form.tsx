@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useRef } from "react"
+import useAuth from "@/auth/presentation/hooks/use-auth"
+import { AuthState } from "@/auth/presentation/state/auth-atom"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,16 +12,25 @@ export default function UserLoginForm(): JSX.Element {
   const usernameRef: React.RefObject<HTMLInputElement> = useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = useRef(null)
 
-  function onSubmit(event: React.SyntheticEvent): void {
+  const {
+    login,
+    authState,
+  }: {
+    authState: AuthState
+    login: (username: string, password: string) => Promise<void>
+  } = useAuth()
+
+  async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault()
 
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    console.log({ username, password })
+    await login(username, password)
   }
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={onSubmit}>
       <div className="grid gap-2">
         <div className="grid gap-1">
@@ -44,7 +55,12 @@ export default function UserLoginForm(): JSX.Element {
             placeholder="Password"
           />
         </div>
-        <Button>Register</Button>
+        <Button>Login</Button>
+        <p className="text-sm text-center">
+          {authState.loading && "Loading..."}
+          {authState.error}
+          {authState.data && "Authenticated"}
+        </p>
       </div>
     </form>
   )
