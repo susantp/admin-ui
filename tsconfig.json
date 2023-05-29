@@ -20,7 +20,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/auth/*": ["./src/modules/auth/*"]
     },
     "strictNullChecks": true
   },
