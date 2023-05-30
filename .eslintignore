@@ -1,3 +1,5 @@
 public
 node_modules
 /components/ui/*
+pages/sentry-example-page.js
+pages/api/sentry-example-api.js

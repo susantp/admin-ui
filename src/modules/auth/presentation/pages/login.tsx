@@ -27,6 +27,7 @@ export default function LoginPage(): JSX.Element {
           >
             Don&apos;t have an account? Register
           </Link>
+          {/* <button onClick={() => methodDoesNotExist()}>Break the world</button>; */}
         </p>
       </div>
     </div>
