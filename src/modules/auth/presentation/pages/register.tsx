@@ -2,7 +2,7 @@
 
 import React from "react"
 import Link from "next/link"
-import UserRegisterForm from "@/src/modules/auth/presentation/components/user-register-form"
+import UserRegisterForm from "@/auth/presentation/components/user-register-form"
 import { RecoilRoot } from "recoil"
 
 export default function RegisterPage(): JSX.Element {

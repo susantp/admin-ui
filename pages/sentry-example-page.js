@@ -1,5 +1,5 @@
-import Head from "next/head";
-import * as Sentry from "@sentry/nextjs";
+import Head from "next/head"
+import * as Sentry from "@sentry/nextjs"
 
 export default function Home() {
   return (
@@ -49,19 +49,19 @@ export default function Home() {
           onClick={async () => {
             const transaction = Sentry.startTransaction({
               name: "Example Frontend Transaction",
-            });
+            })
 
             Sentry.configureScope((scope) => {
-              scope.setSpan(transaction);
-            });
+              scope.setSpan(transaction)
+            })
 
             try {
-              const res = await fetch("/api/sentry-example-api");
+              const res = await fetch("/api/sentry-example-api")
               if (!res.ok) {
-                throw new Error("Sentry Example Frontend Error");
+                throw new Error("Sentry Example Frontend Error")
               }
             } finally {
-              transaction.finish();
+              transaction.finish()
             }
           }}
         >
@@ -70,7 +70,10 @@ export default function Home() {
 
         <p>
           Next, look for the error on the{" "}
-          <a href="https://crupee-foundation.sentry.io/issues/?project=4505274038616064">Issues Page</a>.
+          <a href="https://crupee-foundation.sentry.io/issues/?project=4505274038616064">
+            Issues Page
+          </a>
+          .
         </p>
         <p style={{ marginTop: "24px" }}>
           For more information, see{" "}
@@ -80,5 +83,5 @@ export default function Home() {
         </p>
       </main>
     </div>
-  );
+  )
 }
