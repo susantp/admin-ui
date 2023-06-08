@@ -10,7 +10,7 @@ import * as Sentry from "@sentry/nextjs"
 // }
 
 export default function SentryExamplePage(): JSX.Element {
-  const throwSentryError = async () => {
+  const throwSentryError = () => {
     const transaction = Sentry.startTransaction({
       name: "Example Frontend Transaction",
     })
@@ -19,14 +19,15 @@ export default function SentryExamplePage(): JSX.Element {
       scope.setSpan(transaction)
     })
 
-    try {
-      const res = await fetch("/api/sentry-example-api")
-      if (!res.ok) {
-        throw new Error("Sentry Example Frontend Error")
-      }
-    } finally {
-      transaction.finish()
-    }
+    fetch("/api/sentry-example-api")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Sentry Example Frontend Error")
+        }
+      })
+      .finally(() => {
+        transaction.finish()
+      })
   }
 
   return (
