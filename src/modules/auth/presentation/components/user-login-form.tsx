@@ -20,17 +20,16 @@ export default function UserLoginForm(): JSX.Element {
     login: (username: string, password: string) => Promise<void>
   } = useAuth()
 
-  async function onSubmit(event: React.SyntheticEvent): Promise<void> {
+  function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
 
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    await login(username, password)
+    login(username, password).catch((err) => console.log(err))
   }
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={onSubmit}>
       <div className="grid gap-2">
         <div className="grid gap-1">

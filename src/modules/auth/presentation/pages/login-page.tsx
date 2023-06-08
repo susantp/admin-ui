@@ -1,9 +1,6 @@
-"use client"
-
 import React from "react"
 import Link from "next/link"
 import UserLoginForm from "@/auth/presentation/components/user-login-form"
-import { RecoilRoot } from "recoil"
 
 export default function LoginPage(): JSX.Element {
   return (
@@ -17,9 +14,7 @@ export default function LoginPage(): JSX.Element {
             Enter your credentials to sign in to your account
           </p>
         </div>
-        <RecoilRoot>
-          <UserLoginForm />
-        </RecoilRoot>
+        <UserLoginForm />
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
             href="/register"

@@ -4,6 +4,8 @@ import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Inter } from "next/font/google"
 
+import Providers from "@/app/providers"
+
 const inter: NextFont = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -18,7 +20,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }
