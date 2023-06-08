@@ -32,14 +32,14 @@ export default function useAuth(): {
         username,
         password
       )
-      setAuthState((prevState: AuthState) => ({
-        ...prevState,
+      setAuthState(() => ({
+        error: null,
         loading: false,
         data: response,
       }))
     } catch (error) {
-      setAuthState((prevState: AuthState) => ({
-        ...prevState,
+      setAuthState(() => ({
+        data: null,
         loading: false,
         error: "Login failed. Please try again.",
       }))
