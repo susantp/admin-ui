@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {classNames} from "@/src/utils/helpers"
 import {
   CalendarIcon,
@@ -11,9 +11,9 @@ import {
   UsersIcon
 } from "@heroicons/react/24/outline";
 
-import {usePathname, useRouter} from 'next/navigation'
+import {usePathname} from 'next/navigation'
 export default function SidebarDesktop() {
-  const [navigation,] = useState([
+  const [navigation,setNavigation] = useState([
     {name: "Dashboard", href: "dashboard", icon: HomeIcon, current: true},
     {name: "User Management", href: "users", icon: UsersIcon, current: false},
     {name: "Role Management", href: "#", icon: FolderIcon, current: false},
@@ -22,7 +22,16 @@ export default function SidebarDesktop() {
     {name: "Reports", href: "#", icon: ChartBarIcon, current: false},
   ]);
   const pathname = usePathname()
-  console.log(pathname)
+  useEffect(() => {
+    const updatedNavigation = navigation.map(item => {
+      if (pathname.includes(item.href)) {
+        return { ...item, current: true };
+      } else {
+        return { ...item, current: false };
+      }
+    });
+    setNavigation(updatedNavigation);
+  }, []);
   return <div
     className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
     {/* Sidebar component, swap this element with another sidebar if you like */}
