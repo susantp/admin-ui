@@ -379,7 +379,7 @@ export default function Example() {
 
         <main>
           <div>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <div className="mx-auto max-w-7xl px-4 sm:px-1 md:px-1">
               <div className="mt-10 px-4 sm:px-6 lg:px-8">
                 <div className="border-b border-gray-200 pb-5">
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
