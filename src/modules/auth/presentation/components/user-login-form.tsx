@@ -3,6 +3,7 @@
 import React, { useRef } from "react"
 import useAuth from "@/auth/presentation/hooks/use-auth"
 import { AuthState } from "@/auth/presentation/state/auth-atom"
+import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -26,7 +27,11 @@ export default function UserLoginForm(): JSX.Element {
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    login(username, password).catch((err) => console.log(err))
+    signIn("credentials", { redirect: false, username, password }).catch(
+      (err) => console.log("SIGN IN ERROR:", err)
+    )
+
+    // login(username, password).catch((err) => console.log(err))
   }
 
   return (

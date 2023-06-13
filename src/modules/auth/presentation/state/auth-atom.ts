@@ -43,7 +43,6 @@ const authAtom: RecoilState<AuthState> = atom<AuthState>({
     error: null,
     data: null,
   },
-  effects: [localStorageEffect("user")],
 })
 
 export default authAtom
