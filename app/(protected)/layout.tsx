@@ -27,11 +27,11 @@ export default function RootLayout({
     <body className={inter.className} suppressHydrationWarning>
 
 
-    <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+    {/*<div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
       <SidebarDesktop/>
-    </div>
+    </div>*/}
 
-    <div className="flex flex-1 flex-col md:pl-64">
+    <div className="flex flex-col mx-auto">
       <Navbar/>
       <main>{children}</main>
     </div>
