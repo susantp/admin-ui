@@ -22,19 +22,8 @@ export default function SidebarDesktop() {
     {name: "Reports", href: "#", icon: ChartBarIcon, current: false},
   ]);
   const pathname = usePathname()
-  useEffect(() => {
-    const updatedNavigation = navigation.map(item => {
-      if (pathname.includes(item.href)) {
-        return { ...item, current: true };
-      } else {
-        return { ...item, current: false };
-      }
-    });
-    setNavigation(updatedNavigation);
-  }, []);
   return <div
     className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-    {/* Sidebar component, swap this element with another sidebar if you like */}
     <div
       className="flex flex-grow flex-col overflow-y-auto bg-teal-700 pt-5">
       <div className="flex flex-shrink-0 items-center px-4">
@@ -47,7 +36,7 @@ export default function SidebarDesktop() {
               key={item.name}
               href={item.href}
               className={classNames(
-                item.current
+                pathname.includes(item.href)
                   ? "bg-teal-800 text-white"
                   : "text-white hover:bg-teal-600",
                 "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
