@@ -2,7 +2,7 @@
 
 import React from "react"
 import Link from "next/link"
-import UserLoginForm from "@/src/modules/auth/presentation/components/user-login-form"
+import UserLoginForm from "@/auth/presentation/components/user-login-form"
 import { RecoilRoot } from "recoil"
 
 export default function LoginPage(): JSX.Element {
