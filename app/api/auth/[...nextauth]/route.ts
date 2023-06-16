@@ -26,37 +26,24 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   console.log("CALLBACK SIGN IN")
-    //   console.log("USER", user)
-    //   console.log("ACCOUNT", account)
-    //   console.log("PROFILE", profile)
-    //   console.log("EMAIL", email)
-    //   console.log("CREDENTIALS", credentials)
-    //   return true
-    // },
-    // async redirect({ url, baseUrl }) {
-    //   console.log("CALLBACK REDIRECT")
-    //   console.log("URL", url)
-    //   console.log("BASE_URL", baseUrl)
-    //   return baseUrl
-    // },
-    // async session({ session, token, user }) {
-    //   console.log("CALLBACK SESSION")
-    //   console.log("SESSION", session)
-    //   console.log("TOKEN", token)
-    //   console.log("USER", user)
-    //   return session
-    // },
-    // async jwt({ token, user, account, profile, isNewUser }) {
-    //   console.log("CALLBACK JWT")
-    //   console.log("TOKEN", token)
-    //   console.log("USER", user)
-    //   console.log("ACCOUNT", account)
-    //   console.log("PROFILE", profile)
-    //   console.log("IS_NEW_USER", isNewUser)
-    //   return token
-    // },
+    async signIn({ user }) {
+      if (user) {
+        return Promise.resolve(user)
+      }
+      return Promise.resolve(null)
+    },
+    async session({ session, token, user }) {
+      session.access = token.access
+      session.refresh = token.refresh
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token.access = user.access
+        token.refresh = user.refresh
+      }
+      return token
+    },
   },
 }
 

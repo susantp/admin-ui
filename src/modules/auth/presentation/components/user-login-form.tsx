@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useRef } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import useAuth from "@/auth/presentation/hooks/use-auth"
 import { AuthState } from "@/auth/presentation/state/auth-atom"
 import { signIn } from "next-auth/react"
@@ -12,6 +13,9 @@ import { Label } from "@/components/ui/label"
 export default function UserLoginForm(): JSX.Element {
   const usernameRef: React.RefObject<HTMLInputElement> = useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = useRef(null)
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const {
     login,
@@ -27,9 +31,13 @@ export default function UserLoginForm(): JSX.Element {
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    signIn("credentials", { redirect: false, username, password }).catch(
-      (err) => console.log("SIGN IN ERROR:", err)
-    )
+    signIn("credentials", { redirect: false, username, password })
+      .then((res) => {
+        if (res.ok) {
+          router.replace(searchParams.get("callbackUrl") ?? "/")
+        }
+      })
+      .catch((err) => console.log("SIGN IN ERROR:", err))
 
     // login(username, password).catch((err) => console.log(err))
   }
