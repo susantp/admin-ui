@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["@typescript-eslint", "filenames"],
+
   "extends": [
     "next/core-web-vitals",
     "airbnb",
@@ -10,11 +10,22 @@
     "plugin:@typescript-eslint/strict",
     "prettier"
   ],
+  "plugins": ["@typescript-eslint", "filenames", "@testing-library"],
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["/*.config.js","/*.setup.js", "/*.config.ts", "/*-generator.js", "__tests__/**/*.test.js"],
+  "ignorePatterns": ["/*.config.js","/*.setup.js", "/*.config.ts", "/*-generator.js", "__tests__/**/*.test.tsx"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
