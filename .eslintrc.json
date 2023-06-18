@@ -10,7 +10,7 @@
     "plugin:@typescript-eslint/strict",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "filenames", "@testing-library"],
+  "plugins": ["@typescript-eslint", "filenames", "testing-library"],
   "overrides": [
     // Only uses Testing Library lint rules in test files
     {
