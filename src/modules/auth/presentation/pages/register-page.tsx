@@ -1,9 +1,6 @@
-"use client"
-
 import React from "react"
 import Link from "next/link"
 import UserRegisterForm from "@/auth/presentation/components/user-register-form"
-import { RecoilRoot } from "recoil"
 
 export default function RegisterPage(): JSX.Element {
   return (
@@ -17,9 +14,7 @@ export default function RegisterPage(): JSX.Element {
             Enter your details below to create your account
           </p>
         </div>
-        <RecoilRoot>
-          <UserRegisterForm />
-        </RecoilRoot>
+        <UserRegisterForm />
         <p className="px-8 text-center text-sm text-muted-foreground">
           By clicking continue, you agree to our <br />
           <Link

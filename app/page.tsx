@@ -1,7 +1,12 @@
 import React from "react"
 import Image from "next/image"
+import { getServerSession } from "next-auth"
 
-export default function Home(): JSX.Element {
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+
+export default async function Home() {
+  const session = await getServerSession(authOptions)
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -38,6 +43,10 @@ export default function Home(): JSX.Element {
           height={37}
           priority
         />
+      </div>
+
+      <div>
+        <pre>{JSON.stringify(session)}</pre>
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">

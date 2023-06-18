@@ -7,6 +7,35 @@ export interface AuthState {
   data: AuthApiResponse | null
 }
 
+const localStorageEffect =
+  (key: string) =>
+  ({
+    setSelf,
+    onSet,
+  }: {
+    setSelf: (value: AuthState) => void
+    onSet: (
+      f: (newValue: AuthState, _: unknown, isReset: boolean) => void
+    ) => void
+  }) => {
+    // if (typeof window === "undefined") {
+    //   return
+    // }
+
+    const savedValue = localStorage.getItem(key)
+    if (savedValue) {
+      setSelf(JSON.parse(savedValue) as AuthState)
+    }
+
+    onSet((newValue, _, isReset) => {
+      if (isReset) {
+        localStorage.removeItem(key)
+      } else if (newValue.data) {
+        localStorage.setItem(key, JSON.stringify(newValue))
+      }
+    })
+  }
+
 const authAtom: RecoilState<AuthState> = atom<AuthState>({
   key: "authState",
   default: {
