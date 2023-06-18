@@ -12,6 +12,8 @@
     "prepare": "husky install",
     "preview": "next build && next start",
     "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
     "create-module": "node module-generator.js"
