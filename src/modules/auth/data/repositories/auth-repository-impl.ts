@@ -9,18 +9,8 @@ export default class AuthRepositoryImpl implements AuthRepository {
     this.authDataSource = new AuthDataSource()
   }
 
-  public async login(
-    username: string,
-    password: string
-  ): Promise<AuthApiResponse> {
-    try {
-      return (await this.authDataSource.login(
-        username,
-        password
-      )) as AuthApiResponse
-    } catch (error) {
-      throw new Error("Error occurred during login")
-    }
+  public async login(username: string, password: string) {
+    return this.authDataSource.login(username, password)
   }
 
   public async register(
