@@ -1,27 +1,25 @@
 "use client"
 
 import React from "react"
-import { Inter } from "next/font/google"
-import Link from "next/link"
-import UserLoginForm from "@/auth/presentation/components/user-login-form"
-import { RecoilRoot } from "recoil"
+import Image from "next/image";
+import Link from "next/link";
 
-export default function LoginPage(): JSX.Element {
+export default function Login(): JSX.Element {
   return (
     <div className="flex bg-gray-100 min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img className="mx-auto h-8 w-auto" src="lis.png" alt="Your Company" />
+        <Image className="mx-auto h-8 w-auto" src="/lis.png" alt="Your Company" width={193} height={32} />
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-800">
           SOA-POC
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Sign in or{" "}
-          <a
+          <Link
             href="/register"
             className="font-medium text-teal-600 hover:text-teal-500"
           >
             Register here
-          </a>
+          </Link>
         </p>
       </div>
 

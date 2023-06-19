@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Fragment, useState, useRef } from "react"
+import React, { Fragment, useState } from "react"
 import { Dialog, Menu, Transition } from "@headlessui/react"
 import {
   BarsArrowUpIcon,
@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/20/solid"
 import {
   Bars3BottomLeftIcon,
-  CheckIcon,
+  BellIcon,
   CalendarIcon,
   ChartBarIcon,
   Cog6ToothIcon,
@@ -41,112 +41,11 @@ const userNavigation = [
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "#" },
 ]
-const people = [
-  {
-    name: "Ishwor Kafle",
-    title: "Principle Software Engineer",
-    department: "Development Service",
-    email: "ishwor.kafle@lisnepal.com.np",
-    role: "Super Admin",
-    image: "http://login.lisnepal.com.np/uploads/409/Ishwor.jpg",
-  },
-  {
-    name: "Anish Byanjankar",
-    title: "Principle Software Engineer",
-    department: "Development Service",
-    email: "anish.byanjankar@lisnepal.com.np",
-    role: "Admin",
-    image: "http://login.lisnepal.com.np/uploads/259/Anish.png",
-  },
-  {
-    name: "Rubin Maharjan",
-    title: "Senior Software Engineer",
-    department: "Development Service",
-    email: "rubin.maharjan@lisnepal.com.np",
-    role: "Member",
-    image: "http://login.lisnepal.com.np/uploads/636/Ruben.jpg",
-  },
-  {
-    name: "Susanta Paudel",
-    title: "Senior Software Engineer",
-    department: "Development Service",
-    email: "susanta.paudel@lisnepal.com.np",
-    role: "Member",
-    image: "http://login.lisnepal.com.np/uploads/777/sp.jpg",
-  },
-  {
-    name: "Ishwor Kafle",
-    title: "Principle Software Engineer",
-    department: "Development Service",
-    email: "ishwor.kafle@lisnepal.com.np",
-    role: "Super Admin",
-    image: "http://login.lisnepal.com.np/uploads/409/Ishwor.jpg",
-  },
-  {
-    name: "Anish Byanjankar",
-    title: "Principle Software Engineer",
-    department: "Development Service",
-    email: "anish.byanjankar@lisnepal.com.np",
-    role: "Admin",
-    image: "http://login.lisnepal.com.np/uploads/259/Anish.png",
-  },
-  {
-    name: "Rubin Maharjan",
-    title: "Senior Software Engineer",
-    department: "Development Service",
-    email: "rubin.maharjan@lisnepal.com.np",
-    role: "Member",
-    image: "http://login.lisnepal.com.np/uploads/636/Ruben.jpg",
-  },
-  {
-    name: "Susanta Paudel",
-    title: "Senior Software Engineer",
-    department: "Development Service",
-    email: "susanta.paudel@lisnepal.com.np",
-    role: "Member",
-    image: "http://login.lisnepal.com.np/uploads/777/sp.jpg",
-  },
-  // add more people...
-]
-
-const projects = [
-  {
-    name: "Dashboard",
-    initials: "DB",
-    href: "#",
-    members: 16,
-    bgColor: "bg-pink-600",
-  },
-  {
-    name: "User Management",
-    initials: "UM",
-    href: "#",
-    members: 12,
-    bgColor: "bg-purple-600",
-  },
-  {
-    name: "Role Management",
-    initials: "RM",
-    href: "#",
-    members: 16,
-    bgColor: "bg-yellow-500",
-  },
-  {
-    name: "Page Management",
-    initials: "PM",
-    href: "#",
-    members: 8,
-    bgColor: "bg-green-500",
-  },
-]
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [open, setOpen] = useState(false)
-  const cancelButtonRef = useRef(null)
 
   return (
     <div>
@@ -271,7 +170,7 @@ export default function Example() {
         <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
           <button
             type="button"
-            className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-100 md:hidden"
+            className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 md:hidden"
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
@@ -340,7 +239,7 @@ export default function Example() {
                           Super Admin
                         </p>
                       </div>
-                      <span className="rounded-full bg-white p-4 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-teal-100 focus:ring-offset-2">
+                      <span className="rounded-full bg-white p-4 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-teal-500 focus:ring-offset-2">
                         <span className="sr-only">View notifications</span>
                         <Cog6ToothIcon className="h-6 w-6" aria-hidden="true" />
                       </span>
@@ -396,304 +295,13 @@ export default function Example() {
                   <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     <button
                       type="button"
-                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 sm:w-auto"
-                      onClick={() => setOpen(true)}
+                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto"
                     >
                       <PlusIcon
                         className="-ml-1 mr-3 h-5 w-5"
                         aria-hidden="true"
                       />
                       Add user
-                      <Transition.Root show={open} as={Fragment}>
-                        <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
-                          <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                          </Transition.Child>
-
-                          <div className="fixed inset-0 z-10 overflow-y-auto">
-                            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                              <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                              >
-                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-0">
-                                
-                                    {/* Header */}
-                                    <div className="bg-teal-600 px-4 py-6 sm:px-6">
-                                      <div className="flex items-start justify-between space-x-3">
-                                        <div className="space-y-1">
-                                          <Dialog.Title className="text-lg font-medium text-white">Add new user</Dialog.Title>
-                                          <p className="text-sm text-white">
-                                            Fill up the information below to add new users.
-                                          </p>
-                                        </div>
-                                        <div className="flex h-7 items-center">
-                                          <button
-                                            type="button"
-                                            className="text-gray-300 hover:text-gray-100"
-                                            onClick={() => setOpen(false)}
-                                          >
-                                            <span className="sr-only">Close panel</span>
-                                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                                          </button>
-                                        </div>
-                                      </div>
-                                    </div>
-
-
-                                    <div className="bg-white pt-0.5 pb-11 px-4 sm:rounded-lg sm:px-10">
-                                      <form className="space-y-6" action="#" method="POST">
-                                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                          <div className="sm:col-span-3">
-                                            <label
-                                              htmlFor="first-name"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              First name
-                                            </label>
-                                            <div className="mt-2">
-                                              <input
-                                                type="text"
-                                                name="first-name"
-                                                id="first-name"
-                                                autoComplete="given-name"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-                                              />
-                                            </div>
-                                          </div>
-
-                                          <div className="sm:col-span-3">
-                                            <label
-                                              htmlFor="last-name"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              Last name
-                                            </label>
-                                            <div className="mt-2">
-                                              <input
-                                                type="text"
-                                                name="last-name"
-                                                id="last-name"
-                                                autoComplete="family-name"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-                                              />
-                                            </div>
-                                          </div>
-
-                                          <div className="sm:col-span-full">
-                                            <label
-                                              htmlFor="email"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              Email address
-                                            </label>
-                                            <div className="mt-2">
-                                              <input
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                autoComplete="email"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-                                              />
-                                            </div>
-                                          </div>
-                                          <div className="sm:col-span-3">
-                                            <label
-                                              htmlFor="first-name"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              Password
-                                            </label>
-                                            <div className="mt-2">
-                                              <input
-                                                type="password"
-                                                name="first-name"
-                                                id="first-name"
-                                                autoComplete="given-name"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-                                              />
-                                            </div>
-                                          </div>
-
-                                          <div className="sm:col-span-3">
-                                            <label
-                                              htmlFor="last-name"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              Confirm Password
-                                            </label>
-                                            <div className="mt-2">
-                                              <input
-                                                type="password"
-                                                name="last-name"
-                                                id="last-name"
-                                                autoComplete="family-name"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-                                              />
-                                            </div>
-                                          </div>
-
-                                          <div className="sm:col-span-3">
-                                            <label
-                                              htmlFor="country"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              Department
-                                            </label>
-                                            <div className="mt-2">
-                                              <select
-                                                id="country"
-                                                name="country"
-                                                autoComplete="country-name"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                              >
-                                                <option>Development Services</option>
-                                                <option>BI Line</option>
-                                                <option>HR Department</option>
-                                              </select>
-                                            </div>
-                                          </div>
-                                          <div className="sm:col-span-3">
-                                            <label
-                                              htmlFor="country"
-                                              className="block text-sm font-medium leading-6 text-gray-900"
-                                            >
-                                              Designation
-                                            </label>
-                                            <div className="mt-2">
-                                              <select
-                                                id="country"
-                                                name="country"
-                                                autoComplete="country-name"
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                              >
-                                                <option>Software Engineer</option>
-                                                <option>Senior Software Engineer</option>
-                                                <option>Principle Software Engineer</option>
-                                              </select>
-                                            </div>
-                                          </div>
-
-                                          <fieldset className="sm:col-span-full">
-                                            <legend className="text-sm font-medium text-gray-900">
-                                              Role
-                                            </legend>
-                                            <div className="mt-3 space-y-5">
-                                              <div className="relative flex items-start">
-                                                <div className="absolute flex h-5 items-center">
-                                                  <input
-                                                    id="privacy-public"
-                                                    name="privacy"
-                                                    aria-describedby="privacy-public-description"
-                                                    type="radio"
-                                                    className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-100"
-                                                    defaultChecked
-                                                  />
-                                                </div>
-                                                <div className="pl-7 text-sm">
-                                                  <label
-                                                    htmlFor="privacy-public"
-                                                    className="font-medium text-gray-900"
-                                                  >
-                                                    Super Admin
-                                                  </label>
-                                                  <p
-                                                    id="privacy-public-description"
-                                                    className="text-gray-500"
-                                                  >
-                                                    Every access within the project
-                                                  </p>
-                                                </div>
-                                              </div>
-                                              <div>
-                                                <div className="relative flex items-start">
-                                                  <div className="absolute flex h-5 items-center">
-                                                    <input
-                                                      id="privacy-private-to-project"
-                                                      name="privacy"
-                                                      aria-describedby="privacy-private-to-project-description"
-                                                      type="radio"
-                                                      className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-100"
-                                                    />
-                                                  </div>
-                                                  <div className="pl-7 text-sm">
-                                                    <label
-                                                      htmlFor="privacy-private-to-project"
-                                                      className="font-medium text-gray-900"
-                                                    >
-                                                      Admin
-                                                    </label>
-                                                    <p
-                                                      id="privacy-private-to-project-description"
-                                                      className="text-gray-500"
-                                                    >
-                                                      All view/edit access
-                                                    </p>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div>
-                                                <div className="relative flex items-start">
-                                                  <div className="absolute flex h-5 items-center">
-                                                    <input
-                                                      id="privacy-private"
-                                                      name="privacy"
-                                                      aria-describedby="privacy-private-to-project-description"
-                                                      type="radio"
-                                                      className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-100"
-                                                    />
-                                                  </div>
-                                                  <div className="pl-7 text-sm">
-                                                    <label
-                                                      htmlFor="privacy-private"
-                                                      className="font-medium text-gray-900"
-                                                    >
-                                                      Member
-                                                    </label>
-                                                    <p
-                                                      id="privacy-private-description"
-                                                      className="text-gray-500"
-                                                    >
-                                                      View only access
-                                                    </p>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </fieldset>
-                                        </div>
-                                        <div>
-                                          <button
-                                            type="submit"
-                                            className="flex w-full justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 "
-                                          >
-                                            Add user
-                                          </button>
-                                        </div>
-                                      </form>
-                                    </div>
-                                 
-
-
-                                </Dialog.Panel>
-                              </Transition.Child>
-                            </div>
-                          </div>
-                        </Dialog>
-                      </Transition.Root>
                     </button>
                   </div>
                 </div>

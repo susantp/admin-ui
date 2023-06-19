@@ -13,3 +13,7 @@ export function formatDate(input: string | number): string {
     year: "numeric",
   })
 }
+
+export function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ")
+}
