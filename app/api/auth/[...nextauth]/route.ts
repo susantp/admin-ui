@@ -3,6 +3,7 @@ import NextAuth, {type AuthOptions} from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import UserEntity from "@/auth/domain/entities/user-entity";
 
+// @ts-ignore
 export const authOptions: AuthOptions = {
   session: {strategy: "jwt"},
   secret: process.env.NEXTAUTH_SECRET,
@@ -10,18 +11,19 @@ export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider(
       {
+        id:"cred_1",
         name: "Credentials",
         credentials: {
           username: {label: "Username", type: "text", placeholder: "jsmith"},
           password: {label: "Password", type: "password"}
         },
-
-        async authorize(credentials: Record<"username" | "password", string> | undefined): Promise<null | UserEntity> {
+        type: "credentials",
+        async authorize(credentials: Record<"username" | "password", string> | undefined, re): Promise<null | UserEntity> {
           if (!credentials) return null
 
           const {username, password} = credentials
           const repo = new AuthRepositoryImpl()
-          return repo.login(username, password)
+          return repo.login(username, password);
         }
       }
     ),

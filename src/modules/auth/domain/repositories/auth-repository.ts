@@ -2,7 +2,8 @@ import AuthApiResponse from "@/auth/domain/entities/auth-api-response"
 import UserEntity from "@/auth/domain/entities/user-entity";
 
 export default interface AuthRepository {
-  login(username: string, password: string): Promise<UserEntity>
+  login(username: string, password: string): Promise<UserEntity | null>
+
   register(
     username: string,
     password: string,

@@ -14,7 +14,7 @@ export default class AuthDataSource {
   // }
 
   // eslint-disable-next-line class-methods-use-this
-  async #postLocal(username: string): Promise<UserEntity> {
+  async #postLocal(username: string): Promise<UserEntity | null> {
     const params: InterfaceUserEntityProperties = {
       id: "id",
       username,
@@ -29,7 +29,7 @@ export default class AuthDataSource {
     });
   }
 
-  public login(username: string, password: string|undefined): Promise<UserEntity> {
+  public login(username: string, password: string | undefined): Promise<UserEntity | null> {
     return this.#postLocal(username)
     // return this.#postRemote(username, password)
   }
