@@ -17,7 +17,6 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
-  const {pathname} = request.nextUrl;
   const token = await getToken({
     req: request,
     secret: process.env.SECRET,
@@ -25,13 +24,8 @@ export async function middleware(request: NextRequest) {
 
   const unAuthenticatedRedirect = new URL(`/login`, request.url);
   unAuthenticatedRedirect.searchParams.set("callbackUrl", encodeURI(request.url))
-  const unAuthorizedRewrite = new URL(`/403`, request.url)
   if (!token) {
     return NextResponse.redirect(unAuthenticatedRedirect);
-  }
-  if (['edit', 'delete', 'create'].includes(pathname) &&
-    !["role-1_id", "role-2_id"].includes(token.role as string)) {
-    return NextResponse.rewrite(unAuthorizedRewrite)
   }
   return res;
 }
