@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(unAuthenticatedRedirect);
   }
   if (['edit', 'delete', 'create'].includes(pathname) &&
-    !["admin", "manager"].includes(token.role as string)) {
+    !["role-1_id", "role-2_id"].includes(token.role as string)) {
     return NextResponse.rewrite(unAuthorizedRewrite)
   }
   return res;
