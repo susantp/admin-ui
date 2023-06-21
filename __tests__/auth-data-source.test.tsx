@@ -1,6 +1,6 @@
 import UserEntity, {
   InterfaceUserEntityProperties
-} from "../src/modules/auth/domain/entities/user-entity"
+} from "../src/modules/user/domain/entities/user-entity"
 import AuthDataSource
   from "../src/modules/auth/data/datasource/auth-data-source";
 

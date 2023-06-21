@@ -1,7 +1,4 @@
 import ApiClient from "@/src/utils/api-client"
-import UserEntity, {
-  InterfaceUserEntityProperties
-} from "@/src/modules/auth/domain/entities/user-entity";
 import AuthApiResponse from "@/auth/domain/entities/auth-api-response";
 
 export default class AuthDataSource {

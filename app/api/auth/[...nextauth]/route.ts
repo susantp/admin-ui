@@ -3,7 +3,7 @@ import NextAuth, {type AuthOptions} from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import UserEntity, {
   InterfaceUserEntityProperties
-} from "@/auth/domain/entities/user-entity";
+} from "@/src/modules/user/domain/entities/user-entity";
 import {mockSession} from "next-auth/client/__tests__/helpers/mocks";
 
 export const authOptions: AuthOptions = {

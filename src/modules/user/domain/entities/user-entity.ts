@@ -8,7 +8,7 @@ export interface InterfaceUserEntityProperties {
   password: string,
   email: string,
   phone: number,
-  token: string
+  image: string
 }
 
 export default class UserEntity implements User {
