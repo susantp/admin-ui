@@ -36,7 +36,7 @@ export const authOptions: AuthOptions = {
             password: "password",
             email: "email",
             phone: 12364568,
-            token: "token"
+            image: "image"
           }
           return new UserEntity(userProperties)
         }
