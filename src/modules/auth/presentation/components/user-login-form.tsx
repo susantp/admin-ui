@@ -43,7 +43,7 @@ export default function UserLoginForm(): JSX.Element {
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={() => signIn()}>
       <div className="grid gap-2">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="username">

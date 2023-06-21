@@ -2,6 +2,7 @@ import ApiClient from "@/src/utils/api-client"
 import UserEntity, {
   InterfaceUserEntityProperties
 } from "@/src/modules/auth/domain/entities/user-entity";
+import AuthApiResponse from "@/auth/domain/entities/auth-api-response";
 
 export default class AuthDataSource {
 
@@ -14,22 +15,17 @@ export default class AuthDataSource {
   // }
 
   // eslint-disable-next-line class-methods-use-this
-  async #postLocal(username: string): Promise<UserEntity | null> {
-    const params: InterfaceUserEntityProperties = {
-      id: "id",
-      username,
-      password: "password",
-      email: "email@email.com",
-      phone: 12234324,
-      token: "token_123"
+  async #postLocal(username: string): Promise<AuthApiResponse | null> {
+    const authResponse: AuthApiResponse = {
+      access: "adslkfjalskdfjalsdkfj",
+      refresh: "adsfjaoisdfjoadfjasiodfj"
     }
     return new Promise((resolve) => {
-      const newUser = new UserEntity(params);
-      resolve(newUser);
+      resolve(authResponse);
     });
   }
 
-  public login(username: string, password: string | undefined): Promise<UserEntity | null> {
+  public login(username: string, password: string | undefined): Promise<AuthApiResponse | null> {
     return this.#postLocal(username)
     // return this.#postRemote(username, password)
   }

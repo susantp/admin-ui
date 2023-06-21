@@ -20,7 +20,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>
