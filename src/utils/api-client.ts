@@ -6,10 +6,16 @@ interface ApiResponse {
 }
 
 export default class ApiClient<T> {
-  private static readonly baseUrl: string = "http://localhost:8000/api/v1"
+  private static readonly baseUrl: string =
+    process.env.BACKEND_BASE_URL ?? "http://localhost:8000/"
 
-  public static async get<T>(endpoint: string): Promise<T> {
-    const response: Response = await fetch(`${this.baseUrl}/${endpoint}`)
+  public static async get<T>(
+    endpoint: string,
+    headers?: HeadersInit
+  ): Promise<T> {
+    const response: Response = await fetch(`${this.baseUrl}/${endpoint}`, {
+      headers,
+    })
     if (!response.ok) {
       throw new Error(
         `Error fetching data from API: ${response.status} ${response.statusText}`
@@ -24,10 +30,14 @@ export default class ApiClient<T> {
     return apiResponse.data as Promise<T>
   }
 
-  public static async post<T>(endpoint: string, data: T): Promise<T> {
+  public static async post<T>(
+    endpoint: string,
+    data: T,
+    headers?: { string: string }
+  ): Promise<T> {
     const response: Response = await fetch(`${this.baseUrl}/${endpoint}`, {
       method: "POST",
-      headers: {
+      headers: headers ?? {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),

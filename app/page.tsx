@@ -45,8 +45,8 @@ export default async function Home() {
         />
       </div>
 
-      <div>
-        <pre>{JSON.stringify(session)}</pre>
+      <div className="w-1/3 overflow-clip">
+        <pre>{JSON.stringify(session, null, 4)}</pre>
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">

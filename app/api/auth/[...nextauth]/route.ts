@@ -1,48 +1,49 @@
-import AuthRepositoryImpl from "@/auth/data/repositories/auth-repository-impl"
+import ApiClient from "@/src/utils/api-client"
 import NextAuth, { type AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+
+const credentialProvider = CredentialsProvider({
+  authorize: async (credentials) => {
+    if (!credentials) return null
+
+    const { username, password } = credentials
+
+    try {
+      const tokens: object = await ApiClient.post("soa_poc/user/login/", {
+        username,
+        password,
+      })
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokens.access as string}`,
+      }
+      const user: object = await ApiClient.get("logged-in-user/", headers)
+      const userDetails: object = await ApiClient.get("user-detail/", headers)
+
+      return { ...user, ...userDetails, ...tokens }
+    } catch (_) {
+      return Promise.reject(
+        Error("Authorization Failed! Something went wrong!")
+      )
+    }
+  },
+})
 
 export const authOptions: AuthOptions = {
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
   pages: { signIn: "/login" },
-  providers: [
-    CredentialsProvider({
-      async authorize(credentials) {
-        if (credentials) {
-          const { username, password } = credentials
-
-          const repo = new AuthRepositoryImpl()
-          try {
-            const user = await repo.login(username, password)
-            console.log("AUTHORIZED USER", user)
-            return user
-          } catch (_) {
-            console.log("NO USER")
-          }
-        }
-        return null
-      },
-    }),
-  ],
+  providers: [credentialProvider],
   callbacks: {
-    async signIn({ user }) {
-      if (user) {
-        return Promise.resolve(user)
+    jwt: async ({ token, user, trigger }) => {
+      if (trigger) {
+        token.user = user
       }
-      return Promise.resolve(null)
+      return Promise.resolve(token)
     },
-    async session({ session, token, user }) {
-      session.access = token.access
-      session.refresh = token.refresh
-      return session
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      if (user) {
-        token.access = user.access
-        token.refresh = user.refresh
-      }
-      return token
+    session: async ({ session, token }) => {
+      session.user = token.user
+      return Promise.resolve(session)
     },
   },
 }
