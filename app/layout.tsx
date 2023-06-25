@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   description: "Frontend boilerplate application using NextJS",
 }
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}): JSX.Element {
+}
+
+export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.className}>

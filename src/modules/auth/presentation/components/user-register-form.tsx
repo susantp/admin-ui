@@ -1,41 +1,49 @@
 "use client"
 
-import React, { useRef } from "react"
-import useAuth from "@/auth/presentation/hooks/use-auth"
-import { AuthState } from "@/auth/presentation/state/auth-atom"
+import React from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function UserRegisterForm(): JSX.Element {
-  const usernameRef: React.RefObject<HTMLInputElement> = useRef(null)
-  const passwordRef: React.RefObject<HTMLInputElement> = useRef(null)
-  const emailRef: React.RefObject<HTMLInputElement> = useRef(null)
-  const phoneRef: React.RefObject<HTMLInputElement> = useRef(null)
+  const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+  const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+  const emailRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+  const phoneRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
-  const {
-    register,
-    authState,
-  }: {
-    authState: AuthState
-    register: (
-      username: string,
-      password: string,
-      email: string,
-      phone: string
-    ) => Promise<void>
-  } = useAuth()
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
 
-    const username: string = usernameRef.current?.value ?? ""
-    const password: string = passwordRef.current?.value ?? ""
-    const email: string = emailRef.current?.value ?? ""
-    const phone: string = phoneRef.current?.value ?? ""
-
-    register(username, password, email, phone).catch((err) => console.log(err))
+    // const username: string = usernameRef.current?.value ?? ""
+    // const password: string = passwordRef.current?.value ?? ""
+    // const email: string = emailRef.current?.value ?? ""
+    // const phone: string = phoneRef.current?.value ?? ""
+    //
+    // signIn("credentials", {
+    //   redirect: false,
+    //   username,
+    //   password,
+    //   email,
+    //   phone,
+    //   callbackUrl: searchParams.get("from") ?? "/",
+    // })
+    //   .then((res) => {
+    //     setIsLoading(false)
+    //     if (res?.ok) {
+    //       router.replace(res.url ?? "/")
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     setIsLoading(false)
+    //     console.log("SIGN UP ERROR:", err)
+    //   })
   }
 
   return (
@@ -96,11 +104,7 @@ export default function UserRegisterForm(): JSX.Element {
           />
         </div>
         <Button>Register</Button>
-        <p className="text-sm text-center">
-          {authState.loading && "Loading..."}
-          {authState.error}
-          {authState.data && "Authenticated"}
-        </p>
+        <p className="text-sm text-center">{isLoading && "Loading..."}</p>
       </div>
     </form>
   )

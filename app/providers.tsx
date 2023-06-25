@@ -4,7 +4,11 @@ import React from "react"
 import { SessionProvider } from "next-auth/react"
 import { RecoilRoot } from "recoil"
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+interface ProviderProps {
+  children: React.ReactNode
+}
+
+export default function Providers({ children }: ProviderProps) {
   return (
     <SessionProvider>
       <RecoilRoot>{children}</RecoilRoot>
