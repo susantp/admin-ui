@@ -1,34 +1,39 @@
 import ApiClient from "@/src/utils/api-client"
+import { AuthResponse, UserDetailsResponse, UserResponse } from "@/types"
 import jwtDecode from "jwt-decode"
-import NextAuth, { type AuthOptions } from "next-auth"
+import NextAuth, { User, type AuthOptions } from "next-auth"
 import { JWT } from "next-auth/jwt"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 const credentialProvider = CredentialsProvider({
+  credentials: { username: {}, password: {} },
   authorize: async (credentials) => {
     if (!credentials) return null
 
     const { username, password } = credentials
 
     try {
-      const tokens: object = await ApiClient.post("soa_poc/user/login/", {
-        username,
-        password,
-      })
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${tokens.access as string}`,
-      }
-      const user: object = await ApiClient.get("logged-in-user/", headers)
-      const userDetails: object = await ApiClient.get("user-detail/", headers)
+      const tokens = await new ApiClient().post<AuthResponse>(
+        "soa_poc/user/login/",
+        {
+          username,
+          password,
+        }
+      )
+
+      const apiClient = new ApiClient({ accessToken: tokens.access })
+      const user = await apiClient.get<UserResponse>("logged-in-user/")
+      const userDetails = await apiClient.get<UserDetailsResponse>(
+        "user-detail/"
+      )
 
       return {
         ...user,
-        firstName: userDetails.first_name as string,
-        lastName: userDetails.last_name as string,
-        address: userDetails.address1 as string,
+        firstName: userDetails.first_name,
+        lastName: userDetails.last_name,
+        address: userDetails.address1,
         ...tokens,
-      }
+      } as User
     } catch (_) {
       return Promise.reject(
         Error("Authorization Failed! Something went wrong!")
@@ -39,18 +44,21 @@ const credentialProvider = CredentialsProvider({
 
 const refreshAccessToken = async (token: JWT) => {
   try {
-    const newTokens = await ApiClient.post("soa_poc/refresh-token/", {
-      access: token.access,
-      refresh: token.refresh,
-    })
+    const newTokens = await new ApiClient().post<AuthResponse>(
+      "soa_poc/refresh-token/",
+      {
+        access: token.access,
+        refresh: token.refresh,
+      }
+    )
     console.log("OLD TOKENS", token)
     console.log("NEW TOKENS", newTokens)
     const decoded: JWT = jwtDecode(newTokens.access)
     return {
       ...token,
       access: newTokens.access,
-      refresh: newTokens.refresh,
       expires: decoded.exp,
+      error: null,
     }
   } catch (error) {
     return { ...token, error: "RefreshTokenError" }
