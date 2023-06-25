@@ -1,11 +1,11 @@
-import AuthApiResponse from "@/auth/domain/entities/auth-api-response"
+import { AuthResponse } from "../types"
 
 export default interface AuthRepository {
-  login(username: string, password: string): Promise<AuthApiResponse>
+  login(username: string, password: string): Promise<AuthResponse>
   register(
     username: string,
     password: string,
     email: string,
     phone: string
-  ): Promise<AuthApiResponse>
+  ): Promise<AuthResponse>
 }

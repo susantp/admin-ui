@@ -1,5 +1,9 @@
+import {
+  AuthResponse,
+  UserDetailsResponse,
+  UserResponse,
+} from "@/auth/domain/types"
 import ApiClient from "@/src/utils/api-client"
-import { AuthResponse, UserDetailsResponse, UserResponse } from "@/types"
 import jwtDecode from "jwt-decode"
 import NextAuth, { User, type AuthOptions } from "next-auth"
 import { JWT } from "next-auth/jwt"

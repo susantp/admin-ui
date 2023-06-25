@@ -18,6 +18,7 @@
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
+    "no-param-reassign": ["error", {"props": false}],
 
 //    "@typescript-eslint/no-explicit-any": "error",
 //    "@typescript-eslint/no-non-null-assertion": "error",
@@ -44,6 +45,6 @@
 //      }
 //    ],
 
-    "filenames/match-regex": [2, "^[a-z]+(-[a-z]+)*$", true]
+    "filenames/match-regex": [2, "^[a-z]+(-[a-z]+)*(.d)?$", true]
   }
 }

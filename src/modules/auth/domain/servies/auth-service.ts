@@ -1,17 +1,9 @@
-import AuthApiResponse from "@/auth/domain/entities/auth-api-response"
-import AuthRepository from "@/auth/domain/repositories/auth-repository"
+import AuthDataSource from "@/auth/data/datasource/auth-data-source"
 
 export default class AuthService {
-  private authRepository: AuthRepository
+  authRepository = new AuthDataSource()
 
-  public constructor(authRepository: AuthRepository) {
-    this.authRepository = authRepository
-  }
-
-  public async loginUser(
-    username: string,
-    password: string
-  ): Promise<AuthApiResponse> {
+  async loginUser(username: string, password: string) {
     // Perform any necessary business logic or validation here
     // Example: Hash the password, validate credentials, etc.
 
@@ -23,12 +15,12 @@ export default class AuthService {
     }
   }
 
-  public async registerUser(
+  async registerUser(
     username: string,
     password: string,
     email: string,
     phone: string
-  ): Promise<AuthApiResponse> {
+  ) {
     // Perform any necessary business logic or validation here
     // Example: Validate username, email, phone, etc.
 

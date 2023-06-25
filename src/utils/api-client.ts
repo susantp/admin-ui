@@ -1,4 +1,9 @@
-import { ApiResponse } from "@/types"
+interface ApiResponse<T> {
+  message: string
+  data: T
+  status: number
+  error: string
+}
 
 interface ApiClientParams {
   baseUrl?: string
