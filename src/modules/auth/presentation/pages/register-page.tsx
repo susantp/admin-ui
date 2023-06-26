@@ -2,10 +2,12 @@ import React from "react"
 import Link from "next/link"
 import UserRegisterForm from "@/auth/presentation/components/user-register-form"
 
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+
 export default function RegisterPage(): JSX.Element {
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
-      <div className="space-y-6">
+    <Card className="p-8 space-y-6">
+      <CardHeader>
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">
             Create a account
@@ -14,7 +16,11 @@ export default function RegisterPage(): JSX.Element {
             Enter your details below to create your account
           </p>
         </div>
+      </CardHeader>
+      <CardContent>
         <UserRegisterForm />
+      </CardContent>
+      <CardFooter className="flex-col space-y-2.5">
         <p className="px-8 text-center text-sm text-muted-foreground">
           By clicking continue, you agree to our <br />
           <Link
@@ -40,7 +46,7 @@ export default function RegisterPage(): JSX.Element {
             Already have an account? Log In
           </Link>
         </p>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   )
 }

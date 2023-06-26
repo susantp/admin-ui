@@ -4,6 +4,7 @@ import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Inter } from "next/font/google"
 
+import { Toaster } from "@/components/ui/toaster"
 import Providers from "@/app/providers"
 
 const inter: NextFont = Inter({ subsets: ["latin"] })
@@ -19,9 +20,12 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+    <html lang="en" className="" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background`}>
+        <main>
+          <Providers>{children}</Providers>
+        </main>
+        <Toaster />
       </body>
     </html>
   )

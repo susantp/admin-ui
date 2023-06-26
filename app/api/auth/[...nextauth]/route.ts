@@ -40,7 +40,7 @@ const credentialProvider = CredentialsProvider({
       } as User
     } catch (_) {
       return Promise.reject(
-        Error("Authorization Failed! Something went wrong!")
+        Error("Your sign in request failed. Please try again.")
       )
     }
   },

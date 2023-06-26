@@ -2,6 +2,7 @@
 
 import React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
@@ -103,8 +104,10 @@ export default function UserRegisterForm(): JSX.Element {
             placeholder="Phone Number"
           />
         </div>
-        <Button>Register</Button>
-        <p className="text-sm text-center">{isLoading && "Loading..."}</p>
+        <Button>
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Register
+        </Button>
       </div>
     </form>
   )
