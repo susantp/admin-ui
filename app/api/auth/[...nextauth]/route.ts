@@ -18,7 +18,7 @@ const credentialProvider = CredentialsProvider({
 
     try {
       const tokens = await new ApiClient().post<AuthResponse>(
-        "soa_poc/user/login/",
+        `${process.env.BACKEND_PROJECT_NAME ?? ""}/user/login/`,
         {
           username,
           password,
@@ -49,14 +49,12 @@ const credentialProvider = CredentialsProvider({
 const refreshAccessToken = async (token: JWT) => {
   try {
     const newTokens = await new ApiClient().post<AuthResponse>(
-      "soa_poc/refresh-token/",
+      `${process.env.BACKEND_PROJECT_NAME ?? ""}/refresh-token/`,
       {
         access: token.access,
         refresh: token.refresh,
       }
     )
-    console.log("OLD TOKENS", token)
-    console.log("NEW TOKENS", newTokens)
     const decoded: JWT = jwtDecode(newTokens.access)
     return {
       ...token,
@@ -79,7 +77,6 @@ export const authOptions: AuthOptions = {
       if (trigger) {
         const { id, ...rest } = user
         const decoded: JWT = jwtDecode(user.access)
-        console.log("DECODED", decoded)
         return { ...rest, sub: id, expires: decoded.exp } as JWT
       }
 
