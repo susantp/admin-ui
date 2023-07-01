@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      gridTemplateColumns: {
+        sidebar: "320px auto",
+        "sidebar-collapsed": "72px auto",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +55,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        glass: "rgba(0, 0, 0, 0.25)",
       },
       borderRadius: {
         lg: `var(--radius)`,

@@ -29,9 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         )}`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main>
-            <Providers>{children}</Providers>
-          </main>
+          <Providers>{children}</Providers>
           <Toaster />
         </ThemeProvider>
       </body>
