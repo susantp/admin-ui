@@ -13,6 +13,7 @@ import {CallbacksOptions} from "next-auth/core/types";
 import {
   authDictionaryImpl
 } from "@/auth/domain/config/auth-dictionary";
+import {throws} from "assert";
 
 type CredentialValues =
   Record<keyof typeof credentialInputs, string>
@@ -64,7 +65,9 @@ const refreshAccessToken = async (token: JWT) => {
     return {...token, error: "RefreshTokenError"}
   }
 }
-
+const backendProjectName = process.env.BACKEND_PROJECT_NAME ?? (() => {
+  throw new Error("BACKEND_PROJECT_NAME environment variable must be set");
+})();
 const authorizeMe = async (credentials: CredentialValues, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">): Promise<User | null> => {
   if (!credentials) return null
 
@@ -72,7 +75,7 @@ const authorizeMe = async (credentials: CredentialValues, req: Pick<RequestInter
 
   try {
     const tokens: AuthResponse = await new ApiClient().post<AuthResponse>(
-      `${process.env.BACKEND_PROJECT_NAME ?? ""}/user/login/`,
+      `${backendProjectName}/user/login/`,
       {
         username,
         password,
