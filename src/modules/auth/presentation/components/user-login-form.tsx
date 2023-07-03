@@ -1,20 +1,20 @@
 "use client"
 
 import React from "react"
-import {useRouter, useSearchParams} from "next/navigation"
-import {Loader2} from "lucide-react"
-import {signIn} from "next-auth/react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { authDictionaryImpl } from "@/auth/domain/config/auth-dictionary"
+import { Loader2 } from "lucide-react"
+import { signIn } from "next-auth/react"
 
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import {toast} from "@/components/ui/use-toast"
-import {authDictionaryImpl} from "@/auth/domain/config/auth-dictionary";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
 
 export default function UserLoginForm(): JSX.Element {
   const {
     credentialConfigOptions,
-    loginForm: {emailField, passwordField, actionBtn}
+    loginForm: { emailField, passwordField, actionBtn },
   } = authDictionaryImpl
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
@@ -77,7 +77,7 @@ export default function UserLoginForm(): JSX.Element {
           />
         </div>
         <Button disabled={isLoading}>
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {actionBtn.label}
         </Button>
       </div>

@@ -1,12 +1,11 @@
-import NextAuth, {type AuthOptions} from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
 import {
   callbackConfigOptions,
   credentialProviderConfig,
   pageConfig,
-  sessionConfig
-} from "@/auth/domain/config/credential-provider";
-
+  sessionConfig,
+} from "@/auth/domain/config/credential-provider"
+import NextAuth, { type AuthOptions } from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
 
 export const authOptions: AuthOptions = {
   session: sessionConfig,

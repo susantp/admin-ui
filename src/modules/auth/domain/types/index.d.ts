@@ -16,50 +16,50 @@ export interface UserDetailsResponse {
   address1: string
 }
 export interface InterfaceCredentialsOptions {
-  id: string,
-  name: string,
-  type: "credentials",
+  id: string
+  name: string
+  type: "credentials"
 }
-export interface InterfaceInputField  {
-  label: string,
-  id: string,
-  type: string,
+export interface InterfaceInputField {
+  label: string
+  id: string
+  type: string
   placeHolder: string
 }
 
 export interface InterfaceLogo {
-  path: string,
-  altText: string,
-  width: number,
+  path: string
+  altText: string
+  width: number
   height: number
 }
 
 export interface InterfacePasswordRecovery {
-  label: string,
+  label: string
   path: string
 }
 interface InterfaceAuthForm {
-  formTitle: string,
-  formSubtitle: string,
-  helperLinkLabel: string,
-  path: string,
+  formTitle: string
+  formSubtitle: string
+  helperLinkLabel: string
+  path: string
   actionBtn: {
     label: string
-  },
+  }
 }
-export interface InterfaceLoginForm extends InterfaceAuthForm{
-  emailField: InterfaceInputField,
-  passwordField: InterfaceInputField,
+export interface InterfaceLoginForm extends InterfaceAuthForm {
+  emailField: InterfaceInputField
+  passwordField: InterfaceInputField
 }
-export interface InterfaceRegisterForm extends InterfaceAuthForm{
-  terms:{
-    label: string,
+export interface InterfaceRegisterForm extends InterfaceAuthForm {
+  terms: {
+    label: string
     path: string
-  },
+  }
   privacy: {
-    label: string,
+    label: string
     path: string
-  },
+  }
   privacyTermsText: string
 }
 export interface ApiClientParams {

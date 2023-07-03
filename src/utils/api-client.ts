@@ -1,8 +1,4 @@
-import {
-  ApiClientParams,
-  ApiResponse
-} from "@/auth/domain/types";
-
+import { ApiClientParams, ApiResponse } from "@/auth/domain/types"
 
 export default class ApiClient {
   private readonly baseUrl: string =

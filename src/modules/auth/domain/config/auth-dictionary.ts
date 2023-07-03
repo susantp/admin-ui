@@ -1,4 +1,4 @@
-import {AuthDictionary} from "@/auth/domain/types/auth-dictionary";
+import { AuthDictionary } from "@/auth/domain/types/auth-dictionary"
 
 export const authDictionaryImpl: AuthDictionary = {
   pageTitle: "SOA POC",
@@ -6,7 +6,7 @@ export const authDictionaryImpl: AuthDictionary = {
     path: "/images/lis.png",
     altText: "Next.js Logo",
     width: 196,
-    height: 32
+    height: 32,
   },
   credentialConfigOptions: {
     id: "cred_1",
@@ -15,7 +15,7 @@ export const authDictionaryImpl: AuthDictionary = {
   },
   passwordRecovery: {
     label: "Forgot your password?",
-    path: "/register"
+    path: "/register",
   },
   loginForm: {
     helperLinkLabel: "Don't have an account? Register",
@@ -26,34 +26,34 @@ export const authDictionaryImpl: AuthDictionary = {
       label: "Email",
       type: "email",
       id: "email",
-      placeHolder: "Email"
+      placeHolder: "Email",
     },
     passwordField: {
       id: "password",
       type: "password",
       label: "Password",
-      placeHolder: "Password"
+      placeHolder: "Password",
     },
     actionBtn: {
-      label: "Login"
-    }
+      label: "Login",
+    },
   },
   registerForm: {
     helperLinkLabel: "Already have an account? Log In",
     path: "/register",
     actionBtn: {
-      label: "Register"
+      label: "Register",
     },
     formTitle: "Create a account",
     formSubtitle: "Enter your details below to create your account",
     terms: {
       label: "Terms of Service",
-      path: "/privacy"
+      path: "/privacy",
     },
     privacy: {
       label: "Privacy Policy",
-      path: "/privacy"
+      path: "/privacy",
     },
-    privacyTermsText: "By clicking continue, you agree to our"
-  }
+    privacyTermsText: "By clicking continue, you agree to our",
+  },
 }
