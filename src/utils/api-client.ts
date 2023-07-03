@@ -1,14 +1,8 @@
-interface ApiResponse<T> {
-  message: string
-  data: T
-  status: number
-  error: string
-}
+import {
+  ApiClientParams,
+  ApiResponse
+} from "@/auth/domain/types";
 
-interface ApiClientParams {
-  baseUrl?: string
-  accessToken?: string
-}
 
 export default class ApiClient {
   private readonly baseUrl: string =

@@ -1,4 +1,4 @@
-import {AuthDictionary} from "@/auth/domain/interface/auth-dictionary";
+import {AuthDictionary} from "@/auth/domain/types/auth-dictionary";
 
 export const authDictionaryImpl: AuthDictionary = {
   pageTitle: "SOA POC",

@@ -4,7 +4,7 @@ import {
   InterfaceLogo,
   InterfacePasswordRecovery,
   InterfaceRegisterForm
-} from "@/auth/domain/types";
+} from "@/auth/domain/types/index";
 
 
 export interface AuthDictionary {
@@ -15,3 +15,5 @@ export interface AuthDictionary {
   passwordRecovery: InterfacePasswordRecovery,
   registerForm: InterfaceRegisterForm
 }
+
+

@@ -10,10 +10,7 @@ import {
 import {JWT} from "next-auth/jwt";
 import jwtDecode from "jwt-decode";
 import {CallbacksOptions} from "next-auth/core/types";
-import {
-  authDictionaryImpl
-} from "@/auth/domain/config/auth-dictionary";
-import {throws} from "assert";
+import {authDictionaryImpl} from "@/auth/domain/config/auth-dictionary";
 
 type CredentialValues =
   Record<keyof typeof credentialInputs, string>
@@ -68,7 +65,7 @@ const refreshAccessToken = async (token: JWT) => {
 const backendProjectName = process.env.BACKEND_PROJECT_NAME ?? (() => {
   throw new Error("BACKEND_PROJECT_NAME environment variable must be set");
 })();
-const authorizeMe = async (credentials: CredentialValues, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">): Promise<User | null> => {
+const authorizeMe = async (credentials: CredentialValues): Promise<User | null> => {
   if (!credentials) return null
 
   const {username, password} = credentials
@@ -103,9 +100,7 @@ const authorizeMe = async (credentials: CredentialValues, req: Pick<RequestInter
 }
 const callbacksOptions: CallbacksOptions = {
   redirect: ({url, baseUrl}) => {
-    // Allows relative callback URLs
     if (url.startsWith("/")) return `${baseUrl}${url}`
-    // Allows callback URLs on the same origin
     if (new URL(url).origin === baseUrl) return url
     return baseUrl
   },
