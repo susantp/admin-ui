@@ -6,7 +6,7 @@ import {
 } from "@/auth/domain/types"
 import ApiClient from "@/src/utils/api-client"
 import jwtDecode from "jwt-decode"
-import { PagesOptions, RequestInternal, SessionOptions, User } from "next-auth"
+import { PagesOptions, SessionOptions, User } from "next-auth"
 import { CallbacksOptions } from "next-auth/core/types"
 import { JWT } from "next-auth/jwt"
 import { CredentialInput, CredentialsConfig } from "next-auth/providers"
