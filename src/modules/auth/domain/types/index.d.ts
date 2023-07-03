@@ -15,3 +15,50 @@ export interface UserDetailsResponse {
   last_name: string
   address1: string
 }
+export interface InterfaceCredentialsOptions {
+  id: string,
+  name: string,
+  type: "credentials",
+}
+export interface InterfaceInputField  {
+  label: string,
+  id: string,
+  type: string,
+  placeHolder: string
+}
+
+export interface InterfaceLogo {
+  path: string,
+  altText: string,
+  width: number,
+  height: number
+}
+
+export interface InterfacePasswordRecovery {
+  label: string,
+  path: string
+}
+interface InterfaceAuthForm {
+  formTitle: string,
+  formSubtitle: string,
+  helperLinkLabel: string,
+  path: string,
+  actionBtn: {
+    label: string
+  },
+}
+export interface InterfaceLoginForm extends InterfaceAuthForm{
+  emailField: InterfaceInputField,
+  passwordField: InterfaceInputField,
+}
+export interface InterfaceRegisterForm extends InterfaceAuthForm{
+  terms:{
+    label: string,
+    path: string
+  },
+  privacy: {
+    label: string,
+    path: string
+  },
+  privacyTermsText: string
+}

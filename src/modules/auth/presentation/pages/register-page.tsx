@@ -2,48 +2,60 @@ import React from "react"
 import Link from "next/link"
 import UserRegisterForm from "@/auth/presentation/components/user-register-form"
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card"
+import {authDictionaryImpl} from "@/auth/domain/config/auth-dictionary";
 
 export default function RegisterPage(): JSX.Element {
+  const {
+    registerForm: {
+      formSubtitle,
+      formTitle,
+      privacy,
+      helperLinkLabel,
+      privacyTermsText,
+      terms,
+    },
+    loginForm
+  } = authDictionaryImpl
   return (
     <Card className="p-8 space-y-6">
       <CardHeader>
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Create a account
+            {formTitle}
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your details below to create your account
+            {formSubtitle}
           </p>
         </div>
       </CardHeader>
       <CardContent>
-        <UserRegisterForm />
+        <UserRegisterForm/>
       </CardContent>
       <CardFooter className="flex-col space-y-2.5">
         <p className="px-8 text-center text-sm text-muted-foreground">
-          By clicking continue, you agree to our <br />
+          {privacyTermsText} <br/>
           <Link
-            href="/terms"
+            href={terms.path}
             className="hover:text-brand underline underline-offset-4"
           >
-            Terms of Service
-          </Link>{" "}
-          and{" "}
+            {terms.label}
+          </Link>
+          {" and "}
           <Link
-            href="/privacy"
+            href={privacy.path}
             className="hover:text-brand underline underline-offset-4"
           >
-            Privacy Policy
+            {privacy.label}
           </Link>
           .
         </p>
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
-            href="/login"
+            href={loginForm.path}
             className="hover:text-brand underline underline-offset-4"
           >
-            Already have an account? Log In
+            {helperLinkLabel}
           </Link>
         </p>
       </CardFooter>

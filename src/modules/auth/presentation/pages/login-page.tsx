@@ -2,39 +2,45 @@ import React from "react"
 import Link from "next/link"
 import UserLoginForm from "@/auth/presentation/components/user-login-form"
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card"
+import {authDictionaryImpl} from "@/auth/domain/config/auth-dictionary";
 
 export default function LoginPage(): JSX.Element {
+  const {
+    loginForm: {formTitle, formSubtitle, helperLinkLabel},
+    registerForm,
+    passwordRecovery
+  } = authDictionaryImpl
   return (
     <Card className="p-8 space-y-6">
       <CardHeader>
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
+            {formTitle}
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your credentials to sign in to your account
+            {formSubtitle}
           </p>
         </div>
       </CardHeader>
       <CardContent>
-        <UserLoginForm />
+        <UserLoginForm/>
       </CardContent>
       <CardFooter className="flex-col space-y-2.5">
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
-            href="/register"
+            href={passwordRecovery.path}
             className="hover:text-brand underline underline-offset-4"
           >
-            Forgot your password?
+            {passwordRecovery.label}
           </Link>
         </p>
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
-            href="/register"
+            href={registerForm.path}
             className="hover:text-brand underline underline-offset-4"
           >
-            Don&apos;t have an account? Register
+            {helperLinkLabel}
           </Link>
         </p>
       </CardFooter>
