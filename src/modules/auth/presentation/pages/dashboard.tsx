@@ -1,7 +1,7 @@
 "use client"
 
-import React, { Fragment, useState } from "react"
-import { Dialog, Menu, Transition } from "@headlessui/react"
+import React, {Fragment, useState} from "react"
+import {Dialog, Menu, Transition} from "@headlessui/react"
 import {
   BarsArrowUpIcon,
   ChevronDownIcon,
@@ -21,24 +21,25 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline"
+import Image from "next/image";
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "User Management", href: "users", icon: UsersIcon, current: false },
-  { name: "Role Management", href: "#", icon: FolderIcon, current: false },
-  { name: "Page Management", href: "#", icon: CalendarIcon, current: false },
-  { name: "Data Access", href: "#", icon: InboxIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
+  {name: "Dashboard", href: "#", icon: HomeIcon, current: true},
+  {name: "User Management", href: "users", icon: UsersIcon, current: false},
+  {name: "Role Management", href: "#", icon: FolderIcon, current: false},
+  {name: "Page Management", href: "#", icon: CalendarIcon, current: false},
+  {name: "Data Access", href: "#", icon: InboxIcon, current: false},
+  {name: "Reports", href: "#", icon: ChartBarIcon, current: false},
 ]
 const pages = [
-  { name: "Home", href: "#", current: false },
-  { name: "Dashboard", href: "#", current: true },
+  {name: "Home", href: "#", current: false},
+  {name: "Dashboard", href: "#", current: true},
 ]
 
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  {name: "Your Profile", href: "#"},
+  {name: "Settings", href: "#"},
+  {name: "Sign out", href: "#"},
 ]
 const people = [
   {
@@ -139,12 +140,12 @@ const projects = [
   },
 ]
 
-function classNames(...classes: string[]) {
+function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ")
 }
 
-export default function Example() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+export default function Example(): JSX.Element {
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
 
   return (
     <div>
@@ -163,7 +164,7 @@ export default function Example() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-75"/>
           </Transition.Child>
 
           <div className="fixed inset-0 z-40 flex">
@@ -176,7 +177,8 @@ export default function Example() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-teal-700 pt-5 pb-4">
+              <Dialog.Panel
+                className="relative flex w-full max-w-xs flex-1 flex-col bg-teal-700 pt-5 pb-4">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -190,7 +192,7 @@ export default function Example() {
                     <button
                       type="button"
                       className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                      onClick={() => setSidebarOpen(false)}
+                      onClick={(): void => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
                       <XMarkIcon
@@ -237,7 +239,8 @@ export default function Example() {
       {/* Static sidebar for desktop */}
       <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-grow flex-col overflow-y-auto bg-teal-700 pt-5">
+        <div
+          className="flex flex-grow flex-col overflow-y-auto bg-teal-700 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
             <h3 className="text-white font-bold text-2xl">SOA-POC</h3>
           </div>
@@ -266,14 +269,15 @@ export default function Example() {
         </div>
       </div>
       <div className="flex flex-1 flex-col md:pl-64">
-        <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
+        <div
+          className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
           <button
             type="button"
             className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 md:hidden"
-            onClick={() => setSidebarOpen(true)}
+            onClick={(): void => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
+            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true"/>
           </button>
           <div className="flex flex-1 justify-between px-4">
             <div className="flex flex-1">
@@ -306,7 +310,8 @@ export default function Example() {
                             viewBox="0 0 20 20"
                             aria-hidden="true"
                           >
-                            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                            <path
+                              d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                           </svg>
 
                           <a
@@ -328,19 +333,23 @@ export default function Example() {
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3 invisible lg:visible">
                 <div>
-                  <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm ">
+                  <Menu.Button
+                    className="flex max-w-xs items-center rounded-full bg-white text-sm ">
                     <>
                       <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                        <p
+                          className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                           Ishwor Kafle
                         </p>
-                        <p className="text-xs font-semibold text-teal-500 group-hover:text-gray-700">
+                        <p
+                          className="text-xs font-semibold text-teal-500 group-hover:text-gray-700">
                           Super Admin
                         </p>
                       </div>
-                      <span className="rounded-full bg-white p-4 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-teal-500 focus:ring-offset-2">
+                      <span
+                        className="rounded-full bg-white p-4 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-teal-500 focus:ring-offset-2">
                         <span className="sr-only">View notifications</span>
-                        <Cog6ToothIcon className="h-6 w-6" aria-hidden="true" />
+                        <Cog6ToothIcon className="h-6 w-6" aria-hidden="true"/>
                       </span>
                     </>
                   </Menu.Button>
@@ -354,10 +363,11 @@ export default function Example() {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {userNavigation.map((item) => (
                       <Menu.Item key={item.name}>
-                        {({ active }) => (
+                        {({active}): JSX.Element => (
                           <a
                             href={item.href}
                             className={classNames(
@@ -404,7 +414,8 @@ export default function Example() {
                       >
                         {project.initials}
                       </div>
-                      <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
+                      <div
+                        className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
                         <div className="flex-1 truncate px-4 py-2 text-sm">
                           <a
                             href={project.href}
@@ -436,7 +447,8 @@ export default function Example() {
 
               <div className="py-10">
                 <div className="px-4 sm:px-6 lg:px-8">
-                  <div className="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
+                  <div
+                    className="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
                     <h3 className="text-lg font-medium leading-6 text-gray-900">
                       Active Users
                     </h3>
@@ -445,7 +457,8 @@ export default function Example() {
                       <label className="sr-only">Search</label>
                       <div className="flex rounded-md shadow-sm">
                         <div className="relative flex-grow focus-within:z-10">
-                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                          <div
+                            className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <MagnifyingGlassIcon
                               className="h-5 w-5 text-gray-400"
                               aria-hidden="true"
@@ -484,95 +497,109 @@ export default function Example() {
                     </div>
                   </div>
                   <div className="mt-8 flex flex-col">
-                    <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                      <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                          <table className="min-w-full divide-y divide-gray-300">
+                    <div
+                      className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                      <div
+                        className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div
+                          className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                          <table
+                            className="min-w-full divide-y divide-gray-300">
                             <thead className="bg-gray-50">
-                              <tr>
-                                <th
-                                  scope="col"
-                                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                                >
-                                  Name
-                                </th>
-                                <th
-                                  scope="col"
-                                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                >
-                                  Title
-                                </th>
-                                <th
-                                  scope="col"
-                                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                >
-                                  Status
-                                </th>
-                                <th
-                                  scope="col"
-                                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                >
-                                  Role
-                                </th>
-                                <th
-                                  scope="col"
-                                  className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                                >
-                                  <span className="sr-only">Edit</span>
-                                </th>
-                              </tr>
+                            <tr>
+                              <th
+                                scope="col"
+                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                              >
+                                Name
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                Title
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                Status
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                Role
+                              </th>
+                              <th
+                                scope="col"
+                                className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                              >
+                                <span className="sr-only">Edit</span>
+                              </th>
+                            </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200 bg-white">
-                              {people.map((person) => (
-                                <tr key={person.email}>
-                                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                    <div className="flex items-center">
-                                      <div className="h-10 w-10 flex-shrink-0">
-                                        <img
-                                          className="h-10 w-10 rounded-full"
-                                          src={person.image}
-                                          alt=""
-                                        />
+                            <tbody
+                              className="divide-y divide-gray-200 bg-white">
+                            {people.map((person) => (
+                              <tr key={person.email}>
+                                <td
+                                  className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                  <div className="flex items-center">
+                                    <div className="h-10 w-10 flex-shrink-0">
+                                      <Image
+                                        width={20}
+                                        height={20}
+                                        className="h-10 w-10 rounded-full"
+                                        src={person.image}
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div className="ml-4">
+                                      <div
+                                        className="font-medium text-gray-900">
+                                        {person.name}
                                       </div>
-                                      <div className="ml-4">
-                                        <div className="font-medium text-gray-900">
-                                          {person.name}
-                                        </div>
-                                        <div className="text-gray-500">
-                                          {person.email}
-                                        </div>
+                                      <div className="text-gray-500">
+                                        {person.email}
                                       </div>
                                     </div>
-                                  </td>
-                                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <div className="text-gray-900">
-                                      {person.title}
-                                    </div>
-                                    <div className="text-gray-500">
-                                      {person.department}
-                                    </div>
-                                  </td>
-                                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                                  </div>
+                                </td>
+                                <td
+                                  className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                  <div className="text-gray-900">
+                                    {person.title}
+                                  </div>
+                                  <div className="text-gray-500">
+                                    {person.department}
+                                  </div>
+                                </td>
+                                <td
+                                  className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <span
+                                      className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
                                       Active
                                     </span>
-                                  </td>
-                                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    {person.role}
-                                  </td>
-                                  <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <a
-                                      href="#"
-                                      className="text-teal-600 hover:text-teal-900"
-                                    >
-                                      Edit
-                                      <span className="sr-only">
+                                </td>
+                                <td
+                                  className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                  {person.role}
+                                </td>
+                                <td
+                                  className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                  <a
+                                    href="#"
+                                    className="text-teal-600 hover:text-teal-900"
+                                  >
+                                    Edit
+                                    <span className="sr-only">
                                         , {person.name}
                                       </span>
-                                    </a>
-                                  </td>
-                                </tr>
-                              ))}
+                                  </a>
+                                </td>
+                              </tr>
+                            ))}
                             </tbody>
                           </table>
                         </div>
@@ -580,7 +607,8 @@ export default function Example() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-between  bg-white px-4 py-3 sm:px-6">
+                <div
+                  className="flex items-center justify-between  bg-white px-4 py-3 sm:px-6">
                   <div className="flex flex-1 justify-between sm:hidden">
                     <a
                       href="#"
@@ -595,7 +623,8 @@ export default function Example() {
                       Next
                     </a>
                   </div>
-                  <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                  <div
+                    className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                     <div>
                       <p className="text-sm text-gray-700">
                         Showing <span className="font-medium">1</span> to{" "}
@@ -638,7 +667,8 @@ export default function Example() {
                         >
                           3
                         </a>
-                        <span className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                        <span
+                          className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">
                           ...
                         </span>
                         <a

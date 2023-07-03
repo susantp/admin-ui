@@ -79,3 +79,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+.login-header {
+  @apply sm:mx-auto sm:w-full sm:max-w-md
+}
