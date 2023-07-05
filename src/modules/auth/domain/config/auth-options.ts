@@ -1,3 +1,4 @@
+import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
 import {
   AuthResponse,
   UserDetailsResponse,
@@ -18,7 +19,7 @@ const credentialProvider = CredentialsProvider({
 
     try {
       const tokens = await new ApiClient().post<AuthResponse>(
-        `${process.env.BACKEND_PROJECT_NAME ?? ""}/user/login/`,
+        authEndpoints.userLogin,
         {
           username,
           password,
@@ -26,9 +27,9 @@ const credentialProvider = CredentialsProvider({
       )
 
       const apiClient = new ApiClient({ accessToken: tokens.access })
-      const user = await apiClient.get<UserResponse>("logged-in-user/")
+      const user = await apiClient.get<UserResponse>(authEndpoints.loggedInUser)
       const userDetails = await apiClient.get<UserDetailsResponse>(
-        "user-detail/"
+        authEndpoints.userDetail
       )
 
       return {
@@ -49,7 +50,7 @@ const credentialProvider = CredentialsProvider({
 const refreshAccessToken = async (token: JWT) => {
   try {
     const newTokens = await new ApiClient().post<AuthResponse>(
-      `${process.env.BACKEND_PROJECT_NAME ?? ""}/refresh-token/`,
+      authEndpoints.refreshToken,
       {
         access: token.access,
         refresh: token.refresh,
