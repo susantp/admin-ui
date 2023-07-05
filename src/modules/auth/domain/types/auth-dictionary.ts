@@ -1,5 +1,4 @@
 import {
-  InterfaceCredentialsOptions,
   InterfaceLoginForm,
   InterfaceLogo,
   InterfacePasswordRecovery,
@@ -8,7 +7,6 @@ import {
 
 export interface AuthDictionary {
   pageTitle: string
-  credentialConfigOptions: InterfaceCredentialsOptions
   logo: InterfaceLogo
   loginForm: InterfaceLoginForm
   passwordRecovery: InterfacePasswordRecovery

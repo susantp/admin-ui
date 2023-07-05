@@ -8,11 +8,6 @@ export const authDictionaryImpl: AuthDictionary = {
     width: 196,
     height: 32,
   },
-  credentialConfigOptions: {
-    id: "cred_1",
-    name: "Credentials",
-    type: "credentials",
-  },
   passwordRecovery: {
     label: "Forgot your password?",
     path: "/register",
@@ -23,10 +18,10 @@ export const authDictionaryImpl: AuthDictionary = {
     formTitle: "Welcome back",
     formSubtitle: "Enter your credentials to sign in to your account",
     emailField: {
-      label: "Email",
-      type: "email",
-      id: "email",
-      placeHolder: "Email",
+      label: "Username",
+      type: "text",
+      id: "username",
+      placeHolder: "Username",
     },
     passwordField: {
       id: "password",

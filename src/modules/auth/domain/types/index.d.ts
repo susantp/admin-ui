@@ -15,11 +15,7 @@ export interface UserDetailsResponse {
   last_name: string
   address1: string
 }
-export interface InterfaceCredentialsOptions {
-  id: string
-  name: string
-  type: "credentials"
-}
+
 export interface InterfaceInputField {
   label: string
   id: string
@@ -38,6 +34,7 @@ export interface InterfacePasswordRecovery {
   label: string
   path: string
 }
+
 interface InterfaceAuthForm {
   formTitle: string
   formSubtitle: string
@@ -47,10 +44,12 @@ interface InterfaceAuthForm {
     label: string
   }
 }
+
 export interface InterfaceLoginForm extends InterfaceAuthForm {
   emailField: InterfaceInputField
   passwordField: InterfaceInputField
 }
+
 export interface InterfaceRegisterForm extends InterfaceAuthForm {
   terms: {
     label: string
@@ -62,10 +61,12 @@ export interface InterfaceRegisterForm extends InterfaceAuthForm {
   }
   privacyTermsText: string
 }
+
 export interface ApiClientParams {
   baseUrl?: string
   accessToken?: string
 }
+
 export interface ApiResponse<T> {
   message: string
   data: T

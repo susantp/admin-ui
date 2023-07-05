@@ -13,7 +13,6 @@ import { toast } from "@/components/ui/use-toast"
 
 export default function UserLoginForm(): JSX.Element {
   const {
-    credentialConfigOptions,
     loginForm: { emailField, passwordField, actionBtn },
   } = authDictionaryImpl
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
@@ -31,7 +30,7 @@ export default function UserLoginForm(): JSX.Element {
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    const signInResult = await signIn(credentialConfigOptions.id, {
+    const signInResult = await signIn("credentials", {
       redirect: false,
       username,
       password,
