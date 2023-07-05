@@ -12,6 +12,6 @@ export const authEndpoints: AuthEndpoints = {
   userLogin: `${projectName}/user/login/`,
   userRegister: `${projectName}/user/login/`,
   refreshToken: `${projectName}/refresh-token/`,
-  loggedInUser: `${projectName}/refresh-token/`,
-  userDetail: `logged-in-user/`,
+  loggedInUser: "logged-in-user/",
+  userDetail: "user-detail/",
 }

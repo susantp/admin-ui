@@ -3,7 +3,7 @@ import {
   InterfaceLogo,
   InterfacePasswordRecovery,
   InterfaceRegisterForm,
-} from "@/auth/domain/types/index"
+} from "@/auth/domain/types/auth-endpoints"
 
 export interface AuthDictionary {
   pageTitle: string

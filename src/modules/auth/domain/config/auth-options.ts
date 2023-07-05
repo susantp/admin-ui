@@ -1,9 +1,12 @@
 import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
 import {
-  AuthResponse,
-  UserDetailsResponse,
-  UserResponse,
-} from "@/auth/domain/types"
+  LoggedInUserResponse,
+  RefreshTokenRequest,
+  RefreshTokenResponse,
+  UserDetailResponse,
+  UserLoginRequest,
+  UserLoginResponse,
+} from "@/auth/domain/types/auth-endpoints"
 import ApiClient from "@/src/utils/api-client"
 import jwtDecode from "jwt-decode"
 import { AuthOptions, User } from "next-auth"
@@ -18,17 +21,19 @@ const credentialProvider = CredentialsProvider({
     const { username, password } = credentials
 
     try {
-      const tokens = await new ApiClient().post<AuthResponse>(
-        authEndpoints.userLogin,
-        {
-          username,
-          password,
-        }
-      )
+      const tokens = await new ApiClient().post<
+        UserLoginRequest,
+        UserLoginResponse
+      >(authEndpoints.userLogin, {
+        username,
+        password,
+      })
 
       const apiClient = new ApiClient({ accessToken: tokens.access })
-      const user = await apiClient.get<UserResponse>(authEndpoints.loggedInUser)
-      const userDetails = await apiClient.get<UserDetailsResponse>(
+      const user = await apiClient.get<LoggedInUserResponse>(
+        authEndpoints.loggedInUser
+      )
+      const userDetails = await apiClient.get<UserDetailResponse>(
         authEndpoints.userDetail
       )
 
@@ -49,13 +54,13 @@ const credentialProvider = CredentialsProvider({
 
 const refreshAccessToken = async (token: JWT) => {
   try {
-    const newTokens = await new ApiClient().post<AuthResponse>(
-      authEndpoints.refreshToken,
-      {
-        access: token.access,
-        refresh: token.refresh,
-      }
-    )
+    const newTokens = await new ApiClient().post<
+      RefreshTokenRequest,
+      RefreshTokenResponse
+    >(authEndpoints.refreshToken, {
+      access: token.access,
+      refresh: token.refresh,
+    })
     const decoded: JWT = jwtDecode(newTokens.access)
     return {
       ...token,

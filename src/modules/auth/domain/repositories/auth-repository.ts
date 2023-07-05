@@ -1,11 +1,11 @@
-import { AuthResponse } from "../types"
+import {
+  UserLoginRequest,
+  UserLoginResponse,
+  UserRegisterRequest,
+  UserRegisterResponse,
+} from "../types/auth-endpoints"
 
 export default interface AuthRepository {
-  login(username: string, password: string): Promise<AuthResponse>
-  register(
-    username: string,
-    password: string,
-    email: string,
-    phone: string
-  ): Promise<AuthResponse>
+  login(credentials: UserLoginRequest): Promise<UserLoginResponse>
+  register(details: UserRegisterRequest): Promise<UserRegisterResponse>
 }

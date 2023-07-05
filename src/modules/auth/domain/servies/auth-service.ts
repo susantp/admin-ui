@@ -8,7 +8,7 @@ export default class AuthService {
     // Example: Hash the password, validate credentials, etc.
 
     try {
-      return await this.authRepository.login(username, password)
+      return await this.authRepository.login({ username, password })
       // Additional business logic or transformations if needed
     } catch (error) {
       throw new Error("Error occurred during login")
@@ -25,12 +25,12 @@ export default class AuthService {
     // Example: Validate username, email, phone, etc.
 
     try {
-      return await this.authRepository.register(
+      return await this.authRepository.register({
         username,
         password,
         email,
-        phone
-      )
+        phone,
+      })
       // Additional business logic or transformations if needed
     } catch (error) {
       throw new Error("Error occurred during registration")
