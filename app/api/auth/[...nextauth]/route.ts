@@ -1,19 +1,5 @@
-import {
-  callbackConfigOptions,
-  credentialProviderConfig,
-  pageConfig,
-  sessionConfig,
-} from "@/auth/domain/config/credential-provider"
-import NextAuth, { type AuthOptions } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-
-export const authOptions: AuthOptions = {
-  session: sessionConfig,
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: pageConfig,
-  providers: [CredentialsProvider(credentialProviderConfig)],
-  callbacks: callbackConfigOptions,
-}
+import { authOptions } from "@/auth/domain/config/auth-options"
+import NextAuth from "next-auth"
 
 const handler: unknown = NextAuth(authOptions)
 
