@@ -3,7 +3,7 @@ import Image from "next/image"
 import { authOptions } from "@/auth/domain/config/auth-options"
 import { getServerSession } from "next-auth"
 
-export default async function Home() {
+export default async function Home(): Promise<JSX.Element> {
   const session = await getServerSession(authOptions)
 
   return (

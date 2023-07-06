@@ -18,7 +18,7 @@ export default function UserRegisterForm(): JSX.Element {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  function onSubmit(event: React.SyntheticEvent) {
+  function onSubmit(event: React.SyntheticEvent): void {
     event.preventDefault()
 
     // TODO: Add registration functionality after finalizing all the fields.

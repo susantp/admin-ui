@@ -7,11 +7,13 @@ import {
   UserLoginRequest,
   UserLoginResponse,
 } from "@/auth/domain/types/auth-endpoints"
+import { TokenPayload } from "@/auth/domain/types/nextauth"
 import ApiClient from "@/src/utils/api-client"
 import jwtDecode from "jwt-decode"
 import { AuthOptions, User } from "next-auth"
 import { JWT } from "next-auth/jwt"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { signOut } from "next-auth/react"
 
 const credentialProvider = CredentialsProvider({
   credentials: { username: {}, password: {} },
@@ -54,7 +56,7 @@ const credentialProvider = CredentialsProvider({
   },
 })
 
-const refreshAccessToken = async (token: JWT) => {
+const refreshAccessToken = async (token: JWT): Promise<JWT> => {
   try {
     const newTokens = await new ApiClient().post<
       RefreshTokenRequest,
@@ -63,12 +65,13 @@ const refreshAccessToken = async (token: JWT) => {
       access: token.access,
       refresh: token.refresh,
     })
-    const decoded: JWT = jwtDecode(newTokens.access)
+
+    const decoded: TokenPayload = jwtDecode(newTokens.access)
+
     return {
       ...token,
       access: newTokens.access,
-      expires: decoded.exp,
-      error: null,
+      access_exp: decoded.exp,
     }
   } catch (error) {
     return { ...token, error: "RefreshTokenError" }
@@ -84,14 +87,25 @@ export const authOptions: AuthOptions = {
     jwt: async ({ token, user, trigger }) => {
       if (trigger) {
         const { id, ...rest } = user
-        const decoded: JWT = jwtDecode(user.access)
-        return { ...rest, sub: id, expires: decoded.exp } as JWT
+        const accessDecoded: TokenPayload = jwtDecode(user.access)
+        const refreshDecoded: TokenPayload = jwtDecode(user.refresh)
+
+        return {
+          ...rest,
+          sub: id,
+          access_exp: accessDecoded.exp,
+          refresh_exp: refreshDecoded.exp,
+        }
       }
 
-      const { expires = 0 } = token
-      if (Math.floor(Date.now() / 1000) < expires) return token
+      if (Math.floor(Date.now() / 1000) < token.access_exp) return token
 
-      return (await refreshAccessToken(token)) as JWT
+      if (Math.floor(Date.now()) / 1000 > token.refresh_exp) {
+        await signOut({ redirect: false })
+        throw Error("Token Expired")
+      }
+
+      return refreshAccessToken(token)
     },
     session: async ({ session, token }) => {
       session.user.id = token.sub
@@ -102,7 +116,8 @@ export const authOptions: AuthOptions = {
       session.user.address = token.address
       session.user.access = token.access
       session.user.refresh = token.refresh
-      session.user.expires = token.expires
+      session.user.access_exp = token.access_exp
+      session.user.refresh_exp = token.refresh_exp
 
       return Promise.resolve(session)
     },

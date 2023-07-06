@@ -22,7 +22,7 @@ export default function UserLoginForm(): JSX.Element {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  async function onSubmit(event: React.SyntheticEvent) {
+  async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault()
 
     setIsLoading(true)
