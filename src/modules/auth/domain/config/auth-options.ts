@@ -1,3 +1,4 @@
+import { authConfig } from "@/auth/domain/config/auth-config"
 import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
 import {
   LoggedInUserResponse,
@@ -16,6 +17,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { signOut } from "next-auth/react"
 
 const credentialProvider = CredentialsProvider({
+  id: authConfig.credentialId,
   credentials: { username: {}, password: {} },
   authorize: async (credentials) => {
     if (!credentials) return null

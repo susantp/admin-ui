@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import { authDictionaryImpl } from "@/auth/domain/config/auth-dictionary"
+import { authConfig } from "@/auth/domain/config/auth-config"
 import UserRegisterForm from "@/auth/presentation/components/user-register-form"
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -16,7 +16,7 @@ export default function RegisterPage(): JSX.Element {
       terms,
     },
     loginForm,
-  } = authDictionaryImpl
+  } = authConfig
   return (
     <Card className="p-8 space-y-6">
       <CardHeader>
