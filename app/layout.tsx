@@ -20,8 +20,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-    <html lang="en" className="" suppressHydrationWarning>
-      <body className={`${inter.className} bg-background`}>
+    <html lang="en" className="" >
+      <body className={`${inter.className} bg-background`} suppressHydrationWarning>
         <main>
           <Providers>{children}</Providers>
         </main>
