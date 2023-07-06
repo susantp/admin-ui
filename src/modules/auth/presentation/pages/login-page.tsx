@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import { authDictionaryImpl } from "@/auth/domain/config/auth-dictionary"
+import { authConfig } from "@/auth/domain/config/auth-config"
 import UserLoginForm from "@/auth/presentation/components/user-login-form"
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -10,7 +10,7 @@ export default function LoginPage(): JSX.Element {
     loginForm: { formTitle, formSubtitle, helperLinkLabel },
     registerForm,
     passwordRecovery,
-  } = authDictionaryImpl
+  } = authConfig
   return (
     <Card className="p-8 space-y-6">
       <CardHeader>

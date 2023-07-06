@@ -1,6 +1,6 @@
 import React from "react"
 import Image from "next/image"
-import { authDictionaryImpl } from "@/auth/domain/config/auth-dictionary"
+import { authConfig } from "@/auth/domain/config/auth-config"
 
 interface AuthLayoutProps {
   children: React.ReactNode
@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: AuthLayoutProps): JSX.Element {
   const {
     pageTitle,
     logo: { path, altText, width, height },
-  } = authDictionaryImpl
+  } = authConfig
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-evenly">
       <div className="space-y-6">

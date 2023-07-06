@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { authDictionaryImpl } from "@/auth/domain/config/auth-dictionary"
+import { authConfig } from "@/auth/domain/config/auth-config"
 import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
 
@@ -14,7 +14,7 @@ import { toast } from "@/components/ui/use-toast"
 export default function UserLoginForm(): JSX.Element {
   const {
     loginForm: { emailField, passwordField, actionBtn },
-  } = authDictionaryImpl
+  } = authConfig
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
@@ -30,7 +30,7 @@ export default function UserLoginForm(): JSX.Element {
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    const signInResult = await signIn("credentials", {
+    const signInResult = await signIn(authConfig.credentialId, {
       redirect: false,
       username,
       password,

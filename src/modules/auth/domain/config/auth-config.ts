@@ -1,6 +1,7 @@
-import { AuthDictionary } from "@/auth/domain/types/auth-dictionary"
+import { AuthConfig } from "@/auth/domain/types/auth-config"
 
-export const authDictionaryImpl: AuthDictionary = {
+export const authConfig: AuthConfig = {
+  credentialId: "credentials",
   pageTitle: "SOA POC",
   logo: {
     path: "/images/lis.png",
