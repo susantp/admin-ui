@@ -11,7 +11,7 @@ declare module "next-auth" {
     address: string
     access: string
     refresh: string
-    expires: number
+    expires?: number
   }
 
   interface Session {

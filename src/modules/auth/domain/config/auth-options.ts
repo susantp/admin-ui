@@ -30,20 +30,22 @@ const credentialProvider = CredentialsProvider({
       })
 
       const apiClient = new ApiClient({ accessToken: tokens.access })
-      const user = await apiClient.get<LoggedInUserResponse>(
+      const loggedInUser = await apiClient.get<LoggedInUserResponse>(
         authEndpoints.loggedInUser
       )
       const userDetails = await apiClient.get<UserDetailResponse>(
         authEndpoints.userDetail
       )
 
-      return {
-        ...user,
+      const user: User = {
+        ...loggedInUser,
         firstName: userDetails.first_name,
         lastName: userDetails.last_name,
         address: userDetails.address1,
         ...tokens,
-      } as User
+      }
+
+      return user
     } catch (_) {
       return Promise.reject(
         Error("Your sign in request failed. Please try again.")
