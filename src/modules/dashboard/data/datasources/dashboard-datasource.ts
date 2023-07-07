@@ -31,7 +31,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "ishwor.kafle@lisnepal.com.np",
       role: "Super Admin",
-      image: "http://login.lisnepal.com.np/uploads/409/Ishwor.jpg",
+      image: "/avatar.avif",
     },
     {
       name: "Anish Byanjankar",
@@ -39,7 +39,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "anish.byanjankar@lisnepal.com.np",
       role: "Admin",
-      image: "http://login.lisnepal.com.np/uploads/259/Anish.png",
+      image: "/avatar.avif",
     },
     {
       name: "Rubin Maharjan",
@@ -47,7 +47,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "rubin.maharjan@lisnepal.com.np",
       role: "Member",
-      image: "http://login.lisnepal.com.np/uploads/636/Ruben.jpg",
+      image: "/avatar.avif",
     },
     {
       name: "Susanta Paudel",
@@ -55,7 +55,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "susanta.paudel@lisnepal.com.np",
       role: "Member",
-      image: "http://login.lisnepal.com.np/uploads/777/sp.jpg",
+      image: "/avatar.avif",
     },
     {
       name: "Ishwor Kafle",
@@ -63,7 +63,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "ishwor.kafle1@lisnepal.com.np",
       role: "Super Admin",
-      image: "http://login.lisnepal.com.np/uploads/409/Ishwor.jpg",
+      image: "/avatar.avif",
     },
     {
       name: "Anish Byanjankar",
@@ -71,7 +71,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "anish.byanjankar1@lisnepal.com.np",
       role: "Admin",
-      image: "http://login.lisnepal.com.np/uploads/259/Anish.png",
+      image: "/avatar.avif",
     },
     {
       name: "Rubin Maharjan",
@@ -79,7 +79,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "rubin.maharjan1@lisnepal.com.np",
       role: "Member",
-      image: "http://login.lisnepal.com.np/uploads/636/Ruben.jpg",
+      image: "/avatar.avif",
     },
     {
       name: "Susanta Paudel",
@@ -87,7 +87,7 @@ const useTempData = (): InterfaceGetTempData => {
       department: "Development Service",
       email: "susanta.paudel1@lisnepal.com.np",
       role: "Member",
-      image: "http://login.lisnepal.com.np/uploads/777/sp.jpg",
+      image: "/avatar.avif",
     },
     // add more people...
   ]

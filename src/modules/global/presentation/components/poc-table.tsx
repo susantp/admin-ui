@@ -2,6 +2,7 @@ import React from "react";
 import {
   InterfacePeople
 } from "@/src/modules/dashboard/domain/types/dashboard-type";
+import Image from "next/image";
 
 interface InterfaceTableProps{
   people: InterfacePeople[]
@@ -50,7 +51,7 @@ export default function PocTable({people}: InterfaceTableProps): JSX.Element {
           className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
           <div className="flex items-center">
             <div className="h-10 w-10 flex-shrink-0">
-              <img
+              <Image width={40} height={40}
                 className="h-10 w-10 rounded-full"
                 src={person.image}
                 alt=""
