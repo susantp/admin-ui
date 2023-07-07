@@ -1,19 +1,18 @@
-import {type ClassValue, clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
+import { InterfaceAppPath } from "@/src/modules/global/domain/types/global-type"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 interface InterfaceGetHelpers {
-  joinClasses: (...classes: string[]) => string;
-  formatDate: (input: string | number) => string;
-  cn: (...inputs: ClassValue[]) => string;
+  joinClasses: (...classes: string[]) => string
+  formatDate: (input: string | number) => string
+  cn: (...inputs: ClassValue[]) => string
+  appPaths: () => InterfaceAppPath[]
 }
 
 const getHelpers = (): InterfaceGetHelpers => {
-  const cn = (...inputs: ClassValue[]): string => {
-    return twMerge(clsx(inputs))
-  }
-  const joinClasses = (...classes: string[]): string => {
-    return classes.filter(Boolean).join(" ");
-  }
+  const cn = (...inputs: ClassValue[]): string => twMerge(clsx(inputs))
+  const joinClasses = (...classes: string[]): string =>
+    classes.filter(Boolean).join(" ")
   const formatDate = (input: string | number): string => {
     const date: Date = new Date(input)
     return date.toLocaleDateString("en-US", {
@@ -22,6 +21,13 @@ const getHelpers = (): InterfaceGetHelpers => {
       year: "numeric",
     })
   }
-  return {joinClasses, formatDate, cn}
+  const appPaths = (): InterfaceAppPath[] => [
+    { path: "/dashboard", label: "Dashboard" },
+    { path: "/users", label: "User Management" },
+    { path: "/roles", label: "Role Management" },
+    { path: "/pages", label: "Page Management" },
+  ]
+
+  return { joinClasses, formatDate, cn, appPaths }
 }
 export default getHelpers
