@@ -1,21 +1,24 @@
 "use client"
 
-import React, { Fragment, useState } from "react"
-import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
-import Breadcrumb from "@/src/modules/dashboard/presentation/components/navbar/breadcrumb"
+import React, {Fragment, useState} from "react"
+import useTempData
+  from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
+import Breadcrumb
+  from "@/src/modules/dashboard/presentation/components/navbar/breadcrumb"
 import MobileNav
   from "@/src/modules/dashboard/presentation/components/sidebar/mobile-nav";
 import NavAnchor
   from "@/src/modules/dashboard/presentation/components/sidebar/nav-anchor";
-import UserMenu from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
-import { Menu, Transition } from "@headlessui/react"
-import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline"
+import UserMenu
+  from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
+import {Menu, Transition} from "@headlessui/react"
+import {Cog6ToothIcon} from "@heroicons/react/24/outline"
 
 export default function Navbar(): JSX.Element {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { navigation, userNavigation, pages } = useTempData()
+  const { navigation, userNavigation } = useTempData()
   return (
-    <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
+    <nav className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
       <MobileNav setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}>
         <nav className="space-y-1 px-2">
           {navigation.map((item) => (
@@ -69,6 +72,6 @@ export default function Navbar(): JSX.Element {
           </Menu>
         </div>
       </div>
-    </div>
+    </nav>
   )
 }

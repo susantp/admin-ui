@@ -12,8 +12,8 @@ export default function AuthLayout({ children }: AuthLayoutProps): JSX.Element {
     logo: { path, altText, width, height },
   } = authConfig
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-evenly">
-      <div className="space-y-6">
+    <main className="container flex h-screen w-screen flex-col items-center justify-evenly">
+      <section className="space-y-6">
         <Image
           src={path}
           alt={altText}
@@ -22,9 +22,9 @@ export default function AuthLayout({ children }: AuthLayoutProps): JSX.Element {
           priority
         />
         <h2 className="text-3xl font-semibold text-center">{pageTitle}</h2>
-      </div>
+      </section>
       {children}
       <div />
-    </div>
+    </main>
   )
 }

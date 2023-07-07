@@ -16,14 +16,16 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
-      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+      <aside className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         <SidebarDesktop/>
-      </div>
+      </aside>
 
-      <div className="flex flex-1 flex-col md:pl-64">
-        <Navbar/>
-        {children}
-      </div>
+      <main>
+        <section className="flex flex-1 flex-col md:pl-64">
+          <Navbar/>
+          {children}
+        </section>
+      </main>
     </Suspense>
   )
 }

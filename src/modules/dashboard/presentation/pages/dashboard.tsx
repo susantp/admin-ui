@@ -1,7 +1,8 @@
 "use client"
 
 import React from "react"
-import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
+import useTempData
+  from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
 import getHelpers from "@/src/utils/helpers"
 import {
   BarsArrowUpIcon,
@@ -11,63 +12,29 @@ import {
   EllipsisVerticalIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid"
+import Section
+  from "@/src/modules/dashboard/presentation/components/dashboard-components/section";
+import MostViewedWrapper
+  from "@/src/modules/dashboard/presentation/components/dashboard-components/most-viewed-wrapper";
+import InfoBox
+  from "@/src/modules/dashboard/presentation/components/dashboard-components/info-box";
 
 export default function Dashboard(): JSX.Element {
-  const { projects, people } = useTempData()
+  const {projects, people} = useTempData()
   return (
     <div className="px-4 sm:px-6 md:px-8">
-      <div className="mt-10 px-4 sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200 pb-5">
-          <h3 className="text-lg font-medium leading-6 text-gray-900">
-            Most viewed pages
-          </h3>
-        </div>
-
-        <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
+      <Section label="Most viewed pages">
+        <MostViewedWrapper>
           {projects.map((project) => (
-            <li
-              key={project.name}
-              className="col-span-1 flex rounded-md shadow-sm"
-            >
-              <div
-                className={getHelpers().joinClasses(
-                  project.bgColor,
-                  "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
-                )}
-              >
-                {project.initials}
-              </div>
-              <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
-                <div className="flex-1 truncate px-4 py-2 text-sm">
-                  <a
-                    href={project.href}
-                    className="font-medium text-gray-900 hover:text-gray-600"
-                  >
-                    {project.name}
-                  </a>
-                  <p className="text-gray-500">{project.members} Members</p>
-                </div>
-                <div className="flex-shrink-0 pr-2">
-                  <button
-                    type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white bg-transparent text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </div>
-              </div>
-            </li>
+            <InfoBox key={Math.random()} project={project}/>
           ))}
-        </ul>
-      </div>
+        </MostViewedWrapper>
+      </Section>
 
       <div className="py-10">
         <div className="px-4 sm:px-6 lg:px-8">
-          <div className="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
+          <div
+            className="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
               Active Users
             </h3>
@@ -75,7 +42,8 @@ export default function Dashboard(): JSX.Element {
 
               <div className="flex rounded-md shadow-sm">
                 <div className="relative flex-grow focus-within:z-10">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <div
+                    className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                     <MagnifyingGlassIcon
                       className="h-5 w-5 text-gray-400"
                       aria-hidden="true"
@@ -117,90 +85,98 @@ export default function Dashboard(): JSX.Element {
           </div>
           <div className="mt-8 flex flex-col">
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <div
+                className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                <div
+                  className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                   <table className="min-w-full divide-y divide-gray-300">
                     <thead className="bg-gray-50">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                        >
-                          Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Title
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Status
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Role
-                        </th>
-                        <th
-                          scope="col"
-                          className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                        >
-                          <span className="sr-only">Edit</span>
-                        </th>
-                      </tr>
+                    <tr>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Title
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Status
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Role
+                      </th>
+                      <th
+                        scope="col"
+                        className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                      >
+                        <span className="sr-only">Edit</span>
+                      </th>
+                    </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {people.map((person) => (
-                        <tr key={person.email}>
-                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                            <div className="flex items-center">
-                              <div className="h-10 w-10 flex-shrink-0">
-                                <img
-                                  className="h-10 w-10 rounded-full"
-                                  src={person.image}
-                                  alt=""
-                                />
+                    {people.map((person) => (
+                      <tr key={person.email}>
+                        <td
+                          className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                          <div className="flex items-center">
+                            <div className="h-10 w-10 flex-shrink-0">
+                              <img
+                                className="h-10 w-10 rounded-full"
+                                src={person.image}
+                                alt=""
+                              />
+                            </div>
+                            <div className="ml-4">
+                              <div className="font-medium text-gray-900">
+                                {person.name}
                               </div>
-                              <div className="ml-4">
-                                <div className="font-medium text-gray-900">
-                                  {person.name}
-                                </div>
-                                <div className="text-gray-500">
-                                  {person.email}
-                                </div>
+                              <div className="text-gray-500">
+                                {person.email}
                               </div>
                             </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <div className="text-gray-900">{person.title}</div>
-                            <div className="text-gray-500">
-                              {person.department}
-                            </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                          </div>
+                        </td>
+                        <td
+                          className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <div className="text-gray-900">{person.title}</div>
+                          <div className="text-gray-500">
+                            {person.department}
+                          </div>
+                        </td>
+                        <td
+                          className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <span
+                              className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
                               Active
                             </span>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {person.role}
-                          </td>
-                          <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <button
-                              type="button"
-                              className="text-teal-600 hover:text-teal-900"
-                            >
-                              Edit
-                              <span className="sr-only">, {person.name}</span>
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
+                        </td>
+                        <td
+                          className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {person.role}
+                        </td>
+                        <td
+                          className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                          <button
+                            type="button"
+                            className="text-teal-600 hover:text-teal-900"
+                          >
+                            Edit
+                            <span className="sr-only">, {person.name}</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                     </tbody>
                   </table>
                 </div>
@@ -208,7 +184,8 @@ export default function Dashboard(): JSX.Element {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between  bg-white px-4 py-3 sm:px-6">
+        <div
+          className="flex items-center justify-between  bg-white px-4 py-3 sm:px-6">
           <div className="flex flex-1 justify-between sm:hidden">
             <a
               href="#"
@@ -223,7 +200,8 @@ export default function Dashboard(): JSX.Element {
               Next
             </a>
           </div>
-          <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <div
+            className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
               <p className="text-sm text-gray-700">
                 Showing <span className="font-medium">1</span> to{" "}
@@ -241,7 +219,7 @@ export default function Dashboard(): JSX.Element {
                   className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
                 >
                   <span className="sr-only">Previous</span>
-                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true"/>
                 </a>
                 {/* Current: "z-10 bg-teal-50 border-teal-500 text-teal-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
                 <a
@@ -263,7 +241,8 @@ export default function Dashboard(): JSX.Element {
                 >
                   3
                 </a>
-                <span className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                <span
+                  className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">
                   ...
                 </span>
                 <a
@@ -289,7 +268,7 @@ export default function Dashboard(): JSX.Element {
                   className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
                 >
                   <span className="sr-only">Next</span>
-                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true"/>
                 </a>
               </nav>
             </div>
