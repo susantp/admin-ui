@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-export function UserCard() {
+export function UserCard(): JSX.Element {
   const session = useSession()
 
   const user = session.data?.user

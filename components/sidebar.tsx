@@ -13,7 +13,7 @@ import {
 
 import { UserCard } from "@/components/user-card"
 
-export function Sidebar() {
+export function Sidebar(): JSX.Element {
   const pathname = usePathname()
 
   const navigation = [

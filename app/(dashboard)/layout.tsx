@@ -9,7 +9,9 @@ interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout({
+  children,
+}: DashboardLayoutProps): JSX.Element {
   return (
     <div className="min-h-screen flex">
       <Sidebar />
