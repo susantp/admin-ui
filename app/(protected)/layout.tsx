@@ -21,10 +21,10 @@ export default function RootLayout({
       </aside>
 
       <main>
-        <section className="flex flex-1 flex-col md:pl-64">
+        <div className="flex flex-1 flex-col md:pl-64">
           <Navbar/>
           {children}
-        </section>
+        </div>
       </main>
     </Suspense>
   )

@@ -34,7 +34,7 @@ export default function UserLoginForm(): JSX.Element {
       redirect: false,
       username,
       password,
-      callbackUrl: searchParams.get("from") ?? "/",
+      callbackUrl: searchParams.get("from") ?? "/dashboard",
     })
 
     setIsLoading(false)
