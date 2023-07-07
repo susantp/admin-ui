@@ -1,13 +1,9 @@
 import "@/styles/globals.css"
 import React from "react"
 import {Metadata} from "next"
-import {NextFont} from "next/dist/compiled/@next/font"
-import {Inter} from "next/font/google"
 import Navbar from "@/src/modules/dashboard/presentation/components/navbar"
 import SidebarDesktop
   from "@/src/modules/dashboard/presentation/components/sidebar-desktop"
-
-const inter: NextFont = Inter({subsets: ["latin"]})
 
 export const metadata: Metadata = {
   title: "Frontend Boilerplate NextJS",
