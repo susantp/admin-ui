@@ -21,7 +21,7 @@ function createModule(moduleName) {
     { path: "domain/entities", file: "[module].ts" },
     { path: "domain/repositories", file: "[module]-repository.ts" },
     { path: "domain/services", file: "[module]-service.ts" },
-    { path: "domain/usecases" },
+    { path: "domain/types" },
     { path: "presentation/components" },
     { path: "presentation/pages", file: "[module]-page.ts" },
     { path: "presentation/hooks", file: "use-[module].ts" },
