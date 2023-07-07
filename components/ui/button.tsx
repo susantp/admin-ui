@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "@/src/utils/helpers"
+import getHelpers from "@/src/utils/helpers"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 
@@ -42,7 +42,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={getHelpers().cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       />
