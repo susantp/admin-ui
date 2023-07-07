@@ -1,18 +1,13 @@
 "use client"
 
-import React, {Fragment, useState} from "react"
-import useTempData
-  from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
-import Breadcrumb
-  from "@/src/modules/dashboard/presentation/components/navbar/breadcrumb"
-import MobileNav
-  from "@/src/modules/dashboard/presentation/components/sidebar/mobile-nav";
-import NavAnchor
-  from "@/src/modules/dashboard/presentation/components/sidebar/nav-anchor";
-import UserMenu
-  from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
-import {Menu, Transition} from "@headlessui/react"
-import {Cog6ToothIcon} from "@heroicons/react/24/outline"
+import React, { Fragment, useState } from "react"
+import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
+import Breadcrumb from "@/src/modules/dashboard/presentation/components/navbar/breadcrumb"
+import UserMenu from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
+import MobileNav from "@/src/modules/dashboard/presentation/components/sidebar/mobile-nav"
+import NavAnchor from "@/src/modules/dashboard/presentation/components/sidebar/nav-anchor"
+import { Menu, Transition } from "@headlessui/react"
+import { Cog6ToothIcon } from "@heroicons/react/24/outline"
 
 export default function Navbar(): JSX.Element {
   const [sidebarOpen, setSidebarOpen] = useState(false)

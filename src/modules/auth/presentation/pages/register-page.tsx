@@ -22,7 +22,9 @@ export default function RegisterPage(): JSX.Element {
       <Card className="p-8 space-y-6">
         <CardHeader>
           <div className="text-center space-y-2">
-            <h1 className="text-2xl font-semibold tracking-tight">{formTitle}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">
+              {formTitle}
+            </h1>
             <p className="text-sm text-muted-foreground">{formSubtitle}</p>
           </div>
         </CardHeader>
