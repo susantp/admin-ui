@@ -3,7 +3,7 @@ import {EllipsisVerticalIcon} from "@heroicons/react/20/solid";
 import React from "react";
 import {
   InterfaceProject
-} from "@/src/modules/dashboard/domain/types/dashboard-data";
+} from "@/src/modules/dashboard/domain/types/dashboard-type";
 
 interface InterfaceInfoBoxProps {
   project: InterfaceProject

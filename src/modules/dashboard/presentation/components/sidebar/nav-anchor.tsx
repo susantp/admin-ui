@@ -1,5 +1,5 @@
 import React from "react"
-import { InterfaceNavigation } from "@/src/modules/dashboard/domain/types/dashboard-data"
+import { InterfaceNavigation } from "@/src/modules/dashboard/domain/types/dashboard-type"
 import getHelpers from "@/src/utils/helpers"
 
 interface InterfaceNavAnchorProps {

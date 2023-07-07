@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { InterfaceUserNavigation } from "@/src/modules/dashboard/domain/types/dashboard-data"
+import { InterfaceUserNavigation } from "@/src/modules/dashboard/domain/types/dashboard-type"
 import UserMenu from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
 import { Menu, Transition } from "@headlessui/react"
 import { Cog6ToothIcon } from "@heroicons/react/24/outline"

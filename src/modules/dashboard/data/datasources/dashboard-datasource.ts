@@ -6,7 +6,7 @@ import {
   InterfacePeople,
   InterfaceProject,
   InterfaceUserNavigation,
-} from "@/src/modules/dashboard/domain/types/dashboard-data"
+} from "@/src/modules/dashboard/domain/types/dashboard-type"
 import {
   CalendarIcon,
   ChartBarIcon,

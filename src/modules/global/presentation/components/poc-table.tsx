@@ -1,7 +1,7 @@
 import React from "react";
 import {
   InterfacePeople
-} from "@/src/modules/dashboard/domain/types/dashboard-data";
+} from "@/src/modules/dashboard/domain/types/dashboard-type";
 
 interface InterfaceTableProps{
   people: InterfacePeople[]
