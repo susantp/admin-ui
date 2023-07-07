@@ -1,5 +1,5 @@
 import "@/styles/globals.css"
-import React from "react"
+import React, {Suspense} from "react"
 import {Metadata} from "next"
 import Navbar from "@/src/modules/dashboard/presentation/components/navbar"
 import SidebarDesktop
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }): JSX.Element {
   return (
-    <>
+    <Suspense fallback={<h1>Loading...</h1>}>
       <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         <SidebarDesktop/>
       </div>
@@ -24,6 +24,6 @@ export default function RootLayout({
         <Navbar/>
         {children}
       </div>
-    </>
+    </Suspense>
   )
 }
