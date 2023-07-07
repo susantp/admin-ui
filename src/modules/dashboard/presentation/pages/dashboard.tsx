@@ -93,7 +93,7 @@ export default function Dashboard(): JSX.Element {
                       type="text"
                       name="desktop-search-candidate"
                       id="desktop-search-candidate"
-                      className="hidden w-full rounded-none rounded-l-md border-gray-300 pl-10 focus:border-teal-500 focus:ring-teal-500 sm:block sm:text-sm"
+                      className="hidden w-full h-full rounded-none rounded-l-md border-gray-300 pl-10 focus:border-teal-500 focus:ring-teal-500 sm:block sm:text-sm"
                       placeholder="Search users"
                     />
                   </label>

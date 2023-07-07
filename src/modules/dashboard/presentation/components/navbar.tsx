@@ -3,8 +3,10 @@
 import React, { Fragment, useState } from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
 import Breadcrumb from "@/src/modules/dashboard/presentation/components/navbar/breadcrumb"
-import MobileNav from "@/src/modules/dashboard/presentation/components/navbar/mobile-nav"
-import NavAnchor from "@/src/modules/dashboard/presentation/components/navbar/nav-anchor"
+import MobileNav
+  from "@/src/modules/dashboard/presentation/components/sidebar/mobile-nav";
+import NavAnchor
+  from "@/src/modules/dashboard/presentation/components/sidebar/nav-anchor";
 import UserMenu from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
 import { Menu, Transition } from "@headlessui/react"
 import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline"
@@ -24,22 +26,7 @@ export default function Navbar(): JSX.Element {
       <div className="flex flex-1 justify-between px-4">
         <div className="flex flex-1">
           <nav className="flex" aria-label="Breadcrumb">
-            <ol role="list" className="flex items-center space-x-4">
-              <li>
-                <div>
-                  <a href="#" className="text-gray-400 hover:text-gray-500">
-                    <HomeIcon
-                      className="h-5 w-5 flex-shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">Home</span>
-                  </a>
-                </div>
-              </li>
-              {pages.map((page) => (
-                <Breadcrumb page={page} key={Math.random()} />
-              ))}
-            </ol>
+            <Breadcrumb />
           </nav>
         </div>
 

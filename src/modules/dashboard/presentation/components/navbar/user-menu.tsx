@@ -12,7 +12,7 @@ export default function UserMenu({
 }: InterfaceUserMenuProps): JSX.Element {
   return (
     <Menu.Item key={item.name}>
-      {({ active }) => (
+      {({ active }): JSX.Element => (
         <a
           href={item.href}
           className={getHelpers().joinClasses(
