@@ -11,7 +11,8 @@ declare module "next-auth" {
     address: string
     access: string
     refresh: string
-    expires: number
+    access_exp?: number
+    refresh_exp?: number
   }
 
   interface Session {
@@ -29,7 +30,17 @@ declare module "next-auth/jwt" {
     address: string
     access: string
     refresh: string
-    expires: number
+    access_exp: number
+    refresh_exp: number
     error?: string
   }
+}
+
+export interface TokenPayload {
+  token_type: string
+  exp: number
+  iat: number
+  jti: number
+  user_id: string
+  roles: string[]
 }

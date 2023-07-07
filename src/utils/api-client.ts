@@ -1,14 +1,4 @@
-interface ApiResponse<T> {
-  message: string
-  data: T
-  status: number
-  error: string
-}
-
-interface ApiClientParams {
-  baseUrl?: string
-  accessToken?: string
-}
+import { ApiClientParams, ApiResponse } from "@/src/types"
 
 export default class ApiClient {
   private readonly baseUrl: string =
@@ -41,7 +31,10 @@ export default class ApiClient {
     return this.handleResponse(response)
   }
 
-  public async post<T>(endpoint: string, data: object): Promise<T> {
+  public async post<TRequest, TResponse>(
+    endpoint: string,
+    data: TRequest
+  ): Promise<TResponse> {
     const response: Response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
       headers: {
@@ -54,7 +47,10 @@ export default class ApiClient {
     return this.handleResponse(response)
   }
 
-  public async put<T>(endpoint: string, data: object): Promise<T> {
+  public async put<TRequest, TResponse>(
+    endpoint: string,
+    data: TRequest
+  ): Promise<TResponse> {
     const response: Response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "PUT",
       headers: {

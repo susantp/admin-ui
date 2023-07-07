@@ -2,6 +2,7 @@
 
 import React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { authConfig } from "@/auth/domain/config/auth-config"
 import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
 
@@ -11,6 +12,9 @@ import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 
 export default function UserLoginForm(): JSX.Element {
+  const {
+    loginForm: { emailField, passwordField, actionBtn },
+  } = authConfig
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
@@ -18,7 +22,7 @@ export default function UserLoginForm(): JSX.Element {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  async function onSubmit(event: React.SyntheticEvent) {
+  async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault()
 
     setIsLoading(true)
@@ -26,7 +30,7 @@ export default function UserLoginForm(): JSX.Element {
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    const signInResult = await signIn("credentials", {
+    const signInResult = await signIn(authConfig.credentialId, {
       redirect: false,
       username,
       password,
@@ -51,29 +55,29 @@ export default function UserLoginForm(): JSX.Element {
       <div className="grid gap-2">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="username">
-            Email
+            {emailField.label}
           </Label>
           <Input
-            id="username"
-            type="text"
+            id={emailField.id}
+            type={emailField.type}
             ref={usernameRef}
-            placeholder="Username"
+            placeholder={emailField.placeHolder}
           />
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="password">
-            Email
+            {passwordField.label}
           </Label>
           <Input
-            id="password"
-            type="password"
+            id={passwordField.id}
+            type={passwordField.type}
             ref={passwordRef}
-            placeholder="Password"
+            placeholder={passwordField.placeHolder}
           />
         </div>
         <Button disabled={isLoading}>
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Login
+          {actionBtn.label}
         </Button>
       </div>
     </form>

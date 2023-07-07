@@ -8,7 +8,7 @@ interface ProviderProps {
   children: React.ReactNode
 }
 
-export default function Providers({ children }: ProviderProps) {
+export default function Providers({ children }: ProviderProps): JSX.Element {
   return (
     <SessionProvider>
       <RecoilRoot>{children}</RecoilRoot>

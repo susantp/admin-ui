@@ -21,30 +21,13 @@
     "no-param-reassign": ["error", {"props": false}],
     "@typescript-eslint/no-misused-promises": "warn",
 
-//    "@typescript-eslint/no-explicit-any": "error",
-//    "@typescript-eslint/no-non-null-assertion": "error",
-//    "@typescript-eslint/explicit-function-return-type": "error",
-////    "@typescript-eslint/explicit-member-accessibility": "error",
-//    "@typescript-eslint/explicit-module-boundary-types": "error",
-//    "@typescript-eslint/no-empty-interface": "error",
-//    "@typescript-eslint/no-empty-function": "error",
-//    "@typescript-eslint/no-misused-new": "error",
-//    "@typescript-eslint/no-this-alias": "error",
-//    "@typescript-eslint/no-var-requires": "error",
-//    "@typescript-eslint/triple-slash-reference": "error",
-//    "@typescript-eslint/no-inferrable-types": "off",
-//    "@typescript-eslint/typedef": [
-//      "error",
-//      {
-//        "arrayDestructuring": true,
-//        "arrowParameter": true,
-//        "memberVariableDeclaration": true,
-//        "objectDestructuring": true,
-//        "parameter": true,
-//        "propertyDeclaration": true,
-//        "variableDeclaration": true
-//      }
-//    ],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-non-null-assertion": "warn",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-empty-interface": "error",
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/no-misused-new": "error",
+    "@typescript-eslint/no-var-requires": "error",
 
     "filenames/match-regex": [2, "^[a-z]+(-[a-z]+)*(.d)?$", true]
   }

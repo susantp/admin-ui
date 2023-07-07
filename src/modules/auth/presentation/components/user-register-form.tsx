@@ -3,7 +3,6 @@
 import React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Loader2 } from "lucide-react"
-import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,32 +18,10 @@ export default function UserRegisterForm(): JSX.Element {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  function onSubmit(event: React.SyntheticEvent) {
+  function onSubmit(event: React.SyntheticEvent): void {
     event.preventDefault()
 
-    // const username: string = usernameRef.current?.value ?? ""
-    // const password: string = passwordRef.current?.value ?? ""
-    // const email: string = emailRef.current?.value ?? ""
-    // const phone: string = phoneRef.current?.value ?? ""
-    //
-    // signIn("credentials", {
-    //   redirect: false,
-    //   username,
-    //   password,
-    //   email,
-    //   phone,
-    //   callbackUrl: searchParams.get("from") ?? "/",
-    // })
-    //   .then((res) => {
-    //     setIsLoading(false)
-    //     if (res?.ok) {
-    //       router.replace(res.url ?? "/")
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setIsLoading(false)
-    //     console.log("SIGN UP ERROR:", err)
-    //   })
+    // TODO: Add registration functionality after finalizing all the fields.
   }
 
   return (
