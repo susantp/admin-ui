@@ -1,12 +1,14 @@
-import { NextResponse } from "next/server"
-import { getToken } from "next-auth/jwt"
-import { withAuth } from "next-auth/middleware"
+import {NextResponse} from "next/server"
+import {getToken, JWT} from "next-auth/jwt"
+import {withAuth} from "next-auth/middleware"
+import getHelpers from "@/src/utils/helpers";
+import {InterfaceAppPath} from "@/src/modules/global/domain/types/global-type";
 
 export default withAuth(
   async (req) => {
-    const token = await getToken({ req })
+    const token: JWT|null = await getToken({req})
     const isAuth = !!token
-    const isAuthPage = ["/login", "/register"].includes(req.nextUrl.pathname)
+    const isAuthPage:boolean = ["/login", "/register"].includes(req.nextUrl.pathname)
 
     if (isAuthPage) {
       if (isAuth) {
@@ -18,8 +20,9 @@ export default withAuth(
 
     if (isAuth) return null
 
-    const { pathname, search } = req.nextUrl
-    const from = pathname + search
+    const {pathname, search} = req.nextUrl
+    const dashboardPath: InterfaceAppPath = getHelpers().appPaths().filter(path => path.name.includes('dashboard'))[0]
+    const from:string = pathname + search === "/" ? dashboardPath.name : pathname + search
     const redirectUrl = new URL(
       `/login?from=${encodeURIComponent(from)}`,
       req.url

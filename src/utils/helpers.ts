@@ -22,10 +22,10 @@ const getHelpers = (): InterfaceGetHelpers => {
     })
   }
   const appPaths = (): InterfaceAppPath[] => [
-    { path: "/dashboard", label: "Dashboard" },
-    { path: "/users", label: "User Management" },
-    { path: "/roles", label: "Role Management" },
-    { path: "/pages", label: "Page Management" },
+    { path: "/dashboard", label: "Dashboard" , name: 'dashboard'},
+    { path: "/users", label: "User Management" , name: 'users'},
+    { path: "/roles", label: "Role Management", name: 'roles' },
+    { path: "/pages", label: "Page Management" , name: 'pages'},
   ]
 
   return { joinClasses, formatDate, cn, appPaths }

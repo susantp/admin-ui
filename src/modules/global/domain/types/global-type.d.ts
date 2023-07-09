@@ -1,4 +1,5 @@
 export interface InterfaceAppPath {
   path: string
-  label: string
+  label: string,
+  name: string
 }
