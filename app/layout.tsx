@@ -4,6 +4,9 @@ import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Inter } from "next/font/google"
 
+import { Toaster } from "@/components/ui/toaster"
+import Providers from "@/app/providers"
+
 const inter: NextFont = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -11,14 +14,19 @@ export const metadata: Metadata = {
   description: "Frontend boilerplate application using NextJS",
 }
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}): JSX.Element {
+}
+
+export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background`}>
+        <main>
+          <Providers>{children}</Providers>
+        </main>
+        <Toaster />
+      </body>
     </html>
   )
 }

@@ -1,66 +1,84 @@
 "use client"
 
-import React, { useRef } from "react"
-import useAuth from "@/auth/presentation/hooks/use-auth"
-import { AuthState } from "@/auth/presentation/state/auth-atom"
+import React from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { authConfig } from "@/auth/domain/config/auth-config"
+import { Loader2 } from "lucide-react"
+import { signIn } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
 
 export default function UserLoginForm(): JSX.Element {
-  const usernameRef: React.RefObject<HTMLInputElement> = useRef(null)
-  const passwordRef: React.RefObject<HTMLInputElement> = useRef(null)
-
   const {
-    login,
-    authState,
-  }: {
-    authState: AuthState
-    login: (username: string, password: string) => Promise<void>
-  } = useAuth()
+    loginForm: { emailField, passwordField, actionBtn },
+  } = authConfig
+  const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+  const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault()
 
+    setIsLoading(true)
+
     const username: string = usernameRef.current?.value ?? ""
     const password: string = passwordRef.current?.value ?? ""
 
-    await login(username, password)
+    const signInResult = await signIn(authConfig.credentialId, {
+      redirect: false,
+      username,
+      password,
+      callbackUrl: searchParams.get("from") ?? "/",
+    })
+
+    setIsLoading(false)
+
+    if (!signInResult?.error) {
+      router.replace(signInResult?.url ?? "/")
+    } else {
+      toast({
+        title: "Sign in failed.",
+        description: signInResult.error,
+        variant: "destructive",
+      })
+    }
   }
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={onSubmit}>
       <div className="grid gap-2">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="username">
-            Email
+            {emailField.label}
           </Label>
           <Input
-            id="username"
-            type="text"
+            id={emailField.id}
+            type={emailField.type}
             ref={usernameRef}
-            placeholder="Username"
+            placeholder={emailField.placeHolder}
           />
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="password">
-            Email
+            {passwordField.label}
           </Label>
           <Input
-            id="password"
-            type="password"
+            id={passwordField.id}
+            type={passwordField.type}
             ref={passwordRef}
-            placeholder="Password"
+            placeholder={passwordField.placeHolder}
           />
         </div>
-        <Button>Login</Button>
-        <p className="text-sm text-center">
-          {authState.loading && "Loading..."}
-          {authState.error}
-          {authState.data && "Authenticated"}
-        </p>
+        <Button disabled={isLoading}>
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {actionBtn.label}
+        </Button>
       </div>
     </form>
   )

@@ -1,77 +1,74 @@
-interface ApiResponse {
-  message: string
-  data: unknown | null
-  status: number
-  error: string | null
-}
+import { ApiClientParams, ApiResponse } from "@/src/types"
 
-export default class ApiClient<T> {
-  private static readonly baseUrl: string = "http://localhost:8000/api/v1"
+export default class ApiClient {
+  private readonly baseUrl: string =
+    process.env.BACKEND_BASE_URL ?? "http://localhost:8000/api/v1/"
 
-  public static async get<T>(endpoint: string): Promise<T> {
-    const response: Response = await fetch(`${this.baseUrl}/${endpoint}`)
-    if (!response.ok) {
-      throw new Error(
-        `Error fetching data from API: ${response.status} ${response.statusText}`
-      )
+  private readonly authorization: HeadersInit = {}
+
+  constructor({ baseUrl, accessToken }: ApiClientParams = {}) {
+    if (baseUrl) this.baseUrl = baseUrl
+    if (accessToken) {
+      this.authorization = { Authorization: `Bearer ${accessToken}` }
     }
-    const apiResponse: ApiResponse = (await response.json()) as ApiResponse
-
-    if (apiResponse.error) {
-      throw new Error(apiResponse.error)
-    }
-
-    return apiResponse.data as Promise<T>
   }
 
-  public static async post<T>(endpoint: string, data: T): Promise<T> {
-    const response: Response = await fetch(`${this.baseUrl}/${endpoint}`, {
+  // eslint-disable-next-line class-methods-use-this
+  private async handleResponse<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`)
+    }
+
+    const data = (await response.json()) as ApiResponse<T>
+    return data.data
+  }
+
+  public async get<T>(endpoint: string): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      headers: this.authorization,
+    })
+
+    return this.handleResponse(response)
+  }
+
+  public async post<TRequest, TResponse>(
+    endpoint: string,
+    data: TRequest
+  ): Promise<TResponse> {
+    const response: Response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...this.authorization,
       },
       body: JSON.stringify(data),
     })
 
-    const apiResponse: ApiResponse = (await response.json()) as ApiResponse
-
-    if (apiResponse.error) {
-      throw new Error(apiResponse.error)
-    }
-
-    return apiResponse.data as Promise<T>
+    return this.handleResponse(response)
   }
 
-  public static async put<T>(endpoint: string, data: T): Promise<T> {
-    const response: Response = await fetch(`${this.baseUrl}/${endpoint}`, {
+  public async put<TRequest, TResponse>(
+    endpoint: string,
+    data: TRequest
+  ): Promise<TResponse> {
+    const response: Response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        ...this.authorization,
       },
       body: JSON.stringify(data),
     })
-    if (!response.ok) {
-      throw new Error(
-        `Error updating data in API: ${response.status} ${response.statusText}`
-      )
-    }
-    const apiResponse: ApiResponse = (await response.json()) as ApiResponse
 
-    if (apiResponse.error) {
-      throw new Error(apiResponse.error)
-    }
-
-    return apiResponse.data as Promise<T>
+    return this.handleResponse(response)
   }
 
-  public static async delete(endpoint: string): Promise<void> {
-    const response: Response = await fetch(`${this.baseUrl}/${endpoint}`, {
+  public async delete(endpoint: string): Promise<void> {
+    const response: Response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "DELETE",
+      headers: this.authorization,
     })
-    if (!response.ok) {
-      throw new Error(
-        `Error deleting data from API: ${response.status} ${response.statusText}`
-      )
-    }
+
+    return this.handleResponse(response)
   }
 }
