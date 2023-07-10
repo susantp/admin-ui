@@ -11,6 +11,7 @@ import {
   UserIcon,
 } from "lucide-react"
 
+import { ModeToggle } from "@/components/mode-toggle"
 import { UserCard } from "@/components/user-card"
 
 export function Sidebar(): JSX.Element {
@@ -25,7 +26,7 @@ export function Sidebar(): JSX.Element {
   ]
 
   return (
-    <aside className="relative p-2 w-96">
+    <aside className="relative p-2 w-80">
       <button
         className="absolute top-8 -right-1.5 bg-glass rounded-full p-1 cursor-pointer"
         type="button"
@@ -44,6 +45,8 @@ export function Sidebar(): JSX.Element {
             />
 
             <h3 className="text-2xl font-semibold">SOA POC</h3>
+
+            <ModeToggle />
           </div>
 
           <ul className="flex flex-col space-y-2">
