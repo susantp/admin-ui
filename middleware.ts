@@ -2,7 +2,9 @@ import {NextResponse} from "next/server"
 import {getToken, JWT} from "next-auth/jwt"
 import {withAuth} from "next-auth/middleware"
 import getHelpers from "@/src/utils/helpers";
-import {InterfaceAppPath} from "@/src/modules/global/domain/types/global-type";
+import {
+  InterfacePathObject
+} from "@/src/modules/global/domain/types/global-type";
 
 export default withAuth(
   async (req) => {
@@ -21,8 +23,8 @@ export default withAuth(
     if (isAuth) return null
 
     const {pathname, search} = req.nextUrl
-    const dashboardPath: InterfaceAppPath = getHelpers().appPaths().filter(path => path.name.includes('dashboard'))[0]
-    const from:string = pathname + search === "/" ? dashboardPath.name : pathname + search
+    const {dashboard, home} = getHelpers().appPaths()
+    const from:string = pathname + search === home.path ? dashboard.path : pathname + search
     const redirectUrl = new URL(
       `/login?from=${encodeURIComponent(from)}`,
       req.url

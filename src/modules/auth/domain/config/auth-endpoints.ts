@@ -5,7 +5,8 @@ interface AuthEndpoints {
   userRegister: string
   refreshToken: string
   loggedInUser: string
-  userDetail: string
+  userDetail: string,
+  userRoles: string
 }
 
 export const authEndpoints: AuthEndpoints = {
@@ -14,4 +15,5 @@ export const authEndpoints: AuthEndpoints = {
   refreshToken: `${projectName}/refresh-token/`,
   loggedInUser: "logged-in-user/",
   userDetail: "user-detail/",
+  userRoles: "admin/user-roles/"
 }
