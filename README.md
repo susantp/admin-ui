@@ -39,7 +39,32 @@ npm run format:write
 ```
 
 ### Commit Hooks
-[Husky Documentation](https://typicode.github.io/husky/)
+
+```bash
+synopsis:
+
+# Project recommended commit message format is :
+type(scope): subject (POC-****)
+
+# supported types:
+[ build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test ]
+
+# your project prefix, in our case - POC
+POC - the project prefix
+
+#use 0000 as default jira ticket number if ticket not assigned
+**** - the jira ticket number.
+
+# eg.1
+fix(server): send cors headers (POC-1011)
+
+# eg.2
+feat(blog): add comment section (POC-0011)
+
+#git message format
+git commit -m "fix(server-component): add query param validation (POC-1045)"
+```
+[For more details, follow Husky Documentation](https://typicode.github.io/husky/)
 
 ## Tailwind
 Update configuration at `tailwind.config.js`
