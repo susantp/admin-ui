@@ -3,16 +3,15 @@
 import React, {Fragment} from "react"
 import {Menu, Transition} from "@headlessui/react"
 import {Cog6ToothIcon} from "@heroicons/react/24/outline"
+import {useAtomValue} from "jotai";
+import {sessionUserAtom} from "@/src/modules/global/domain/states/global-atoms";
 
-interface InterfaceProfileDropdownProps {
-  // userNavigation: InterfaceUserNavigation[],
+interface IProfileDropdownProps {
   children: JSX.Element
 }
 
-export default function ProfileDropdown({
-                                          children
-                                        }: InterfaceProfileDropdownProps): JSX.Element {
-
+export default function ProfileDropdown({children}: IProfileDropdownProps): JSX.Element {
+  const loggedInUser = useAtomValue(sessionUserAtom)
   return (
     <Menu as="div" className="relative ml-3 invisible lg:visible">
       <div>
@@ -22,7 +21,7 @@ export default function ProfileDropdown({
             <div className="ml-3">
               <p
                 className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                Ishwor Kafle
+                {loggedInUser?.username?.toUpperCase()}
               </p>
               <p
                 className="text-xs font-semibold text-teal-500 group-hover:text-gray-700">
