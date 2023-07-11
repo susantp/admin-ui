@@ -13,7 +13,7 @@ export default function Login(): JSX.Element {
           SOA-POC
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Sign in or{" "}
+          Log in or{" "}
           <Link
             href="/register"
             className="font-medium text-teal-600 hover:text-teal-500"
@@ -31,7 +31,7 @@ export default function Login(): JSX.Element {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email address
+                Username/Email
               </label>
               <div className="mt-1">
                 <input
@@ -95,7 +95,7 @@ export default function Login(): JSX.Element {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
-                Sign in
+                Log in
               </button>
             </div>
           </form>
@@ -118,7 +118,7 @@ export default function Login(): JSX.Element {
                   href="#"
                   className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                 >
-                  <span className="sr-only">Sign in with Microsoft</span>
+                  <span className="sr-only">Log in with Microsoft</span>
                   <svg
                     className="h-5 w-5"
                     aria-hidden="true"

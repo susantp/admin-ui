@@ -1,140 +1,100 @@
 "use client"
-import { PaperClipIcon } from '@heroicons/react/20/solid'
+import { BookOpenIcon, ClipboardDocumentCheckIcon, FolderIcon, UserIcon, UsersIcon } from '@heroicons/react/20/solid'
+import {
+  Bars4Icon,
+  CalendarIcon,
+  ClockIcon,
+  PhotoIcon,
+  TableCellsIcon,
+  UserGroupIcon,
+  ViewColumnsIcon,
+} from '@heroicons/react/24/outline'
 
-export default function Profile() {
+const items = [
+  {
+    title: 'Dashboard',
+    description: '30 Members',
+    icon: Bars4Icon,
+    background: 'bg-teal-500',
+  },
+  {
+    title: 'User Management',
+    description: '6 Members',
+    icon: UsersIcon,
+    background: 'bg-yellow-500',
+  },
+  {
+    title: 'Role Management',
+    description: '4 Members',
+    icon: FolderIcon,
+    background: 'bg-green-500',
+  },
+  {
+    title: 'Page Management',
+    description: '12 Members',
+    icon: ClipboardDocumentCheckIcon,
+    background: 'bg-blue-500',
+  },
+  {
+    title: 'Data Access',
+    description: '20 Members',
+    icon: TableCellsIcon,
+    background: 'bg-indigo-500',
+  },
+  {
+    title: 'Reports',
+    description: '10 Members',
+    icon: BookOpenIcon,
+    background: 'bg-purple-500',
+  },
+]
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+export default function Example() {
   return (
-    <div className=" mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-    <div className="mt-10 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+       <div className="mt-10 px-4 sm:px-6 lg:px-8">
 
-      <div>
-        <h3 className="text-lg font-medium leading-6 text-gray-900">User Detail Information</h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and access information.</p>
+      <h2 className="text-lg font-medium text-gray-900">Page Management</h2>
+      <p className="mt-1 text-sm text-gray-500">
+        Details about the page management
+      </p>
+      <ul role="list" className="mt-6 grid grid-cols-1 gap-6 border-t border-b border-gray-200 py-6 sm:grid-cols-2">
+        {items.map((item, itemIdx) => (
+          <li key={itemIdx} className="flow-root">
+            <div className="relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:ring-2 focus-within:ring-teal-500 hover:bg-gray-50">
+              <div
+                className={classNames(
+                  item.background,
+                  'flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-lg'
+                )}
+              >
+                <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-gray-900">
+                  <a href="#" className="focus:outline-none">
+                    <span className="absolute inset-0" aria-hidden="true" />
+                    <span>{item.title}</span>
+                    <span aria-hidden="true"> &rarr;</span>
+                  </a>
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-4 flex">
+        <a href="#" className="text-sm font-medium text-teal-600 hover:text-teal-500">
+          Create a new page
+          <span aria-hidden="true"> &rarr;</span>
+        </a>
       </div>
-      <div className="mt-5 border-t border-gray-200">
-        <dl className="divide-y divide-gray-200">
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Full name</dt>
-            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <span className="flex-grow">Ishwor Kafle</span>
-
-            </dd>
-          </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Title</dt>
-            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <span className="flex-grow">Principle Engineer</span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
-            </dd>
-          </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Email address</dt>
-            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <span className="flex-grow">ishwor.kafle@example.com</span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
-            </dd>
-          </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Department</dt>
-            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <span className="flex-grow">Development Service</span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
-            </dd>
-          </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Status</dt>
-            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <span className="flex-grow">
-               Active
-              </span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
-            </dd>
-          </div>
-          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Page Access</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                  <div className="flex w-0 flex-1 items-center">
-                    <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                    <span className="ml-2 w-0 flex-1 truncate">Dashboard</span>
-                  </div>
-                  <div className="ml-4 flex flex-shrink-0 space-x-4">
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                    >
-                      Update
-                    </button>
-                    <span className="text-gray-300" aria-hidden="true">
-                      |
-                    </span>
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </li>
-                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                  <div className="flex w-0 flex-1 items-center">
-                    <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                    <span className="ml-2 w-0 flex-1 truncate">User Management</span>
-                  </div>
-                  <div className="ml-4 flex flex-shrink-0 space-x-4">
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                    >
-                      Update
-                    </button>
-                    <span className="text-gray-300" aria-hidden="true">
-                      |
-                    </span>
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-teal-600 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </dd>
-          </div>
-        </dl>
-      </div>
-
     </div>
     </div>
-  
   )
 }

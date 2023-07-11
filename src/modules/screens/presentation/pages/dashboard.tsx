@@ -81,29 +81,29 @@ const people = [
 
 const projects = [
   {
-    name: "Dashboard",
-    initials: "DB",
+    name: "Super Admin",
+    initials: "SA",
     href: "#",
     members: 16,
     bgColor: "bg-pink-600",
   },
   {
-    name: "User Management",
-    initials: "UM",
+    name: "Registered Users",
+    initials: "RU",
     href: "#",
     members: 12,
     bgColor: "bg-purple-600",
   },
   {
-    name: "Role Management",
-    initials: "RM",
+    name: "Members",
+    initials: "MB",
     href: "#",
     members: 16,
     bgColor: "bg-yellow-500",
   },
   {
-    name: "Page Management",
-    initials: "PM",
+    name: "Accounts",
+    initials: "AC",
     href: "#",
     members: 8,
     bgColor: "bg-green-500",
@@ -118,7 +118,7 @@ export default function Dashboard() {
     <div className="mt-10 px-4 sm:px-6 lg:px-8">
       <div className="border-b border-gray-200 pb-5">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
-          Most viewed pages
+          Top Groups
         </h3>
       </div>
 

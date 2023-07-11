@@ -32,7 +32,7 @@ export default function RegisterPage(): JSX.Element {
             href="/login"
             className="font-medium text-teal-600 hover:text-teal-500"
           >
-            Login here
+            Log in here
           </Link>
         </p>
       </div>
@@ -90,6 +90,24 @@ export default function RegisterPage(): JSX.Element {
                     name="email"
                     type="email"
                     autoComplete="email"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-full">
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Username
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="username"
+                    name="username"
+                    type="username"
+                    autoComplete="username"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -183,7 +201,7 @@ export default function RegisterPage(): JSX.Element {
                         name="privacy"
                         aria-describedby="privacy-public-description"
                         type="radio"
-                        className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-500"
+                        className="h-4 w-4 border-gray-300 text-gray-300 focus:ring-teal-500"
                         defaultChecked
                       />
                     </div>
@@ -192,69 +210,21 @@ export default function RegisterPage(): JSX.Element {
                         htmlFor="privacy-public"
                         className="font-medium text-gray-900"
                       >
-                        Super Admin
+                        Member
                       </label>
                       <p
                         id="privacy-public-description"
                         className="text-gray-500"
                       >
-                        Every access within the project
+                        By default you will be assigned a member role
                       </p>
                     </div>
                   </div>
                   <div>
-                    <div className="relative flex items-start">
-                      <div className="absolute flex h-5 items-center">
-                        <input
-                          id="privacy-private-to-project"
-                          name="privacy"
-                          aria-describedby="privacy-private-to-project-description"
-                          type="radio"
-                          className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-500"
-                        />
-                      </div>
-                      <div className="pl-7 text-sm">
-                        <label
-                          htmlFor="privacy-private-to-project"
-                          className="font-medium text-gray-900"
-                        >
-                          Admin
-                        </label>
-                        <p
-                          id="privacy-private-to-project-description"
-                          className="text-gray-500"
-                        >
-                          All view/edit access
-                        </p>
-                      </div>
-                    </div>
+                  
                   </div>
                   <div>
-                    <div className="relative flex items-start">
-                      <div className="absolute flex h-5 items-center">
-                        <input
-                          id="privacy-private"
-                          name="privacy"
-                          aria-describedby="privacy-private-to-project-description"
-                          type="radio"
-                          className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-500"
-                        />
-                      </div>
-                      <div className="pl-7 text-sm">
-                        <label
-                          htmlFor="privacy-private"
-                          className="font-medium text-gray-900"
-                        >
-                          Member
-                        </label>
-                        <p
-                          id="privacy-private-description"
-                          className="text-gray-500"
-                        >
-                          View only access
-                        </p>
-                      </div>
-                    </div>
+                  
                   </div>
                 </div>
               </fieldset>
@@ -264,7 +234,7 @@ export default function RegisterPage(): JSX.Element {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
-                Sign in
+                Create Account
               </button>
             </div>
           </form>

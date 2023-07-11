@@ -9,7 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { usePathname } from 'next/navigation'
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/20/solid";
+import { ArrowLeftOnRectangleIcon, ClipboardDocumentCheckIcon } from "@heroicons/react/20/solid";
+import { Climate_Crisis } from "next/font/google";
 
 
 export default function Navbar() {
@@ -19,23 +20,30 @@ export default function Navbar() {
   const [navigation, setNavigation] = useState([
     { name: "Dashboard", href: "dashboard", icon: HomeIcon, current: true },
     { name: "User Management", href: "users", icon: UsersIcon, current: false },
-    { name: "Role Management", href: "#", icon: FolderIcon, current: false },
-    { name: "Page Management", href: "#", icon: CalendarIcon, current: false },
+    { name: "Role Management", href: "role", icon: FolderIcon, current: false },
+    { name: "Page Management", href: "pagemanagement", icon: ClipboardDocumentCheckIcon, current: false },
     { name: "Data Access", href: "#", icon: InboxIcon, current: false },
     { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
   ]);
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [pages,] = useState([
-    { name: "Home", href: "#", current: false },
+    
     { name: "Dashboard", href: "#", current: true },
   ]);
   const [userNavigation,] = useState([
     { name: "Your Profile", href: "/profile" },
     { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    { name: "Log out", href: "#"},
   ]);
 
   const pathname = usePathname()
+
+  //Breadcrumb components
+  function capitalizeWords(str:string) {
+    const withoutLeadingSlash = str.startsWith('/') ? str.substring(1) : str;
+    return withoutLeadingSlash.toLowerCase().split('/').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join('/');
+  }
+  const capitalizedPathname = capitalizeWords(pathname);
   return <div>
       <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
@@ -142,6 +150,27 @@ export default function Navbar() {
                   </a>
                 </div>
               </li>
+              <li>
+                  <div className="flex items-center w-max">
+                    <svg
+                      className="h-5 w-5 flex-shrink-0 text-gray-300"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
+                      <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                    </svg>
+
+                    <a
+                     
+                      className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                     
+                    >
+                      Home
+                    </a>
+                  </div>
+                </li>
               {pages.map((page) => (
                 <li key={page.name}>
                   <div className="flex items-center w-max">
@@ -160,7 +189,7 @@ export default function Navbar() {
                       className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
                       aria-current={page.current ? "page" : undefined}
                     >
-                      {page.name}
+                      {capitalizedPathname}
                     </a>
                   </div>
                 </li>
@@ -254,11 +283,11 @@ export default function Navbar() {
                             </div>
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                               <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                                Sign out of your account
+                                Log out of your account
                               </Dialog.Title>
                               <div className="mt-2">
                                 <p className="text-sm text-gray-500">
-                                  Are you sure you want to sign out of your account?
+                                  Are you sure you want to Log out of your account?
                                 </p>
                               </div>
                             </div>

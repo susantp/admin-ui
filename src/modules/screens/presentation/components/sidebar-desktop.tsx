@@ -5,11 +5,11 @@ import React, {Fragment, useState, useRef} from "react";
 import {
   Bars3BottomLeftIcon, CalendarIcon, ChartBarIcon,
   Cog6ToothIcon, FolderIcon,
-  HomeIcon, InboxIcon, UsersIcon, XMarkIcon, MagnifyingGlassIcon, BellIcon
+  HomeIcon, InboxIcon, UsersIcon, XMarkIcon, MagnifyingGlassIcon, BellIcon, ClipboardDocumentIcon
 } from "@heroicons/react/24/outline";
 import {Dialog, Menu, Transition} from "@headlessui/react";
 import {usePathname} from 'next/navigation'
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/20/solid";
+import { ArrowLeftOnRectangleIcon, ClipboardDocumentCheckIcon } from "@heroicons/react/20/solid";
 
 export default function Navbar(){
   const [open, setOpen] = useState(false)
@@ -18,8 +18,8 @@ export default function Navbar(){
   const [navigation,setNavigation] = useState([
     {name: "Dashboard", href: "dashboard", icon: HomeIcon, current: true},
     {name: "User Management", href: "users", icon: UsersIcon, current: false},
-    {name: "Role Management", href: "#", icon: FolderIcon, current: false},
-    {name: "Page Management", href: "#", icon: CalendarIcon, current: false},
+    {name: "Role Management", href: "role", icon: FolderIcon, current: false},
+    {name: "Page Management", href: "pagemanagement", icon: ClipboardDocumentIcon, current: false},
     {name: "Data Access", href: "#", icon: InboxIcon, current: false},
     {name: "Reports", href: "#", icon: ChartBarIcon, current: false},
   ]);
