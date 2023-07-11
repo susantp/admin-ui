@@ -4,18 +4,16 @@ import React, {Suspense} from "react";
 import SidebarDesktop
   from "@/src/modules/dashboard/presentation/components/sidebar-desktop";
 import Navbar from "@/src/modules/dashboard/presentation/components/navbar";
-import {ApiResponse} from "@/src/types";
-import {
-  InterfaceUserDetail, sessionAtom, userDetailAtom
-} from "@/src/modules/dashboard/domain/states/dashboard-atom";
 import {useHydrateAtoms} from "jotai/utils";
 import {User} from "next-auth";
-import {session} from "next-auth/core/routes";
-import {mockSession} from "next-auth/client/__tests__/helpers/mocks";
-import user = mockSession.user;
+import {IUserScreens} from "@/src/modules/global/domain/types/global-type";
+import {
+  sessionUserAtom,
+  userScreensAtom
+} from "@/src/modules/global/domain/states/global-atoms";
 
 interface IProtectedContainerProps {
-  loggedInUserDetail: ApiResponse<InterfaceUserDetail> | boolean
+  loggedInUserScreens: IUserScreens
   sessionUser: User,
   children: React.ReactNode
 }
@@ -23,10 +21,10 @@ interface IProtectedContainerProps {
 function ProtectedContainer({
                               children,
                               sessionUser,
-                              loggedInUserDetail
+                              loggedInUserScreens
                             }: IProtectedContainerProps): JSX.Element {
 
-  useHydrateAtoms([[userDetailAtom, loggedInUserDetail], [sessionAtom, sessionUser]])
+  useHydrateAtoms([[userScreensAtom, loggedInUserScreens], [sessionUserAtom, sessionUser]])
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
       <aside

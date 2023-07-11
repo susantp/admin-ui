@@ -3,27 +3,18 @@ import React from "react"
 import {Metadata} from "next"
 import ProtectedContainer from "@/app/(protected)/protected-container";
 import {ApiResponse} from "@/src/types";
-import {
-  InterfaceUserDetail
-} from "@/src/modules/dashboard/domain/states/dashboard-atom";
-import DashboardRepository, {
-  InterfaceDashboardRepo
-} from "@/src/modules/dashboard/domain/repositories/dashboard-repository";
-import {getServerSession} from "next-auth";
+import {getServerSession, User} from "next-auth";
 import {authOptions} from "@/auth/domain/config/auth-options";
+import {
+  GlobalDatasource
+} from "@/src/modules/global/data/datasources/global-datasource";
+import {IUserScreens} from "@/src/modules/global/domain/types/global-type";
+import {mockSession} from "next-auth/client/__tests__/helpers/mocks";
+import user = mockSession.user;
 
 export const metadata: Metadata = {
   title: "Frontend Boilerplate NextJS",
   description: "Frontend boilerplate application using NextJS",
-}
-const fetchUserDetails = async (access: string | undefined): Promise<ApiResponse<InterfaceUserDetail> | boolean> => {
-  if (!access) return false
-
-  const repo: InterfaceDashboardRepo = new DashboardRepository()
-  const response: ApiResponse<InterfaceUserDetail> | null = await repo.getUserDetail(access)
-  if (response === null || response.error) return false
-
-  return response
 }
 
 interface IRootLayout {
@@ -32,12 +23,13 @@ interface IRootLayout {
 
 async function RootLayout({children}: IRootLayout): Promise<JSX.Element | null> {
   const session = await getServerSession(authOptions)
-  const userDetail = await fetchUserDetails(session?.user.access)
-  if (!userDetail) return null
   if (!session) return null
-  const {user} = session
+  const repo: GlobalDatasource = new GlobalDatasource()
+  const userScreens: IUserScreens | null = await repo.fetchUserScreens(session.user.access)
+  if (!userScreens) return null
   return (
-    <ProtectedContainer sessionUser={user} loggedInUserDetail={userDetail}>
+    <ProtectedContainer sessionUser={session.user}
+                        loggedInUserScreens={userScreens}>
       {children}
     </ProtectedContainer>
   )

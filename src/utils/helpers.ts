@@ -1,7 +1,8 @@
 import {
-  InterfaceAppPaths
+  InterfaceAppPaths,
+  IUserScreens
 } from "@/src/modules/global/domain/types/global-type"
-import {clsx, type ClassValue} from "clsx"
+import {type ClassValue, clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
 
 interface InterfaceGetHelpers {
@@ -9,6 +10,7 @@ interface InterfaceGetHelpers {
   formatDate: (input: string | number) => string
   cn: (...inputs: ClassValue[]) => string
   appPaths: () => InterfaceAppPaths
+  mapAppPaths: (storageValue: string | null) => IUserScreens | null
 }
 
 const getHelpers = (): InterfaceGetHelpers => {
@@ -24,13 +26,46 @@ const getHelpers = (): InterfaceGetHelpers => {
     })
   }
   const appPaths = (): InterfaceAppPaths => ({
-    home: {path: "/", label: "Home", name: 'home'},
-    dashboard: {path: "/dashboard", label: "DashboardContainer", name: 'dashboard'},
-    users: {path: "/users", label: "User Management", name: 'users'},
-    roles: {path: "/roles", label: "Role Management", name: 'roles'},
-    pages: {path: "/pages", label: "Page Management", name: 'pages'},
+    home: {path: "/", label: "Home", name: 'home', id: "home"},
+    dashboard: {
+      path: "/dashboard",
+      label: "DashboardContainer",
+      name: "dashboard",
+      id: "dashboard"
+    },
+    users: {
+      path: "/users",
+      label: "User Management",
+      name: 'users',
+      id: "users"
+    },
+    roles: {
+      path: "/roles",
+      label: "Role Management",
+      name: 'roles',
+      id: "roles"
+    },
+    pages: {
+      path: "/pages",
+      label: "Page Management",
+      name: 'pages',
+      id: "pages"
+    },
   })
-
-  return {joinClasses, formatDate, cn, appPaths}
+  const mapAppPaths = (storageValue: string | null): IUserScreens | null => {
+    if (!storageValue) return null
+    try {
+      const screensArray: IUserScreens = {screens: JSON.parse(storageValue)}
+      screensArray.screens.map(screen => {
+        screen.path = `/${screen.name.toLowerCase()}`
+        return screen
+      })
+      return screensArray
+    } catch (error: unknown) {
+      if (error instanceof Error) console.log(error.message)
+      return null
+    }
+  }
+  return {joinClasses, formatDate, cn, appPaths, mapAppPaths}
 }
 export default getHelpers
