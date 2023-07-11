@@ -5,6 +5,7 @@ import Link from "next/link"
 import UserRegisterForm from "@/auth/presentation/components/user-register-form"
 import { RecoilRoot } from "recoil"
 import Image from "next/image";
+import Image from "next/image";
 
 export default function RegisterPage(): JSX.Element {
   return (
@@ -23,11 +24,14 @@ export default function RegisterPage(): JSX.Element {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image className="mx-auto h-8 w-auto" src="/lis.png" alt="Your Company" width={193} height={32} />
+        <Image className="mx-auto h-8 w-auto" src="/lis.png" alt="Your Company" width={193} height={32} />
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-800">
           SOA-POC Registration
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Already have a account?{" "}
+          <Link
+            href="/login"
           <Link
             href="/login"
             className="font-medium text-teal-600 hover:text-teal-500"
