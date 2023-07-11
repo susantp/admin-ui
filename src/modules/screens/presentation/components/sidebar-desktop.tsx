@@ -19,7 +19,7 @@ export default function Navbar(){
     {name: "Dashboard", href: "dashboard", icon: HomeIcon, current: true},
     {name: "User Management", href: "users", icon: UsersIcon, current: false},
     {name: "Role Management", href: "role", icon: FolderIcon, current: false},
-    {name: "Page Management", href: "pagemanagement", icon: ClipboardDocumentIcon, current: false},
+    {name: "Screen Management", href: "pagemanagement", icon: ClipboardDocumentIcon, current: false},
     {name: "Data Access", href: "#", icon: InboxIcon, current: false},
     {name: "Reports", href: "#", icon: ChartBarIcon, current: false},
   ]);

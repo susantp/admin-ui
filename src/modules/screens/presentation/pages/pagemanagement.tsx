@@ -58,7 +58,7 @@ export default function Example() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
        <div className="mt-10 px-4 sm:px-6 lg:px-8">
 
-      <h2 className="text-lg font-medium text-gray-900">Page Management</h2>
+      <h2 className="text-lg font-medium text-gray-900">Screen Management</h2>
       <p className="mt-1 text-sm text-gray-500">
         Details about the page management
       </p>
