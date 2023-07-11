@@ -3,10 +3,9 @@
 import React from "react"
 import Image from "next/image";
 import Link from "next/link";
-import Image from "next/image";
-import Link from "next/link";
 
-export default function Login(): JSX.Element {
+
+
 export default function Login(): JSX.Element {
   return (
     <div className="flex bg-gray-100 min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -24,7 +23,7 @@ export default function Login(): JSX.Element {
           >
             Register here
           </Link>
-          </Link>
+          
         </p>
       </div>
 
