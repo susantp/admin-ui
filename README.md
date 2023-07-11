@@ -63,6 +63,12 @@ feat(blog): add comment section (POC-0011)
 
 #git message format
 git commit -m "fix(server-component): add query param validation (POC-1045)"
+
+
+# Note for linux users:
+While running "git commit" command,if you encountered errors such as : ".husky/pre-commit hook was ignored because it's not set as executable."
+please give script the executable permission : chmod +x .husky/pre-commit
+
 ```
 [For more details, follow Husky Documentation](https://typicode.github.io/husky/)
 
