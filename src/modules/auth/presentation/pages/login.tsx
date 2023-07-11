@@ -4,13 +4,10 @@ import React from "react"
 import Image from "next/image";
 import Link from "next/link";
 
-
-
 export default function Login(): JSX.Element {
   return (
     <div className="flex bg-gray-100 min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <Image className="mx-auto h-8 w-auto" src="/lis.png" alt="Your Company" width={193} height={32} />
         <Image className="mx-auto h-8 w-auto" src="/lis.png" alt="Your Company" width={193} height={32} />
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-800">
           SOA-POC
