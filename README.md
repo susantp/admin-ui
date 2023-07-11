@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+## Project Onboarding and set up documentation
+
+Visit our [confluence documentation](https://poc-acl.atlassian.net/wiki/spaces/AP/pages/4980740) with your browser for step-by-step project set up guidelines.
+
+
 ## Starting the Server
 
 Starting the development server:
