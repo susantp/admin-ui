@@ -19,7 +19,3 @@ export interface IScreen {
   path: string | undefined,
   permissions: string[]
 }
-
-export interface IUserScreens {
-  screens: IScreen[]
-}

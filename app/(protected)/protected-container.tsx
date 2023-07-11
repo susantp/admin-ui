@@ -6,14 +6,14 @@ import SidebarDesktop
 import Navbar from "@/src/modules/dashboard/presentation/components/navbar";
 import {useHydrateAtoms} from "jotai/utils";
 import {User} from "next-auth";
-import {IUserScreens} from "@/src/modules/global/domain/types/global-type";
+import {IScreen} from "@/src/modules/global/domain/types/global-type";
 import {
   sessionUserAtom,
   userScreensAtom
 } from "@/src/modules/global/domain/states/global-atoms";
 
 interface IProtectedContainerProps {
-  loggedInUserScreens: IUserScreens
+  loggedInUserScreens: IScreen[]
   sessionUser: User,
   children: React.ReactNode
 }
