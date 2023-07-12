@@ -1,20 +1,20 @@
 "use client"
 
 import React from "react"
-import {useRouter, useSearchParams} from "next/navigation"
-import {authConfig} from "@/auth/domain/config/auth-config"
-import {Loader2} from "lucide-react"
-import {signIn} from "next-auth/react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { authConfig } from "@/auth/domain/config/auth-config"
+import getHelpers from "@/src/utils/helpers"
+import { Loader2 } from "lucide-react"
+import { signIn } from "next-auth/react"
 
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import {toast} from "@/components/ui/use-toast"
-import getHelpers from "@/src/utils/helpers";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
 
 export default function UserLoginForm(): JSX.Element {
   const {
-    loginForm: {emailField, passwordField, actionBtn},
+    loginForm: { emailField, passwordField, actionBtn },
   } = authConfig
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
@@ -22,7 +22,7 @@ export default function UserLoginForm(): JSX.Element {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const router = useRouter()
   const searchParams = useSearchParams()
-  const {dashboard} = getHelpers().appPaths()
+  const { dashboard } = getHelpers().appPaths()
 
   async function onSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault()
@@ -78,7 +78,7 @@ export default function UserLoginForm(): JSX.Element {
           />
         </div>
         <Button disabled={isLoading}>
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {actionBtn.label}
         </Button>
       </div>

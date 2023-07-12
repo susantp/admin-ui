@@ -1,5 +1,5 @@
-import {DefaultUser} from "next-auth"
-import {DefaultJWT} from "next-auth/jwt"
+import { DefaultUser } from "next-auth"
+import { DefaultJWT } from "next-auth/jwt"
 
 declare module "next-auth" {
   interface User extends DefaultUser {
@@ -12,7 +12,7 @@ declare module "next-auth" {
     access: string
     refresh: string
     access_exp?: number
-    refresh_exp?: number,
+    refresh_exp?: number
     email: string
   }
 

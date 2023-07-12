@@ -1,21 +1,18 @@
 import React from "react"
-import {
-  InterfaceUserNavigation
-} from "@/src/modules/dashboard/domain/types/dashboard-type"
+import { InterfaceUserNavigation } from "@/src/modules/dashboard/domain/types/dashboard-type"
 import getHelpers from "@/src/utils/helpers"
-import {Menu} from "@headlessui/react"
+import { Menu } from "@headlessui/react"
 
 interface InterfaceUserMenuProps {
   item: InterfaceUserNavigation
 }
 
 export default function UserMenu({
-                                   item,
-                                 }: InterfaceUserMenuProps): JSX.Element {
-
+  item,
+}: InterfaceUserMenuProps): JSX.Element {
   return (
     <Menu.Item key={item.name}>
-      {({active}): JSX.Element => (
+      {({ active }): JSX.Element => (
         <a
           href={item.href}
           className={getHelpers().joinClasses(

@@ -1,16 +1,16 @@
-import {NextResponse} from "next/server"
-import {getToken, JWT} from "next-auth/jwt"
-import {withAuth} from "next-auth/middleware"
-import getHelpers from "@/src/utils/helpers";
-import {
-  InterfacePathObject
-} from "@/src/modules/global/domain/types/global-type";
+import { NextResponse } from "next/server"
+import { InterfacePathObject } from "@/src/modules/global/domain/types/global-type"
+import getHelpers from "@/src/utils/helpers"
+import { JWT, getToken } from "next-auth/jwt"
+import { withAuth } from "next-auth/middleware"
 
 export default withAuth(
   async (req) => {
-    const token: JWT|null = await getToken({req})
+    const token: JWT | null = await getToken({ req })
     const isAuth = !!token
-    const isAuthPage:boolean = ["/login", "/register"].includes(req.nextUrl.pathname)
+    const isAuthPage: boolean = ["/login", "/register"].includes(
+      req.nextUrl.pathname
+    )
 
     if (isAuthPage) {
       if (isAuth) {
@@ -22,9 +22,10 @@ export default withAuth(
 
     if (isAuth) return null
 
-    const {pathname, search} = req.nextUrl
-    const {dashboard, home} = getHelpers().appPaths()
-    const from:string = pathname + search === home.path ? dashboard.path : pathname + search
+    const { pathname, search } = req.nextUrl
+    const { dashboard, home } = getHelpers().appPaths()
+    const from: string =
+      pathname + search === home.path ? dashboard.path : pathname + search
     const redirectUrl = new URL(
       `/login?from=${encodeURIComponent(from)}`,
       req.url

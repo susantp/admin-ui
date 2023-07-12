@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import getHelpers from "@/src/utils/helpers";
+import React from "react"
+import Link from "next/link"
+import getHelpers from "@/src/utils/helpers"
 
 export default function Page(): JSX.Element {
   // TODO map frontend routes with request if not found any routes give some message
@@ -10,7 +10,12 @@ export default function Page(): JSX.Element {
         <h1 className="text-4xl text-red-500">Oops!!! Page Not found.</h1>
         <h3>must be under construction or you are lost.</h3>
         <div className="px-5 py-2 bg-blue-600 rounded-2xl">
-          <Link href={getHelpers().appPaths().dashboard.path} className="text-white font-bold" >Way To Dashboard</Link>
+          <Link
+            href={getHelpers().appPaths().dashboard.path}
+            className="text-white font-bold"
+          >
+            Way To Dashboard
+          </Link>
         </div>
       </div>
     </div>

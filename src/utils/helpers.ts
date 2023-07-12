@@ -1,6 +1,6 @@
-import {InterfaceAppPaths} from "@/src/modules/global/domain/types/global-type"
-import {type ClassValue, clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
+import { InterfaceAppPaths } from "@/src/modules/global/domain/types/global-type"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
@@ -22,33 +22,33 @@ const getHelpers = (): InterfaceGetHelpers => {
     })
   }
   const appPaths = (): InterfaceAppPaths => ({
-    home: {path: "/", label: "Home", name: 'home', id: "home"},
+    home: { path: "/", label: "Home", name: "home", id: "home" },
     dashboard: {
       path: "/dashboard",
       label: "DashboardContainer",
       name: "dashboard",
-      id: "dashboard"
+      id: "dashboard",
     },
     users: {
       path: "/users",
       label: "User Management",
-      name: 'users',
-      id: "users"
+      name: "users",
+      id: "users",
     },
     roles: {
       path: "/roles",
       label: "Role Management",
-      name: 'roles',
-      id: "roles"
+      name: "roles",
+      id: "roles",
     },
     pages: {
       path: "/pages",
       label: "Page Management",
-      name: 'pages',
-      id: "pages"
+      name: "pages",
+      id: "pages",
     },
   })
 
-  return {joinClasses, formatDate, cn, appPaths}
+  return { joinClasses, formatDate, cn, appPaths }
 }
 export default getHelpers

@@ -2,12 +2,12 @@
 
 import React from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
+import PocTable from "@/src/modules/global/presentation/components/poc-table"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   PlusIcon,
 } from "@heroicons/react/20/solid"
-import PocTable from "@/src/modules/global/presentation/components/poc-table";
 
 export default function Users(): JSX.Element {
   const { people } = useTempData()

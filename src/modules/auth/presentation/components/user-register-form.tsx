@@ -1,11 +1,11 @@
 "use client"
 
 import React from "react"
-import {Loader2} from "lucide-react"
+import { Loader2 } from "lucide-react"
 
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function UserRegisterForm(): JSX.Element {
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
@@ -13,7 +13,7 @@ export default function UserRegisterForm(): JSX.Element {
   const emailRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const phoneRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
-  const [isLoading, ] = React.useState<boolean>(false)
+  const [isLoading] = React.useState<boolean>(false)
 
   function onSubmit(event: React.SyntheticEvent): void {
     event.preventDefault()
