@@ -39,7 +39,7 @@ export class GlobalDatasource implements IGlobalRepository {
   async fetchUserScreens(
     accessToken: string | undefined
   ): Promise<IScreen[] | null> {
-    const requestPath = path.join(this.baseUrl, authEndpoints.userRoles)
+    const requestPath = path.join(this.baseUrl, authEndpoints.userScreens)
     if (!accessToken) return null
     return newApiClient(requestPath, accessToken).get()
   }
