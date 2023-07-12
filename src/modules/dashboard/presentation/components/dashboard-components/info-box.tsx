@@ -1,6 +1,6 @@
 import React from "react"
 import { InterfaceProject } from "@/src/modules/dashboard/domain/types/dashboard-type"
-import getHelpers from "@/src/utils/helpers"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 
 interface InterfaceInfoBoxProps {

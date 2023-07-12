@@ -1,6 +1,6 @@
 import React from "react"
 import { InterfaceUserNavigation } from "@/src/modules/dashboard/domain/types/dashboard-type"
-import getHelpers from "@/src/utils/helpers"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { Menu } from "@headlessui/react"
 
 interface InterfaceUserMenuProps {

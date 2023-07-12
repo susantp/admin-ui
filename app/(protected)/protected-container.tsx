@@ -7,7 +7,7 @@ import {
   sessionUserAtom,
   userScreensAtom,
 } from "@/src/modules/global/domain/states/global-atoms"
-import { IScreen } from "@/src/modules/global/domain/types/global-type"
+import { IScreen} from "@/src/modules/global/domain/types/repository/global-repository";
 import { useHydrateAtoms } from "jotai/utils"
 import { User } from "next-auth"
 

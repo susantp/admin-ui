@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server"
-import { InterfacePathObject } from "@/src/modules/global/domain/types/global-type"
-import getHelpers from "@/src/utils/helpers"
-import { JWT, getToken } from "next-auth/jwt"
-import { withAuth } from "next-auth/middleware"
+import {NextResponse} from "next/server"
+import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers";
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
+import {getToken, JWT} from "next-auth/jwt"
+import {withAuth} from "next-auth/middleware"
 
 export default withAuth(
   async (req) => {
@@ -23,7 +23,7 @@ export default withAuth(
     if (isAuth) return null
 
     const { pathname, search } = req.nextUrl
-    const { dashboard, home } = getHelpers().appPaths()
+    const { dashboard, home }: InterfaceAppPaths = getHelpers().appPaths()
     const from: string =
       pathname + search === home.path ? dashboard.path : pathname + search
     const redirectUrl = new URL(

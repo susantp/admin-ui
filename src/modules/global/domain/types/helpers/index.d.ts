@@ -10,12 +10,8 @@ export interface InterfaceAppPaths {
   dashboard: InterfacePathObject
   users: InterfacePathObject
   roles: InterfacePathObject
-  pages: InterfacePathObject
+  screens: InterfacePathObject
 }
-
-export interface IScreen {
-  id: string
-  name: string
-  path: string | undefined
-  permissions: string[]
+export interface IconSet {
+  [key: string]: { icon: JSX.Element };
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import getHelpers from "@/src/utils/helpers"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 
 export default function Page(): JSX.Element {
   // TODO map frontend routes with request if not found any routes give some message

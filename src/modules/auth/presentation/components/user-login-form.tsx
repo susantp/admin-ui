@@ -3,7 +3,7 @@
 import React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { authConfig } from "@/auth/domain/config/auth-config"
-import getHelpers from "@/src/utils/helpers"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
 

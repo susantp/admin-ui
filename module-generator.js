@@ -20,7 +20,7 @@ function createModule(moduleName) {
     { path: "data/repositories", file: "[module]-repository-impl.ts" },
     { path: "domain/entities", file: "[module].ts" },
     { path: "domain/repositories", file: "[module]-repository.ts" },
-    { path: "domain/services", file: "[module]-service.ts" },
+    { path: "domain/hooks", file: "[module]-service.ts" },
     { path: "domain/types" },
     { path: "presentation/components" },
     { path: "presentation/pages", file: "[module]-page.ts" },

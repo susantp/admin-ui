@@ -1,4 +1,4 @@
-import { IScreen } from "@/src/modules/global/domain/types/global-type"
+import { IScreen} from "@/src/modules/global/domain/types/repository/global-repository";
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { User } from "next-auth"
@@ -12,4 +12,4 @@ export const userScreensAtom = atomWithStorage<IScreen[] | null>(
 
 export const sidebarAtom = atom(false)
 
-export const currentScreen = atom<IScreen | null>(null)
+export const currentScreenAtom = atom<IScreen | null>(null)

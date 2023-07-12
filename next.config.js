@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental:{
+    serverActions: true,
     swcPlugins: [['@swc-jotai/react-refresh', {}]],
   },
 }

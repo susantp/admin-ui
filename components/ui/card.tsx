@@ -1,5 +1,5 @@
 import * as React from "react"
-import getHelpers from "@/src/utils/helpers"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 
 const Card = React.forwardRef<
   HTMLDivElement,

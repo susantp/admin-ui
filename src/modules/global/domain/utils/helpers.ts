@@ -1,12 +1,22 @@
-import { InterfaceAppPaths } from "@/src/modules/global/domain/types/global-type"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository";
+import {type ClassValue, clsx} from "clsx"
+import {twMerge} from "tailwind-merge"
+import {
+  CalendarIcon,
+  FolderIcon,
+  HomeIcon,
+  UsersIcon
+} from "@heroicons/react/24/outline";
+import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers";
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
   formatDate: (input: string | number) => string
   cn: (...inputs: ClassValue[]) => string
   appPaths: () => InterfaceAppPaths
+  mapScreens: (responseScreens: IScreen[] | null) => IScreen[] | null
 }
 
 const getHelpers = (): InterfaceGetHelpers => {
@@ -22,10 +32,15 @@ const getHelpers = (): InterfaceGetHelpers => {
     })
   }
   const appPaths = (): InterfaceAppPaths => ({
-    home: { path: "/", label: "Home", name: "home", id: "home" },
+    home: {
+      path: "/home",
+      label: "Home",
+      name: "home",
+      id: "home",
+    },
     dashboard: {
       path: "/dashboard",
-      label: "DashboardContainer",
+      label: "Dashboard",
       name: "dashboard",
       id: "dashboard",
     },
@@ -41,14 +56,21 @@ const getHelpers = (): InterfaceGetHelpers => {
       name: "roles",
       id: "roles",
     },
-    pages: {
-      path: "/pages",
-      label: "Page Management",
-      name: "pages",
-      id: "pages",
+    screens: {
+      path: "/screens",
+      label: "Screen Management",
+      name: "screens",
+      id: "screens",
     },
   })
 
-  return { joinClasses, formatDate, cn, appPaths }
+  const mapScreens = (responseScreens: IScreen[] | null): IScreen[] | null => {
+    if (!responseScreens) return null
+    return responseScreens.filter((screen: IScreen) => {
+      if (!(screen.slug in appPaths())) return false
+      return screen
+    })
+  }
+  return {joinClasses, formatDate, cn, appPaths, mapScreens}
 }
 export default getHelpers
