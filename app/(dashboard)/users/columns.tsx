@@ -19,6 +19,7 @@ export interface User {
   created_at: string
   updated_at: string
   roles: string[]
+  role: string
 }
 
 export const columns: ColumnDef<User>[] = [
@@ -75,8 +76,9 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: "roles",
+    accessorKey: "role",
     header: "Role",
+    enableGlobalFilter: false,
   },
   {
     id: "actions",
