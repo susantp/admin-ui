@@ -1,12 +1,12 @@
 import IGlobalRepository
   from "@/src/modules/global/data/repositories/global-repository-impl";
 import {ApiResponse} from "@/src/types";
-import {IUserScreens} from "@/src/modules/global/domain/types/global-type";
+import {IScreen} from "@/src/modules/global/domain/types/global-type";
 import path from "path";
 import {authEndpoints} from "@/auth/domain/config/auth-endpoints";
 
 interface InterfaceNewApiClient {
-  get: () => Promise<IUserScreens | null>
+  get: () => Promise<IScreen[] | null>
 }
 
 export const newApiClient = (requestPath: string, token: string | null): InterfaceNewApiClient => {
@@ -23,9 +23,9 @@ export const newApiClient = (requestPath: string, token: string | null): Interfa
     if (data.error) return null
     return data.data
   }
-  const get = async (): Promise<IUserScreens | null> => {
+  const get = async (): Promise<IScreen[] | null> => {
     const response = await fetch(requestUrl, requestInit)
-    return handleResponse<Promise<IUserScreens> | null>(response)
+    return handleResponse<Promise<IScreen[]> | null>(response)
   }
 
 
@@ -35,7 +35,7 @@ export const newApiClient = (requestPath: string, token: string | null): Interfa
 export class GlobalDatasource implements IGlobalRepository {
   private readonly baseUrl: string = "http://192.168.50.239:8000/api/v1/"
 
-  async fetchUserScreens(accessToken: string | undefined): Promise<IUserScreens | null> {
+  async fetchUserScreens(accessToken: string | undefined): Promise<IScreen[] | null> {
     const requestPath = path.join(this.baseUrl, authEndpoints.userRoles)
     if (!accessToken) return null
     return newApiClient(requestPath, accessToken).get()

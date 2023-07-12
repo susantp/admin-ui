@@ -1,6 +1,4 @@
 import React from "react"
-import { InterfaceNavigation } from "@/src/modules/dashboard/domain/types/dashboard-type"
-import getHelpers from "@/src/utils/helpers"
 import {IScreen} from "@/src/modules/global/domain/types/global-type";
 
 interface INavigationAnchorProps {

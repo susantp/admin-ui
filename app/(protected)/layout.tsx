@@ -8,7 +8,6 @@ import {
   GlobalDatasource
 } from "@/src/modules/global/data/datasources/global-datasource";
 import {IScreen} from "@/src/modules/global/domain/types/global-type";
-import {mockSession} from "next-auth/client/__tests__/helpers/mocks";
 
 export const metadata: Metadata = {
   title: "Frontend Boilerplate NextJS",

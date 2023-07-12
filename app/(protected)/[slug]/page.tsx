@@ -2,11 +2,7 @@ import React from "react";
 import Link from "next/link";
 import getHelpers from "@/src/utils/helpers";
 
-interface IDynamicPageProps {
-  params: { slug: string }
-}
-
-export default function Page({params}: IDynamicPageProps): JSX.Element {
+export default function Page(): JSX.Element {
   // TODO map frontend routes with request if not found any routes give some message
   return (
     <div className="flex w-full h-screen justify-center items-center">
