@@ -1,7 +1,4 @@
-import {
-  InterfaceAppPaths,
-  IUserScreens
-} from "@/src/modules/global/domain/types/global-type"
+import {InterfaceAppPaths} from "@/src/modules/global/domain/types/global-type"
 import {type ClassValue, clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
 
@@ -10,7 +7,6 @@ interface InterfaceGetHelpers {
   formatDate: (input: string | number) => string
   cn: (...inputs: ClassValue[]) => string
   appPaths: () => InterfaceAppPaths
-  mapAppPaths: (storageValue: string | null) => IUserScreens | null
 }
 
 const getHelpers = (): InterfaceGetHelpers => {
@@ -52,20 +48,7 @@ const getHelpers = (): InterfaceGetHelpers => {
       id: "pages"
     },
   })
-  const mapAppPaths = (storageValue: string | null): IUserScreens | null => {
-    if (!storageValue) return null
-    try {
-      const screensArray: IUserScreens = {screens: JSON.parse(storageValue)}
-      screensArray.screens.map(screen => {
-        screen.path = `/${screen.name.toLowerCase()}`
-        return screen
-      })
-      return screensArray
-    } catch (error: unknown) {
-      if (error instanceof Error) console.log(error.message)
-      return null
-    }
-  }
-  return {joinClasses, formatDate, cn, appPaths, mapAppPaths}
+
+  return {joinClasses, formatDate, cn, appPaths}
 }
 export default getHelpers

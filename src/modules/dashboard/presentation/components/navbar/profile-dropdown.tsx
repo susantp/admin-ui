@@ -5,13 +5,14 @@ import {Menu, Transition} from "@headlessui/react"
 import {Cog6ToothIcon} from "@heroicons/react/24/outline"
 import {useAtomValue} from "jotai";
 import {sessionUserAtom} from "@/src/modules/global/domain/states/global-atoms";
+import {User} from "next-auth";
 
 interface IProfileDropdownProps {
   children: JSX.Element
 }
 
 export default function ProfileDropdown({children}: IProfileDropdownProps): JSX.Element {
-  const loggedInUser = useAtomValue(sessionUserAtom)
+  const loggedInUser: User | null = useAtomValue(sessionUserAtom)
   return (
     <Menu as="div" className="relative ml-3 invisible lg:visible">
       <div>
@@ -21,7 +22,7 @@ export default function ProfileDropdown({children}: IProfileDropdownProps): JSX.
             <div className="ml-3">
               <p
                 className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                {loggedInUser?.username?.toUpperCase()}
+                {loggedInUser?.username.toUpperCase()}
               </p>
               <p
                 className="text-xs font-semibold text-teal-500 group-hover:text-gray-700">

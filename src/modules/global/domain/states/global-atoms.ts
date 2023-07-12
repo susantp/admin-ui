@@ -1,8 +1,9 @@
 import {atom} from "jotai";
 import {atomWithStorage} from "jotai/utils";
 import {IScreen} from "@/src/modules/global/domain/types/global-type";
+import {User} from "next-auth";
 
-export const sessionUserAtom = atomWithStorage('user', {})
+export const sessionUserAtom = atomWithStorage<User | null>('user', null)
 
 export const userScreensAtom = atomWithStorage<IScreen[] | null>('screens', null)
 
