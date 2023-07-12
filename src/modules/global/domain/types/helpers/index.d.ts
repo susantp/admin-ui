@@ -12,6 +12,4 @@ export interface InterfaceAppPaths {
   roles: InterfacePathObject
   screens: InterfacePathObject
 }
-export interface IconSet {
-  [key: string]: { icon: JSX.Element };
-}
+type IconSet = Record<string, { icon: JSX.Element }>

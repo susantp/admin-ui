@@ -1,4 +1,4 @@
-import { IScreen} from "@/src/modules/global/domain/types/repository/global-repository";
+import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { User } from "next-auth"

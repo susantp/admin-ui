@@ -1,15 +1,7 @@
-import {
-  IScreen
-} from "@/src/modules/global/domain/types/repository/global-repository";
-import {type ClassValue, clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
-import {
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon
-} from "@heroicons/react/24/outline";
-import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers";
+import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
+import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
@@ -71,6 +63,6 @@ const getHelpers = (): InterfaceGetHelpers => {
       return screen
     })
   }
-  return {joinClasses, formatDate, cn, appPaths, mapScreens}
+  return { joinClasses, formatDate, cn, appPaths, mapScreens }
 }
 export default getHelpers

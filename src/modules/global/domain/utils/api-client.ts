@@ -1,18 +1,20 @@
+import path from "path"
 import {
   INewApiClientParams,
-  InterfaceNewApiClient
-} from "@/src/modules/global/domain/types/api-client";
-import path from "path";
-import {ApiResponse} from "@/src/types";
+  InterfaceNewApiClient,
+} from "@/src/modules/global/domain/types/api-client"
+import { ApiResponse } from "@/src/types"
 
 const apiClient = ({
-                     requestPath,
-                     token
-                   }: INewApiClientParams): InterfaceNewApiClient => {
-  const requestUrl: URL = new URL(path.join("http://192.168.50.239:8000/api/v1/", requestPath))
+  requestPath,
+  token,
+}: INewApiClientParams): InterfaceNewApiClient => {
+  const requestUrl: URL = new URL(
+    path.join("http://192.168.50.239:8000/api/v1/", requestPath)
+  )
   const requestInit: RequestInit = {}
   if (token) {
-    requestInit.headers = {Authorization: `Bearer ${token}`}
+    requestInit.headers = { Authorization: `Bearer ${token}` }
   }
   const handleResponse = async <T>(response: Response): Promise<T | null> => {
     if (!response.ok) {
@@ -27,7 +29,7 @@ const apiClient = ({
     return handleResponse(response)
   }
 
-  return {get}
+  return { get }
 }
 
 export default apiClient

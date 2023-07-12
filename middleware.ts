@@ -1,8 +1,8 @@
-import {NextResponse} from "next/server"
-import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers";
+import { NextResponse } from "next/server"
+import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
-import {getToken, JWT} from "next-auth/jwt"
-import {withAuth} from "next-auth/middleware"
+import { JWT, getToken } from "next-auth/jwt"
+import { withAuth } from "next-auth/middleware"
 
 export default withAuth(
   async (req) => {

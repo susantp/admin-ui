@@ -1,5 +1,3 @@
-import {LucideIcon} from 'lucide-react';
-
 export default interface IGlobalRepository {
   fetchUserScreens: () => Promise<IScreen[] | null>
 }
