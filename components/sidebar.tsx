@@ -26,7 +26,7 @@ export function Sidebar(): JSX.Element {
   ]
 
   return (
-    <aside className="relative p-2 w-80">
+    <aside className="relative p-2 w-80 text-primary-foreground">
       <button
         className="absolute top-8 -right-1.5 bg-glass rounded-full p-1 cursor-pointer"
         type="button"
