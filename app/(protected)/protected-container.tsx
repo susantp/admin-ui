@@ -1,16 +1,13 @@
 "use client"
 
-import React, { Suspense, useEffect } from "react"
-import { usePathname } from "next/navigation"
-import Navbar from "@/src/modules/dashboard/presentation/components/navbar"
-import Sidebar from "@/src/modules/dashboard/presentation/components/sidebar"
+import React, { Suspense } from "react"
 import {
-  currentScreenAtom,
   sessionUserAtom,
   userScreensAtom,
 } from "@/src/modules/global/domain/states/global-atoms"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { useAtomValue, useSetAtom } from "jotai"
+import Navbar from "@/src/modules/global/presentation/components/navbar"
+import Sidebar from "@/src/modules/global/presentation/components/sidebar"
 import { useHydrateAtoms } from "jotai/utils"
 import { User } from "next-auth"
 

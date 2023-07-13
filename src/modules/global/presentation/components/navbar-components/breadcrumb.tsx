@@ -13,7 +13,7 @@ export default function Breadcrumb(): JSX.Element {
           <li>
             <div>
               <Link
-                href="/dashboard-container"
+                href="/src/modules/dashboard/presentation/pages/dashboard-container"
                 className="text-gray-400 hover:text-gray-500"
               >
                 <HomeIcon

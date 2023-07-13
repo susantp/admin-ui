@@ -2,10 +2,10 @@
 
 import React from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
-import Breadcrumb from "@/src/modules/dashboard/presentation/components/navbar/breadcrumb"
-import ProfileDropdown from "@/src/modules/dashboard/presentation/components/navbar/profile-dropdown"
-import UserMenu from "@/src/modules/dashboard/presentation/components/navbar/user-menu"
 import { sidebarAtom } from "@/src/modules/global/domain/states/global-atoms"
+import Breadcrumb from "@/src/modules/global/presentation/components/navbar-components/breadcrumb"
+import ProfileDropdown from "@/src/modules/global/presentation/components/navbar-components/profile-dropdown"
+import UserMenu from "@/src/modules/global/presentation/components/navbar-components/user-menu"
 import { Menu } from "@headlessui/react"
 import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline"
 import { useAtom } from "jotai"

@@ -70,7 +70,7 @@ export default function MobileNavigation({
             </Dialog.Panel>
           </Transition.Child>
           <div className="w-14 flex-shrink-0" aria-hidden="true">
-            {/* Dummy element to force sidebar to shrink to fit close icon */}
+            {/* Dummy element to force sidebar-components to shrink to fit close icon */}
           </div>
         </div>
       </Dialog>

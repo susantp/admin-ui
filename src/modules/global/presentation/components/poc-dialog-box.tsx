@@ -1,7 +1,6 @@
 import React from "react"
-import CreateEditUserForm from "@/src/modules/dashboard/presentation/components/user-components/create-edit-user-form"
 import { Dialog } from "@headlessui/react"
-import { XMarkIcon } from "@heroicons/react/20/solid"
+import { XMarkIcon } from "@heroicons/react/24/outline"
 
 interface IPocDialogBoxParams {
   children: JSX.Element
