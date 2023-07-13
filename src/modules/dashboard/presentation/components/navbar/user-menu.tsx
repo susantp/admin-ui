@@ -15,7 +15,7 @@ export default function UserMenu({
       {({ active }): JSX.Element => (
         <a
           href={item.href}
-          className={getHelpers().joinClasses(
+          className={getHelpers.joinClasses(
             active ? "bg-gray-100" : "",
             "block px-4 py-2 text-sm text-gray-700"
           )}

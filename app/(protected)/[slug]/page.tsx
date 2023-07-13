@@ -11,7 +11,7 @@ export default function Page(): JSX.Element {
         <h3>must be under construction or you are lost.</h3>
         <div className="px-5 py-2 bg-blue-600 rounded-2xl">
           <Link
-            href={getHelpers().appPaths().dashboard.path}
+            href={getHelpers.appPaths.dashboard.path}
             className="text-white font-bold"
           >
             Way To Dashboard

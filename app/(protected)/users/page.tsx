@@ -1,3 +1,8 @@
-import Users from "@/src/modules/dashboard/presentation/pages/users"
+"use client"
 
-export default Users
+import React from "react"
+import UserContainer from "@/src/modules/dashboard/presentation/pages/user-container"
+
+export default function Page(): JSX.Element {
+  return <UserContainer />
+}

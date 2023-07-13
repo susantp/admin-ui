@@ -17,7 +17,7 @@ export default function InfoBox({
       className="col-span-1 flex rounded-md shadow-sm"
     >
       <div
-        className={getHelpers().joinClasses(
+        className={getHelpers.joinClasses(
           project.bgColor,
           "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
         )}

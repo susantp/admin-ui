@@ -1,21 +1,34 @@
 import path from "path"
 import {
-  INewApiClientParams,
-  InterfaceNewApiClient,
+  IApiClientParams,
+  InterfaceApiClient,
 } from "@/src/modules/global/domain/types/api-client"
 import { ApiResponse } from "@/src/types"
 
 const apiClient = ({
+  xScreen,
   requestPath,
   token,
-}: INewApiClientParams): InterfaceNewApiClient => {
-  const requestUrl: URL = new URL(
-    path.join("http://192.168.50.239:8000/api/v1/", requestPath)
-  )
-  const requestInit: RequestInit = {}
-  if (token) {
-    requestInit.headers = { Authorization: `Bearer ${token}` }
+}: IApiClientParams): InterfaceApiClient => {
+  const apiBaseUrl: string | undefined = process.env.BACKEND_BASE_URL
+  if (!apiBaseUrl) throw Error("Please validate all environment variables.")
+  const requestHeaders: Record<string, string> = {
+    "Content-Type": "application/json",
   }
+  const requestInit: RequestInit = { ...requestHeaders }
+
+  const url: URL = new URL(path.join(apiBaseUrl, requestPath))
+
+  if (token) {
+    requestInit.headers = {
+      ...requestHeaders,
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  if (xScreen) {
+    requestInit.headers = { ...requestHeaders, "X-SCREEN-ID": `${xScreen}` }
+  }
+  console.log("request to: ", requestPath, "\nrequest from Screen: ", xScreen)
   const handleResponse = async <T>(response: Response): Promise<T | null> => {
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`)
@@ -25,9 +38,22 @@ const apiClient = ({
     return data.data
   }
   const get = async <T>(): Promise<T | null> => {
-    const response: Response = await fetch(requestUrl, requestInit)
+    const response: Response = await fetch(url, requestInit)
     return handleResponse(response)
   }
+
+  // const post = async <TRequest TResponse>({body}):Promise<TResponse>=>{
+  //   const response: Response = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       ...this.authorization,
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //
+  //   return this.handleResponse(response)
+  // }
 
   return { get }
 }

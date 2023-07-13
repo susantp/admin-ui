@@ -16,7 +16,7 @@ const Label = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={getHelpers().cn(labelVariants(), className)}
+    className={getHelpers.cn(labelVariants(), className)}
     {...props}
   />
 ))

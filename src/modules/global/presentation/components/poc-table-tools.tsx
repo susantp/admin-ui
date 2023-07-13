@@ -7,7 +7,7 @@ import {
 
 export default function PocTableTools(): JSX.Element {
   return (
-    <div className="flex justify-end" id="table-tools">
+    <div className="flex" id="table-tools">
       <div className="flex rounded-md shadow-sm">
         <div className="relative flex-grow focus-within:z-10">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">

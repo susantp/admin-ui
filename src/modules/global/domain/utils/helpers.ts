@@ -7,25 +7,14 @@ interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
   formatDate: (input: string | number) => string
   cn: (...inputs: ClassValue[]) => string
-  appPaths: () => InterfaceAppPaths
+  appPaths: InterfaceAppPaths
   mapScreens: (responseScreens: IScreen[] | null) => IScreen[] | null
 }
 
-const getHelpers = (): InterfaceGetHelpers => {
-  const cn = (...inputs: ClassValue[]): string => twMerge(clsx(inputs))
-  const joinClasses = (...classes: string[]): string =>
-    classes.filter(Boolean).join(" ")
-  const formatDate = (input: string | number): string => {
-    const date: Date = new Date(input)
-    return date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    })
-  }
-  const appPaths = (): InterfaceAppPaths => ({
+const getHelpers: InterfaceGetHelpers = {
+  appPaths: {
     home: {
-      path: "/home",
+      path: "/",
       label: "Home",
       name: "home",
       id: "home",
@@ -54,15 +43,27 @@ const getHelpers = (): InterfaceGetHelpers => {
       name: "screens",
       id: "screens",
     },
-  })
+  },
 
-  const mapScreens = (responseScreens: IScreen[] | null): IScreen[] | null => {
+  cn: (...inputs: ClassValue[]): string => twMerge(clsx(inputs)),
+
+  joinClasses: (...classes: string[]): string =>
+    classes.filter(Boolean).join(" "),
+
+  formatDate: (input: string | number): string => {
+    const date: Date = new Date(input)
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+  },
+  mapScreens: (responseScreens: IScreen[] | null): IScreen[] | null => {
     if (!responseScreens) return null
-    return responseScreens.filter((screen: IScreen) => {
-      if (!(screen.slug in appPaths())) return false
+    return responseScreens.filter((screen: IScreen): boolean | IScreen => {
+      if (!(screen.slug in getHelpers.appPaths)) return false
       return screen
     })
-  }
-  return { joinClasses, formatDate, cn, appPaths, mapScreens }
+  },
 }
 export default getHelpers

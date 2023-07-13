@@ -1,11 +1,11 @@
 import React from "react"
 
-interface InterfaceMostViewedWrapperProps {
+interface IMostViewedWrapperProps {
   children: JSX.Element[]
 }
 export default function MostViewedWrapper({
   children,
-}: InterfaceMostViewedWrapperProps): JSX.Element {
+}: IMostViewedWrapperProps): JSX.Element {
   return (
     <div
       id="most-viewed-wrapper"

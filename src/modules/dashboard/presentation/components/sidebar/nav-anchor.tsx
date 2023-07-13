@@ -11,21 +11,18 @@ interface INavigationAnchorProps {
     keyName: keyof IconSet,
     additionalClass?: string
   ) => JSX.Element | null
-  handleNavigation: (screen: IScreen) => void
 }
 
 export default function NavAnchor({
   screen,
   handleGetIcon,
-  handleNavigation,
 }: INavigationAnchorProps): JSX.Element {
   const pathname = usePathname()
   return (
     <Link
-      onClick={(): void => handleNavigation(screen)}
       key={screen.name}
       href={screen.slug}
-      className={getHelpers().joinClasses(
+      className={getHelpers.joinClasses(
         pathname.includes(screen.slug)
           ? "bg-teal-800 text-white"
           : "text-teal-100 hover:bg-teal-600",

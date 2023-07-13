@@ -1,11 +1,16 @@
 import React from "react"
+import { RedirectType } from "next/dist/client/components/redirect"
 import Image from "next/image"
+import { redirect } from "next/navigation"
 import { authOptions } from "@/auth/domain/config/auth-options"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { getServerSession } from "next-auth"
 
 export default async function Home(): Promise<JSX.Element> {
   const session = await getServerSession(authOptions)
 
+  if (session)
+    redirect(getHelpers.appPaths.dashboard.path, RedirectType.replace)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

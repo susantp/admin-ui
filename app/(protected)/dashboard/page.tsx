@@ -1,6 +1,6 @@
 import React from "react"
 import { Metadata } from "next"
-import DashboardContainer from "@/src/modules/dashboard/presentation/pages/dashboardContainer"
+import DashboardContainer from "@/src/modules/dashboard/presentation/pages/dashboard-container"
 
 export const metadata: Metadata = {
   title: "Login",

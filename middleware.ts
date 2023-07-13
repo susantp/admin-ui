@@ -8,22 +8,21 @@ export default withAuth(
   async (req) => {
     const token: JWT | null = await getToken({ req })
     const isAuth = !!token
-    const isAuthPage: boolean = ["/login", "/register"].includes(
-      req.nextUrl.pathname
-    )
+    const { pathname, search } = req.nextUrl
+    const { dashboard, home }: InterfaceAppPaths = getHelpers.appPaths
 
-    if (isAuthPage) {
+    if (["/login", "/register"].includes(pathname)) {
       if (isAuth) {
-        return NextResponse.redirect(new URL("/", req.url))
+        return NextResponse.redirect(new URL(dashboard.path, req.url))
       }
 
       return null
     }
 
-    if (isAuth) return null
+    if (isAuth) {
+      return null
+    }
 
-    const { pathname, search } = req.nextUrl
-    const { dashboard, home }: InterfaceAppPaths = getHelpers().appPaths()
     const from: string =
       pathname + search === home.path ? dashboard.path : pathname + search
     const redirectUrl = new URL(
