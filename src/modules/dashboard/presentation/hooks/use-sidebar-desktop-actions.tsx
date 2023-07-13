@@ -1,11 +1,4 @@
 import React, { useEffect, useState } from "react"
-// import {
-//   Award,
-//   HomeIcon,
-//   Layers,
-//   LayoutDashboardIcon,
-//   UserContainer,
-// } from "lucide-react"
 import { usePathname } from "next/navigation"
 import {
   currentScreenAtom,
@@ -14,18 +7,10 @@ import {
 import { IconSet } from "@/src/modules/global/domain/types/helpers"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
 import {
-  Bars3BottomLeftIcon,
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
   ClipboardDocumentIcon,
-  Cog6ToothIcon,
   FolderIcon,
   HomeIcon,
-  InboxIcon,
-  MagnifyingGlassIcon,
   UsersIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline"
 import { useAtomValue, useSetAtom } from "jotai"
 
@@ -38,7 +23,7 @@ interface ISidebarDesktopActions {
 }
 
 const useSidebarDesktopActions = (): ISidebarDesktopActions => {
-  const userScreens = useAtomValue(userScreensAtom)
+  const userScreens: IScreen[] | null = useAtomValue(userScreensAtom)
   const pathName = usePathname()
   const setCurrentScreen = useSetAtom(currentScreenAtom)
 
