@@ -1,7 +1,7 @@
 "use client"
 
 import React, { Fragment } from "react"
-import { sessionUserAtom } from "@/src/modules/global/domain/states/global-atoms"
+import { sessionUserAtom } from "@/src/modules/global/presentation/state/global-states"
 import { Menu, Transition } from "@headlessui/react"
 import { Cog6ToothIcon } from "@heroicons/react/24/outline"
 import { useAtomValue } from "jotai"

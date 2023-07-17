@@ -9,7 +9,7 @@ import PocTable from "@/src/modules/global/presentation/components/poc-table"
 import PocTablePagination from "@/src/modules/global/presentation/components/poc-table-pagination"
 import PocTableTools from "@/src/modules/global/presentation/components/poc-table-tools"
 import PocTableWrapper from "@/src/modules/global/presentation/components/poc-table-wrapper"
-import CreateEditUserForm from "@/src/modules/user/presentation/components/create-edit-user-form"
+import CreateEditUserForm from "@/src/modules/users/presentation/components/create-edit-user-form"
 
 export default function UserContainer(): JSX.Element {
   const { people } = useTempData()

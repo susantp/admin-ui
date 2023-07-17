@@ -1,7 +1,9 @@
-import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
-import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository"
+import {type ClassValue, clsx} from "clsx"
+import {twMerge} from "tailwind-merge"
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
@@ -9,6 +11,8 @@ interface InterfaceGetHelpers {
   cn: (...inputs: ClassValue[]) => string
   appPaths: InterfaceAppPaths
   mapScreens: (responseScreens: IScreen[] | null) => IScreen[] | null
+  getBackendProjectName: () => string
+  getBackendBaseUrl: () => string
 }
 
 const getHelpers: InterfaceGetHelpers = {
@@ -65,5 +69,17 @@ const getHelpers: InterfaceGetHelpers = {
       return screen
     })
   },
+
+  getBackendProjectName: (): string => {
+    const projectName: string | undefined = process.env.BACKEND_PROJECT_NAME
+    if (!projectName) throw new Error('Please validate all environment variables.')
+    return projectName
+  },
+
+  getBackendBaseUrl: (): string => {
+    const baseUrl: string|undefined = process.env.BACKEND_BASE_URL
+    if (!baseUrl) throw new Error('Please validate all environment variables.')
+    return baseUrl
+  }
 }
 export default getHelpers

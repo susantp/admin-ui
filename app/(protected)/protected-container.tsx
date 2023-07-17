@@ -4,7 +4,7 @@ import React, { Suspense } from "react"
 import {
   sessionUserAtom,
   userScreensAtom,
-} from "@/src/modules/global/domain/states/global-atoms"
+} from "@/src/modules/global/presentation/state/global-states"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
 import Navbar from "@/src/modules/global/presentation/components/navbar"
 import Sidebar from "@/src/modules/global/presentation/components/sidebar"

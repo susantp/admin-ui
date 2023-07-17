@@ -1,8 +1,8 @@
 import { ApiClientParams, ApiResponse } from "@/src/types"
+import getHelpers from "@/src/modules/global/domain/utils/helpers";
 
 export default class ApiClient {
-  private readonly baseUrl: string =
-    process.env.BACKEND_BASE_URL ?? "http://localhost:8000/api/v1/"
+  private readonly baseUrl: string = getHelpers.getBackendBaseUrl()
 
   private readonly authorization: HeadersInit = {}
 

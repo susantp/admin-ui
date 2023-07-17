@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation"
 import {
   currentScreenAtom,
   userScreensAtom,
-} from "@/src/modules/global/domain/states/global-atoms"
+} from "@/src/modules/global/presentation/state/global-states"
 import { IconSet } from "@/src/modules/global/domain/types/helpers"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
 import {

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { sidebarAtom } from "@/src/modules/global/domain/states/global-atoms"
+import { sidebarAtom } from "@/src/modules/global/presentation/state/global-states"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import { useAtom } from "jotai/index"

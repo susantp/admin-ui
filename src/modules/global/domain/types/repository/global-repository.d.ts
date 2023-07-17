@@ -1,4 +1,4 @@
-export default interface IGlobalRepository {
+export default interface IGlobalService {
   fetchUserScreens: () => Promise<IScreen[] | null>
 }
 
