@@ -19,8 +19,8 @@ export function Sidebar(): JSX.Element {
 
   const navigation = [
     { name: "Dashboard", href: "/", icon: <LayoutDashboardIcon /> },
-    { name: "User Management", href: "/users", icon: <UserIcon /> },
-    { name: "Role Management", href: "/roles", icon: <FolderIcon /> },
+    { name: "User Management", href: "/user-management", icon: <UserIcon /> },
+    { name: "Role Management", href: "/role-management", icon: <FolderIcon /> },
     { name: "Page Management", href: "/pages", icon: <CalendarIcon /> },
     { name: "Reports", href: "/reports", icon: <BarChartIcon /> },
   ]

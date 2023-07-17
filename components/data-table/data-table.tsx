@@ -24,16 +24,18 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { DataTablePagination } from "@/components/data-table/data-table-pagination"
-import { DataTableToolbar } from "@/app/(dashboard)/users/data-table-toolbar"
+import { DataTableToolbar } from "@/components/data-table/data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  label: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  label,
 }: DataTableProps<TData, TValue>): JSX.Element {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -52,6 +54,7 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
+
     getCoreRowModel: getCoreRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
@@ -62,7 +65,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} label="users" />
+      <DataTableToolbar table={table} label={label} />
       <div className="border rounded-md">
         <Table>
           <TableHeader>

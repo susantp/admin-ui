@@ -25,7 +25,7 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder={`Filter ${label ?? ""}...`}
           onChange={(event): void => {
-            // table.setGlobalFilter(event.target.value)
+            table.setGlobalFilter(event.target.value)
           }}
           className="h-8 w-[150px] lg:w-[250px]"
         />

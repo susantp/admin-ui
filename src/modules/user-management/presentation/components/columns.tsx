@@ -1,26 +1,13 @@
 "use client"
 
 import React from "react"
+import { User } from "@/src/modules/user-management/domain/types/user"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-
-export interface User {
-  id: string
-  username: string
-  email: string
-  phone: string | null
-  is_active: boolean
-  is_user: boolean
-  is_superuser: boolean
-  created_at: string
-  updated_at: string
-  roles: string[]
-  role: string
-}
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -83,6 +70,10 @@ export const columns: ColumnDef<User>[] = [
   {
     id: "actions",
     header: "Action",
-    cell: () => <Button variant="link">Edit</Button>,
+    cell: () => (
+      <Button variant="link" size="sm">
+        Edit
+      </Button>
+    ),
   },
 ]
