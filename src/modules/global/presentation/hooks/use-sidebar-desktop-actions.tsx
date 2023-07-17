@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
+import React, {useEffect, useState} from "react"
+import {usePathname} from "next/navigation"
 import {
   currentScreenAtom,
   userScreensAtom,
 } from "@/src/modules/global/presentation/state/global-states"
-import { IconSet } from "@/src/modules/global/domain/types/helpers"
-import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
+import {IconSet} from "@/src/modules/global/domain/types/helpers"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository"
 import {
   ClipboardDocumentIcon,
   FolderIcon,
   HomeIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline"
-import { useAtomValue, useSetAtom } from "jotai"
+import {useAtomValue, useSetAtom} from "jotai"
 
 interface ISidebarDesktopActions {
   userScreens: IScreen[] | null
@@ -32,7 +34,9 @@ const useSidebarDesktopActions = (): ISidebarDesktopActions => {
       const currentScreen: IScreen | undefined = userScreens?.find((screen) =>
         pathName.includes(screen.slug)
       )
-      if (currentScreen) setCurrentScreen(currentScreen)
+      if (currentScreen) {
+        setCurrentScreen(currentScreen)
+      }
     }
     setCurrentUserScreenToState()
   }, [])

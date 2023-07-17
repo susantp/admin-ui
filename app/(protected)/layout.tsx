@@ -1,15 +1,16 @@
 import "@/styles/globals.css"
 import React from "react"
 import {Metadata} from "next"
-import globalServices from "@/src/modules/global/domain/services/global-service"
+import {
+  fetchUserScreens
+} from "@/src/modules/global/domain/services/global-service"
 import {
   IScreen
 } from "@/src/modules/global/domain/types/repository/global-repository"
-import getClient from "@/src/modules/global/domain/utils/get-client"
+import {validateSession} from "@/src/modules/global/domain/utils/get-client"
 import {Session} from "next-auth"
 
 import ProtectedContainer from "@/app/(protected)/protected-container"
-import {authEndpoints} from "@/auth/domain/config/auth-endpoints";
 
 export const metadata: Metadata = {
   title: "Frontend Boilerplate NextJS",
@@ -17,15 +18,15 @@ export const metadata: Metadata = {
 }
 
 interface IRootLayout {
-  children: React.ReactNode
+  children: JSX.Element
 }
 
 async function RootLayout({
-  children,
-}: IRootLayout): Promise<JSX.Element | null> {
-  const session: Session | null = await getClient.validateSession()
+                            children,
+                          }: IRootLayout): Promise<JSX.Element | null> {
+  const session: Session | null = await validateSession()
   const userScreens: IScreen[] | null =
-    await globalServices.fetchUserScreens()
+    await fetchUserScreens()
   if (!session || !userScreens) return null
 
   return (

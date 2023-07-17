@@ -1,9 +1,13 @@
-import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers"
+import {
+  IComposeRequestPathParams,
+  InterfaceAppPaths
+} from "@/src/modules/global/domain/types/helpers"
 import {
   IScreen
 } from "@/src/modules/global/domain/types/repository/global-repository"
 import {type ClassValue, clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
+import path from "path";
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
@@ -13,6 +17,7 @@ interface InterfaceGetHelpers {
   mapScreens: (responseScreens: IScreen[] | null) => IScreen[] | null
   getBackendProjectName: () => string
   getBackendBaseUrl: () => string
+  composeRequestPath: ({requestPath}: IComposeRequestPathParams) => URL
 }
 
 const getHelpers: InterfaceGetHelpers = {
@@ -72,14 +77,16 @@ const getHelpers: InterfaceGetHelpers = {
 
   getBackendProjectName: (): string => {
     const projectName: string | undefined = process.env.BACKEND_PROJECT_NAME
-    if (!projectName) throw new Error('Please validate all environment variables.')
-    return projectName
+    return typeof projectName === 'string' ? projectName : 'poc'
   },
 
   getBackendBaseUrl: (): string => {
-    const baseUrl: string|undefined = process.env.BACKEND_BASE_URL
-    if (!baseUrl) throw new Error('Please validate all environment variables.')
-    return baseUrl
+    const baseUrl: string | undefined = process.env.BACKEND_BASE_URL
+    return typeof baseUrl === 'string' ? baseUrl : "http://192.168.50.239:8000/api/v1/"
+  },
+  composeRequestPath: ({requestPath}: IComposeRequestPathParams): URL => {
+    const apiBaseUrl: string = getHelpers.getBackendBaseUrl()
+    return new URL(path.join(apiBaseUrl, requestPath));
   }
 }
 export default getHelpers

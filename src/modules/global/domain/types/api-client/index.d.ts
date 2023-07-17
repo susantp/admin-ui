@@ -1,24 +1,11 @@
-import {Session} from "next-auth"
-
-interface IClientParams {
-  xScreen: string | null
-  requestPath: string
+export interface IClientParams {
+  xScreen: string | null,
+  method: string,
+  body: BodyInit
 }
-
-export type IGetAuthClientParams = IClientParams
-export type IGetPublicClientParams = IClientParams
-
-export interface IApiClientParams extends IClientParams {
-  token: string | null
-}
-
-export interface IGetClient {
-  validateSession: () => Promise<Session | null>
-  authentic: ({
-                requestPath,
-                xScreen,
-              }: IGetAuthClientParams) => Promise<InterfaceApiClient | null>
-  public: ({requestUrl}: IGetPublicClientParams) => InterfaceApiClient
+export interface IGetRequestParams {
+  requestPath: URL
+  requestInit: RequestInit | undefined
 }
 
 export interface InterfaceApiClient {

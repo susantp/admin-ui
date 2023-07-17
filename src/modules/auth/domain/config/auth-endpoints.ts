@@ -1,4 +1,6 @@
-const projectName = process.env.BACKEND_PROJECT_NAME ?? "poc"
+import getHelpers from "@/src/modules/global/domain/utils/helpers";
+
+const projectName = getHelpers.getBackendProjectName()
 
 interface AuthEndpoints {
   userLogin: string
@@ -13,7 +15,7 @@ export const authEndpoints: AuthEndpoints = {
   userLogin: `${projectName}/user/login/`,
   userRegister: `${projectName}/user/login/`,
   refreshToken: `${projectName}/refresh-token/`,
-  loggedInUser: "logged-in-users/",
-  userDetail: "users-detail/",
-  userScreens: "admin/logged-in-users-screens/",
+  loggedInUser: "logged-in-user/",
+  userDetail: "user-detail/",
+  userScreens: "admin/logged-in-user-screens/",
 }

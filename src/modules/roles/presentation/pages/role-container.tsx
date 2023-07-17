@@ -10,7 +10,7 @@ import getHelpers from "@/src/modules/global/domain/utils/helpers";
 import {useAtomValue} from "jotai";
 import {
   currentScreenAtom,
-  sessionUserAtom
+  sessionUserAtom, userScreensAtom
 } from "@/src/modules/global/presentation/state/global-states";
 import {User} from "next-auth";
 import {
@@ -19,13 +19,18 @@ import {
 import {
   IRoleList
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints";
-import {IRoleService} from "@/src/modules/roles/domain/types/repository";
+import {useHydrateAtoms} from "jotai/utils";
+import {rolesAtom} from "@/src/modules/roles/presentation/state/role-state";
+import {fetchRoles} from "@/src/modules/roles/domain/services/role-service";
 
 interface IRoleContainerProps {
-  service: IRoleService
+  roles: IRoleList[]
 }
 
-export default function RoleContainer({service}: IRoleContainerProps): JSX.Element {
+export default function RoleContainer({roles}: IRoleContainerProps): JSX.Element {
+  useHydrateAtoms([
+    [rolesAtom, roles]
+  ])
   const {projects} = useTempData()
   const statuses = {
     active: 'text-green-700 bg-green-50 ring-green-600/20',
@@ -34,10 +39,8 @@ export default function RoleContainer({service}: IRoleContainerProps): JSX.Eleme
   }
   const sessionUser: User | null = useAtomValue(sessionUserAtom)
   const currentScreen: IScreen | null = useAtomValue(currentScreenAtom)
-  const getRoles: Promise<IRoleList[] | null> = service.fetchRoles()
-  getRoles.then((role: IRoleList[] | null) => {
-    console.log(role)
-  }).catch(e => e?.message)
+
+
   return (
     <div className="max-w-full px-4 sm:px-6 md:px-8">
       <div className="mt-10 px-4 sm:px-6 lg:px-8">
