@@ -24,8 +24,6 @@ async function RootLayout({
   children,
 }: IRootLayout): Promise<JSX.Element | null> {
   const session: Session | null = await getClient.validateSession()
-
-  return null
   const userScreens: IScreen[] | null =
     await globalServices.fetchUserScreens()
   if (!session || !userScreens) return null
