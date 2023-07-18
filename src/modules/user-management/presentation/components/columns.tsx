@@ -63,7 +63,7 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: "role",
+    accessorKey: "roles",
     header: "Role",
     enableGlobalFilter: false,
   },

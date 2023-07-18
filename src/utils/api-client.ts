@@ -4,12 +4,15 @@ export default class ApiClient {
   private readonly baseUrl: string =
     process.env.BACKEND_BASE_URL ?? "http://localhost:8000/api/v1/"
 
-  private readonly authorization: HeadersInit = {}
+  private readonly headers: HeadersInit = {}
 
-  constructor({ baseUrl, accessToken }: ApiClientParams = {}) {
+  constructor({ baseUrl, accessToken, headers }: ApiClientParams = {}) {
     if (baseUrl) this.baseUrl = baseUrl
     if (accessToken) {
-      this.authorization = { Authorization: `Bearer ${accessToken}` }
+      this.headers = { Authorization: `Bearer ${accessToken}` }
+    }
+    if (headers) {
+      this.headers = { ...this.headers, ...headers }
     }
   }
 
@@ -19,13 +22,15 @@ export default class ApiClient {
       throw new Error(`Request failed with status ${response.status}`)
     }
 
+    console.log("API RESPONSE", response)
+
     const data = (await response.json()) as ApiResponse<T>
     return data.data
   }
 
   public async get<T>(endpoint: string): Promise<T> {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      headers: this.authorization,
+      headers: this.headers,
     })
 
     return this.handleResponse(response)
@@ -39,7 +44,7 @@ export default class ApiClient {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...this.authorization,
+        ...this.headers,
       },
       body: JSON.stringify(data),
     })
@@ -55,7 +60,7 @@ export default class ApiClient {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        ...this.authorization,
+        ...this.headers,
       },
       body: JSON.stringify(data),
     })
@@ -66,7 +71,7 @@ export default class ApiClient {
   public async delete(endpoint: string): Promise<void> {
     const response: Response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "DELETE",
-      headers: this.authorization,
+      headers: this.headers,
     })
 
     return this.handleResponse(response)

@@ -1,6 +1,7 @@
 export interface ApiClientParams {
   baseUrl?: string
   accessToken?: string
+  headers?: HeadersInit
 }
 
 export interface ApiResponse<T> {

@@ -10,7 +10,7 @@ interface AuthEndpoints {
 
 export const authEndpoints: AuthEndpoints = {
   userLogin: `${projectName}/user/login/`,
-  userRegister: `${projectName}/user/login/`,
+  userRegister: `${projectName}/user/register/`,
   refreshToken: `${projectName}/refresh-token/`,
   loggedInUser: "logged-in-user/",
   userDetail: "user-detail/",
