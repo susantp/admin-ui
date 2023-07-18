@@ -16,7 +16,7 @@ export default function DashboardContainer(): JSX.Element {
 
   return (
     <PocContainer>
-      <Section label="Most viewed pages" subLabel={null} actionEl={null}>
+      <Section label="Most viewed roles" subLabel={null} actionEl={null}>
         <MostViewedWrapper>
           {projects.map((project) => (
             <InfoBox key={Math.random()} project={project} />
@@ -24,7 +24,7 @@ export default function DashboardContainer(): JSX.Element {
         </MostViewedWrapper>
       </Section>
 
-      <Section label="Active UserContainer" subLabel={null} actionEl={null}>
+      <Section label="Active Users" subLabel={null} actionEl={null}>
         <PocTableWrapper>
           <PocTableTools />
           <PocTable people={people} />
