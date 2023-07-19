@@ -3,6 +3,7 @@ import Section from "@/src/modules/dashboard/presentation/components/section"
 import PocContainer
   from "@/src/modules/global/presentation/components/poc-container"
 import {Input} from "@/components/ui/input";
+import Link from "next/link";
 
 function ScreenPermissionBox(): JSX.Element {
   return (
@@ -85,7 +86,10 @@ export default function CreateRole(): JSX.Element {
 
           </div>
           <div className="flex flex-shrink-0 justify-end px-4 py-4 mt-6">
-            <button type="button" className="dangerButtonStyle">Cancel</button>
+            <Link href="/roles" type="button"
+                  className="dangerButtonStyle">
+              Cancel
+            </Link>
             <button
               type="submit"
               className="ml-4 inline-flex justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
