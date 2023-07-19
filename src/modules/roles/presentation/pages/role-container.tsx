@@ -1,37 +1,102 @@
 "use client"
 
-import React, {Fragment} from "react";
-import {Menu, Transition} from '@headlessui/react'
-import {EllipsisVerticalIcon, PlusIcon} from '@heroicons/react/20/solid'
-import {KeyIcon} from '@heroicons/react/24/outline'
+import React, { Fragment, useState } from "react";
+import { Menu, Transition, Dialog } from '@headlessui/react'
+import { EllipsisVerticalIcon, PlusIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { KeyIcon } from '@heroicons/react/24/outline'
 import useTempData
   from "@/src/modules/dashboard/data/datasources/dashboard-datasource";
 import getHelpers from "@/src/modules/global/domain/utils/helpers";
-import {useAtomValue} from "jotai";
+import { useAtomValue } from "jotai";
 import {
   currentScreenAtom,
   sessionUserAtom, userScreensAtom
 } from "@/src/modules/global/presentation/state/global-states";
-import {User} from "next-auth";
+import { User } from "next-auth";
 import {
   IScreen
 } from "@/src/modules/global/domain/types/repository/global-repository";
 import {
   IRoleList
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints";
-import {useHydrateAtoms} from "jotai/utils";
-import {rolesAtom} from "@/src/modules/roles/presentation/state/role-state";
-import {fetchRoles} from "@/src/modules/roles/domain/services/role-service";
+import { useHydrateAtoms } from "jotai/utils";
+import { rolesAtom } from "@/src/modules/roles/presentation/state/role-state";
+import { fetchRoles } from "@/src/modules/roles/domain/services/role-service";
+import { ChevronRightIcon } from "lucide-react";
+import Link from 'next/link'
 
 interface IRoleContainerProps {
   roles: IRoleList[]
 }
+const tabs = [
+  { name: 'All', href: '#', current: true },
+  { name: 'Development', href: '#', current: false },
+  { name: 'Managed Service', href: '#', current: false },
+  { name: 'System', href: '#', current: false },
+]
+const team = [
+  {
+    name: 'Admin',
+    handle: '8',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Owner',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Member',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Member',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Member',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Member',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Member',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+  {
+    name: 'Member',
+    handle: '2',
+    href: '#',
+    status: 'online',
+  },
+]
 
-export default function RoleContainer({roles}: IRoleContainerProps): JSX.Element {
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+
+export default function RoleContainer({ roles }: IRoleContainerProps): JSX.Element {
+  const [open, setOpen] = useState(false)
   useHydrateAtoms([
     [rolesAtom, roles]
   ])
-  const {projects} = useTempData()
+  const { projects } = useTempData()
   const statuses = {
     active: 'text-green-700 bg-green-50 ring-green-600/20',
     inactive: 'text-red-600 bg-red-50 ring-red-500/10',
@@ -54,122 +119,117 @@ export default function RoleContainer({roles}: IRoleContainerProps): JSX.Element
             </p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto"
 
-            >
-              <PlusIcon
+              <Link
+              href="roles/create"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto"
+              >
+                <PlusIcon
                 className="-ml-1 mr-3 h-5 w-5"
                 aria-hidden="true"
               />
-              Add Role
-
-            </button>
+              New Role
+              </Link>
           </div>
         </div>
 
-        <ul
-          className=" divide-y divide-gray-100 mt-6 border-t border-b border-gray-200">
-          {projects.map((project) => (
-            <li key={project.id}
-                className="flex items-center justify-between gap-x-6 py-5">
-              <div className="min-w-0">
-                <div className="flex items-start gap-x-3">
-                  <p
-                    className="text-sm font-semibold leading-6 text-gray-900">{project.name}</p>
-                  <p
-                    className={getHelpers.joinClasses(
-                      statuses[project.status],
-                      'rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset'
+
+
+        <div className=" mt-5 fixed w-[72%] flex h-full flex-col bg-white shadow-xl">
+          <div className="p-3">
+           
+          </div>
+          <div className="border-b border-gray-200">
+            <div className="px-6">
+              <nav className="-mb-px flex space-x-6" x-descriptions="Tab component">
+                {tabs.map((tab) => (
+                  <a
+                    key={tab.name}
+                    href={tab.href}
+                    className={classNames(
+                      tab.current
+                        ? 'border-teal-500 text-teal-600'
+                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                      'whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium'
                     )}
                   >
-                    {project.status}
-                  </p>
+                    {tab.name}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
+          <ul role="list" className="flex-1 divide-y divide-gray-200 overflow-y-auto">
+            {team.map((person) => (
+              <li key={person.handle}>
+                <div className="group relative flex items-center px-5 py-6">
+                  <a href={person.href} className="-m-1 block flex-1 p-1">
+                    <div className="absolute inset-0 group-hover:bg-gray-50" aria-hidden="true" />
+                    <div className="relative flex min-w-0 flex-1 items-center">
+                  
+                      <div className="ml-4 truncate">
+                        <p className="truncate text-sm font-medium text-gray-900">{person.name}</p>
+                        <p className="truncate text-sm text-gray-500">{ person.handle + ' Members'}</p>
+                      </div>
+                    </div>
+                  </a>
+                  <Menu as="div" className="relative ml-2 inline-block flex-shrink-0 text-left">
+                    <Menu.Button className="group relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+                      <span className="sr-only">Open options menu</span>
+                      <span className="flex h-full w-full items-center justify-center rounded-full">
+                        <ChevronRightIcon
+                          className="h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </Menu.Button>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-9 top-0 z-10 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                  'block px-4 py-2 text-sm'
+                                )}
+                              >
+                                View profile
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                  'block px-4 py-2 text-sm'
+                                )}
+                              >
+                                Send message
+                              </a>
+                            )}
+                          </Menu.Item>
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 </div>
-                <div
-                  className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                  <p className="whitespace-nowrap">
-                    {project.members}
-                  </p>
-                  <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
-                    <circle cx={1} cy={1} r={1}/>
-                  </svg>
-                  <p className="truncate">Created by {project.createdBy}</p>
-                </div>
-              </div>
-              <div className="flex flex-none items-center gap-x-4">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-x-1.5 rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
-                >
-                  <KeyIcon className="-ml-0.5 h-5 w-5" aria-hidden="true"/>
-                  Manage Access
-                </button>
-                <Menu as="div" className="relative flex-none">
-                  <Menu.Button
-                    className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
-                    <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon className="h-5 w-5"
-                                          aria-hidden="true"/>
-                  </Menu.Button>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items
-                      className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                      <Menu.Item>
-                        {({active}): JSX.Element => (
-                          <p
-                            className={getHelpers.joinClasses(
-                              active ? 'bg-gray-50' : '',
-                              'block px-3 py-1 taext-sm leading-6 text-gray-900'
-                            )}
-                          >
-                            Edit<span
-                            className="sr-only">, {project.name}</span>
-                          </p>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({active}): JSX.Element => (
-                          <p
-                            className={getHelpers.joinClasses(
-                              active ? 'bg-gray-50' : '',
-                              'block px-3 py-1 text-sm leading-6 text-gray-900'
-                            )}
-                          >
-                            Move<span
-                            className="sr-only">, {project.name}</span>
-                          </p>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({active}): JSX.Element => (
-                          <p
-                            className={getHelpers.joinClasses(
-                              active ? 'bg-gray-50' : '',
-                              'block px-3 py-1 text-sm leading-6 text-gray-900'
-                            )}
-                          >
-                            Delete<span
-                            className="sr-only">, {project.name}</span>
-                          </p>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
     </div>
   )
