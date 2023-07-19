@@ -3,13 +3,15 @@ import { Dialog } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 
 interface IPocDialogBoxParams {
-  children: JSX.Element
+  title: string
+  description: string
   open: boolean
   onClose: () => void
 }
 
 function PocDialogBox({
-  children,
+  title,
+  description,
   onClose,
   open,
 }: IPocDialogBoxParams): JSX.Element {
@@ -21,7 +23,7 @@ function PocDialogBox({
             <div className="bg-teal-700 py-6 px-4 sm:px-6">
               <div className="flex items-center justify-between">
                 <Dialog.Title className="text-lg font-medium text-white">
-                  Add new user
+                  {title}
                 </Dialog.Title>
                 <div className="ml-3 flex h-7 items-center">
                   <button
@@ -34,14 +36,14 @@ function PocDialogBox({
                   </button>
                 </div>
               </div>
-              <div className="mt-1">
-                <p className="text-sm text-white">
-                  Get started by filling in the information below to create a
-                  new user.
-                </p>
-              </div>
+              <Dialog.Description>
+                <div className="mt-1">
+                  <p className="text-sm text-white">
+                    {description}
+                  </p>
+                </div>
+              </Dialog.Description>
             </div>
-            {children}
           </Dialog.Panel>
         </div>
       </div>

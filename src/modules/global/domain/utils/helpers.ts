@@ -3,9 +3,14 @@ import {
   IComposeRequestPathParams,
   InterfaceAppPaths,
 } from "@/src/modules/global/domain/types/helpers"
-import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository"
+import {type ClassValue, clsx} from "clsx"
+import {twMerge} from "tailwind-merge"
+import {
+  IPermissionEndpointResponse
+} from "@/src/modules/roles/domain/types/endpoints/role-endpoints";
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
@@ -16,7 +21,9 @@ interface InterfaceGetHelpers {
   getBackendProjectName: () => string
   getBackendBaseUrl: () => string
   getAppUrl: () => string
-  composeRequestPath: ({ requestPath }: IComposeRequestPathParams) => URL
+  composeRequestPath: ({requestPath}: IComposeRequestPathParams) => URL
+  getUniqueScreensFromPermissions: (data: IPermissionEndpointResponse[]) => string[]
+  toTitleCase: (data: string) => string
 }
 
 const getHelpers: InterfaceGetHelpers = {
@@ -85,7 +92,7 @@ const getHelpers: InterfaceGetHelpers = {
       ? baseUrl
       : "http://192.168.50.239:8000/api/v1/"
   },
-  composeRequestPath: ({ requestPath }: IComposeRequestPathParams): URL => {
+  composeRequestPath: ({requestPath}: IComposeRequestPathParams): URL => {
     const apiBaseUrl: string = getHelpers.getBackendBaseUrl()
     return new URL(path.join(apiBaseUrl, requestPath))
   },
@@ -93,5 +100,16 @@ const getHelpers: InterfaceGetHelpers = {
     const appUrl: undefined | string = process.env.NEXT_PUBLIC_APP_URL
     return typeof appUrl === "string" ? appUrl : "http://localhost:3000"
   },
+  getUniqueScreensFromPermissions: (data: IPermissionEndpointResponse[]): string[] => {
+    const uniqueScreensSet: Set<string> = new Set<string>();
+
+    data.forEach((permission: IPermissionEndpointResponse) => {
+      if (permission.screen) {
+        uniqueScreensSet.add(permission.screen);
+      }
+    });
+    return Array.from(uniqueScreensSet);
+  },
+  toTitleCase: (string: string): string => string.charAt(0).toUpperCase() + string.substring(1)
 }
 export default getHelpers
