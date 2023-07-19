@@ -57,10 +57,8 @@ function RoleList({role}:IRoleListProps): JSX.Element {
   )
 }
 
-
-
 export default function RoleContainer({rolesData}: IRoleContainerProps): JSX.Element {
-  const {total, total_page, results} = rolesData
+  const {total, totalPage, results} = rolesData
   useHydrateAtoms([
     [rolesAtom, results]
   ])
