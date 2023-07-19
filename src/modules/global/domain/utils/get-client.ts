@@ -1,8 +1,8 @@
 "use server"
 
-import {authOptions} from "@/auth/domain/config/auth-options"
 import {IClientParams,} from "@/src/modules/global/domain/types/api-client"
 import {getServerSession, Session} from "next-auth"
+import {authOptions} from "@/auth/domain/config/auth-options";
 
 export const validateSession = async (): Promise<Session | null> => {
 
@@ -10,16 +10,17 @@ export const validateSession = async (): Promise<Session | null> => {
   if (!session) return null
   return session
 }
-
 export const authenticClient = async ({
-                                        xScreen, body, method
-                                      }: IClientParams): Promise<RequestInit | undefined> => {
+                                        xScreen
+                                      }: IClientParams): Promise<RequestInit | null> => {
   const session: Session | null = await validateSession()
-  if (!session) return undefined
+  if (!session) {
+    throw new Error("Unauthenticated")
+  }
   const {
     user: {access},
   } = session
-  let requestInit: RequestInit = {method}
+  const requestInit: RequestInit = {}
   let requestHeaders: Record<string, string> = {
     "Content-Type": "application/json",
   }
@@ -34,9 +35,6 @@ export const authenticClient = async ({
       ...requestHeaders,
       "X-SCREEN-ID": `${xScreen}`,
     }
-  }
-  if (body) {
-    requestInit = {...requestInit, body}
   }
   requestInit.headers = {...requestHeaders}
   return requestInit

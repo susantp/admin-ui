@@ -1,14 +1,29 @@
 export interface IClientParams {
   xScreen: string | null,
-  method: string,
-  body: BodyInit
+  token: string|undefined
 }
 export interface IGetRequestParams {
   requestPath: URL
-  requestInit: RequestInit | undefined
+  requestInit: RequestInit
 }
-
+export interface IPostRequestParams{
+  requestPath: URL
+  requestInit: RequestInit
+  body: BodyInit
+}
 export interface InterfaceApiClient {
   getRequest: <T>() => Promise<T | null>
   postRequest: <TRequest, TResponse>(payload: BodyInit) => Promise<TResponse | null>
+}
+
+export interface ApiClientParams {
+  baseUrl?: string
+  accessToken?: string
+}
+
+export interface ApiResponse<T> {
+  message: string
+  data: T
+  status: number
+  error: string
 }
