@@ -10,16 +10,22 @@ import {getRequest} from "@/src/modules/global/domain/utils/api-client";
 import {IClientParams} from "@/src/modules/global/domain/types/api-client";
 
 
-export const fetchRoles = async (): Promise<IRoleList[] | null> => {
 
-  const clientConfig: RequestInit | undefined = await authenticClient({
-    xScreen: "efc830e6-2030-4057-bd10-6e715ae1352c",
-    method: "get"
+export interface IFetchRolesData{
+  total: string
+  totalPage: string
+  results: IRoleList[]
+}
+export const fetchRoles = async (): Promise<IFetchRolesData | null> => {
+
+  const clientConfig: RequestInit | null = await authenticClient({
+    xScreen: "efc830e6-2030-4057-bd10-6e715ae1352c"
   } as IClientParams)
+  if(!clientConfig) return null
   const requestPath: string = roleEndpoints.fetchRoles
   const url: URL = getHelpers.composeRequestPath({requestPath});
 
-  const responseRoles: IRoleList[] | null | undefined = await getRequest<IRoleList[] | null>({
+  const responseRoles: IFetchRolesData | null | undefined = await getRequest<IFetchRolesData | null>({
     requestPath: url,
     requestInit: clientConfig
   })
