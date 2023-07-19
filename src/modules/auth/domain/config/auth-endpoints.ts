@@ -1,4 +1,4 @@
-import getHelpers from "@/src/modules/global/domain/utils/helpers";
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 
 const projectName = getHelpers.getBackendProjectName()
 

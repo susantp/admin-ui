@@ -1,33 +1,30 @@
 "use server"
 
-import {IClientParams,} from "@/src/modules/global/domain/types/api-client"
-import {getServerSession, Session} from "next-auth"
-import {authOptions} from "@/auth/domain/config/auth-options";
+import { authOptions } from "@/auth/domain/config/auth-options"
+import { IClientParams } from "@/src/modules/global/domain/types/api-client"
+import { Session, getServerSession } from "next-auth"
 
 export const validateSession = async (): Promise<Session | null> => {
-
   const session: Session | null = await getServerSession(authOptions)
   if (!session) return null
   return session
 }
 export const authenticClient = async ({
-                                        xScreen
-                                      }: IClientParams): Promise<RequestInit | null> => {
+  xScreen,
+}: IClientParams): Promise<RequestInit | null> => {
   const session: Session | null = await validateSession()
   if (!session) {
     throw new Error("Unauthenticated")
   }
   const {
-    user: {access},
+    user: { access },
   } = session
   const requestInit: RequestInit = {}
-  let requestHeaders: HeadersInit = [
-    ["Content-Type", "application/json",]
-  ]
+  let requestHeaders: HeadersInit = [["Content-Type", "application/json"]]
   if (access) {
     requestHeaders = {
       ...requestHeaders,
-      "Authorization": `Bearer ${access}`,
+      Authorization: `Bearer ${access}`,
     }
   }
   if (xScreen) {
@@ -36,12 +33,12 @@ export const authenticClient = async ({
       "X-SCREEN-ID": `${xScreen}`,
     }
   }
-  requestInit.headers = {...requestHeaders}
+  requestInit.headers = { ...requestHeaders }
   return requestInit
 }
 export const publicClient = (): RequestInit => {
   const requestHeaders: Record<string, string> = {
     "Content-Type": "application/json",
   }
-  return {...requestHeaders}
+  return { ...requestHeaders }
 }

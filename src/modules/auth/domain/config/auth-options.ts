@@ -1,62 +1,84 @@
-import {authConfig} from "@/auth/domain/config/auth-config"
-import {authEndpoints} from "@/auth/domain/config/auth-endpoints"
+import { Response } from "next/dist/compiled/@edge-runtime/primitives/fetch"
+import { authConfig } from "@/auth/domain/config/auth-config"
+import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
 import {
   LoggedInUserResponse,
   RefreshTokenResponse,
   UserDetailResponse,
   UserLoginResponse,
 } from "@/auth/domain/types/auth-endpoints"
-import {TokenPayload} from "@/auth/domain/types/nextauth"
+import { TokenPayload } from "@/auth/domain/types/nextauth"
+import { handleResponse } from "@/src/modules/global/domain/utils/api-client"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import jwtDecode from "jwt-decode"
-import {AuthOptions, User} from "next-auth"
-import {JWT} from "next-auth/jwt"
+import { AuthOptions, User } from "next-auth"
+import { JWT } from "next-auth/jwt"
 import CredentialsProvider from "next-auth/providers/credentials"
-import {signOut} from "next-auth/react"
-import getHelpers from "@/src/modules/global/domain/utils/helpers";
-import {handleResponse} from "@/src/modules/global/domain/utils/api-client";
-import {Response} from "next/dist/compiled/@edge-runtime/primitives/fetch";
+import { signOut } from "next-auth/react"
 
-const headers: HeadersInit = [
-  ['Content-Type', 'application/json']
-]
-const requestInit: RequestInit = {headers}
+const headers: HeadersInit = [["Content-Type", "application/json"]]
+const requestInit: RequestInit = { headers }
 
 const credentialProvider = CredentialsProvider({
   id: authConfig.credentialId,
-  credentials: {username: {}, password: {}},
-  authorize: async (credentials: Record<"username" | "password", string> | undefined): Promise<User | null> => {
+  credentials: { username: {}, password: {} },
+  authorize: async (
+    credentials: Record<"username" | "password", string> | undefined
+  ): Promise<User | null> => {
     if (!credentials) return null
     // compose request path with baseUrl
-    const {loggedInUser, userDetail, userLogin} = authEndpoints
-    const loggedInUserRequestPath: URL = getHelpers.composeRequestPath({requestPath: loggedInUser})
-    const userDetailRequestPath: URL = getHelpers.composeRequestPath({requestPath: userDetail})
-    const loginRequestPath: URL = getHelpers.composeRequestPath({requestPath: userLogin})
+    const { loggedInUser, userDetail, userLogin } = authEndpoints
+    const loggedInUserRequestPath: URL = getHelpers.composeRequestPath({
+      requestPath: loggedInUser,
+    })
+    const userDetailRequestPath: URL = getHelpers.composeRequestPath({
+      requestPath: userDetail,
+    })
+    const loginRequestPath: URL = getHelpers.composeRequestPath({
+      requestPath: userLogin,
+    })
 
     const bodyInit: BodyInit = JSON.stringify(credentials)
 
     const loginRequestInit: RequestInit = {
       ...requestInit,
       body: bodyInit,
-      method: "POST"
+      method: "POST",
     }
 
     try {
       // login request to get userLogin response
-      const loginResponse: Response = await fetch(loginRequestPath, loginRequestInit)
-      const userLoginResponseData: UserLoginResponse = await handleResponse<UserLoginResponse>(loginResponse)
+      const loginResponse: Response = await fetch(
+        loginRequestPath,
+        loginRequestInit
+      )
+      const userLoginResponseData: UserLoginResponse =
+        await handleResponse<UserLoginResponse>(loginResponse)
 
       // update headers with token
-      const headersWithAuth: HeadersInit = [...headers, ["Authorization", `Bearer ${userLoginResponseData.access}`]]
+      const headersWithAuth: HeadersInit = [
+        ...headers,
+        ["Authorization", `Bearer ${userLoginResponseData.access}`],
+      ]
       const requestInitWithAuth: RequestInit = {
-        ...requestInit, headers: headersWithAuth
+        ...requestInit,
+        headers: headersWithAuth,
       }
 
       // fetch logged in user and user detail
-      const loggedInUserResponse: Response = await fetch(loggedInUserRequestPath, requestInitWithAuth)
-      const userDetailsResponse: Response = await fetch(userDetailRequestPath, requestInitWithAuth)
+      const loggedInUserResponse: Response = await fetch(
+        loggedInUserRequestPath,
+        requestInitWithAuth
+      )
+      const userDetailsResponse: Response = await fetch(
+        userDetailRequestPath,
+        requestInitWithAuth
+      )
 
-      const loggedInUserResponseData: LoggedInUserResponse = await handleResponse<LoggedInUserResponse>(loggedInUserResponse)
-      const userDetailsResponseData: UserDetailResponse = await handleResponse<UserDetailResponse>(userDetailsResponse)
+      const loggedInUserResponseData: LoggedInUserResponse =
+        await handleResponse<LoggedInUserResponse>(loggedInUserResponse)
+      const userDetailsResponseData: UserDetailResponse =
+        await handleResponse<UserDetailResponse>(userDetailsResponse)
 
       return {
         ...loggedInUserResponseData,
@@ -74,21 +96,31 @@ const credentialProvider = CredentialsProvider({
 })
 
 const refreshAccessToken = async (token: JWT): Promise<JWT> => {
-  const {refreshToken} = authEndpoints
-  const requestPath: URL = getHelpers.composeRequestPath({requestPath: refreshToken})
-  const headersWithAuth: HeadersInit = [...headers,
-    ["Authorization", `Bearer ${token.access}`]
+  const { refreshToken } = authEndpoints
+  const requestPath: URL = getHelpers.composeRequestPath({
+    requestPath: refreshToken,
+  })
+  const headersWithAuth: HeadersInit = [
+    ...headers,
+    ["Authorization", `Bearer ${token.access}`],
   ]
   const bodyInit: BodyInit = JSON.stringify({
     access: token.access,
-    refresh: token.refresh
+    refresh: token.refresh,
   })
   const authenticRequestInitWithBody: RequestInit = {
-    ...requestInit, headers: headersWithAuth, body: bodyInit, method: "POST"
+    ...requestInit,
+    headers: headersWithAuth,
+    body: bodyInit,
+    method: "POST",
   }
   try {
-    const response: Response = await fetch(requestPath, authenticRequestInitWithBody)
-    const newTokens: RefreshTokenResponse | null = await handleResponse<RefreshTokenResponse>(response)
+    const response: Response = await fetch(
+      requestPath,
+      authenticRequestInitWithBody
+    )
+    const newTokens: RefreshTokenResponse | null =
+      await handleResponse<RefreshTokenResponse>(response)
 
     const decoded: TokenPayload = jwtDecode(newTokens.access)
 
@@ -98,19 +130,19 @@ const refreshAccessToken = async (token: JWT): Promise<JWT> => {
       access_exp: decoded.exp,
     }
   } catch (error) {
-    return {...token, error: "RefreshTokenError"}
+    return { ...token, error: "RefreshTokenError" }
   }
 }
 
 export const authOptions: AuthOptions = {
-  session: {strategy: "jwt"},
+  session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
-  pages: {signIn: "/login"},
+  pages: { signIn: "/login" },
   providers: [credentialProvider],
   callbacks: {
-    jwt: async ({token, user, trigger}) => {
+    jwt: async ({ token, user, trigger }) => {
       if (trigger) {
-        const {id, ...rest} = user
+        const { id, ...rest } = user
         const accessDecoded: TokenPayload = jwtDecode(user.access)
         const refreshDecoded: TokenPayload = jwtDecode(user.refresh)
 
@@ -125,13 +157,13 @@ export const authOptions: AuthOptions = {
       if (Math.floor(Date.now() / 1000) < token.access_exp) return token
 
       if (Math.floor(Date.now()) / 1000 > token.refresh_exp) {
-        await signOut({redirect: false})
+        await signOut({ redirect: false })
         throw Error("Token Expired")
       }
 
       return refreshAccessToken(token)
     },
-    session: async ({session, token}) => {
+    session: async ({ session, token }) => {
       session.user.id = token.sub
       session.user.firstName = token.firstName
       session.user.lastName = token.lastName

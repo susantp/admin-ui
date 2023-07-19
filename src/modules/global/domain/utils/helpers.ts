@@ -1,13 +1,11 @@
+import path from "path"
 import {
   IComposeRequestPathParams,
-  InterfaceAppPaths
+  InterfaceAppPaths,
 } from "@/src/modules/global/domain/types/helpers"
-import {
-  IScreen
-} from "@/src/modules/global/domain/types/repository/global-repository"
-import {type ClassValue, clsx} from "clsx"
-import {twMerge} from "tailwind-merge"
-import path from "path";
+import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 interface InterfaceGetHelpers {
   joinClasses: (...classes: string[]) => string
@@ -17,7 +15,8 @@ interface InterfaceGetHelpers {
   mapScreens: (responseScreens: IScreen[] | null) => IScreen[] | null
   getBackendProjectName: () => string
   getBackendBaseUrl: () => string
-  composeRequestPath: ({requestPath}: IComposeRequestPathParams) => URL
+  getAppUrl: () => string
+  composeRequestPath: ({ requestPath }: IComposeRequestPathParams) => URL
 }
 
 const getHelpers: InterfaceGetHelpers = {
@@ -77,16 +76,22 @@ const getHelpers: InterfaceGetHelpers = {
 
   getBackendProjectName: (): string => {
     const projectName: string | undefined = process.env.BACKEND_PROJECT_NAME
-    return typeof projectName === 'string' ? projectName : 'poc'
+    return typeof projectName === "string" ? projectName : "poc"
   },
 
   getBackendBaseUrl: (): string => {
     const baseUrl: string | undefined = process.env.BACKEND_BASE_URL
-    return typeof baseUrl === 'string' ? baseUrl : "http://192.168.50.239:8000/api/v1/"
+    return typeof baseUrl === "string"
+      ? baseUrl
+      : "http://192.168.50.239:8000/api/v1/"
   },
-  composeRequestPath: ({requestPath}: IComposeRequestPathParams): URL => {
+  composeRequestPath: ({ requestPath }: IComposeRequestPathParams): URL => {
     const apiBaseUrl: string = getHelpers.getBackendBaseUrl()
-    return new URL(path.join(apiBaseUrl, requestPath));
-  }
+    return new URL(path.join(apiBaseUrl, requestPath))
+  },
+  getAppUrl: (): string => {
+    const appUrl: undefined | string = process.env.NEXT_PUBLIC_APP_URL
+    return typeof appUrl === "string" ? appUrl : "http://localhost:3000"
+  },
 }
 export default getHelpers

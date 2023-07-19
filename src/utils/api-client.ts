@@ -1,9 +1,8 @@
-
-import getHelpers from "@/src/modules/global/domain/utils/helpers";
 import {
   ApiClientParams,
-  ApiResponse
-} from "@/src/modules/global/domain/types/api-client";
+  ApiResponse,
+} from "@/src/modules/global/domain/types/api-client"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 
 export default class ApiClient {
   private readonly baseUrl: string = getHelpers.getBackendBaseUrl()

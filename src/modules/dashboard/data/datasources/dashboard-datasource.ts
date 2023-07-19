@@ -93,14 +93,14 @@ const useTempData = (): InterfaceGetTempData => {
   ]
   const projects: InterfaceProject[] = [
     {
-      id: 'dashboard',
+      id: "dashboard",
       name: "Dashboard",
       initials: "DB",
       href: "#",
       members: 16,
       bgColor: "bg-pink-600",
       status: "active",
-      createdBy: 'admin'
+      createdBy: "admin",
     },
     {
       id: "users",
@@ -109,28 +109,28 @@ const useTempData = (): InterfaceGetTempData => {
       href: "#",
       members: 12,
       bgColor: "bg-purple-600",
-      status: 'active',
-      createdBy: 'admin'
+      status: "active",
+      createdBy: "admin",
     },
     {
-      id: 'roles',
+      id: "roles",
       name: "Role Management",
       initials: "RM",
       href: "#",
       members: 16,
       bgColor: "bg-yellow-500",
-      status: 'active',
-      createdBy: 'admin'
+      status: "active",
+      createdBy: "admin",
     },
     {
-      id: 'pages',
+      id: "pages",
       name: "Page Management",
       initials: "PM",
       href: "#",
       members: 8,
       bgColor: "bg-green-500",
-      status: 'inactive',
-      createdBy: 'admin'
+      status: "inactive",
+      createdBy: "admin",
     },
   ]
   const pages: InterfacePage[] = [

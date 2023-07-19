@@ -14,6 +14,6 @@ export interface InterfaceAppPaths {
 }
 type IconSet = Record<string, { icon: JSX.Element }>
 
-export interface IComposeRequestPathParams{
+export interface IComposeRequestPathParams {
   requestPath: string
 }
