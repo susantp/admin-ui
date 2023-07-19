@@ -21,9 +21,9 @@ export const authenticClient = async ({
     user: {access},
   } = session
   const requestInit: RequestInit = {}
-  let requestHeaders: Record<string, string> = {
-    "Content-Type": "application/json",
-  }
+  let requestHeaders: HeadersInit = [
+    ["Content-Type", "application/json",]
+  ]
   if (access) {
     requestHeaders = {
       ...requestHeaders,
