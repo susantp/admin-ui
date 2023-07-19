@@ -2,14 +2,11 @@ import {authConfig} from "@/auth/domain/config/auth-config"
 import {authEndpoints} from "@/auth/domain/config/auth-endpoints"
 import {
   LoggedInUserResponse,
-  RefreshTokenRequest,
   RefreshTokenResponse,
   UserDetailResponse,
-  UserLoginRequest,
   UserLoginResponse,
 } from "@/auth/domain/types/auth-endpoints"
 import {TokenPayload} from "@/auth/domain/types/nextauth"
-import ApiClient from "@/src/utils/api-client"
 import jwtDecode from "jwt-decode"
 import {AuthOptions, User} from "next-auth"
 import {JWT} from "next-auth/jwt"
@@ -17,65 +14,81 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import {signOut} from "next-auth/react"
 import getHelpers from "@/src/modules/global/domain/utils/helpers";
 import {handleResponse} from "@/src/modules/global/domain/utils/api-client";
+import {Response} from "next/dist/compiled/@edge-runtime/primitives/fetch";
+
+const headers: HeadersInit = [
+  ['Content-Type', 'application/json']
+]
+const requestInit: RequestInit = {headers}
 
 const credentialProvider = CredentialsProvider({
   id: authConfig.credentialId,
   credentials: {username: {}, password: {}},
-  authorize: async (credentials):Promise<User|null> => {
+  authorize: async (credentials: Record<"username" | "password", string> | undefined): Promise<User | null> => {
     if (!credentials) return null
+    // compose request path with baseUrl
+    const {loggedInUser, userDetail, userLogin} = authEndpoints
+    const loggedInUserRequestPath: URL = getHelpers.composeRequestPath({requestPath: loggedInUser})
+    const userDetailRequestPath: URL = getHelpers.composeRequestPath({requestPath: userDetail})
+    const loginRequestPath: URL = getHelpers.composeRequestPath({requestPath: userLogin})
 
-    const {username, password} = credentials
-    const requestInit: RequestInit = {}
-    const loggedInUserRequestPath: string = getHelpers.getBackendBaseUrl() + authEndpoints.loggedInUser
-    const userDetailRequestPath: string = getHelpers.getBackendBaseUrl() + authEndpoints.userDetail
-    // const bodyInit: BodyInit = credentials
+    const bodyInit: BodyInit = JSON.stringify(credentials)
+
+    const loginRequestInit: RequestInit = {
+      ...requestInit,
+      body: bodyInit,
+      method: "POST"
+    }
+
     try {
-      const tokens = await new ApiClient().post<
-        UserLoginRequest,
-        UserLoginResponse
-      >(authEndpoints.userLogin, {
-        username,
-        password,
-      })
+      // login request to get userLogin response
+      const loginResponse: Response = await fetch(loginRequestPath, loginRequestInit)
+      const userLoginResponseData: UserLoginResponse = await handleResponse<UserLoginResponse>(loginResponse)
 
-      requestInit.headers = [
-        ["Authorization", `Bearer ${tokens.access}`]
-      ]
-
-      const loggedInUserResponse: Response = await fetch(loggedInUserRequestPath, requestInit)
-      const userDetailsResponse: Response = await fetch(userDetailRequestPath, requestInit)
-
-      const loggedInUser: LoggedInUserResponse | null = await handleResponse<LoggedInUserResponse>(loggedInUserResponse)
-      const userDetails: UserDetailResponse | null = await handleResponse<UserDetailResponse>(userDetailsResponse)
-
-      if(!loggedInUser || !userDetails) return null
-
-      const user: User = {
-        ...loggedInUser,
-        firstName: userDetails.first_name,
-        lastName: userDetails.last_name,
-        address: userDetails.address1,
-        ...tokens,
+      // update headers with token
+      const headersWithAuth: HeadersInit = [...headers, ["Authorization", `Bearer ${userLoginResponseData.access}`]]
+      const requestInitWithAuth: RequestInit = {
+        ...requestInit, headers: headersWithAuth
       }
 
-      return user
+      // fetch logged in user and user detail
+      const loggedInUserResponse: Response = await fetch(loggedInUserRequestPath, requestInitWithAuth)
+      const userDetailsResponse: Response = await fetch(userDetailRequestPath, requestInitWithAuth)
+
+      const loggedInUserResponseData: LoggedInUserResponse = await handleResponse<LoggedInUserResponse>(loggedInUserResponse)
+      const userDetailsResponseData: UserDetailResponse = await handleResponse<UserDetailResponse>(userDetailsResponse)
+
+      return {
+        ...loggedInUserResponseData,
+        firstName: userDetailsResponseData.first_name,
+        lastName: userDetailsResponseData.last_name,
+        address: userDetailsResponseData.address1,
+        ...userLoginResponseData,
+      }
     } catch (_) {
       return Promise.reject(
-        Error("Your sign in request failed. Please try again.")
+        Error(`Your sign in request failed. Please try again.`)
       )
     }
   },
 })
 
 const refreshAccessToken = async (token: JWT): Promise<JWT> => {
+  const {refreshToken} = authEndpoints
+  const requestPath: URL = getHelpers.composeRequestPath({requestPath: refreshToken})
+  const headersWithAuth: HeadersInit = [...headers,
+    ["Authorization", `Bearer ${token.access}`]
+  ]
+  const bodyInit: BodyInit = JSON.stringify({
+    access: token.access,
+    refresh: token.refresh
+  })
+  const authenticRequestInitWithBody: RequestInit = {
+    ...requestInit, headers: headersWithAuth, body: bodyInit, method: "POST"
+  }
   try {
-    const newTokens = await new ApiClient().post<
-      RefreshTokenRequest,
-      RefreshTokenResponse
-    >(authEndpoints.refreshToken, {
-      access: token.access,
-      refresh: token.refresh,
-    })
+    const response: Response = await fetch(requestPath, authenticRequestInitWithBody)
+    const newTokens: RefreshTokenResponse | null = await handleResponse<RefreshTokenResponse>(response)
 
     const decoded: TokenPayload = jwtDecode(newTokens.access)
 

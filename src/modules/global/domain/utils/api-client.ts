@@ -4,12 +4,12 @@ import {
   IPostRequestParams,
 } from "@/src/modules/global/domain/types/api-client"
 
-const handleResponse = async <T>(response: Response): Promise<T | null> => {
+const handleResponse = async <T>(response: Response): Promise<T > => {
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`)
   }
   const data: ApiResponse<T> = (await response.json()) as ApiResponse<T>
-  if (data.error) return null
+  if (data.error) throw new Error("response data has error")
   return data.data
 }
 const postRequest = async <TRequest, TResponse>({
