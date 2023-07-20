@@ -5,18 +5,7 @@ import { getRequest } from "@/src/modules/global/domain/utils/api-client"
 import { authenticClient } from "@/src/modules/global/domain/utils/get-client"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { roleEndpoints } from "@/src/modules/roles/domain/objects/role-endpoints"
-import { IRoleList } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-
-export interface IFetchRolesData {
-  total: string
-  totalPage: string
-  results: IRoleList[]
-}
-export interface IFetchRolesOriginalData {
-  total: string
-  total_page: string
-  results: IRoleList[]
-}
+import { IFetchRolesOriginalData } from "@/src/modules/roles/domain/types/repository"
 
 export const fetchRoles = async (): Promise<IFetchRolesOriginalData | null> => {
   const clientConfig: RequestInit | null = await authenticClient({

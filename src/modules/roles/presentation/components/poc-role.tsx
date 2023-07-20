@@ -1,22 +1,20 @@
 import React from "react"
-import {
-  IRoleList
-} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import UseRoleListAction
-  from "@/src/modules/roles/presentation/hooks/use-role-list-action";
-import Link from "next/link";
+import Link from "next/link"
+import { IRoleList } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import UseRoleListAction from "@/src/modules/roles/presentation/hooks/use-role-list-action"
 
 interface IRoleListProps {
   role: IRoleList
   onDelete: () => void
 }
 
-export default function PocRole({role, onDelete}: IRoleListProps): JSX.Element {
-  const {permittedScreens} = UseRoleListAction(role)
+export default function PocRole({
+  role,
+  onDelete,
+}: IRoleListProps): JSX.Element {
+  const { permittedScreens } = UseRoleListAction(role)
   return (
-    <div
-      className="group relative flex items-center px-5 py-6 justify-between flex-wrap ">
-
+    <div className="group relative flex items-center px-5 py-6 justify-between flex-wrap ">
       <div className="ml-4 ">
         <p className="truncate text-sm font-medium text-gray-900">
           {role.name}
@@ -27,16 +25,13 @@ export default function PocRole({role, onDelete}: IRoleListProps): JSX.Element {
       </div>
 
       <div className="flex gap-2 justify-between items-center">
-        <Link href={`roles/${role.id}`}
-              className="primaryButtonStyle">
+        <Link href={`roles/${role.id}`} className="primaryButtonStyle">
           Edit
         </Link>
-        <button type="button"
-                className="dangerButtonStyle"
-                onClick={onDelete}>Delete
+        <button type="button" className="dangerButtonStyle" onClick={onDelete}>
+          Delete
         </button>
       </div>
-
     </div>
   )
 }

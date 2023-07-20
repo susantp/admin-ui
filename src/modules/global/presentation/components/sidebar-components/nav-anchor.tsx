@@ -21,7 +21,7 @@ export default function NavAnchor({
   return (
     <Link
       key={screen.name}
-      href={screen.slug}
+      href={`/${screen.slug}`}
       className={getHelpers.joinClasses(
         pathname.includes(screen.slug)
           ? "bg-teal-800 text-white"

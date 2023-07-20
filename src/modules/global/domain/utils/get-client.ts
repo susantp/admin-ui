@@ -2,7 +2,7 @@
 
 import { authOptions } from "@/auth/domain/config/auth-options"
 import { IClientParams } from "@/src/modules/global/domain/types/api-client"
-import { Session, getServerSession } from "next-auth"
+import { getServerSession, Session } from "next-auth"
 
 export const validateSession = async (): Promise<Session | null> => {
   const session: Session | null = await getServerSession(authOptions)

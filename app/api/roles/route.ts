@@ -1,19 +1,6 @@
 import { NextResponse } from "next/server"
-import {
-  IFetchRolesData,
-  IFetchRolesOriginalData,
-  fetchRoles,
-} from "@/src/modules/roles/domain/services/role-service"
-
-export function mapApiResponseToIFetchRolesData(
-  apiResponse: IFetchRolesOriginalData
-): IFetchRolesData {
-  return {
-    total: apiResponse.total,
-    totalPage: apiResponse.total_page, // Mapping total_page to totalPage
-    results: apiResponse.results,
-  }
-}
+import { fetchRoles } from "@/src/modules/roles/domain/services/role-service"
+import { IFetchRolesOriginalData } from "@/src/modules/roles/domain/types/repository"
 
 export async function GET(): Promise<NextResponse> {
   const rolesResponseData: IFetchRolesOriginalData | null = await fetchRoles()

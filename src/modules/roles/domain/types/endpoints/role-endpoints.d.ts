@@ -11,3 +11,11 @@ interface IPermissionEndpointResponse {
   code: TPermission
   screen: string
 }
+export interface AuthEndpoints {
+  userLogin: string
+  userRegister: string
+  refreshToken: string
+  loggedInUser: string
+  userDetail: string
+  userScreens: string
+}

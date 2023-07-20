@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental:{
-    serverActions: true,
-    swcPlugins: [['@swc-jotai/react-refresh', {}]],
+  experimental: {
+    appDir: true,
+    serverActions: true
+    // swcPlugins: [['@swc-jotai/react-refresh', {}]],
   },
 }
 
@@ -12,7 +13,7 @@ module.exports = nextConfig
 
 // Injected content via Sentry wizard below
 
-const { withSentryConfig } = require("@sentry/nextjs");
+const {withSentryConfig} = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
   module.exports,

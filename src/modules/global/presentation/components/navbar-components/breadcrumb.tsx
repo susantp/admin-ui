@@ -1,12 +1,12 @@
 import React from "react"
 import Link from "next/link"
-import {usePathname} from "next/navigation"
-import {HomeIcon} from "@heroicons/react/24/outline"
-import getHelpers from "@/src/modules/global/domain/utils/helpers";
+import { usePathname } from "next/navigation"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
+import { HomeIcon } from "@heroicons/react/24/outline"
 
 export default function Breadcrumb(): JSX.Element {
   const pathname = usePathname()
-  const paths: string[] = pathname.split('/')
+  const paths: string[] = pathname.split("/")
   return (
     <div className="flex flex-1">
       <nav className="flex" aria-label="Breadcrumb">
@@ -25,23 +25,21 @@ export default function Breadcrumb(): JSX.Element {
             </div>
           </li>
           <li>
-            {
-              paths.map((path, index) => {
-                if (index === 1) {
-                  return (
-                    <Link
-                      key={Math.random()}
-                      href={`/${path}`}
-                      className="text-sm font-medium text-gray-500 hover:text-gray-700"
-                      aria-current
-                    >
-                      {getHelpers.toTitleCase(path)}
-                    </Link>
-                  )
-                }
-                return ` / ${  path}`
-              })
-            }
+            {paths.map((path, index) => {
+              if (index === 1) {
+                return (
+                  <Link
+                    key={Math.random()}
+                    href={`/${path}`}
+                    className="text-sm font-medium text-gray-500 hover:text-gray-700"
+                    aria-current
+                  >
+                    {getHelpers.toTitleCase(path)}
+                  </Link>
+                )
+              }
+              return ` / ${path}`
+            })}
           </li>
         </ol>
       </nav>

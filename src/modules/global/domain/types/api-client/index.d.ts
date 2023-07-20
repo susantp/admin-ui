@@ -13,9 +13,7 @@ export interface IPostRequestParams {
 }
 export interface InterfaceApiClient {
   getRequest: <T>() => Promise<T | null>
-  postRequest: <TRequest, TResponse>(
-    payload: BodyInit
-  ) => Promise<TResponse | null>
+  postRequest: <TResponse>(payload: BodyInit) => Promise<TResponse | null>
 }
 
 export interface ApiClientParams {

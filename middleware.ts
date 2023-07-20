@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
-import { JWT, getToken } from "next-auth/jwt"
+import { getToken, JWT } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
 
 export default withAuth(

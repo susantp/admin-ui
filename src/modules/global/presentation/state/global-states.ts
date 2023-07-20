@@ -10,6 +10,6 @@ export const userScreensAtom = atomWithStorage<IScreen[] | null>(
   null
 )
 
-export const sidebarAtom = atom(false)
+export const sidebarAtom = atom<boolean>(false)
 
 export const currentScreenAtom = atom<IScreen | null>(null)

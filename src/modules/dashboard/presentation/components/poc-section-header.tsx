@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 interface InterfaceMostViewedWrapperHeaderProps {
   label: string | null
@@ -6,9 +6,9 @@ interface InterfaceMostViewedWrapperHeaderProps {
 }
 
 export function PocSectionHeader({
-                                   label,
-                                   subLabel,
-                                 }: InterfaceMostViewedWrapperHeaderProps): JSX.Element {
+  label,
+  subLabel,
+}: InterfaceMostViewedWrapperHeaderProps): JSX.Element {
   return (
     <div id="section-header-wrapper">
       <h2 className="text-lg font-medium leading-6 text-gray-900 ">{label}</h2>

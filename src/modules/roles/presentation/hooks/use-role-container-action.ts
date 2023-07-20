@@ -1,13 +1,11 @@
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import {
   IFetchRolesData,
   IFetchRolesOriginalData,
-} from "@/src/modules/roles/domain/services/role-service"
-import {rolesAtom} from "@/src/modules/roles/presentation/state/role-state"
-import {useAtom} from "jotai"
-
-import {mapApiResponseToIFetchRolesData} from "@/app/api/roles/route"
+} from "@/src/modules/roles/domain/types/repository"
+import { rolesAtom } from "@/src/modules/roles/presentation/state/role-state"
+import { useAtom } from "jotai"
 
 interface IUseRoleContainerAction {
   roles: IFetchRolesData | null
@@ -24,14 +22,14 @@ export default function useRoleContainerAction(): IUseRoleContainerAction {
 
   useEffect(() => {
     const controller: AbortController = new AbortController()
-    const {signal} = controller
+    const { signal } = controller
     const getRoles = async (): Promise<IFetchRolesData> => {
       const appUrl: string = getHelpers.getAppUrl()
       setLoading(true)
-      const response: Response = await fetch(`${appUrl}/api/roles`, {signal})
+      const response: Response = await fetch(`${appUrl}/api/roles`, { signal })
       const data: IFetchRolesOriginalData =
         (await response.json()) as IFetchRolesOriginalData
-      return mapApiResponseToIFetchRolesData(data)
+      return getHelpers.mapApiResponseToIFetchRolesData(data)
     }
     getRoles()
       .then((data): void => {
@@ -47,5 +45,5 @@ export default function useRoleContainerAction(): IUseRoleContainerAction {
 
   const toggleDialog = (): void => setOpen(!open)
   const handleDelete = (): void => setOpen(true)
-  return {roles, loading, open, handleDelete, toggleDialog}
+  return { roles, loading, open, handleDelete, toggleDialog }
 }

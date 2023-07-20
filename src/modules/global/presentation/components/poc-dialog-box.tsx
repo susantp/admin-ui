@@ -38,9 +38,7 @@ function PocDialogBox({
               </div>
               <Dialog.Description>
                 <div className="mt-1">
-                  <p className="text-sm text-white">
-                    {description}
-                  </p>
+                  <p className="text-sm text-white">{description}</p>
                 </div>
               </Dialog.Description>
             </div>
