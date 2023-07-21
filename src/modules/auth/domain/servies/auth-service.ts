@@ -1,11 +1,9 @@
-import AuthDataSource from "@/auth/data/datasource/auth-data-source"
-import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
-import { IDoLoginParams, ITokenParams } from "@/auth/domain/types/auth-config"
+import {authEndpoints} from "@/auth/domain/config/auth-endpoints"
+import {IDoLoginParams, ITokenParams} from "@/auth/domain/types/auth-config"
 import {
   LoggedInUserResponse,
   UserDetailResponse,
   UserLoginResponse,
-  UserRegisterResponse,
 } from "@/auth/domain/types/auth-endpoints"
 import {
   getRequest,
