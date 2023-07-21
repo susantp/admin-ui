@@ -1,70 +1,20 @@
 import path from "path"
+import { appPaths } from "@/src/modules/global/domain/objects/global"
 import {
   IComposeRequestPathParams,
-  InterfaceAppPaths,
+  InterfaceGetHelpers,
 } from "@/src/modules/global/domain/types/helpers"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { IPermissionEndpointResponse } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import { IPermission } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import {
-  IFetchRolesData,
-  IFetchRolesOriginalData,
+  IRolesMappedResponseData,
+  IRolesOriginalResponseData,
 } from "@/src/modules/roles/domain/types/repository"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
-interface InterfaceGetHelpers {
-  joinClasses: (...classes: string[]) => string
-  formatDate: (input: string | number) => string
-  cn: (...inputs: ClassValue[]) => string
-  appPaths: InterfaceAppPaths
-  mapScreens: (responseScreens: IScreen[] | null) => IScreen[] | null
-  getBackendProjectName: () => string
-  getBackendBaseUrl: () => string
-  getAppUrl: () => string
-  composeRequestPath: ({ requestPath }: IComposeRequestPathParams) => URL
-  getUniqueScreensFromPermissions: (
-    data: IPermissionEndpointResponse[]
-  ) => string[]
-  toTitleCase: (data: string) => string
-  mapApiResponseToIFetchRolesData: (
-    apiResponse: IFetchRolesOriginalData
-  ) => IFetchRolesData
-}
-
 const getHelpers: InterfaceGetHelpers = {
-  appPaths: {
-    home: {
-      path: "/",
-      label: "Home",
-      name: "home",
-      id: "home",
-    },
-    dashboard: {
-      path: "/dashboard",
-      label: "Dashboard",
-      name: "dashboard",
-      id: "dashboard",
-    },
-    users: {
-      path: "/users",
-      label: "User Management",
-      name: "users",
-      id: "users",
-    },
-    roles: {
-      path: "/roles",
-      label: "Role Management",
-      name: "roles",
-      id: "roles",
-    },
-    screens: {
-      path: "/screens",
-      label: "Screen Management",
-      name: "screens",
-      id: "screens",
-    },
-  },
-
+  appPaths,
   cn: (...inputs: ClassValue[]): string => twMerge(clsx(inputs)),
 
   joinClasses: (...classes: string[]): string =>
@@ -105,12 +55,12 @@ const getHelpers: InterfaceGetHelpers = {
     const appUrl: undefined | string = process.env.NEXT_PUBLIC_APP_URL
     return typeof appUrl === "string" ? appUrl : "http://localhost:3000"
   },
-  getUniqueScreensFromPermissions: (
-    data: IPermissionEndpointResponse[]
+  getUniqueScreensFromPermissionsResponseData: (
+    data: IPermission[]
   ): string[] => {
     const uniqueScreensSet: Set<string> = new Set<string>()
 
-    data.forEach((permission: IPermissionEndpointResponse) => {
+    data.forEach((permission: IPermission) => {
       if (permission.screen) {
         uniqueScreensSet.add(permission.screen)
       }
@@ -119,9 +69,9 @@ const getHelpers: InterfaceGetHelpers = {
   },
   toTitleCase: (string: string): string =>
     string.charAt(0).toUpperCase() + string.substring(1),
-  mapApiResponseToIFetchRolesData: (
-    apiResponse: IFetchRolesOriginalData
-  ): IFetchRolesData => ({
+  mapRolesData: (
+    apiResponse: IRolesOriginalResponseData
+  ): IRolesMappedResponseData => ({
     total: apiResponse.total,
     totalPage: apiResponse.total_page, // Mapping total_page to totalPage
     results: apiResponse.results,

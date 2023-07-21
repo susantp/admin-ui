@@ -1,6 +1,12 @@
 import React from "react"
-import CreateRole from "@/src/modules/roles/presentation/pages/create-role"
+import { Metadata } from "next"
+import CreateRoleContainer from "@/src/modules/roles/presentation/pages/create-role-container"
 
-export default function Page(): JSX.Element {
-  return <CreateRole />
+export const metadata: Metadata = {
+  title: "Create Page",
+  description: "",
+}
+
+export default function Page(): React.ReactNode {
+  return <CreateRoleContainer />
 }

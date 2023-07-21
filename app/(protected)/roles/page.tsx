@@ -1,6 +1,8 @@
-import React from "react"
+import { Metadata } from "next"
 import RoleContainer from "@/src/modules/roles/presentation/pages/role-container"
 
-export default function Page(): JSX.Element {
-  return <RoleContainer />
+export const metadata: Metadata = {
+  title: "Role Management",
+  description: "",
 }
+export default RoleContainer

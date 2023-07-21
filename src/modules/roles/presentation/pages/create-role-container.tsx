@@ -1,12 +1,45 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
 import Section from "@/src/modules/dashboard/presentation/components/section"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import PocContainer from "@/src/modules/global/presentation/components/poc-container"
+import PocLoader from "@/src/modules/global/presentation/components/poc-loader"
 import ScreenPermissionBox from "@/src/modules/roles/presentation/components/screen-permission-box"
+import useCreateRoleContainerActions from "@/src/modules/roles/presentation/hooks/use-create-role-container-actions"
 
 import { Input } from "@/components/ui/input"
 
-export default function CreateRole(): JSX.Element {
+interface IScreenPermissionWrapperProps {
+  children: React.ReactNode
+}
+
+function ScreenPermissionWrapper({
+  children,
+}: IScreenPermissionWrapperProps): React.ReactNode {
+  return (
+    <div
+      id="screen-permission-wrapper"
+      className="flex flex-col w-full sm:px-6 gap-y-4"
+    >
+      <div
+        id="wrapper-title"
+        className="bg-primary text-white py-6 px-4 sm:px-6 items-center flex"
+      >
+        <h2 className="text-lg">Manage Permissions</h2>
+      </div>
+
+      {children}
+    </div>
+  )
+}
+
+export default function CreateRoleContainer(): React.ReactNode {
+  const { loading, groupedData } = useCreateRoleContainerActions()
+
+  if (loading || !groupedData || !groupedData.length) return <PocLoader />
+
   return (
     <PocContainer>
       <Section label="" subLabel={null} actionEl={null}>
@@ -36,30 +69,27 @@ export default function CreateRole(): JSX.Element {
               </div>
             </div>
 
-            <div
-              id="screen-permission-wrapper"
-              className="flex flex-col w-full sm:px-6 gap-y-4"
-            >
-              <div
-                id="wrapper-title"
-                className="bg-primary text-white py-6 px-4 sm:px-6 items-center flex"
-              >
-                <h2 className="text-lg">Manage Permissions</h2>
-              </div>
-
+            <ScreenPermissionWrapper>
               <div
                 id="screens"
                 className="grid grid-cols-2 lg:grid-cols-4 items-center justify-center gap-6"
               >
-                {[1, 2, 3, 4].map(() => (
-                  <ScreenPermissionBox />
+                {groupedData.map((screen) => (
+                  <ScreenPermissionBox
+                    key={Math.random()}
+                    screenWithPermission={screen}
+                  />
                 ))}
               </div>
-            </div>
+            </ScreenPermissionWrapper>
           </div>
 
           <div className="flex flex-shrink-0 justify-end px-4 py-4 mt-6">
-            <Link href="/roles" type="button" className="dangerButtonStyle">
+            <Link
+              href={getHelpers.appPaths.roles.path}
+              type="button"
+              className="dangerButtonStyle"
+            >
               Cancel
             </Link>
             <button

@@ -1,14 +1,19 @@
 import React from "react"
+import Section from "@/src/modules/dashboard/presentation/components/section"
 import PocContainer from "@/src/modules/global/presentation/components/poc-container"
+import CreateRoleContainer from "@/src/modules/roles/presentation/pages/create-role-container"
 
-export default function Page({
-  params,
-}: {
+interface ISlugPageProps {
   params: { slug: string }
-}): JSX.Element {
+}
+
+export default function Page({ params }: ISlugPageProps): JSX.Element {
+  const { slug } = params
   return (
     <PocContainer>
-      <h1>{params.slug}</h1>
+      <Section subLabel={null} label={slug} actionEl={null}>
+        <CreateRoleContainer />
+      </Section>
     </PocContainer>
   )
 }

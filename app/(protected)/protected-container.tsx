@@ -14,14 +14,14 @@ import { User } from "next-auth"
 interface IProtectedContainerProps {
   loggedInUserScreens: IScreen[]
   sessionUser: User
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 function ProtectedContainer({
   children,
   sessionUser,
   loggedInUserScreens,
-}: IProtectedContainerProps): JSX.Element {
+}: IProtectedContainerProps): React.ReactNode {
   useHydrateAtoms([
     [userScreensAtom, loggedInUserScreens],
     [sessionUserAtom, sessionUser],

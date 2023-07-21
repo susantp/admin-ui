@@ -5,12 +5,12 @@ interface IUserRoleListAction {
   permittedScreens: string[]
 }
 
-export default function UseRoleListAction(
+export default function UseRoleListActions(
   role: IRoleList
 ): IUserRoleListAction {
   const { permissions } = role
   const permittedScreens: string[] =
-    getHelpers.getUniqueScreensFromPermissions(permissions)
+    getHelpers.getUniqueScreensFromPermissionsResponseData(permissions)
 
   return { permittedScreens }
 }

@@ -1,46 +1,66 @@
 import AuthDataSource from "@/auth/data/datasource/auth-data-source"
+import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
+import { IDoLoginParams, ITokenParams } from "@/auth/domain/types/auth-config"
 import {
+  LoggedInUserResponse,
+  UserDetailResponse,
   UserLoginResponse,
   UserRegisterResponse,
 } from "@/auth/domain/types/auth-endpoints"
+import {
+  getRequest,
+  postRequest,
+} from "@/src/modules/global/domain/utils/api-client"
+import {
+  getClientForUserDetailAndLoggedInUser,
+  publicClient,
+} from "@/src/modules/global/domain/utils/authorize-method-client"
+import getHelpers from "@/src/modules/global/domain/utils/helpers"
 
-export default class AuthService {
-  authRepository = new AuthDataSource()
+export const doLogin = async ({
+  credentials,
+}: IDoLoginParams): Promise<UserLoginResponse> => {
+  const { userLogin } = authEndpoints
+  const clientConfig: RequestInit = publicClient()
+  const loginRequestPath: URL = getHelpers.composeRequestPath({
+    requestPath: userLogin,
+  })
+  const bodyInit: BodyInit = JSON.stringify(credentials)
+  return postRequest<UserLoginResponse>({
+    requestPath: loginRequestPath,
+    requestInit: clientConfig,
+    body: bodyInit,
+  })
+}
 
-  async loginUser(
-    username: string,
-    password: string
-  ): Promise<UserLoginResponse> {
-    // Perform any necessary business logic or validation here
-    // Example: Hash the password, validate credentials, etc.
+export const getLoggedInUserDetails = async ({
+  token,
+}: ITokenParams): Promise<LoggedInUserResponse> => {
+  const { loggedInUser } = authEndpoints
+  const clientConfig: RequestInit = getClientForUserDetailAndLoggedInUser({
+    token,
+  })
+  const loggedInUserRequestPath: URL = getHelpers.composeRequestPath({
+    requestPath: loggedInUser,
+  })
+  return getRequest<LoggedInUserResponse>({
+    requestPath: loggedInUserRequestPath,
+    requestInit: clientConfig,
+  })
+}
 
-    try {
-      return await this.authRepository.login({ username, password })
-      // Additional business logic or transformations if needed
-    } catch (error) {
-      throw new Error("Error occurred during login")
-    }
-  }
-
-  async registerUser(
-    username: string,
-    password: string,
-    email: string,
-    phone: string
-  ): Promise<UserRegisterResponse> {
-    // Perform any necessary business logic or validation here
-    // Example: Validate username, email, phone, etc.
-
-    try {
-      return await this.authRepository.register({
-        username,
-        password,
-        email,
-        phone,
-      })
-      // Additional business logic or transformations if needed
-    } catch (error) {
-      throw new Error("Error occurred during registration")
-    }
-  }
+export const getUserDetails = async ({
+  token,
+}: ITokenParams): Promise<UserDetailResponse> => {
+  const { userDetail } = authEndpoints
+  const clientConfig: RequestInit = getClientForUserDetailAndLoggedInUser({
+    token,
+  })
+  const userDetailRequestPath: URL = getHelpers.composeRequestPath({
+    requestPath: userDetail,
+  })
+  return getRequest<UserDetailResponse>({
+    requestPath: userDetailRequestPath,
+    requestInit: clientConfig,
+  })
 }

@@ -52,3 +52,9 @@ export interface AuthConfig {
   passwordRecovery: InterfacePasswordRecovery
   registerForm: InterfaceRegisterForm
 }
+export interface ITokenParams {
+  token: string
+}
+export interface IDoLoginParams {
+  credentials: Record<"username" | "password", string> | undefined
+}

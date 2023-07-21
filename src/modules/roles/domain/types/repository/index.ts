@@ -1,14 +1,11 @@
 import { IRoleList } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 
-export interface IRoleService {
-  fetchRoles: () => Promise<IRoleList[] | null>
-}
-export interface IFetchRolesData {
+export interface IRolesMappedResponseData {
   total: string
   totalPage: string
   results: IRoleList[]
 }
-export interface IFetchRolesOriginalData {
+export interface IRolesOriginalResponseData {
   total: string
   total_page: string
   results: IRoleList[]

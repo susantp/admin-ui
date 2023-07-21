@@ -2,6 +2,11 @@ import { Response } from "next/dist/compiled/@edge-runtime/primitives/fetch"
 import { authConfig } from "@/auth/domain/config/auth-config"
 import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
 import {
+  doLogin,
+  getLoggedInUserDetails,
+  getUserDetails,
+} from "@/auth/domain/servies/auth-service"
+import {
   LoggedInUserResponse,
   RefreshTokenResponse,
   UserDetailResponse,
@@ -26,59 +31,15 @@ const credentialProvider = CredentialsProvider({
     credentials: Record<"username" | "password", string> | undefined
   ): Promise<User | null> => {
     if (!credentials) return null
-    // compose request path with baseUrl
-    const { loggedInUser, userDetail, userLogin } = authEndpoints
-    const loggedInUserRequestPath: URL = getHelpers.composeRequestPath({
-      requestPath: loggedInUser,
-    })
-    const userDetailRequestPath: URL = getHelpers.composeRequestPath({
-      requestPath: userDetail,
-    })
-    const loginRequestPath: URL = getHelpers.composeRequestPath({
-      requestPath: userLogin,
-    })
-
-    const bodyInit: BodyInit = JSON.stringify(credentials)
-
-    const loginRequestInit: RequestInit = {
-      ...requestInit,
-      body: bodyInit,
-      method: "POST",
-    }
-
     try {
-      // login request to get userLogin response
-      const loginResponse: Response = await fetch(
-        loginRequestPath,
-        loginRequestInit
-      )
-      const userLoginResponseData: UserLoginResponse =
-        await handleResponse<UserLoginResponse>(loginResponse)
-
-      // update headers with token
-      const headersWithAuth: HeadersInit = [
-        ...headers,
-        ["Authorization", `Bearer ${userLoginResponseData.access}`],
-      ]
-      const requestInitWithAuth: RequestInit = {
-        ...requestInit,
-        headers: headersWithAuth,
-      }
-
-      // fetch logged in user and user detail
-      const loggedInUserResponse: Response = await fetch(
-        loggedInUserRequestPath,
-        requestInitWithAuth
-      )
-      const userDetailsResponse: Response = await fetch(
-        userDetailRequestPath,
-        requestInitWithAuth
-      )
-
+      const userLoginResponseData: UserLoginResponse = await doLogin({
+        credentials,
+      })
       const loggedInUserResponseData: LoggedInUserResponse =
-        await handleResponse<LoggedInUserResponse>(loggedInUserResponse)
-      const userDetailsResponseData: UserDetailResponse =
-        await handleResponse<UserDetailResponse>(userDetailsResponse)
+        await getLoggedInUserDetails({ token: userLoginResponseData.access })
+      const userDetailsResponseData: UserDetailResponse = await getUserDetails({
+        token: userLoginResponseData.access,
+      })
 
       return {
         ...loggedInUserResponseData,

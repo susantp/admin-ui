@@ -1,7 +1,8 @@
 import React from "react"
 import Link from "next/link"
 import { IRoleList } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import UseRoleListAction from "@/src/modules/roles/presentation/hooks/use-role-list-action"
+import UseRoleListActions from "@/src/modules/roles/presentation/hooks/use-role-list-actions"
+import { Layers } from "lucide-react"
 
 interface IRoleListProps {
   role: IRoleList
@@ -12,16 +13,16 @@ export default function PocRole({
   role,
   onDelete,
 }: IRoleListProps): JSX.Element {
-  const { permittedScreens } = UseRoleListAction(role)
+  const { permittedScreens } = UseRoleListActions(role)
   return (
     <div className="group relative flex items-center px-5 py-6 justify-between flex-wrap ">
       <div className="ml-4 ">
         <p className="truncate text-sm font-medium text-gray-900">
           {role.name}
         </p>
-        <p className="truncate py-4 text-sm text-gray-500 overflow-hidden">
-          Total {permittedScreens.length} Screens permitted.
-        </p>
+        <div className="truncate inline-flex gap-x-3 items-center py-4 text-sm text-gray-500 overflow-hidden">
+          <Layers /> {permittedScreens.length} Screens permitted.
+        </div>
       </div>
 
       <div className="flex gap-2 justify-between items-center">

@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react"
 import DesktopNavigation from "@/src/modules/global/presentation/components/sidebar-components/desktop-navigation"
 import MobileNavigation from "@/src/modules/global/presentation/components/sidebar-components/mobile-navigation"

@@ -12,3 +12,7 @@ export interface IScreen {
 export interface IFetchUserScreensParams {
   accessToken: string | undefined
 }
+
+export interface IServiceProps {
+  xScreen: IScreen | null
+}

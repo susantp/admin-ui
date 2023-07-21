@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react"
 
 interface IRoleListWrapperProps {
-  children: ReactNode[]
+  children: ReactNode
 }
 
 export function PocRoleListWrapper({
@@ -10,7 +10,7 @@ export function PocRoleListWrapper({
   return (
     <div className="flex h-full flex-col bg-white shadow-xl">
       <div className="flex-1 divide-y divide-gray-200 overflow-y-auto">
-        {children.map((child) => child)}
+        {children}
       </div>
     </div>
   )

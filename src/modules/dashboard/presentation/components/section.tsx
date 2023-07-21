@@ -2,10 +2,10 @@ import React from "react"
 import { PocSectionHeader } from "@/src/modules/dashboard/presentation/components/poc-section-header"
 
 interface ISectionProps {
-  children: JSX.Element
+  children: React.ReactNode | null
   subLabel: string | null
   label: string | null
-  actionEl: JSX.Element | React.ReactNode
+  actionEl: React.ReactNode
 }
 
 export default function Section({
