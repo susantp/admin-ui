@@ -3,11 +3,11 @@
 import React from "react"
 import { User } from "@/src/modules/user-management/domain/types/user"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -31,19 +31,14 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "username",
-    header: "Username",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Username" />
+    ),
   },
   {
     accessorKey: "email",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={(): void =>
-          column.toggleSorting(column.getIsSorted() === "asc")
-        }
-      >
-        Email <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
-      </Button>
+      <DataTableColumnHeader column={column} title="Email" />
     ),
   },
   {
@@ -52,7 +47,9 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "is_active",
-    header: "Status",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Status" />
+    ),
     cell: ({ row }): JSX.Element => {
       const isActive = row.getValue("is_active")
       return (
@@ -64,7 +61,9 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "roles",
-    header: "Role",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Role" />
+    ),
     enableGlobalFilter: false,
   },
   {

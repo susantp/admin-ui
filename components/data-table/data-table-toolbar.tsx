@@ -6,7 +6,6 @@ import { X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -29,17 +28,6 @@ export function DataTableToolbar<TData>({
           }}
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {table.getColumn("role") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("role")}
-            title="Roles"
-            options={[
-              { label: "Superuser", value: "Superuser" },
-              { label: "Admin", value: "Admin" },
-              { label: "Member", value: "Member" },
-            ]}
-          />
-        )}
         {isFiltered && (
           <Button
             variant="ghost"

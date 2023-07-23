@@ -1,16 +1,14 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   SortingState,
   flexRender,
   getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
@@ -23,44 +21,78 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { DataResponse } from "@/components/data-table/data-response"
 import { DataTablePagination } from "@/components/data-table/data-table-pagination"
 import { DataTableToolbar } from "@/components/data-table/data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  dataFn: (
+    pagination: PaginationState,
+    globalFilter: string
+  ) => Promise<DataResponse<TData> | null>
   label: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
+  dataFn,
   label,
 }: DataTableProps<TData, TValue>): JSX.Element {
+  const [data, setData] = React.useState<TData[]>([])
+  const [pageCount, setPageCount] = React.useState(0)
+
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+
+  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [rowSelection, setRowSelection] = React.useState({})
+
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [globalFilter, setGlobalFilter] = React.useState("")
+
+  useEffect(() => {
+    dataFn(pagination, globalFilter)
+      .then((res) => {
+        if (res) {
+          setData(res.results)
+          setPageCount(res.total_page)
+        }
+      })
+      .catch(() => {})
+  }, [dataFn, pagination, globalFilter])
 
   const table = useReactTable({
     data,
     columns,
-    state: {
-      sorting,
-      rowSelection,
-      columnFilters,
-    },
-    onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-
     getCoreRowModel: getCoreRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+
+    pageCount,
+    manualPagination: true,
+    onPaginationChange: setPagination,
+
+    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+
+    enableRowSelection: true, // Use this to apply condition for row selection
+    onRowSelectionChange: setRowSelection,
+
+    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+
+    state: {
+      pagination,
+      rowSelection,
+      sorting,
+
+      columnFilters,
+      globalFilter,
+    },
   })
 
   return (
@@ -84,7 +116,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="overflow-auto">
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow

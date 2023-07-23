@@ -22,8 +22,6 @@ export default class ApiClient {
       throw new Error(`Request failed with status ${response.status}`)
     }
 
-    console.log("API RESPONSE", response)
-
     const data = (await response.json()) as ApiResponse<T>
     return data.data
   }

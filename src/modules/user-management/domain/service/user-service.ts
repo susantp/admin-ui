@@ -4,12 +4,13 @@ import {
   UserRegisterRequest,
   UserRegisterResponse,
 } from "@/auth/domain/types/auth-endpoints"
-import { AllUsersResponse } from "@/src/modules/user-management/data/api-endpoints"
 import { userEndpoints } from "@/src/modules/user-management/data/endpoints"
 import { User } from "@/src/modules/user-management/domain/types/user"
 import UserService from "@/src/modules/user-management/domain/types/user-service"
 import ApiClient from "@/src/utils/api-client"
 import { getServerSession } from "next-auth"
+
+import { DataResponse } from "@/components/data-table/data-response"
 
 export const userService: UserService = {
   async fetchAllUsers(): Promise<User[]> {
@@ -18,7 +19,7 @@ export const userService: UserService = {
     const headers = { "x-screen-id": "6d9478a4-572e-4d54-bd08-c40bbd0d2b80" }
     const apiClient = new ApiClient({ accessToken, headers })
 
-    const response = await apiClient.get<AllUsersResponse>(
+    const response = await apiClient.get<DataResponse<User>>(
       userEndpoints.allUsers
     )
 
@@ -38,6 +39,6 @@ export const userService: UserService = {
       phone: "",
     })
 
-    console.log("CREATE USER RESPONSE", response)
+    // console.log("CREATE USER RESPONSE", response)
   },
 }

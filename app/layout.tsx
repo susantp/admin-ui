@@ -25,7 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} ${cn(
-          "min-h-screen bg-background antialiased"
+          "min-h-screen bg-background antialiased overflow-hidden"
         )}`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

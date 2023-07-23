@@ -15,7 +15,7 @@ export default async function RoleManagementPage(): Promise<JSX.Element> {
         <Button className="px-8 w-fit place-self-end">Add New User</Button>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={data} label="roles" />
+        {/* <DataTable columns={columns} label="roles"  dataFn={() => {}}/> */}
       </CardContent>
     </Card>
   )
