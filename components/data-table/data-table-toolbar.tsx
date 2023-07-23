@@ -17,13 +17,20 @@ export function DataTableToolbar<TData>({
   table,
   label,
 }: DataTableToolbarProps<TData>): JSX.Element {
-  const isFiltered = table.getState().columnFilters.length > 0
+  const isFiltered =
+    table.getState().columnFilters.length > 0 ||
+    table.getState().globalFilter !== ""
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
           placeholder={`Filter ${label ?? ""}...`}
+          value={
+            table.getState().globalFilter !== ""
+              ? String(table.getState().globalFilter)
+              : ""
+          }
           onChange={(event): void => {
             table.setGlobalFilter(event.target.value)
           }}
@@ -32,7 +39,7 @@ export function DataTableToolbar<TData>({
         {isFiltered && (
           <Button
             variant="ghost"
-            onClick={(): void => table.resetColumnFilters()}
+            onClick={(): void => table.setGlobalFilter("")}
             className="h-8 px-2 lg:px-3"
           >
             Reset

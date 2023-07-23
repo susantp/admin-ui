@@ -82,7 +82,10 @@ export function DataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
 
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
+    onGlobalFilterChange: (x: string) => {
+      setPagination({ pageIndex: 0, pageSize: 10 })
+      setGlobalFilter(x)
+    },
     getFilteredRowModel: getFilteredRowModel(),
 
     state: {
