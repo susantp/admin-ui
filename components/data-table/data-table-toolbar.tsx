@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -39,7 +40,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      {/* <DataTableViewOptions table={table} /> */}
+      <DataTableViewOptions table={table} />
     </div>
   )
 }

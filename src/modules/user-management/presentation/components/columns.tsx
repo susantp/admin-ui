@@ -46,15 +46,16 @@ export const columns: ColumnDef<User>[] = [
     header: "Phone",
   },
   {
+    id: "status",
     accessorKey: "is_active",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }): JSX.Element => {
-      const isActive = row.getValue("is_active")
+      const isActive = row.getValue("status")
       return (
         <Badge variant={isActive ? "default" : "destructive"}>
-          {row.getValue("is_active") ? "Active" : "Inactive"}
+          {isActive ? "Active" : "Inactive"}
         </Badge>
       )
     },
@@ -62,7 +63,7 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "roles",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Role" />
+      <DataTableColumnHeader column={column} title="Roles" />
     ),
     enableGlobalFilter: false,
   },
