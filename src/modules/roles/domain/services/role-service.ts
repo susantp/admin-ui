@@ -62,4 +62,8 @@ export const fetPermissions = async ({
 export const createRole = async ({
                                    xScreen,
                                    body
-                                 }: ICreateRoleServiceProps): Promise<void> => Promise.resolve(console.log(body))
+                                 }: ICreateRoleServiceProps) => {
+  if (!xScreen) return null
+  const data = {xScreen, body}
+  return Promise.resolve(data)
+}

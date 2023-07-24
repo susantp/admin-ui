@@ -19,20 +19,37 @@ import RoleNameField
 import RoleFormActions
   from "@/src/modules/roles/presentation/components/role-name-actions";
 import PocColDiv from "@/src/modules/global/presentation/poc-col-div";
-import {FormikProps, useFormik} from "formik";
-import {
-  roleFormikConfig
-} from "@/src/modules/roles/domain/objects/role-formik-config";
+import {FormikProps, FormikValues, useFormik} from "formik";
 import {IRoleFormValues} from "@/src/modules/roles/domain/types/crud";
+import {useAtomValue} from "jotai";
+import {
+  currentScreenAtom
+} from "@/src/modules/global/presentation/state/global-states";
+import {
+  roleFormFieldValue
+} from "@/src/modules/roles/domain/objects/role-form-field-values";
+import {createRole} from "@/src/modules/roles/domain/services/role-service";
 
 export default function CreateRoleContainer(): React.ReactNode {
   const {loading, groupedData} = useCreateRoleContainerActions()
+  const currentScreen = useAtomValue(currentScreenAtom)
 
-  const roleCreateForm: FormikProps<IRoleFormValues> = useFormik<IRoleFormValues>(roleFormikConfig)
-  const {values, handleChange, setFieldValue} = roleCreateForm
+  const handleFormSubmit = async (values: FormikValues): Promise<void> => {
+    const response = await createRole({
+      xScreen: currentScreen,
+      body: JSON.stringify(values, null, 2)
+    })
+    console.log(response)
+  }
+
+  const roleCreateForm: FormikProps<IRoleFormValues> = useFormik<IRoleFormValues>({
+    initialValues: roleFormFieldValue,
+    onSubmit: handleFormSubmit
+  })
 
   if (loading || !groupedData || !groupedData.length) return <PocLoader/>
 
+  const {values, handleChange, setFieldValue} = roleCreateForm
   return (
     <PocContainer>
       <Section label="" subLabel={null} actionEl={null}>
