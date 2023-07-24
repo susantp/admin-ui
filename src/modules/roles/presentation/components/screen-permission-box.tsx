@@ -42,7 +42,7 @@ export default function ScreenPermissionBox({
                  checked={values.includes(permission.id)}
                  onChange={async (): Promise<void> => {
                    const index = values.indexOf(permission.id);
-                   const newPermissions = [...values]
+                   const newPermissions: string[] = [...values]
                    if (index === -1) {
                      newPermissions.push(permission.id)
                    } else {

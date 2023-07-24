@@ -22,7 +22,7 @@ import PocColDiv from "@/src/modules/global/presentation/poc-col-div";
 import {FormikProps, useFormik} from "formik";
 import {
   roleFormikConfig
-} from "@/src/modules/roles/data/objects/role-formik-config";
+} from "@/src/modules/roles/domain/objects/role-formik-config";
 import {IRoleFormValues} from "@/src/modules/roles/domain/types/crud";
 
 export default function CreateRoleContainer(): React.ReactNode {
