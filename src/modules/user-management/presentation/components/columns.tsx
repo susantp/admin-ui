@@ -4,9 +4,10 @@ import React from "react"
 import { User } from "@/src/modules/user-management/domain/types/user"
 import { ColumnDef } from "@tanstack/react-table"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Switch } from "@/components/ui/switch"
+import { Combobox } from "@/components/combobox"
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
 
 export const columns: ColumnDef<User>[] = [
@@ -42,6 +43,28 @@ export const columns: ColumnDef<User>[] = [
     ),
   },
   {
+    id: "name",
+    accessorKey: "detail",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Name" />
+    ),
+    cell: ({ row }): JSX.Element => {
+      const value = row.getValue("name")
+      return (
+        <span>
+          {value.first_name} {value.last_name}
+        </span>
+      )
+    },
+  },
+  {
+    id: "designation",
+    accessorKey: "detail.designation",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Designation" />
+    ),
+  },
+  {
     accessorKey: "phone",
     header: "Phone",
   },
@@ -52,11 +75,37 @@ export const columns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }): JSX.Element => {
-      const isActive = row.getValue("status")
+      const isActive = row.getValue<boolean>("status")
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const [value, setValue] = React.useState(isActive)
+
       return (
-        <Badge variant={isActive ? "default" : "destructive"}>
-          {isActive ? "Active" : "Inactive"}
-        </Badge>
+        <Switch
+          checked={value}
+          onCheckedChange={(): void => {
+            setValue((prevState) => !prevState)
+          }}
+        />
+      )
+    },
+  },
+  {
+    accessorKey: "is_superuser",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Is Admin?" />
+    ),
+    cell: ({ row }): JSX.Element => {
+      const isAdmin = row.getValue<boolean>("is_superuser")
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const [value, setValue] = React.useState(isAdmin)
+
+      return (
+        <Switch
+          checked={value}
+          onCheckedChange={(): void => {
+            setValue((prevState) => !prevState)
+          }}
+        />
       )
     },
   },
@@ -65,7 +114,21 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Roles" />
     ),
-    enableGlobalFilter: false,
+    cell: ({ row }): JSX.Element => {
+      const options = [
+        { value: "Customer", label: "Customer" },
+        { value: "Admin", label: "Admin" },
+        { value: "Superadmin", label: "Superadmin" },
+        { value: "Member", label: "Member" },
+      ]
+
+      return (
+        <Combobox
+          value={row.getValue<string[]>("roles")[0]}
+          options={options}
+        />
+      )
+    },
   },
   {
     id: "actions",
