@@ -6,7 +6,7 @@ interface IShowMoreButton {
 
 export function ShowMoreButton({
   itemCount,
-}: IShowMoreButton): React.ReactNode | null {
+}: IShowMoreButton): JSX.Element | null {
   if (itemCount < 5) return null
   return (
     <div className="flex w-full justify-center items-center">

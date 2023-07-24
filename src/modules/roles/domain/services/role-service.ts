@@ -12,10 +12,7 @@ import { IRolesOriginalResponseData } from "@/src/modules/roles/domain/types/rep
 export const fetchRoles = async ({
   xScreen,
 }: IServiceProps): Promise<IRolesOriginalResponseData | null> => {
-  if (!xScreen)
-    throw new Error(
-      "This request requires a screen ID, which has not been set yet."
-    )
+  if (!xScreen) return null
   const { id } = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
     xScreen: id,
@@ -36,10 +33,7 @@ export const fetchRoles = async ({
 export const fetPermissions = async ({
   xScreen,
 }: IServiceProps): Promise<IPermission[] | null> => {
-  if (!xScreen)
-    throw new Error(
-      "This request requires a screen ID, which has not been set yet."
-    )
+  if (!xScreen) return null
   const { id } = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
     xScreen: id,
