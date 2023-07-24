@@ -7,7 +7,7 @@ import {
 const handleResponse = async <T>(response: Response): Promise<T> => {
   const apiResponse: ApiResponse<T> = (await response.json()) as ApiResponse<T>
   if (!response.ok) {
-    throw new Error(`${apiResponse.message}`)
+    throw new Error(`${apiResponse.error}`)
   }
   return apiResponse.data
 }

@@ -5,7 +5,7 @@ interface IRoleFormProps {
   handleSubmit: () => void
 }
 
-export default function RoleForm({children, handleSubmit}: IRoleFormProps): JSX.Element {
+export default function RoleForm({children, handleSubmit}: IRoleFormProps): React.ReactNode {
   return <form onSubmit={handleSubmit}
     className="flex h-full flex-col bg-white shadow-xl">
     {children}

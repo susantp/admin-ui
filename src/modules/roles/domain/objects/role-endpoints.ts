@@ -4,4 +4,5 @@ export const roleEndpoints: IRoleEndpoints = {
   fetchRoles: "admin/roles/",
   fetchPermission: "admin/permissions/",
   fetchTopRoles: "admin/top-roles/",
+  createRole: "admin/roles/"
 }

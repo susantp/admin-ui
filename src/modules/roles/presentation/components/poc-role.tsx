@@ -1,18 +1,18 @@
 import React from "react"
 import Link from "next/link"
-import { IRoleList } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import { IRole } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import UseRoleListActions from "@/src/modules/roles/presentation/hooks/use-role-list-actions"
 import { Layers } from "lucide-react"
 
 interface IRoleListProps {
-  role: IRoleList
+  role: IRole
   onDelete: () => void
 }
 
 export default function PocRole({
   role,
   onDelete,
-}: IRoleListProps): JSX.Element {
+}: IRoleListProps): React.ReactNode {
   const { permittedScreens } = UseRoleListActions(role)
   return (
     <div className="group relative flex items-center px-5 py-6 justify-between flex-wrap ">

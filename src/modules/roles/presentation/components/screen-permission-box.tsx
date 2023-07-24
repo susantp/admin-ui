@@ -9,6 +9,7 @@ import {IRoleFormValues} from "@/src/modules/roles/domain/types/crud";
 interface IScreenPermissionBoxProps {
   screenWithPermission: IGroupedScreenWithPermissions
   values: string[]
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   handleSetFieldValues: (field: string, value: any, shouldValidate?: boolean) => Promise<void | FormikErrors<IRoleFormValues>>;
 }
 
@@ -41,14 +42,14 @@ export default function ScreenPermissionBox({
                  name="permissions" className="flex-none"
                  checked={values.includes(permission.id)}
                  onChange={async (): Promise<void> => {
-                   const index = values.indexOf(permission.id);
+                   const index: number = values.indexOf(permission.id);
                    const newPermissions: string[] = [...values]
                    if (index === -1) {
                      newPermissions.push(permission.id)
                    } else {
                      newPermissions.splice(index, 1)
                    }
-                   await handleSetFieldValues('permissionValues', newPermissions)
+                   await handleSetFieldValues('permissions', newPermissions)
                  }}
           />
         </div>

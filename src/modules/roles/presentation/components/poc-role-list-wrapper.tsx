@@ -6,7 +6,7 @@ interface IRoleListWrapperProps {
 
 export function PocRoleListWrapper({
   children,
-}: IRoleListWrapperProps): JSX.Element {
+}: IRoleListWrapperProps): React.ReactNode {
   return (
     <div className="flex h-full flex-col bg-white shadow-xl">
       <div className="flex-1 divide-y divide-gray-200 overflow-y-auto">
