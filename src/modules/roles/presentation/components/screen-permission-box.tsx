@@ -4,7 +4,7 @@ import {
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import {Fingerprint} from "lucide-react"
 import {FormikErrors} from "formik/dist/types";
-import {IRoleFormValues} from "@/src/modules/roles/domain/types/crud";
+import {IRoleFormValues} from "../../domain/types/service";
 
 interface IScreenPermissionBoxProps {
   screenWithPermission: IGroupedScreenWithPermissions

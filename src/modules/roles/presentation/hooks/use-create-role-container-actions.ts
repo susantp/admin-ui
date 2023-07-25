@@ -8,7 +8,7 @@ import {
 import {
   createRole,
   fetchPermissions
-} from "@/src/modules/roles/domain/services/role-service"
+} from "@/src/modules/roles/domain/services/role-server-actions"
 import {
   IGroupedScreenWithPermissions,
   IPermission,
@@ -18,17 +18,23 @@ import {
   permissionsAtom
 } from "@/src/modules/roles/presentation/state/role-state"
 import {useAtom, useAtomValue} from "jotai"
-import {IRoleFormValues} from "@/src/modules/roles/domain/types/crud";
 import {FormikHelpers, FormikProps, useFormik} from "formik";
 import {
   roleFormFieldValue
 } from "@/src/modules/roles/domain/objects/role-form-field-values";
 import * as Yup from 'yup'
+import {
+  getGroupedData,
+  getRoleFormikConfig,
+  getRoleFormSchema
+} from "@/src/modules/roles/domain/services/create-role-utils";
+import {FormikConfig} from "formik/dist/types";
+import {IRoleFormValues} from "../../domain/types/service";
 
 interface IUseCreateRoleContainerActions {
   permissions: IPermission[] | null
   loading: boolean
-  groupedData: IGroupedScreenWithPermissions[] | undefined
+  groupedData: IGroupedScreenWithPermissions[] | null
   roleCreateForm: FormikProps<IRoleFormValues>
   open: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
@@ -56,28 +62,9 @@ export default function useCreateRoleContainerActions(): IUseCreateRoleContainer
     return (): void => setPermissions(null)
   }, [currentScreen?.id])
 
-  const groupedData: IGroupedScreenWithPermissions[] | undefined =
-    permissions?.reduce(
-      (acc: IGroupedScreenWithPermissions[], obj: IPermission) => {
-        const {screen, id, code} = obj
-        const existingEntry: IGroupedScreenWithPermissions | undefined =
-          acc.find((entry) => entry.screen === screen)
+  const groupedData: IGroupedScreenWithPermissions[] | null = permissions && getGroupedData({permissions})
 
-        if (existingEntry) {
-          existingEntry.permissions.push({id, code})
-        } else {
-          acc.push({screen, permissions: [{id, code}]})
-        }
-
-        return acc
-      },
-      []
-    )
-
-  const displayErrorMessage: Yup.ObjectSchema<IRoleFormValues> = Yup.object().shape({
-    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-    permissions: Yup.array().of(Yup.string().required('Required')).min(0).required('Required'),
-  })
+  const roleFormSchema: Yup.ObjectSchema<IRoleFormValues> = getRoleFormSchema()
 
   const handleFormSubmit = async (values: IRoleFormValues, actions: FormikHelpers<IRoleFormValues>): Promise<void> => {
     const response: IRole | null = await createRole({
@@ -95,12 +82,14 @@ export default function useCreateRoleContainerActions(): IUseCreateRoleContainer
     actions.resetForm()
   }
 
-  const roleCreateForm: FormikProps<IRoleFormValues> = useFormik<IRoleFormValues>({
-    enableReinitialize: true,
+  const roleFormikConfig: FormikConfig<IRoleFormValues> = getRoleFormikConfig<IRoleFormValues>({
+    formSchema: roleFormSchema,
     initialValues: roleFormFieldValue,
-    validationSchema: displayErrorMessage,
-    onSubmit: handleFormSubmit
+    handleSubmit: handleFormSubmit
   })
+
+  const roleCreateForm: FormikProps<IRoleFormValues> = useFormik<IRoleFormValues>(roleFormikConfig)
+
 
   return {
     permissions,

@@ -19,7 +19,7 @@ import {
 import {
   IRolesOriginalResponseData
 } from "@/src/modules/roles/domain/types/repository"
-import {ICreateRoleServiceProps} from "@/src/modules/roles/domain/types/crud";
+import {ICreateRoleServiceProps} from "../types/service";
 
 export const fetchRoles = async ({
                                    xScreen,

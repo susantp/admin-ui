@@ -4,7 +4,7 @@ import MobileNavigation from "@/src/modules/global/presentation/components/sideb
 import NavAnchor from "@/src/modules/global/presentation/components/sidebar-components/nav-anchor"
 import useSidebarDesktopActions from "@/src/modules/global/presentation/hooks/use-sidebar-desktop-actions"
 
-function Sidebar(): JSX.Element | null {
+function Sidebar(): React.ReactNode | null {
   const { getIcon, userScreens } = useSidebarDesktopActions()
 
   if (!userScreens?.length) throw Error("You are not assigned to any Screen.")

@@ -1,4 +1,4 @@
-import {IRoleFormValues} from "@/src/modules/roles/domain/types/crud";
+import {IRoleFormValues} from "../types/service";
 
 
 export const roleFormFieldValue: IRoleFormValues = {name:'', permissions:[]}
