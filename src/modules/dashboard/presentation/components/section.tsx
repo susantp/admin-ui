@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import { PocSectionHeader } from "@/src/modules/dashboard/presentation/components/poc-section-header"
 
 interface ISectionProps {
@@ -13,7 +13,7 @@ export default function Section({
   label,
   subLabel,
   actionEl,
-}: ISectionProps): JSX.Element {
+}: ISectionProps): ReactNode {
   return (
     <section id="info-section" className="py-5">
       {(label || subLabel) && (

@@ -1,13 +1,13 @@
 "use client"
 
-import React from "react"
+import React, {ReactNode} from "react"
 import { Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function UserRegisterForm(): JSX.Element {
+export default function UserRegisterForm(): ReactNode {
   const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const emailRef: React.RefObject<HTMLInputElement> = React.useRef(null)

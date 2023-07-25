@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import {Dialog} from "@headlessui/react"
 import {XMarkIcon} from "@heroicons/react/24/outline"
 import Link from "next/link";
@@ -19,7 +19,7 @@ function PocDialogBox({
                         open,
                         goBackPath,
                         addNewPath
-                      }: IPocDialogBoxParams): React.ReactNode {
+                      }: IPocDialogBoxParams): ReactNode {
   return (
     <Dialog className="relative z-10" onClose={onClose} open={open}>
       <div

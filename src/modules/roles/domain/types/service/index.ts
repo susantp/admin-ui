@@ -3,9 +3,10 @@ import {
 } from "@/src/modules/global/domain/types/repository/global-repository";
 import {FormikHelpers, FormikValues} from "formik";
 import {
-  IPermission
+  IPermission, IRole
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints";
 import * as Yup from "yup";
+import {Dispatch, SetStateAction} from "react";
 
 export interface IRoleFormValues extends FormikValues {
   name: string
@@ -16,12 +17,40 @@ export interface ICreateRoleServiceProps extends IServiceProps {
   body: string
 }
 
+export interface IGetRoleProps extends IServiceProps{
+  roleId: string
+}
+
 export interface IGetGroupedData {
   permissions: IPermission[]
 }
 
-export interface IGetFormikHook <T extends object>{
+export interface IGetFormikHookParams <T extends object>{
   initialValues: T
   formSchema: Yup.ObjectSchema<T>
   handleSubmit: (values: T, actions: FormikHelpers<T>) => Promise<void>
+}
+
+export interface IHelperTexts{
+  formTitle: string,
+  formSubtitle: string,
+  dialogBoxTitle: string,
+  dialogBoxDescription: string
+}
+
+export interface IGetHelperTextsParams{
+  slug: string | null
+}
+
+export interface IHandleFormSubmitResponseParams{
+  response: IRole | null
+  open: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+  setApiError: Dispatch<SetStateAction<{message: string}>>
+  actions: FormikHelpers<IRoleFormValues>
+  errorMsg: string
+}
+
+export interface IGetPermissionIdsProps{
+  permissions: IPermission[]
 }

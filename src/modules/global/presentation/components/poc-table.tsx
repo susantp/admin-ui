@@ -1,11 +1,11 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import Image from "next/image"
 import { InterfacePeople } from "@/src/modules/dashboard/domain/types/dashboard-type"
 
 interface InterfaceTableProps {
   people: InterfacePeople[]
 }
-export default function PocTable({ people }: InterfaceTableProps): JSX.Element {
+export default function PocTable({ people }: InterfaceTableProps): ReactNode {
   return (
     <div className="" id="poc-table-wrapper">
       <table className="min-w-full divide-y divide-gray-300 table-auto">

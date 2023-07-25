@@ -1,11 +1,11 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import Link from "next/link"
 import { authConfig } from "@/auth/domain/config/auth-config"
 import UserRegisterForm from "@/auth/presentation/components/user-register-form"
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
-export default function RegisterPage(): JSX.Element {
+export default function RegisterPage(): ReactNode {
   const {
     registerForm: {
       formSubtitle,

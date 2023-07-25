@@ -10,7 +10,7 @@ export default function PocColDiv({
                                     children,
                                     lgColCount,
                                     defaultColCount
-                                  }: IPocColDivProps): JSX.Element {
+                                  }: IPocColDivProps): React.ReactNode {
   return <div
     id="screens"
     className={`grid grid-cols-${defaultColCount} lg:grid-cols-${lgColCount} items-center justify-center gap-6`}

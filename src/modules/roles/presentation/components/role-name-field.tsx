@@ -1,5 +1,5 @@
 import {Input} from "@/components/ui/input";
-import React from "react";
+import React, {ReactNode} from "react";
 import ErrorDiv from "@/src/modules/roles/presentation/components/error-div";
 
 interface IRoleNameFieldProps {
@@ -12,7 +12,7 @@ export default function RoleNameField({
                                         nameValue,
                                         handleChange,
                                         validationErrors
-                                      }: IRoleNameFieldProps): JSX.Element {
+                                      }: IRoleNameFieldProps): ReactNode {
   return <div id="role-name-field"
               className="divide-y divide-gray-200 px-4 sm:px-6">
     <div className="space-y-6 pb-5 pt-6">

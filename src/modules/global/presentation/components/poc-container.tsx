@@ -1,12 +1,12 @@
-import React from "react"
+import React, {ReactNode} from "react"
 
 interface InterfaceContainerProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function PocContainer({
   children,
-}: InterfaceContainerProps): JSX.Element {
+}: InterfaceContainerProps): ReactNode {
   return (
     <div className="p-4 sm:px-6 md:px-8 w-full" id="dashboard-container">
       {children}

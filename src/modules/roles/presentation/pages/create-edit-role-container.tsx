@@ -7,8 +7,8 @@ import PocContainer
 import PocLoader from "@/src/modules/global/presentation/components/poc-loader"
 import ScreenPermissionBox
   from "@/src/modules/roles/presentation/components/screen-permission-box"
-import useCreateRoleContainerActions
-  from "@/src/modules/roles/presentation/hooks/use-create-role-container-actions"
+import useCreateEditRoleContainerActions
+  from "@/src/modules/roles/presentation/hooks/use-create-edit-role-container-actions"
 import ScreenPermissionWrapper
   from "@/src/modules/roles/presentation/components/screen-permission-wrapper";
 import RoleForm from "@/src/modules/roles/presentation/components/role-form";
@@ -23,15 +23,20 @@ import PocDialogBox
   from "@/src/modules/global/presentation/components/poc-dialog-box";
 import {appPaths} from "@/src/modules/global/domain/objects/global";
 
-export default function CreateRoleContainer(): React.ReactNode {
+interface ICreateEditRoleContainerProps {
+  slug: string | null
+}
+
+export default function CreateEditRoleContainer({slug}: ICreateEditRoleContainerProps): React.ReactNode {
   const {
     loading,
     groupedData,
     roleCreateForm,
     open,
     setIsOpen,
-    apiError
-  } = useCreateRoleContainerActions()
+    apiError,
+    helperTexts: {formSubtitle, formTitle, dialogBoxTitle, dialogBoxDescription}
+  } = useCreateEditRoleContainerActions(slug)
 
   if (loading || !groupedData || !groupedData.length) return <PocLoader/>
 
@@ -46,7 +51,8 @@ export default function CreateRoleContainer(): React.ReactNode {
     <PocContainer>
       <Section label="" subLabel={null} actionEl={null}>
         <RoleForm handleSubmit={handleSubmit}>
-          <RoleFormTitle/>
+          <RoleFormTitle title={formTitle}
+                         subtitle={formSubtitle}/>
           <RoleNameField validationErrors={errors.name}
                          nameValue={values.name}
                          handleChange={handleChange}/>
@@ -71,10 +77,10 @@ export default function CreateRoleContainer(): React.ReactNode {
                           addNewPath={null}
                           description={apiError.message} open={open}
                           onClose={(): void => setIsOpen(!open)}/>
-          : <PocDialogBox title="New Role Added"
+          : <PocDialogBox title={dialogBoxTitle}
                           goBackPath={appPaths.roles.path}
-                          addNewPath={`${appPaths.roles.path}/create`}
-                          description="new role added successfully" open={open}
+                          addNewPath={null}
+                          description={dialogBoxDescription} open={open}
                           onClose={(): void => setIsOpen(!open)}/>
       }
     </PocContainer>

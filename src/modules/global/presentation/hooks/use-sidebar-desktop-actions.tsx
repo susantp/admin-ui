@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
-import { IconSet } from "@/src/modules/global/domain/types/helpers"
-import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
+import React, {ReactElement, ReactNode, useEffect, useState} from "react"
+import {usePathname} from "next/navigation"
+import {IconSet} from "@/src/modules/global/domain/types/helpers"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository"
 import {
   currentScreenAtom,
   userScreensAtom,
@@ -12,14 +14,14 @@ import {
   HomeIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline"
-import { useAtomValue, useSetAtom } from "jotai"
+import {useAtomValue, useSetAtom} from "jotai"
 
 interface ISidebarDesktopActions {
   userScreens: IScreen[] | null
   getIcon: (
     keyName: keyof IconSet,
     additionalClass?: string
-  ) => JSX.Element | null
+  ) => ReactNode
 }
 
 const useSidebarDesktopActions = (): ISidebarDesktopActions => {
@@ -40,19 +42,19 @@ const useSidebarDesktopActions = (): ISidebarDesktopActions => {
   }, [])
 
   const [iconSet] = useState<IconSet>({
-    home: { icon: <HomeIcon /> },
-    users: { icon: <UsersIcon /> },
-    dashboard: { icon: <HomeIcon /> },
-    screens: { icon: <ClipboardDocumentIcon /> },
-    roles: { icon: <FolderIcon /> },
+    home: {icon: <HomeIcon/>},
+    users: {icon: <UsersIcon/>},
+    dashboard: {icon: <HomeIcon/>},
+    screens: {icon: <ClipboardDocumentIcon/>},
+    roles: {icon: <FolderIcon/>},
   })
 
   const getIcon = (
     keyName: keyof IconSet,
     additionalClass?: string
-  ): JSX.Element | null => {
-    const iconElement: JSX.Element = iconSet[keyName].icon
-    return React.cloneElement(iconElement, {
+  ): ReactNode | null => {
+    const iconElement: ReactNode = iconSet[keyName].icon
+    return React.cloneElement(iconElement as ReactElement, {
       className: additionalClass,
     })
   }

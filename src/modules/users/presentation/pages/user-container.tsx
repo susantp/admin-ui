@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, {ReactNode} from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
 import Section from "@/src/modules/dashboard/presentation/components/section"
 import PocContainer from "@/src/modules/global/presentation/components/poc-container"
@@ -9,7 +9,7 @@ import PocTablePagination from "@/src/modules/global/presentation/components/poc
 import PocTableTools from "@/src/modules/global/presentation/components/poc-table-tools"
 import PocTableWrapper from "@/src/modules/global/presentation/components/poc-table-wrapper"
 
-export default function UserContainer(): JSX.Element {
+export default function UserContainer(): ReactNode {
   const { people } = useTempData()
   return (
     <PocContainer>

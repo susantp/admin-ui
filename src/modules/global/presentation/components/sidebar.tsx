@@ -1,10 +1,10 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import DesktopNavigation from "@/src/modules/global/presentation/components/sidebar-components/desktop-navigation"
 import MobileNavigation from "@/src/modules/global/presentation/components/sidebar-components/mobile-navigation"
 import NavAnchor from "@/src/modules/global/presentation/components/sidebar-components/nav-anchor"
 import useSidebarDesktopActions from "@/src/modules/global/presentation/hooks/use-sidebar-desktop-actions"
 
-function Sidebar(): React.ReactNode | null {
+function Sidebar(): ReactNode {
   const { getIcon, userScreens } = useSidebarDesktopActions()
 
   if (!userScreens?.length) throw Error("You are not assigned to any Screen.")

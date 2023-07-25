@@ -11,7 +11,7 @@ export default function Error({
 }: {
   error: Error
   reset: () => void
-}): JSX.Element {
+}): React.ReactNode {
   useEffect(() => {
     // Log the error to an error reporting service
   }, [error])

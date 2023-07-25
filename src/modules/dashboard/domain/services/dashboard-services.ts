@@ -14,6 +14,8 @@ import {
   ITopRolesResponseData
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 
+const {getToRoles} = roleEndpoints
+
 export const fetchTopRoles = async ({
                                       xScreen,
                                     }: IServiceProps): Promise<ITopRolesResponseData[] | null> => {
@@ -23,7 +25,7 @@ export const fetchTopRoles = async ({
     xScreen: id,
   } as IClientParams)
   if (!clientConfig) return null
-  const requestPath: string = roleEndpoints.fetchTopRoles
+  const requestPath: string = getToRoles
   const url: URL = getHelpers.composeRequestPath({requestPath})
 
   const responseRoles: ITopRolesResponseData[] | null | undefined =

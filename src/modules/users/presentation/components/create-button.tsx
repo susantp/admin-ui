@@ -1,10 +1,10 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import { PlusIcon } from "@heroicons/react/20/solid"
 
 interface ICreateButtonParams {
   onClose: () => void
 }
-function CreateButton({ onClose }: ICreateButtonParams): JSX.Element {
+function CreateButton({ onClose }: ICreateButtonParams): ReactNode {
   return (
     <button
       type="button"

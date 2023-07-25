@@ -1,11 +1,11 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import {
   BarsArrowUpIcon,
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid"
 
-export default function PocTableTools(): JSX.Element {
+export default function PocTableTools(): ReactNode {
   return (
     <div className="flex" id="table-tools">
       <div className="flex rounded-md shadow-sm">

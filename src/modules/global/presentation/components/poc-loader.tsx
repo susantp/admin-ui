@@ -1,7 +1,7 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import { Loader2 } from "lucide-react"
 
-export default function PocLoader(): JSX.Element {
+export default function PocLoader(): ReactNode {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Loader2 size={48} color="red" />

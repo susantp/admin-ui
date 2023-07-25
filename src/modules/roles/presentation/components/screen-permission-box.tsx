@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import {
   IGroupedScreenWithPermissions
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
@@ -18,7 +18,7 @@ export default function ScreenPermissionBox({
                                               screenWithPermission,
                                               values,
                                               handleSetFieldValues
-                                            }: IScreenPermissionBoxProps): JSX.Element | null {
+                                            }: IScreenPermissionBoxProps): ReactNode {
   const {screen, permissions} = screenWithPermission
   return (
     <div className="flex flex-col shadow-md">

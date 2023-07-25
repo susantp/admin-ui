@@ -14,5 +14,5 @@ export interface IFetchUserScreensParams {
 }
 
 export interface IServiceProps {
-  xScreen: IScreen | null
+  xScreen: IScreen
 }

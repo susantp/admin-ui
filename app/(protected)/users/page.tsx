@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: "User Management",
   description: "",
 }
-export default function Page(): JSX.Element {
+export default function Page(): React.ReactNode {
   return <UserContainer />
 }

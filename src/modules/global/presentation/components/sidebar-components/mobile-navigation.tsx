@@ -1,16 +1,16 @@
-import React, { Fragment } from "react"
+import React, {Fragment, ReactNode} from "react"
 import { sidebarAtom } from "@/src/modules/global/presentation/state/global-states"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import { useAtom } from "jotai/index"
 
 interface IMobileNavigationProps {
-  children: JSX.Element[] | JSX.Element | null
+  children: ReactNode
 }
 
 export default function MobileNavigation({
   children,
-}: IMobileNavigationProps): JSX.Element {
+}: IMobileNavigationProps): ReactNode {
   const [open, setOpen] = useAtom(sidebarAtom)
   return (
     <Transition.Root show={open} as={Fragment}>

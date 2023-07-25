@@ -1,9 +1,17 @@
-import { useEffect, useState } from "react"
-import { fetchTopRoles } from "@/src/modules/dashboard/domain/services/dashboard-services"
-import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { currentScreenAtom } from "@/src/modules/global/presentation/state/global-states"
-import { ITopRolesResponseData } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import { useAtomValue } from "jotai/index"
+import {useEffect, useState} from "react"
+import {
+  fetchTopRoles
+} from "@/src/modules/dashboard/domain/services/dashboard-services"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository"
+import {
+  currentScreenAtom
+} from "@/src/modules/global/presentation/state/global-states"
+import {
+  ITopRolesResponseData
+} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import {useAtomValue} from "jotai"
 
 interface IDashboardActions {
   loading: boolean
@@ -16,20 +24,20 @@ export default function useDashboardActions(): IDashboardActions {
   const [topRoles, setTopRoles] = useState<ITopRolesResponseData[] | null>(null)
 
   useEffect(() => {
-    fetchTopRoles({ xScreen: currentScreen })
-      .then((data) => {
-        if (data) {
-          setTopRoles(data)
-        }
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-      .finally(() => setLoading(false))
+    if (currentScreen) {
+      fetchTopRoles({xScreen: currentScreen})
+        .then((data) => {
+          if (data) {
+            setTopRoles(data)
+          }
+          setLoading(false)
+        })
+        .catch(() => setLoading(false))
+        .finally(() => setLoading(false))
+    }
 
     return (): void => setTopRoles(null)
   }, [currentScreen?.id])
 
-  console.log(topRoles)
-
-  return { loading, topRoles }
+  return {loading, topRoles}
 }

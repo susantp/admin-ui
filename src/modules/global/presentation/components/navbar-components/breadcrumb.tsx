@@ -1,10 +1,10 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { HomeIcon } from "@heroicons/react/24/outline"
 
-export default function Breadcrumb(): JSX.Element {
+export default function Breadcrumb(): ReactNode {
   const pathname = usePathname()
   const paths: string[] = pathname.split("/")
   return (

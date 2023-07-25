@@ -7,7 +7,8 @@ import {
 } from "@/src/modules/global/presentation/state/global-states"
 import {
   createRole,
-  fetchPermissions
+  fetchPermissions,
+  fetchRole
 } from "@/src/modules/roles/domain/services/role-server-actions"
 import {
   IGroupedScreenWithPermissions,
@@ -25,11 +26,14 @@ import {
 import * as Yup from 'yup'
 import {
   getGroupedData,
+  getHelperTexts,
+  getPermissionIds,
   getRoleFormikConfig,
-  getRoleFormSchema
-} from "@/src/modules/roles/domain/services/create-role-utils";
+  getRoleFormSchema,
+  handleFormSubmitResponse
+} from "@/src/modules/roles/domain/services/create-edit-role-utils";
 import {FormikConfig} from "formik/dist/types";
-import {IRoleFormValues} from "../../domain/types/service";
+import {IHelperTexts, IRoleFormValues} from "../../domain/types/service";
 
 interface IUseCreateRoleContainerActions {
   permissions: IPermission[] | null
@@ -39,52 +43,78 @@ interface IUseCreateRoleContainerActions {
   open: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
   apiError: { message: string }
+  helperTexts: IHelperTexts
 }
 
-export default function useCreateRoleContainerActions(): IUseCreateRoleContainerActions {
+
+export default function useCreateEditRoleContainerActions(slug: string | null): IUseCreateRoleContainerActions {
   const [permissions, setPermissions] = useAtom(permissionsAtom)
   const currentScreen = useAtomValue<IScreen | null>(currentScreenAtom)
   const [loading, setLoading] = useState<boolean>(true)
   const [open, setIsOpen] = useState(false)
   const [apiError, setApiError] = useState({message: ''})
+  const [initialValues, setInitialValues] = useState<IRoleFormValues>(roleFormFieldValue)
 
   useEffect(() => {
-    fetchPermissions({xScreen: currentScreen})
-      .then((data) => {
-        if (data) {
-          setPermissions(data)
-        }
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-      .finally(() => setLoading(false))
+    if (currentScreen) {
+      fetchPermissions({xScreen: currentScreen})
+        .then((data) => {
+          if (data) {
+            setPermissions(data)
+          }
+          setLoading(false)
+        })
+        .catch(() => setLoading(false))
+        .finally(() => setLoading(false))
+    }
 
-    return (): void => setPermissions(null)
+    if (slug && currentScreen) {
+      fetchRole({
+        xScreen: currentScreen,
+        roleId: slug
+      })
+        .then(data => {
+          if (data) {
+            const permissionsValues: string[] = getPermissionIds({permissions: data.permissions})
+            const {name} = data
+            setInitialValues({name, permissions: permissionsValues})
+          }
+        })
+        .catch(() => setLoading(false))
+        .finally(() => setLoading(false))
+    }
+    // return (): void => setPermissions(null)
   }, [currentScreen?.id])
+
+
+  const helperTexts: IHelperTexts = getHelperTexts({slug})
 
   const groupedData: IGroupedScreenWithPermissions[] | null = permissions && getGroupedData({permissions})
 
   const roleFormSchema: Yup.ObjectSchema<IRoleFormValues> = getRoleFormSchema()
 
   const handleFormSubmit = async (values: IRoleFormValues, actions: FormikHelpers<IRoleFormValues>): Promise<void> => {
+    // TODO if not current screen set instead of throwing error give toast message
+    if (!currentScreen) throw new Error("Screen not set yet.")
     const response: IRole | null = await createRole({
       xScreen: currentScreen,
       body: JSON.stringify(values)
     })
-    if (!response || !('permissions' in response)) {
-      setApiError(prevState => ({
-        ...prevState,
-        message: "Operation not succeeded, try again."
-      }))
-      setIsOpen(!open)
-    }
-    setIsOpen(!open)
-    actions.resetForm()
+
+    handleFormSubmitResponse({
+      actions,
+      response,
+      setIsOpen,
+      open,
+      errorMsg: "Operation not succeeded, try again.",
+      setApiError
+    })
+
   }
 
   const roleFormikConfig: FormikConfig<IRoleFormValues> = getRoleFormikConfig<IRoleFormValues>({
     formSchema: roleFormSchema,
-    initialValues: roleFormFieldValue,
+    initialValues,
     handleSubmit: handleFormSubmit
   })
 
@@ -98,6 +128,7 @@ export default function useCreateRoleContainerActions(): IUseCreateRoleContainer
     roleCreateForm,
     open,
     setIsOpen,
-    apiError
+    apiError,
+    helperTexts
   }
 }

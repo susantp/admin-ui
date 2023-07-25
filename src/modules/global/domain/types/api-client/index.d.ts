@@ -1,6 +1,5 @@
 export interface IClientParams {
   xScreen: string | null
-  token: string | undefined
 }
 export interface IGetRequestParams {
   requestPath: URL

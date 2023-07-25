@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { IconSet } from "@/src/modules/global/domain/types/helpers"
@@ -10,13 +10,13 @@ interface INavigationAnchorProps {
   handleGetIcon: (
     keyName: keyof IconSet,
     additionalClass?: string
-  ) => JSX.Element | null
+  ) => ReactNode
 }
 
 export default function NavAnchor({
   screen,
   handleGetIcon,
-}: INavigationAnchorProps): JSX.Element {
+}: INavigationAnchorProps): ReactNode {
   const pathname = usePathname()
   return (
     <Link

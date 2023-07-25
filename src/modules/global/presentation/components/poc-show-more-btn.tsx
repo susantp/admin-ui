@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 
 interface IShowMoreButton {
   itemCount: number
@@ -6,7 +6,7 @@ interface IShowMoreButton {
 
 export function ShowMoreButton({
   itemCount,
-}: IShowMoreButton): JSX.Element | null {
+}: IShowMoreButton): ReactNode | null {
   if (itemCount < 5) return null
   return (
     <div className="flex w-full justify-center items-center">

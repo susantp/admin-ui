@@ -1,6 +1,6 @@
 import "@/styles/globals.css"
 
-import React from "react"
+import React, {ReactNode} from "react"
 import {Metadata} from "next"
 import {NextFont} from "next/dist/compiled/@next/font"
 import {Roboto} from "next/font/google"
@@ -8,7 +8,7 @@ import {Roboto} from "next/font/google"
 import {Toaster} from "@/components/ui/toaster"
 import Providers from "@/app/providers"
 
-const inter: NextFont = Roboto({
+const roboto: NextFont = Roboto({
   weight: ['400', '700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
 }
 
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export default function RootLayout({children}: RootLayoutProps): JSX.Element {
+export default function RootLayout({children}: RootLayoutProps): ReactNode {
   return (
-    <html lang="en" className="">
+    <html lang="en">
     <body
-      className={`${inter.className} bg-background`}
+      className={`${roboto.className} bg-background`}
       suppressHydrationWarning
     >
     <Providers>{children}</Providers>

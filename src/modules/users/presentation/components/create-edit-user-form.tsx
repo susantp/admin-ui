@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 
 import { Input } from "@/components/ui/input"
 
@@ -7,7 +7,7 @@ interface ICreateEditUserFormProps {
 }
 export default function CreateEditUserForm({
   onClose,
-}: ICreateEditUserFormProps): JSX.Element {
+}: ICreateEditUserFormProps): ReactNode {
   return (
     <form className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
       <div className="flex flex-1 flex-col justify-between">

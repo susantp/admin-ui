@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, {ReactNode} from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
 import InfoBox from "@/src/modules/dashboard/presentation/components/info-box"
 import MostViewedWrapper from "@/src/modules/dashboard/presentation/components/most-viewed-wrapper"
@@ -13,7 +13,7 @@ import PocTablePagination from "@/src/modules/global/presentation/components/poc
 import PocTableTools from "@/src/modules/global/presentation/components/poc-table-tools"
 import PocTableWrapper from "@/src/modules/global/presentation/components/poc-table-wrapper"
 
-export default function DashboardContainer(): JSX.Element {
+export default function DashboardContainer(): ReactNode {
   const { people } = useTempData()
   const { loading, topRoles } = useDashboardActions()
   if (loading || !topRoles || !topRoles.length) return <PocLoader />

@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, {ReactNode} from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { authConfig } from "@/auth/domain/config/auth-config"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 
-export default function UserLoginForm(): JSX.Element {
+export default function UserLoginForm(): ReactNode {
   const {
     loginForm: { emailField, passwordField, actionBtn },
   } = authConfig

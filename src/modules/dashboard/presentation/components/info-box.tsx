@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { ITopRolesResponseData } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"
@@ -7,7 +7,7 @@ interface InterfaceInfoBoxProps {
   role: ITopRolesResponseData
 }
 
-export default function InfoBox({ role }: InterfaceInfoBoxProps): JSX.Element {
+export default function InfoBox({ role }: InterfaceInfoBoxProps): ReactNode {
   const { name, members } = role
   const initials: string = (
     name.charAt(0) + name.charAt(name.length - 1)

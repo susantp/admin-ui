@@ -1,6 +1,7 @@
 export interface IRoleEndpoints {
-  fetchRoles: string
-  fetchPermission: string
-  fetchTopRoles: string
-  createRole: string
+  getRoles: string
+  getPermissions: string
+  getToRoles: string
+  postRole: string
+  getRole: string
 }

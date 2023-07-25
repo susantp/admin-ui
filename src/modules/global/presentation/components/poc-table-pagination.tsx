@@ -1,7 +1,7 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 
-export default function PocTablePagination(): JSX.Element {
+export default function PocTablePagination(): ReactNode {
   return (
     <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">

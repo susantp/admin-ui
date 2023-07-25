@@ -1,19 +1,16 @@
 import React from "react"
-import Section from "@/src/modules/dashboard/presentation/components/section"
-import PocContainer from "@/src/modules/global/presentation/components/poc-container"
-import CreateRoleContainer from "@/src/modules/roles/presentation/pages/create-role-container"
+import CreateEditRoleContainer
+  from "@/src/modules/roles/presentation/pages/create-edit-role-container"
+import {Metadata} from "next";
 
 interface ISlugPageProps {
   params: { slug: string }
 }
-
-export default function Page({ params }: ISlugPageProps): JSX.Element {
-  const { slug } = params
-  return (
-    <PocContainer>
-      <Section subLabel={null} label={slug} actionEl={null}>
-        <CreateRoleContainer />
-      </Section>
-    </PocContainer>
-  )
+export const metadata: Metadata = {
+  title: "Edit Role",
+  description: "",
+}
+export default function Page({params}: ISlugPageProps): React.ReactNode {
+  const {slug} = params
+  return <CreateEditRoleContainer slug={slug}/>
 }

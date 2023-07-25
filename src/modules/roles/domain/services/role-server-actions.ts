@@ -1,6 +1,5 @@
 "use server"
 
-import {IClientParams} from "@/src/modules/global/domain/types/api-client"
 import {
   IServiceProps
 } from "@/src/modules/global/domain/types/repository/global-repository"
@@ -14,12 +13,15 @@ import {
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import {roleEndpoints} from "@/src/modules/roles/domain/objects/role-endpoints"
 import {
-  IPermission, IRole
+  IPermission,
+  IRole
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import {
   IRolesOriginalResponseData
 } from "@/src/modules/roles/domain/types/repository"
-import {ICreateRoleServiceProps} from "../types/service";
+import {ICreateRoleServiceProps, IGetRoleProps} from "../types/service";
+
+const {getRoles, postRole, getRole, getPermissions} = roleEndpoints
 
 export const fetchRoles = async ({
                                    xScreen,
@@ -27,10 +29,10 @@ export const fetchRoles = async ({
   if (!xScreen) return null
   const {id} = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
-    xScreen: id,
-  } as IClientParams)
+    xScreen: id
+  })
   if (!clientConfig) return null
-  const requestPath: string = roleEndpoints.fetchRoles
+  const requestPath: string = getRoles
   const url: URL = getHelpers.composeRequestPath({requestPath})
 
   const responseRoles: IRolesOriginalResponseData | null | undefined =
@@ -43,15 +45,14 @@ export const fetchRoles = async ({
 }
 
 export const fetchPermissions = async ({
-                                       xScreen,
-                                     }: IServiceProps): Promise<IPermission[] | null> => {
-  if (!xScreen) return null
+                                         xScreen,
+                                       }: IServiceProps): Promise<IPermission[] | null> => {
   const {id} = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
-    xScreen: id,
-  } as IClientParams)
+    xScreen: id
+  })
   if (!clientConfig) return null
-  const requestPath: string = roleEndpoints.fetchPermission
+  const requestPath: string = getPermissions
   const url: URL = getHelpers.composeRequestPath({requestPath})
 
   const responsePermissions: IPermission[] = await getRequest<IPermission[]>({
@@ -65,19 +66,37 @@ export const fetchPermissions = async ({
 export const createRole = async ({
                                    xScreen,
                                    body
-                                 }: ICreateRoleServiceProps): Promise<IRole|null> => {
-  if (!xScreen) return null
+                                 }: ICreateRoleServiceProps): Promise<IRole | null> => {
   const {id} = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
     xScreen: id
-  } as IClientParams)
+  })
   if (!clientConfig) return null
-  const requestPath: string = roleEndpoints.createRole
+  const requestPath: string = postRole
   const url: URL = getHelpers.composeRequestPath({requestPath})
-  const response:IRole = await postRequest<IRole>({
+  const response: IRole = await postRequest<IRole>({
     requestPath: url,
     body,
     requestInit: clientConfig
+  })
+  if (!response) return null
+  return response
+}
+
+export const fetchRole = async ({
+                                  roleId,
+                                  xScreen
+                                }: IGetRoleProps): Promise<null | IRole> => {
+  const {id} = xScreen
+  const clientConfig: RequestInit | null = await authenticClient({
+    xScreen: id
+  })
+  if (!clientConfig) return null
+  const requestPath: string = getRole.replace("[id]", roleId)
+  const url: URL = getHelpers.composeRequestPath({requestPath})
+  const response: IRole = await getRequest<IRole>({
+    requestPath: url,
+    requestInit: clientConfig,
   })
   if (!response) return null
   return response
