@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import Link from "next/link"
 import { authConfig } from "@/auth/domain/config/auth-config"
 import UserLoginForm from "@/auth/presentation/components/user-login-form"

@@ -1,26 +1,22 @@
 "use client"
 
-import React, {ReactNode} from "react"
-import useTempData
-  from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
-import Breadcrumb
-  from "@/src/modules/global/presentation/components/navbar-components/breadcrumb"
-import UserMenu
-  from "@/src/modules/global/presentation/components/navbar-components/user-menu"
+import React, { ReactNode } from "react"
+import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
+import Breadcrumb from "@/src/modules/global/presentation/components/navbar-components/breadcrumb"
+import ProfileDropdown from "@/src/modules/global/presentation/components/navbar-components/profile-dropdown"
+import UserMenu from "@/src/modules/global/presentation/components/navbar-components/user-menu"
 import {
   sessionUserAtom,
-  sidebarAtom
+  sidebarAtom,
 } from "@/src/modules/global/presentation/state/global-states"
-import {Menu} from "@headlessui/react"
-import {Bars3BottomLeftIcon} from "@heroicons/react/24/outline"
-import ProfileDropdown
-  from "@/src/modules/global/presentation/components/navbar-components/profile-dropdown";
-import {User} from "next-auth";
-import {useAtom, useAtomValue} from "jotai";
+import { Menu } from "@headlessui/react"
+import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline"
+import { useAtom, useAtomValue } from "jotai"
+import { User } from "next-auth"
 
 export default function Navbar(): ReactNode {
   const [open, setOpen] = useAtom(sidebarAtom)
-  const loggedInUser: User | null = useAtomValue<User|null>(sessionUserAtom)
+  const loggedInUser: User | null = useAtomValue<User | null>(sessionUserAtom)
   const { userNavigation } = useTempData()
 
   return (

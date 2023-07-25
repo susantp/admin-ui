@@ -1,4 +1,4 @@
-import {IRoleEndpoints} from "@/src/modules/roles/domain/config/role-endpoints"
+import { IRoleEndpoints } from "@/src/modules/roles/domain/config/role-endpoints"
 
 export const roleEndpoints: IRoleEndpoints = {
   getRoles: "admin/roles/",
@@ -6,5 +6,5 @@ export const roleEndpoints: IRoleEndpoints = {
   getToRoles: "admin/top-roles/",
   postRole: "admin/roles/",
   getRole: "admin/role/[id]/",
-  putRole: "admin/role/[id]/"
+  putRole: "admin/role/[id]/",
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { authConfig } from "@/auth/domain/config/auth-config"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"

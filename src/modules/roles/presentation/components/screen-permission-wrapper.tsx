@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 
 interface IScreenPermissionWrapperProps {
   children: React.ReactNode
 }
 
 export default function ScreenPermissionWrapper({
-                                   children,
-                                 }: IScreenPermissionWrapperProps): React.ReactNode {
+  children,
+}: IScreenPermissionWrapperProps): React.ReactNode {
   return (
     <div
       id="screen-permission-wrapper"

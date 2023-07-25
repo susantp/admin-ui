@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import Image from "next/image"
 import { InterfacePeople } from "@/src/modules/dashboard/domain/types/dashboard-type"
 

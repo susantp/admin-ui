@@ -5,13 +5,12 @@ import React, { useEffect } from "react"
 
 import { Button } from "@/components/ui/button"
 
-export default function Error({
-  error,
-  reset,
-}: {
+interface IErrorProps {
   error: Error
   reset: () => void
-}): React.ReactNode {
+}
+
+export default function Error({ error, reset }: IErrorProps): React.ReactNode {
   useEffect(() => {
     // Log the error to an error reporting service
   }, [error])

@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import { PlusIcon } from "@heroicons/react/20/solid"
 
 interface ICreateButtonParams {

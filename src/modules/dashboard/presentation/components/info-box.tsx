@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
 import { ITopRolesResponseData } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"

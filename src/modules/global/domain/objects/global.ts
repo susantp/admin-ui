@@ -1,4 +1,4 @@
-import {InterfaceAppPaths} from "@/src/modules/global/domain/types/helpers"
+import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
 
 export const appPaths: InterfaceAppPaths = {
   home: {
@@ -35,7 +35,7 @@ export const appPaths: InterfaceAppPaths = {
     path: (id: number | string): string => `${appPaths.roles.path}/${id}/edit`,
     label: "Edit Role",
     name: "roles",
-    id: "edit-role"
+    id: "edit-role",
   },
   screens: {
     path: "/screens",

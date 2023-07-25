@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import { PocSectionHeader } from "@/src/modules/dashboard/presentation/components/poc-section-header"
 
 interface ISectionProps {

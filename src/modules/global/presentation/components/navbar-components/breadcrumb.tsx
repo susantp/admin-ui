@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"

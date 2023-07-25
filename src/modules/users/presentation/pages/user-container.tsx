@@ -1,6 +1,6 @@
 "use client"
 
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
 import Section from "@/src/modules/dashboard/presentation/components/section"
 import PocContainer from "@/src/modules/global/presentation/components/poc-container"

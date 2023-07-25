@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 interface IPocColDivProps {
   children: React.ReactNode
@@ -7,14 +7,16 @@ interface IPocColDivProps {
 }
 
 export default function PocColDiv({
-                                    children,
-                                    lgColCount,
-                                    defaultColCount
-                                  }: IPocColDivProps): React.ReactNode {
-  return <div
-    id="screens"
-    className={`grid grid-cols-${defaultColCount} lg:grid-cols-${lgColCount} items-center justify-center gap-6`}
-  >
-    {children}
-  </div>
+  children,
+  lgColCount,
+  defaultColCount,
+}: IPocColDivProps): React.ReactNode {
+  return (
+    <div
+      id="screens"
+      className={`grid grid-cols-${defaultColCount} lg:grid-cols-${lgColCount} items-center justify-center gap-6`}
+    >
+      {children}
+    </div>
+  )
 }

@@ -1,4 +1,4 @@
-import React, {Fragment, ReactNode} from "react"
+import React, { Fragment, ReactNode } from "react"
 import { sidebarAtom } from "@/src/modules/global/presentation/state/global-states"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"

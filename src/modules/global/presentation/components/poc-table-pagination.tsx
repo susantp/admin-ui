@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 
 export default function PocTablePagination(): ReactNode {

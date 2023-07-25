@@ -1,6 +1,6 @@
 "use client"
 
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import { Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"

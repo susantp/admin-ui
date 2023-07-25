@@ -1,4 +1,3 @@
-import {IRoleFormValues} from "../types/service";
+import { IRoleFormValues } from "../types/service"
 
-
-export const roleFormFieldValue: IRoleFormValues = {name:'', permissions:[]}
+export const roleFormFieldValue: IRoleFormValues = { name: "", permissions: [] }

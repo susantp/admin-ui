@@ -1,15 +1,11 @@
-import {
-  IScreen
-} from "@/src/modules/global/domain/types/repository/global-repository"
-import {
-  IPermission
-} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import React from "react"
+import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
+import { IPermission } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import {
   IRolesMappedResponseData,
   IRolesOriginalResponseData,
 } from "@/src/modules/roles/domain/types/repository"
-import {ClassValue} from "clsx/clsx"
-import React from "react";
+import { ClassValue } from "clsx/clsx"
 
 interface InterfacePathBase {
   id: string
@@ -30,7 +26,7 @@ export interface InterfaceAppPaths {
   dashboard: InterfaceStaticPath
   users: InterfaceStaticPath
   roles: InterfaceStaticPath
-  editRole: InterfaceDynamicPath,
+  editRole: InterfaceDynamicPath
   createRole: InterfaceDynamicPath
   screens: InterfaceStaticPath
 }
@@ -50,7 +46,7 @@ export interface InterfaceGetHelpers {
   getBackendProjectName: () => string
   getBackendBaseUrl: () => string
   getAppUrl: () => string
-  composeRequestPath: ({requestPath}: IComposeRequestPathParams) => URL
+  composeRequestPath: ({ requestPath }: IComposeRequestPathParams) => URL
   getUniqueScreensFromPermissionsResponseData: (data: IPermission[]) => string[]
   toTitleCase: (data: string) => string
   mapRolesData: (

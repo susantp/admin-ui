@@ -1,6 +1,6 @@
 "use client"
 
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react"
 import useTempData from "@/src/modules/dashboard/data/datasources/dashboard-datasource"
 import InfoBox from "@/src/modules/dashboard/presentation/components/info-box"
 import MostViewedWrapper from "@/src/modules/dashboard/presentation/components/most-viewed-wrapper"

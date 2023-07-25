@@ -1,19 +1,11 @@
-import {useEffect, useState} from "react"
-import {
-  IScreen
-} from "@/src/modules/global/domain/types/repository/global-repository"
+import { useEffect, useState } from "react"
+import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
-import {
-  currentScreenAtom
-} from "@/src/modules/global/presentation/state/global-states"
-import {
-  fetchRoles
-} from "@/src/modules/roles/domain/services/role-server-actions"
-import {
-  IRolesMappedResponseData
-} from "@/src/modules/roles/domain/types/repository"
-import {rolesAtom} from "@/src/modules/roles/presentation/state/role-state"
-import {useAtom, useAtomValue} from "jotai"
+import { currentScreenAtom } from "@/src/modules/global/presentation/state/global-states"
+import { fetchRoles } from "@/src/modules/roles/domain/services/role-server-actions"
+import { IRolesMappedResponseData } from "@/src/modules/roles/domain/types/repository"
+import { rolesAtom } from "@/src/modules/roles/presentation/state/role-state"
+import { useAtom, useAtomValue } from "jotai"
 
 interface IUseRoleContainerActions {
   roles: IRolesMappedResponseData | null
@@ -31,23 +23,24 @@ export default function useRoleContainerActions(): IUseRoleContainerActions {
   const [open, setOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    if (currentScreen) {
-      fetchRoles({
-        xScreen: currentScreen,
+    if (!currentScreen) return (): void => setRoles(null)
+
+    fetchRoles({
+      xScreen: currentScreen,
+    })
+      .then((data) => {
+        if (data) {
+          const mappedData: IRolesMappedResponseData =
+            getHelpers.mapRolesData(data)
+          setRoles(mappedData)
+        }
+        setLoading(false)
       })
-        .then((data) => {
-          if (data) {
-            const mappedData: IRolesMappedResponseData =
-              getHelpers.mapRolesData(data)
-            setRoles(mappedData)
-          }
-          setLoading(false)
-        })
-        .catch(() => setLoading(false))
-        .finally(() => setLoading(false))
-    }
+      .catch(() => setLoading(false))
+      .finally(() => setLoading(false))
+
     return (): void => setRoles(null)
-  }, [currentScreen?.id])
+  }, [currentScreen])
 
   const toggleDialog = (): void => setOpen(!open)
   const handleDelete = (): void => setOpen(true)

@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page(): React.ReactNode {
-  return <CreateEditRoleContainer slug={null}  />
+  return <CreateEditRoleContainer slug={null} />
 }

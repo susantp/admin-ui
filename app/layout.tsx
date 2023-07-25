@@ -1,18 +1,18 @@
 import "@/styles/globals.css"
 
-import React, {ReactNode} from "react"
-import {Metadata} from "next"
-import {NextFont} from "next/dist/compiled/@next/font"
-import {Roboto} from "next/font/google"
+import React, { ReactNode } from "react"
+import { Metadata } from "next"
+import { NextFont } from "next/dist/compiled/@next/font"
+import { Roboto } from "next/font/google"
 
-import {Toaster} from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster"
 import Providers from "@/app/providers"
 
 const roboto: NextFont = Roboto({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -24,16 +24,16 @@ interface RootLayoutProps {
   children: ReactNode
 }
 
-export default function RootLayout({children}: RootLayoutProps): ReactNode {
+export default function RootLayout({ children }: RootLayoutProps): ReactNode {
   return (
     <html lang="en">
-    <body
-      className={`${roboto.className} bg-background`}
-      suppressHydrationWarning
-    >
-    <Providers>{children}</Providers>
-    <Toaster/>
-    </body>
+      <body
+        className={`${roboto.className} bg-background`}
+        suppressHydrationWarning
+      >
+        <Providers>{children}</Providers>
+        <Toaster />
+      </body>
     </html>
   )
 }

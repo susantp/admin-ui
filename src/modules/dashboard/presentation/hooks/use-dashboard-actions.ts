@@ -1,17 +1,9 @@
-import {useEffect, useState} from "react"
-import {
-  fetchTopRoles
-} from "@/src/modules/dashboard/domain/services/dashboard-services"
-import {
-  IScreen
-} from "@/src/modules/global/domain/types/repository/global-repository"
-import {
-  currentScreenAtom
-} from "@/src/modules/global/presentation/state/global-states"
-import {
-  ITopRolesResponseData
-} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import {useAtomValue} from "jotai"
+import { useEffect, useState } from "react"
+import { fetchTopRoles } from "@/src/modules/dashboard/domain/services/dashboard-services"
+import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
+import { currentScreenAtom } from "@/src/modules/global/presentation/state/global-states"
+import { ITopRolesResponseData } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import { useAtomValue } from "jotai"
 
 interface IDashboardActions {
   loading: boolean
@@ -25,7 +17,7 @@ export default function useDashboardActions(): IDashboardActions {
 
   useEffect(() => {
     if (currentScreen) {
-      fetchTopRoles({xScreen: currentScreen})
+      fetchTopRoles({ xScreen: currentScreen })
         .then((data) => {
           if (data) {
             setTopRoles(data)
@@ -37,7 +29,7 @@ export default function useDashboardActions(): IDashboardActions {
     }
 
     return (): void => setTopRoles(null)
-  }, [currentScreen?.id])
+  }, [currentScreen])
 
-  return {loading, topRoles}
+  return { loading, topRoles }
 }
