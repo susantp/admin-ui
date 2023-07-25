@@ -5,7 +5,8 @@ import {
 } from "@/src/modules/global/domain/types/repository/global-repository"
 import {
   getRequest,
-  postRequest
+  postRequest,
+  putRequest
 } from "@/src/modules/global/domain/utils/api-client"
 import {
   authenticClient
@@ -19,9 +20,14 @@ import {
 import {
   IRolesOriginalResponseData
 } from "@/src/modules/roles/domain/types/repository"
-import {ICreateRoleServiceProps, IGetRoleProps} from "../types/service";
+import {
+  ICreateRoleServiceProps,
+  IFetchRoleProps,
+  IUpdateRoleProps
+} from "../types/service";
 
-const {getRoles, postRole, getRole, getPermissions} = roleEndpoints
+const {getRoles, postRole, putRole, getRole, getPermissions} = roleEndpoints
+const {composeRequestPath} = getHelpers
 
 export const fetchRoles = async ({
                                    xScreen,
@@ -33,7 +39,7 @@ export const fetchRoles = async ({
   })
   if (!clientConfig) return null
   const requestPath: string = getRoles
-  const url: URL = getHelpers.composeRequestPath({requestPath})
+  const url: URL = composeRequestPath({requestPath})
 
   const responseRoles: IRolesOriginalResponseData | null | undefined =
     await getRequest<IRolesOriginalResponseData | null>({
@@ -53,7 +59,7 @@ export const fetchPermissions = async ({
   })
   if (!clientConfig) return null
   const requestPath: string = getPermissions
-  const url: URL = getHelpers.composeRequestPath({requestPath})
+  const url: URL = composeRequestPath({requestPath})
 
   const responsePermissions: IPermission[] = await getRequest<IPermission[]>({
     requestPath: url,
@@ -73,7 +79,7 @@ export const createRole = async ({
   })
   if (!clientConfig) return null
   const requestPath: string = postRole
-  const url: URL = getHelpers.composeRequestPath({requestPath})
+  const url: URL = composeRequestPath({requestPath})
   const response: IRole = await postRequest<IRole>({
     requestPath: url,
     body,
@@ -85,18 +91,39 @@ export const createRole = async ({
 
 export const fetchRole = async ({
                                   roleId,
-                                  xScreen
-                                }: IGetRoleProps): Promise<null | IRole> => {
+                                  xScreen,
+                                }: IFetchRoleProps): Promise<null | IRole> => {
   const {id} = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
     xScreen: id
   })
   if (!clientConfig) return null
   const requestPath: string = getRole.replace("[id]", roleId)
-  const url: URL = getHelpers.composeRequestPath({requestPath})
+  const url: URL = composeRequestPath({requestPath})
   const response: IRole = await getRequest<IRole>({
     requestPath: url,
     requestInit: clientConfig,
+  })
+  if (!response) return null
+  return response
+}
+
+export const updateRole = async ({
+                                   roleId,
+                                   xScreen,
+                                   body
+                                 }: IUpdateRoleProps): Promise<IRole | null> => {
+  const {id} = xScreen
+  const clientConfig: RequestInit | null = await authenticClient({
+    xScreen: id
+  })
+  if (!clientConfig) return null
+  const requestPath: string = putRole.replace("[id]", roleId)
+  const url: URL = composeRequestPath({requestPath})
+  const response: IRole = await putRequest<IRole>({
+    requestPath: url,
+    requestInit: clientConfig,
+    body
   })
   if (!response) return null
   return response

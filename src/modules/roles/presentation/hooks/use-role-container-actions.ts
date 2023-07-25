@@ -7,8 +7,7 @@ import {
   currentScreenAtom
 } from "@/src/modules/global/presentation/state/global-states"
 import {
-  fetchRoles,
-  getRoles
+  fetchRoles
 } from "@/src/modules/roles/domain/services/role-server-actions"
 import {
   IRolesMappedResponseData

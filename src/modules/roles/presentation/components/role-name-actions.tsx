@@ -6,9 +6,15 @@ import React from "react";
 
 interface IRoleFormActions {
   isSubmitting: boolean
+  slug: string | null
 }
 
-export default function RoleFormActions({isSubmitting}: IRoleFormActions): React.ReactNode {
+export default function RoleFormActions({
+                                          isSubmitting,
+                                          slug
+                                        }: IRoleFormActions): React.ReactNode {
+  let submitValue: string = slug ? "Update" : "Submit"
+  submitValue = isSubmitting ? "Please wait..." : submitValue
   return <div
     className="flex flex-shrink-0 justify-end border border-t-gray-200 px-4 py-4 mt-6">
     <Link
@@ -19,7 +25,7 @@ export default function RoleFormActions({isSubmitting}: IRoleFormActions): React
       Cancel
     </Link>
     <input
-      value={isSubmitting ? "Please wait..." : "Submit"}
+      value={submitValue}
       type="submit"
       className="cursor-pointer ml-4 inline-flex justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
     />

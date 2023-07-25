@@ -1,9 +1,10 @@
 import {IRoleEndpoints} from "@/src/modules/roles/domain/config/role-endpoints"
 
 export const roleEndpoints: IRoleEndpoints = {
-  getRoles: "admin/roles/", // getRoles
-  getPermissions: "admin/permissions/", // getPermissions
-  getToRoles: "admin/top-roles/", // getToRoles
-  postRole: "admin/roles/", // postRole
-  getRole: `admin/role/[id]/` // getRole
+  getRoles: "admin/roles/",
+  getPermissions: "admin/permissions/",
+  getToRoles: "admin/top-roles/",
+  postRole: "admin/roles/",
+  getRole: "admin/role/[id]/",
+  putRole: "admin/role/[id]/"
 }

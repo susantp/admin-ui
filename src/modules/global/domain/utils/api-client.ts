@@ -22,6 +22,17 @@ const postRequest = async <TResponse>({
   return handleResponse(response)
 }
 
+const putRequest = async <TResponse>({
+                                        requestPath,
+                                        requestInit,
+                                        body,
+                                      }: IPostRequestParams): Promise<TResponse> => {
+  const init = { ...requestInit, method: "PUT", body }
+  const response: Response = await fetch(requestPath, init)
+
+  return handleResponse(response)
+}
+
 const getRequest = async <T>({
   requestPath,
   requestInit,
@@ -30,4 +41,4 @@ const getRequest = async <T>({
   return handleResponse(response)
 }
 
-export { getRequest, postRequest, handleResponse }
+export { getRequest, postRequest, putRequest, handleResponse }

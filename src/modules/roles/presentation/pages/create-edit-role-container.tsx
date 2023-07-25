@@ -31,22 +31,22 @@ export default function CreateEditRoleContainer({slug}: ICreateEditRoleContainer
   const {
     loading,
     groupedData,
-    roleCreateForm,
+    roleCreateForm: {
+      handleSubmit,
+      errors,
+      values,
+      handleChange,
+      setFieldValue,
+      isSubmitting
+    },
     open,
     setIsOpen,
     apiError,
     helperTexts: {formSubtitle, formTitle, dialogBoxTitle, dialogBoxDescription}
-  } = useCreateEditRoleContainerActions(slug)
+  } = useCreateEditRoleContainerActions({slug})
 
   if (loading || !groupedData || !groupedData.length) return <PocLoader/>
 
-  const {
-    handleSubmit,
-    errors,
-    values,
-    handleChange,
-    setFieldValue
-  } = roleCreateForm
   return (
     <PocContainer>
       <Section label="" subLabel={null} actionEl={null}>
@@ -66,7 +66,7 @@ export default function CreateEditRoleContainer({slug}: ICreateEditRoleContainer
               />)}
             </PocColDiv>
           </ScreenPermissionWrapper>
-          <RoleFormActions isSubmitting={roleCreateForm.isSubmitting}/>
+          <RoleFormActions isSubmitting={isSubmitting} slug={slug}/>
         </RoleForm>
       </Section>
 

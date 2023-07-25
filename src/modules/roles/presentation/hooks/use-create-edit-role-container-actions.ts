@@ -8,7 +8,8 @@ import {
 import {
   createRole,
   fetchPermissions,
-  fetchRole
+  fetchRole,
+  updateRole
 } from "@/src/modules/roles/domain/services/role-server-actions"
 import {
   IGroupedScreenWithPermissions,
@@ -46,8 +47,12 @@ interface IUseCreateRoleContainerActions {
   helperTexts: IHelperTexts
 }
 
+interface IUseCreateRoleContainerActionsProps {
+  slug: string | null
+}
 
-export default function useCreateEditRoleContainerActions(slug: string | null): IUseCreateRoleContainerActions {
+
+export default function useCreateEditRoleContainerActions({slug}: IUseCreateRoleContainerActionsProps): IUseCreateRoleContainerActions {
   const [permissions, setPermissions] = useAtom(permissionsAtom)
   const currentScreen = useAtomValue<IScreen | null>(currentScreenAtom)
   const [loading, setLoading] = useState<boolean>(true)
@@ -57,6 +62,7 @@ export default function useCreateEditRoleContainerActions(slug: string | null): 
 
   useEffect(() => {
     if (currentScreen) {
+      setLoading(true)
       fetchPermissions({xScreen: currentScreen})
         .then((data) => {
           if (data) {
@@ -83,7 +89,10 @@ export default function useCreateEditRoleContainerActions(slug: string | null): 
         .catch(() => setLoading(false))
         .finally(() => setLoading(false))
     }
-    // return (): void => setPermissions(null)
+    return (): void => {
+      setPermissions(null)
+      setInitialValues(roleFormFieldValue)
+    }
   }, [currentScreen?.id])
 
 
@@ -96,10 +105,16 @@ export default function useCreateEditRoleContainerActions(slug: string | null): 
   const handleFormSubmit = async (values: IRoleFormValues, actions: FormikHelpers<IRoleFormValues>): Promise<void> => {
     // TODO if not current screen set instead of throwing error give toast message
     if (!currentScreen) throw new Error("Screen not set yet.")
-    const response: IRole | null = await createRole({
-      xScreen: currentScreen,
-      body: JSON.stringify(values)
-    })
+    const response: IRole | null = slug
+      ? await updateRole({
+        xScreen: currentScreen,
+        body: JSON.stringify(values),
+        roleId: slug
+      })
+      : await createRole({
+        xScreen: currentScreen,
+        body: JSON.stringify(values)
+      })
 
     handleFormSubmitResponse({
       actions,

@@ -10,10 +10,6 @@ export interface IPostRequestParams {
   requestInit: RequestInit
   body: BodyInit
 }
-export interface InterfaceApiClient {
-  getRequest: <T>() => Promise<T | null>
-  postRequest: <TResponse>(payload: BodyInit) => Promise<TResponse | null>
-}
 
 export interface ApiClientParams {
   baseUrl?: string

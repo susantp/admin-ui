@@ -14,10 +14,15 @@ export interface IRoleFormValues extends FormikValues {
 }
 
 export interface ICreateRoleServiceProps extends IServiceProps {
-  body: string
+  body: BodyInit
 }
 
-export interface IGetRoleProps extends IServiceProps{
+export interface IUpdateRoleProps extends IServiceProps{
+  roleId: string
+  body: BodyInit
+}
+
+export interface IFetchRoleProps extends IServiceProps{
   roleId: string
 }
 
