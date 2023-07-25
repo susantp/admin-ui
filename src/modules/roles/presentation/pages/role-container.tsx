@@ -31,7 +31,7 @@ export default function RoleContainer(): React.ReactNode {
       <Section
         label="Role Management"
         subLabel="Create, edit or delete roles"
-        actionEl={<ActionLink path={`${appPaths.roles.path}/create`}/>}
+        actionEl={<ActionLink path={appPaths.createRole.path('')}/>}
       >
         <PocRoleListWrapper>
           {results.map((role) => (

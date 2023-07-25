@@ -1,26 +1,41 @@
-import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { IPermission } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import {
+  IScreen
+} from "@/src/modules/global/domain/types/repository/global-repository"
+import {
+  IPermission
+} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
 import {
   IRolesMappedResponseData,
   IRolesOriginalResponseData,
 } from "@/src/modules/roles/domain/types/repository"
-import { ClassValue } from "clsx/clsx"
+import {ClassValue} from "clsx/clsx"
+import React from "react";
 
-interface InterfacePathObject {
+interface InterfacePathBase {
   id: string
-  path: string
   label: string
   name: string
 }
 
-export interface InterfaceAppPaths {
-  home: InterfacePathObject
-  dashboard: InterfacePathObject
-  users: InterfacePathObject
-  roles: InterfacePathObject
-  screens: InterfacePathObject
+interface InterfaceStaticPath extends InterfacePathBase {
+  path: string
 }
-type IconSet = Record<string, { icon: JSX.Element }>
+
+interface InterfaceDynamicPath extends InterfacePathBase {
+  path: (id: string | number) => string
+}
+
+export interface InterfaceAppPaths {
+  home: InterfaceStaticPath
+  dashboard: InterfaceStaticPath
+  users: InterfaceStaticPath
+  roles: InterfaceStaticPath
+  editRole: InterfaceDynamicPath,
+  createRole: InterfaceDynamicPath
+  screens: InterfaceStaticPath
+}
+
+type IconSet = Record<string, { icon: React.ReactNode }>
 
 export interface IComposeRequestPathParams {
   requestPath: string
@@ -35,7 +50,7 @@ export interface InterfaceGetHelpers {
   getBackendProjectName: () => string
   getBackendBaseUrl: () => string
   getAppUrl: () => string
-  composeRequestPath: ({ requestPath }: IComposeRequestPathParams) => URL
+  composeRequestPath: ({requestPath}: IComposeRequestPathParams) => URL
   getUniqueScreensFromPermissionsResponseData: (data: IPermission[]) => string[]
   toTitleCase: (data: string) => string
   mapRolesData: (
