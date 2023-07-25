@@ -73,8 +73,8 @@ export const handleFormSubmitResponse = ({
     setApiError(({message: errorMsg}))
     setIsOpen(!open)
   }
-  setIsOpen(!open)
   actions.resetForm()
+  setIsOpen(!open)
 }
 
 export const getPermissionIds = ({permissions}: IGetPermissionIdsProps): string[] => {

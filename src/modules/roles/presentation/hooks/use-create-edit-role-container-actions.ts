@@ -16,10 +16,7 @@ import {
   IPermission,
   IRole,
 } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import {
-  permissionsAtom
-} from "@/src/modules/roles/presentation/state/role-state"
-import {useAtom, useAtomValue} from "jotai"
+import {useAtomValue} from "jotai"
 import {FormikHelpers, FormikProps, useFormik} from "formik";
 import {
   roleFormFieldValue
@@ -53,7 +50,7 @@ interface IUseCreateRoleContainerActionsProps {
 
 
 export default function useCreateEditRoleContainerActions({slug}: IUseCreateRoleContainerActionsProps): IUseCreateRoleContainerActions {
-  const [permissions, setPermissions] = useAtom(permissionsAtom)
+  const [permissions, setPermissions] = useState<IPermission[] | null>(null)
   const currentScreen = useAtomValue<IScreen | null>(currentScreenAtom)
   const [loading, setLoading] = useState<boolean>(true)
   const [open, setIsOpen] = useState(false)

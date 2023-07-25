@@ -8,8 +8,8 @@ interface IPocDialogBoxParams {
   description: string
   open: boolean
   onClose: () => void
-  goBackPath: string | null
-  addNewPath: string | null
+  goBackPath?: string | null
+  addNewPath?: string | null
 }
 
 function PocDialogBox({
@@ -17,9 +17,10 @@ function PocDialogBox({
                         description,
                         onClose,
                         open,
-                        goBackPath,
-                        addNewPath
+                        goBackPath = null,
+                        addNewPath = null
                       }: IPocDialogBoxParams): ReactNode {
+
   return (
     <Dialog className="relative z-10" onClose={onClose} open={open}>
       <div
@@ -33,16 +34,16 @@ function PocDialogBox({
                 <Dialog.Title className="text-lg font-medium text-white">
                   {title}
                 </Dialog.Title>
-                <div className="ml-3 flex h-7 items-center">
-                  <button
-                    type="button"
-                    className="rounded-md bg-teal-700 text-gray-100 hover:text-white focus:outline-none "
-                    onClick={onClose}
-                  >
-                    <span className="sr-only">Close panel</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true"/>
-                  </button>
-                </div>
+                {/*<div className="ml-3 flex h-7 items-center">*/}
+                {/*  <button*/}
+                {/*    type="button"*/}
+                {/*    className="rounded-md bg-teal-700 text-gray-100 hover:text-white focus:outline-none "*/}
+                {/*    onClick={onClose}*/}
+                {/*  >*/}
+                {/*    <span className="sr-only">Close panel</span>*/}
+                {/*    <XMarkIcon className="h-6 w-6" aria-hidden="true"/>*/}
+                {/*  </button>*/}
+                {/*</div>*/}
               </div>
               <Dialog.Description className="text-sm text-white py-5">
                 {description}
@@ -69,3 +70,8 @@ function PocDialogBox({
 }
 
 export default PocDialogBox
+
+PocDialogBox.defaultProps = {
+  goBackPath: null,
+  addNewPath: null,
+};

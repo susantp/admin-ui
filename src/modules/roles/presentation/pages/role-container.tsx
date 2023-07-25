@@ -51,8 +51,6 @@ export default function RoleContainer(): React.ReactNode {
         onClose={toggleDialog}
         title="Feature not available"
         description="We will get back soon!"
-        addNewPath={null}
-        goBackPath={null}
       />
     </PocContainer>
   )
