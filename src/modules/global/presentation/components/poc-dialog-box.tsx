@@ -7,8 +7,8 @@ interface IPocDialogBoxParams {
   description: string
   open: boolean
   onClose: () => void
-  goBackPath?: string | null
-  addNewPath?: string | null
+  goBackPath: string | null
+  addNewPath: string | null
 }
 
 function PocDialogBox({
@@ -66,7 +66,4 @@ function PocDialogBox({
 
 export default PocDialogBox
 
-PocDialogBox.defaultProps = {
-  goBackPath: null,
-  addNewPath: null,
-}
+

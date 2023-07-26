@@ -7,7 +7,7 @@ import { Layers } from "lucide-react"
 
 interface IRoleListProps {
   role: IRole
-  onDelete: () => void
+  onDelete: (role: IRole) => void
 }
 
 export default function PocRole({
@@ -15,25 +15,27 @@ export default function PocRole({
   onDelete,
 }: IRoleListProps): React.ReactNode {
   const { permittedScreens } = UseRoleListActions(role)
+  const {id, name} = role
+  const {length} = permittedScreens
   return (
     <div className="group relative flex items-center px-5 py-6 justify-between flex-wrap ">
       <div className="ml-4 ">
         <p className="truncate text-sm font-medium text-gray-900">
-          {role.name}
+          {name}
         </p>
         <div className="truncate inline-flex gap-x-3 items-center py-4 text-sm text-gray-500 overflow-hidden">
-          <Layers /> {permittedScreens.length} Screens permitted.
+          <Layers /> {length} Screens permitted.
         </div>
       </div>
 
       <div className="flex gap-2 justify-between items-center">
         <Link
-          href={appPaths.editRole.path(role.id)}
+          href={appPaths.editRole.path(id)}
           className="primaryButtonStyle"
         >
           Edit
         </Link>
-        <button type="button" className="dangerButtonStyle" onClick={onDelete}>
+        <button type="button" className="dangerButtonStyle" onClick={():void => onDelete(role)}>
           Delete
         </button>
       </div>
