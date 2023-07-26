@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {Dispatch, SetStateAction, useEffect, useState} from "react"
 import {
   IScreen
 } from "@/src/modules/global/domain/types/repository/global-repository"
@@ -7,32 +7,49 @@ import {
   currentScreenAtom
 } from "@/src/modules/global/presentation/state/global-states"
 import {
-  fetchRoles
+  fetchRoles,
+  removeRole
 } from "@/src/modules/roles/domain/services/role-server-actions"
 import {
   IRolesMappedResponseData
 } from "@/src/modules/roles/domain/types/repository"
-import {rolesAtom} from "@/src/modules/roles/presentation/state/role-state"
 import {useAtom, useAtomValue} from "jotai"
 import {IRole} from "@/src/modules/roles/domain/types/endpoints/role-endpoints";
+import {
+  INoContentApiResponse
+} from "@/src/modules/global/domain/types/api-client";
+import {rolesAtom} from "@/src/modules/roles/presentation/state/role-state";
 
 interface IUseRoleContainerActions {
   roles: IRolesMappedResponseData | null
   loading: boolean
+  openDialog: boolean
+  toggleDialog: () => void
   handleDelete: (role: IRole) => void
   openModal: boolean
   toggleModal: () => void
   currentScreen: IScreen | null
-  handleConfirmDelete: () => void
+  handleConfirmDelete: () => Promise<void>
   deletionRole: IRole | null
+  dialogBoxLabels: IDialogBoxLabels
+}
+
+interface IDialogBoxLabels {
+  title: string
+  description: string
 }
 
 export default function useRoleContainerActions(): IUseRoleContainerActions {
   const [roles, setRoles] = useAtom(rolesAtom)
   const currentScreen = useAtomValue<IScreen | null>(currentScreenAtom)
   const [loading, setLoading] = useState<boolean>(true)
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [deletionRole, setDeletionRole] = useState<IRole | null>(null)
+  const [dialogBoxLabels, setDialogBoxLabels] = useState<IDialogBoxLabels>({
+    description: "",
+    title: ""
+  })
 
   useEffect(() => {
     if (!currentScreen) return (): void => setRoles(null)
@@ -42,7 +59,6 @@ export default function useRoleContainerActions(): IUseRoleContainerActions {
     })
       .then((data) => {
         if (data) {
-          console.log(data)
           const mappedData: IRolesMappedResponseData =
             getHelpers.mapRolesData(data)
           setRoles(mappedData)
@@ -53,25 +69,73 @@ export default function useRoleContainerActions(): IUseRoleContainerActions {
       .finally(() => setLoading(false))
 
     return (): void => setRoles(null)
-  }, [currentScreen])
+  }, [currentScreen, setRoles, openDialog])
 
+  const toggleDialog = (): void => setOpenDialog(!openDialog)
   const toggleModal = (): void => setOpenModal(!openModal)
   const handleDelete = (role: IRole): void => {
     setDeletionRole(role)
     toggleModal()
   }
-  const handleConfirmDelete = (): void => {
-    // TODO get deletion role id and send api request to delete
-    console.log(deletionRole)
+
+  const cancelPromptWithMessage = (labels: IDialogBoxLabels, handleDialogBoxLabels: Dispatch<SetStateAction<IDialogBoxLabels>>, handleModal: () => void, handleDialog: () => void): void => {
+    handleDialogBoxLabels(labels)
+    handleModal()
+    handleDialog()
   }
+
+  const handleConfirmDelete = async (): Promise<void> => {
+    if (!deletionRole) return;
+    if (!currentScreen) return;
+    const labels: IDialogBoxLabels = {
+      title: "",
+      description: ""
+    }
+    const {members} = deletionRole
+
+    if (members) {
+      const helperTexts: IDialogBoxLabels = {
+        ...labels,
+        title: "Operation failed!!",
+        description: `${deletionRole.name} with ${members} ${members > 1 ? `members` : `member`} assigned can't be deleted.`
+      }
+      cancelPromptWithMessage(helperTexts, setDialogBoxLabels, toggleModal, toggleDialog)
+      return;
+    }
+
+    const response: INoContentApiResponse | null = await removeRole({
+      xScreen: currentScreen,
+      roleId: deletionRole.id
+    })
+    if (!response) {
+      const responseTexts: IDialogBoxLabels = {
+        ...labels,
+        title: "Failed",
+        description: "Sorry unintentional error occurred."
+      }
+      cancelPromptWithMessage(responseTexts, setDialogBoxLabels, toggleModal, toggleDialog)
+      return
+    }
+    const responseTexts: IDialogBoxLabels = {
+      ...labels,
+      title: "Success",
+      description: response.message
+    }
+    cancelPromptWithMessage(responseTexts, setDialogBoxLabels, toggleModal, toggleDialog)
+  }
+
+
   return {
     roles,
     loading,
+    openDialog,
     handleDelete,
+    toggleDialog,
     handleConfirmDelete,
     currentScreen,
     toggleModal,
     openModal,
-    deletionRole
+    deletionRole,
+    dialogBoxLabels
   }
 }

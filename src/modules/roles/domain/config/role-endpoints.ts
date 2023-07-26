@@ -5,4 +5,5 @@ export interface IRoleEndpoints {
   postRole: string
   getRole: string
   putRole: string
+  deleteRole: string
 }

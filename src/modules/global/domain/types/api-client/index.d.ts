@@ -11,6 +11,11 @@ export interface IPostRequestParams {
   body: BodyInit
 }
 
+export interface IDeleteRequestParams{
+  requestPath: URL
+  requestInit: RequestInit
+}
+
 export interface ApiClientParams {
   baseUrl?: string
   accessToken?: string
@@ -21,4 +26,9 @@ export interface ApiResponse<T> {
   data: T
   status: number
   error: string
+}
+
+export interface INoContentApiResponse{
+  message: string
+  success: boolean
 }

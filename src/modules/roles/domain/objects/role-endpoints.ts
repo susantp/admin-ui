@@ -5,6 +5,7 @@ export const roleEndpoints: IRoleEndpoints = {
   getPermissions: "admin/permissions/",
   getToRoles: "admin/top-roles/",
   postRole: "admin/roles/",
-  getRole: "admin/role/[id]/",
-  putRole: "admin/role/[id]/",
+  getRole: "admin/role/{id}/",
+  putRole: "admin/role/{id}/",
+  deleteRole: "admin/role/{id}/",
 }

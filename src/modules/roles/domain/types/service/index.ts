@@ -21,6 +21,10 @@ export interface IUpdateRoleProps extends IServiceProps {
   body: BodyInit
 }
 
+export interface IDeleteRoleProps extends IServiceProps {
+  roleId: string
+}
+
 export interface IFetchRoleProps extends IServiceProps {
   roleId: string
 }

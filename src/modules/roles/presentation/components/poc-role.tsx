@@ -2,7 +2,7 @@ import React from "react"
 import Link from "next/link"
 import {appPaths} from "@/src/modules/global/domain/objects/global"
 import {IRole} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import {User, Users} from "lucide-react"
+import {Users} from "lucide-react"
 
 interface IRoleListProps {
   role: IRole

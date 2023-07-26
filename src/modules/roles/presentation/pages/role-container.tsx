@@ -19,7 +19,8 @@ import {
 } from "@/src/modules/roles/presentation/components/poc-role-list-wrapper"
 import useRoleContainerActions
   from "@/src/modules/roles/presentation/hooks/use-role-container-actions"
-import DeleteConfirmModal from "@/src/modules/roles/presentation/components/delete-confirm-modal";
+import DeleteConfirmModal
+  from "@/src/modules/roles/presentation/components/delete-confirm-modal";
 
 export default function RoleContainer(): React.ReactNode {
   const {
@@ -29,11 +30,15 @@ export default function RoleContainer(): React.ReactNode {
     openModal,
     toggleModal,
     handleConfirmDelete,
-    deletionRole
+    deletionRole,
+    openDialog,
+    toggleDialog,
+    dialogBoxLabels
   } =
     useRoleContainerActions()
   if (loading || !roles || !roles.results.length) return <PocLoader/>
   const {results, total} = roles
+  const {title, description} = dialogBoxLabels
   return (
     <PocContainer>
       <Section
@@ -54,7 +59,17 @@ export default function RoleContainer(): React.ReactNode {
         <ShowMoreButton itemCount={results.length}/>
       </Section>
 
-      <DeleteConfirmModal isOpen={openModal} closeModal={toggleModal} handleDelete={handleConfirmDelete} role={deletionRole} />
+      <PocDialogBox
+        open={openDialog}
+        onClose={toggleDialog}
+        title={title}
+        description={description}
+        goBackPath={appPaths.roles.path}
+        addNewPath={null}
+      />
+      <DeleteConfirmModal isOpen={openModal} closeModal={toggleModal}
+                          handleDelete={handleConfirmDelete}
+                          role={deletionRole}/>
     </PocContainer>
 
   )
