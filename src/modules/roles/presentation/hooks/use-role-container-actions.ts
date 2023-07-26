@@ -42,6 +42,7 @@ export default function useRoleContainerActions(): IUseRoleContainerActions {
     })
       .then((data) => {
         if (data) {
+          console.log(data)
           const mappedData: IRolesMappedResponseData =
             getHelpers.mapRolesData(data)
           setRoles(mappedData)

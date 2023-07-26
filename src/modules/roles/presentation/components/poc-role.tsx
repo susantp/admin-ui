@@ -1,9 +1,8 @@
 import React from "react"
 import Link from "next/link"
-import { appPaths } from "@/src/modules/global/domain/objects/global"
-import { IRole } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
-import UseRoleListActions from "@/src/modules/roles/presentation/hooks/use-role-list-actions"
-import { Layers } from "lucide-react"
+import {appPaths} from "@/src/modules/global/domain/objects/global"
+import {IRole} from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import {User, Users} from "lucide-react"
 
 interface IRoleListProps {
   role: IRole
@@ -14,9 +13,7 @@ export default function PocRole({
   role,
   onDelete,
 }: IRoleListProps): React.ReactNode {
-  const { permittedScreens } = UseRoleListActions(role)
-  const {id, name} = role
-  const {length} = permittedScreens
+  const {id, name, members} = role
   return (
     <div className="group relative flex items-center px-5 py-6 justify-between flex-wrap ">
       <div className="ml-4 ">
@@ -24,7 +21,7 @@ export default function PocRole({
           {name}
         </p>
         <div className="truncate inline-flex gap-x-3 items-center py-4 text-sm text-gray-500 overflow-hidden">
-          <Layers /> {length} Screens permitted.
+          <Users /> {members} members assigned.
         </div>
       </div>
 

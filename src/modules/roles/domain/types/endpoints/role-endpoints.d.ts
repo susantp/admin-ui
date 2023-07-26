@@ -2,6 +2,7 @@ export interface IRole {
   id: string
   name: string
   permissions: IPermission[]
+  members: number
 }
 
 type TPermission = "CREATE" | "EDIT" | "UPDATE" | "DELETE"
