@@ -29,6 +29,7 @@ export interface InterfaceAppPaths {
   editRole: InterfaceDynamicPath
   createRole: InterfaceDynamicPath
   screens: InterfaceStaticPath
+  profile: InterfaceStaticPath
 }
 
 type IconSet = Record<string, { icon: React.ReactNode }>

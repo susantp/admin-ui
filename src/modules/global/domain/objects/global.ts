@@ -1,6 +1,12 @@
 import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
 
 export const appPaths: InterfaceAppPaths = {
+  profile:{
+    path: "/profile",
+    label: "Profile",
+    name: "profile",
+    id: "profile",
+  },
   home: {
     path: "/",
     label: "Home",

@@ -15,6 +15,7 @@ import {
   InboxIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline"
+import {appPaths} from "@/src/modules/global/domain/objects/global";
 
 interface InterfaceGetTempData {
   people: InterfacePeople[]
@@ -138,7 +139,7 @@ const useTempData = (): InterfaceGetTempData => {
     { name: "Dashboard", href: "#", current: true },
   ]
   const userNavigation: InterfaceUserNavigation[] = [
-    { name: "Your Profile", href: "#" },
+    { name: "Your Profile", href: appPaths.profile.path },
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ]
