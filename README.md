@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+## Project Onboarding and set up documentation
+
+Visit our [confluence documentation](https://poc-acl.atlassian.net/wiki/spaces/AP/pages/4980740) with your browser for step-by-step project set up guidelines.
+
+
 ## Starting the Server
 
 Starting the development server:
@@ -39,7 +45,38 @@ npm run format:write
 ```
 
 ### Commit Hooks
-[Husky Documentation](https://typicode.github.io/husky/)
+
+```bash
+synopsis:
+
+# Project recommended commit message format is :
+type(scope): subject (POC-****)
+
+# supported types:
+[ build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test ]
+
+# your project prefix, in our case - POC
+POC - the project prefix
+
+#use 0000 as default jira ticket number if ticket not assigned
+**** - the jira ticket number.
+
+# eg.1
+fix(server): send cors headers (POC-1011)
+
+# eg.2
+feat(blog): add comment section (POC-0011)
+
+#git message format
+git commit -m "fix(server-component): add query param validation (POC-1045)"
+
+
+# Note for linux users:
+While running "git commit" command,if you encountered errors such as : ".husky/pre-commit hook was ignored because it's not set as executable."
+please give script the executable permission : chmod +x .husky/pre-commit
+
+```
+[For more details, follow Husky Documentation](https://typicode.github.io/husky/)
 
 ## Tailwind
 Update configuration at `tailwind.config.js`
