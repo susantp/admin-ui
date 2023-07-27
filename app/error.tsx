@@ -5,13 +5,15 @@ import React, { useEffect } from "react"
 
 import { Button } from "@/components/ui/button"
 
+interface IErrorPageProps {
+  error: Error
+  reset: () => void
+}
+
 export default function Error({
   error,
   reset,
-}: {
-  error: Error
-  reset: () => void
-}): JSX.Element {
+}: IErrorPageProps): React.ReactNode {
   useEffect(() => {
     // Log the error to an error reporting service
   }, [error])

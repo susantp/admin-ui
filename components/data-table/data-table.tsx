@@ -4,12 +4,12 @@ import React, { useEffect } from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
-  PaginationState,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  PaginationState,
+  SortingState,
   useReactTable,
 } from "@tanstack/react-table"
 

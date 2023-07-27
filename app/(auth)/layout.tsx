@@ -6,7 +6,9 @@ interface AuthLayoutProps {
   children: React.ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps): JSX.Element {
+export default function AuthLayout({
+  children,
+}: AuthLayoutProps): React.ReactNode {
   const {
     pageTitle,
     logo: { path, altText, width, height },
