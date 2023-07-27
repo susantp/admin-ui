@@ -40,6 +40,10 @@ export default function UserLoginForm(): JSX.Element {
     setIsLoading(false)
 
     if (!signInResult?.error) {
+      toast({
+        title: "Success",
+        description: "Signed in successfully. Redirecting...",
+      })
       router.replace(signInResult?.url ?? "/")
     } else {
       toast({

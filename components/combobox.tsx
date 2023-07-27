@@ -43,8 +43,8 @@ export function Combobox({ value, options }: ComboboxProps): JSX.Element {
             {options.map((option) => (
               <CommandItem
                 key={option.value}
-                onSelect={(x): void => {
-                  setValue(x)
+                onSelect={(): void => {
+                  setValue(option.value)
                   setOpen(false)
                 }}
               >

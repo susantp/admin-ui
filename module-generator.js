@@ -23,7 +23,7 @@ function createModule(moduleName) {
     { path: "domain/services", file: "[module]-service.ts" },
     { path: "domain/usecases" },
     { path: "presentation/components" },
-    { path: "presentation/pages", file: "[module]-page.ts" },
+    { path: "presentation/pages", file: "[module]-route.ts" },
     { path: "presentation/hooks", file: "use-[module].ts" },
     { path: "presentation/state", file: "[module]-state.ts" },
   ]

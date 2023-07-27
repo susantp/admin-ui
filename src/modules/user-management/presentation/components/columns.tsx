@@ -1,45 +1,51 @@
 "use client"
 
 import React from "react"
-import { User } from "@/src/modules/user-management/domain/types/user"
+import {
+  User,
+  UserDetail,
+} from "@/src/modules/user-management/domain/types/user"
 import { ColumnDef } from "@tanstack/react-table"
+import { useSession } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Switch } from "@/components/ui/switch"
+import { toast } from "@/components/ui/use-toast"
 import { Combobox } from "@/components/combobox"
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
 
 export const columns: ColumnDef<User>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value): void =>
-          table.toggleAllPageRowsSelected(!!value)
-        }
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value): void => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={table.getIsAllPageRowsSelected()}
+  //       onCheckedChange={(value): void =>
+  //         table.toggleAllPageRowsSelected(!!value)
+  //       }
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value): void => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  // },
   {
     accessorKey: "username",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Username" />
     ),
-  },
-  {
-    accessorKey: "email",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
+    cell: ({ row }) => (
+      <span>
+        {row.original.username}
+        <br />
+        <span className="text-muted-foreground">{row.original.email}</span>
+      </span>
     ),
   },
   {
@@ -49,20 +55,15 @@ export const columns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }): JSX.Element => {
-      const value = row.getValue("name")
+      const detail = row.getValue<UserDetail>("name")
       return (
         <span>
-          {value.first_name} {value.last_name}
+          {detail.first_name} {detail.last_name}
+          <br />
+          <span className="text-muted-foreground">{detail.designation}</span>
         </span>
       )
     },
-  },
-  {
-    id: "designation",
-    accessorKey: "detail.designation",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Designation" />
-    ),
   },
   {
     accessorKey: "phone",
@@ -75,15 +76,38 @@ export const columns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }): JSX.Element => {
+      "use client"
+
       const isActive = row.getValue<boolean>("status")
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const [value, setValue] = React.useState(isActive)
+      const userId = row.original.id
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const session = useSession()
 
       return (
         <Switch
           checked={value}
-          onCheckedChange={(): void => {
-            setValue((prevState) => !prevState)
+          onCheckedChange={async (): Promise<void> => {
+            const accessToken = session.data?.user.access ?? ""
+
+            const response = await fetch(
+              `/api/user/${userId}/active-deactive`,
+              {
+                headers: { Authorization: `Bearer ${accessToken}` },
+              }
+            )
+
+            if (response.ok) {
+              setValue((prevState) => !prevState)
+              toast({
+                title: "User status updated!",
+              })
+            } else {
+              toast({
+                title: "Something went wrong!",
+              })
+            }
           }}
         />
       )
@@ -98,12 +122,30 @@ export const columns: ColumnDef<User>[] = [
       const isAdmin = row.getValue<boolean>("is_superuser")
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const [value, setValue] = React.useState(isAdmin)
+      const userId = row.original.id
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const session = useSession()
 
       return (
         <Switch
           checked={value}
-          onCheckedChange={(): void => {
-            setValue((prevState) => !prevState)
+          onCheckedChange={async (): Promise<void> => {
+            const accessToken = session.data?.user.access ?? ""
+
+            const response = await fetch(`/api/user/${userId}/is-superuser`, {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            })
+
+            if (response.ok) {
+              setValue((prevState) => !prevState)
+              toast({
+                title: "User status updated!",
+              })
+            } else {
+              toast({
+                title: "Something went wrong!",
+              })
+            }
           }}
         />
       )
@@ -129,14 +171,5 @@ export const columns: ColumnDef<User>[] = [
         />
       )
     },
-  },
-  {
-    id: "actions",
-    header: "Action",
-    cell: () => (
-      <Button variant="link" size="sm">
-        Edit
-      </Button>
-    ),
   },
 ]

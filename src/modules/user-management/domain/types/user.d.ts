@@ -1,3 +1,10 @@
+export interface UserDetail {
+  first_name: string
+  last_name: string
+  address1: string
+  designation: string
+}
+
 export interface User {
   id: string
   username: string
@@ -9,10 +16,5 @@ export interface User {
   created_at: string
   updated_at: string
   roles: string[]
-  detail: {
-    first_name: string
-    last_name: string
-    address1: string
-    designation: string
-  }
+  detail: UserDetail
 }
