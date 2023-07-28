@@ -11,7 +11,7 @@ export interface IPostRequestParams {
   body: BodyInit
 }
 
-export interface IDeleteRequestParams{
+export interface IDeleteRequestParams {
   requestPath: URL
   requestInit: RequestInit
 }
@@ -28,7 +28,7 @@ export interface ApiResponse<T> {
   error: string
 }
 
-export interface INoContentApiResponse{
+export interface INoContentApiResponse {
   message: string
   success: boolean
 }

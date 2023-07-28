@@ -1,5 +1,5 @@
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
-import { AuthEndpoints } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import { AuthEndpoints } from "@/src/modules/role/domain/types/endpoints/role-endpoints"
 
 const projectName = getHelpers.getBackendProjectName()
 

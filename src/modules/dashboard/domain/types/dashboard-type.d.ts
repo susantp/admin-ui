@@ -14,7 +14,9 @@ export interface InterfacePage {
   href: string
   current: boolean
 }
+
 type IStatus = "active" | "inactive" | "archived"
+
 export interface InterfaceProject {
   id: string
   name: string
@@ -29,6 +31,7 @@ export interface InterfaceProject {
 export interface InterfaceUserNavigation {
   name: string
   href: string
+  action: (() => Promise<null>) | null
 }
 
 export interface InterfaceNavigation {
@@ -36,9 +39,9 @@ export interface InterfaceNavigation {
   href: string
   icon: React.ForwardRefExoticComponent<
     React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
-      title?: string
-      titleId?: string
-    } & React.RefAttributes<SVGSVGElement>
+    title?: string
+    titleId?: string
+  } & React.RefAttributes<SVGSVGElement>
   >
   current: boolean
 }

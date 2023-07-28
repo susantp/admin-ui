@@ -1,10 +1,10 @@
 import React from "react"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { IPermission } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import { IPermission } from "@/src/modules/role/domain/types/endpoints/role-endpoints"
 import {
   IRolesMappedResponseData,
   IRolesOriginalResponseData,
-} from "@/src/modules/roles/domain/types/repository"
+} from "@/src/modules/role/domain/types/repository"
 import { ClassValue } from "clsx/clsx"
 
 interface InterfacePathBase {

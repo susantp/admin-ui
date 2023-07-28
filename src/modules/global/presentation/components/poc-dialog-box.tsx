@@ -65,5 +65,3 @@ function PocDialogBox({
 }
 
 export default PocDialogBox
-
-

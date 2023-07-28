@@ -8,61 +8,64 @@ import {
 
 const handleResponse = async <T>(response: Response): Promise<T> => {
   // Check if status is 204 (No Content), then return noContentObject object as T
+
   if (response.status === 204) {
     const noContentObject: INoContentApiResponse = {
       message: "Successfully Deleted.",
-      success: true
+      success: true,
     }
-    return noContentObject as T;
+    return noContentObject as T
   }
-
+  if(response.status > 400){
+    throw new Error(`${response.statusText}`)
+  }
   // If status is not 204, assume content exists and parse it
-  const apiResponse: ApiResponse<T> = (await response.json()) as ApiResponse<T>;
+  const apiResponse: ApiResponse<T> = (await response.json()) as ApiResponse<T>
+  // console.log('on api client', apiResponse)
   if (!response.ok) {
-    throw new Error(`${apiResponse.error}`);
+    throw new Error(`${apiResponse.error}`)
   }
-  return apiResponse.data;
-};
+  return apiResponse.data
+}
 
 const getRequest = async <T>({
-                               requestPath,
-                               requestInit,
-                             }: IGetRequestParams): Promise<T> => {
+  requestPath,
+  requestInit,
+}: IGetRequestParams): Promise<T> => {
   const response: Response = await fetch(requestPath, requestInit)
   return handleResponse(response)
 }
 
 const postRequest = async <TResponse>({
-                                        requestPath,
-                                        requestInit,
-                                        body,
-                                      }: IPostRequestParams): Promise<TResponse> => {
-  const init: RequestInit = {...requestInit, method: "POST", body}
+  requestPath,
+  requestInit,
+  body,
+}: IPostRequestParams): Promise<TResponse> => {
+  const init: RequestInit = { ...requestInit, method: "POST", body }
   const response: Response = await fetch(requestPath, init)
 
   return handleResponse(response)
 }
 
 const putRequest = async <TResponse>({
-                                       requestPath,
-                                       requestInit,
-                                       body,
-                                     }: IPostRequestParams): Promise<TResponse> => {
-  const init: RequestInit = {...requestInit, method: "PUT", body}
+  requestPath,
+  requestInit,
+  body,
+}: IPostRequestParams): Promise<TResponse> => {
+  const init: RequestInit = { ...requestInit, method: "PUT", body }
   const response: Response = await fetch(requestPath, init)
 
   return handleResponse(response)
 }
 
 const deleteRequest = async <TResponse>({
-                                          requestPath,
-                                          requestInit
-                                        }: IDeleteRequestParams): Promise<TResponse> => {
-  const init: RequestInit = {...requestInit, method: "DELETE"}
+  requestPath,
+  requestInit,
+}: IDeleteRequestParams): Promise<TResponse> => {
+  const init: RequestInit = { ...requestInit, method: "DELETE" }
   const response: Response = await fetch(requestPath, init)
 
   return handleResponse(response)
 }
 
-
-export {getRequest, postRequest, putRequest, deleteRequest, handleResponse}
+export { getRequest, postRequest, putRequest, deleteRequest, handleResponse }

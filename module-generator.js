@@ -20,11 +20,11 @@ function createModule(moduleName) {
     { path: "data/repositories", file: "[module]-repository-impl.ts" },
     { path: "domain/objects", file: "[module].ts" },
     { path: "domain/repositories", file: "[module]-repository.ts" },
-    { path: "domain/services", file: "[module]-service.ts" },
+    { path: "domain/actions", file: "[module]-service.ts" },
     { path: "domain/types" },
     { path: "presentation/components" },
     { path: "presentation/pages", file: "[module]-page.ts" },
-    { path: "presentation/services", file: "use-[module].ts" },
+    { path: "presentation/actions", file: "use-[module].ts" },
     { path: "presentation/state", file: "[module]-state.ts" },
   ]
 

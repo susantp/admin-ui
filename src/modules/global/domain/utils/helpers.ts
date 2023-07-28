@@ -5,11 +5,11 @@ import {
   InterfaceGetHelpers,
 } from "@/src/modules/global/domain/types/helpers"
 import { IScreen } from "@/src/modules/global/domain/types/repository/global-repository"
-import { IPermission } from "@/src/modules/roles/domain/types/endpoints/role-endpoints"
+import { IPermission } from "@/src/modules/role/domain/types/endpoints/role-endpoints"
 import {
   IRolesMappedResponseData,
   IRolesOriginalResponseData,
-} from "@/src/modules/roles/domain/types/repository"
+} from "@/src/modules/role/domain/types/repository"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 

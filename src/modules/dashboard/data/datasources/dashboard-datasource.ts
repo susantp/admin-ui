@@ -7,6 +7,7 @@ import {
   InterfaceProject,
   InterfaceUserNavigation,
 } from "@/src/modules/dashboard/domain/types/dashboard-type"
+import {appPaths} from "@/src/modules/global/domain/objects/global"
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -15,7 +16,8 @@ import {
   InboxIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline"
-import {appPaths} from "@/src/modules/global/domain/objects/global";
+import {signOut} from "next-auth/react";
+import getHelpers from "@/src/modules/global/domain/utils/helpers";
 
 interface InterfaceGetTempData {
   people: InterfacePeople[]
@@ -24,7 +26,9 @@ interface InterfaceGetTempData {
   userNavigation: InterfaceUserNavigation[]
   navigation: InterfaceNavigation[]
 }
+
 const useTempData = (): InterfaceGetTempData => {
+  const appUrl = getHelpers.getAppUrl()
   const people: InterfacePeople[] = [
     {
       name: "Ishwor Kafle",
@@ -135,23 +139,27 @@ const useTempData = (): InterfaceGetTempData => {
     },
   ]
   const pages: InterfacePage[] = [
-    { name: "Home", href: "#", current: false },
-    { name: "Dashboard", href: "#", current: true },
+    {name: "Home", href: "#", current: false},
+    {name: "Dashboard", href: "#", current: true},
   ]
   const userNavigation: InterfaceUserNavigation[] = [
-    { name: "Your Profile", href: appPaths.profile.path },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    {name: "Your Profile", href: appPaths.profile.path, action: null},
+    {name: "Settings", href: "#", action: null},
+    {
+      name: "Sign out",
+      href: "#",
+      action: () => signOut({callbackUrl: `${appUrl}/login`}).then(() => null).catch(() => null)
+    },
   ]
   const navigation: InterfaceNavigation[] = [
-    { name: "Dashboard", href: "dashboard", icon: HomeIcon, current: true },
-    { name: "User Management", href: "users", icon: UsersIcon, current: false },
-    { name: "Role Management", href: "#", icon: FolderIcon, current: false },
-    { name: "Page Management", href: "#", icon: CalendarIcon, current: false },
-    { name: "Data Access", href: "#", icon: InboxIcon, current: false },
-    { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
+    {name: "Dashboard", href: "dashboard", icon: HomeIcon, current: true},
+    {name: "User Management", href: "users", icon: UsersIcon, current: false},
+    {name: "Role Management", href: "#", icon: FolderIcon, current: false},
+    {name: "Page Management", href: "#", icon: CalendarIcon, current: false},
+    {name: "Data Access", href: "#", icon: InboxIcon, current: false},
+    {name: "Reports", href: "#", icon: ChartBarIcon, current: false},
   ]
 
-  return { people, projects, pages, userNavigation, navigation }
+  return {people, projects, pages, userNavigation, navigation}
 }
 export default useTempData

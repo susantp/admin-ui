@@ -1,7 +1,7 @@
 import { InterfaceAppPaths } from "@/src/modules/global/domain/types/helpers"
 
 export const appPaths: InterfaceAppPaths = {
-  profile:{
+  profile: {
     path: "/profile",
     label: "Profile",
     name: "profile",
