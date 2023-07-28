@@ -6,12 +6,13 @@ import {
   updateEmailAction,
   updatePasswordAction,
   updatePhoneAction
-} from "@/src/modules/profile/presentation/actions";
-import {useSession} from "next-auth/react";
+} from "../../domain/actions";
+import {signOut, useSession} from "next-auth/react";
 import {toast, ToastOptions} from "react-toastify";
 import {
   IPasswordUpdateBody
 } from "@/src/modules/profile/domain/types/endpoints";
+import getHelpers from "@/src/modules/global/domain/utils/helpers";
 
 const useUserProfileContainerAction = (): IUserProfileContainerAction => {
   const {data} = useSession()
@@ -81,7 +82,7 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
       }
       updatePasswordAction({body: JSON.stringify(bodyObject)})
         .then(() => {
-          // const appUrl = getHelpers.getAppUrl()
+          const appUrl = getHelpers.getAppUrl()
           // signOut({callbackUrl: `${appUrl}/login`}).then(() => null).catch(() => null)
           toast.success("Password updated, Logging Out !!!", {toastId: passwordUpdateToast})
         })

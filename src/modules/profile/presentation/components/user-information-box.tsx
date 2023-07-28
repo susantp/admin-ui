@@ -79,7 +79,7 @@ export default function UserInformationBox({
           inputRef={oldPasswordRef}
           action={!passwordEditMode ? onPasswordEditMode : undefined}
           defaultValue=""
-          disabled
+          disabled={false}
           label={passwordEditMode ? "Old Password" : password.label}
           type={password.inputType}
           placeholder={password.placeholder}
