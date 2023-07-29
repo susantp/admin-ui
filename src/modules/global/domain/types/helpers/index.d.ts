@@ -22,6 +22,7 @@ interface InterfaceDynamicPath extends InterfacePathBase {
 }
 
 export interface InterfaceAppPaths {
+  [key: string]: InterfaceStaticPath | InterfaceDynamicPath;
   home: InterfaceStaticPath
   dashboard: InterfaceStaticPath
   users: InterfaceStaticPath

@@ -1,9 +1,11 @@
 import React from "react"
 import Link from "next/link"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
+import {ISlugPageProps} from "@/app/(protected)/roles/[slug]/edit/page";
 
-export default function Page(): React.ReactNode {
+export default function Page({params}: ISlugPageProps): React.ReactNode {
   // TODO map frontend routes with request if not found any routes give some message
+  console.log(params)
   return (
     <div className="flex w-full h-screen justify-center items-center">
       <div className="flex flex-col items-center gap-y-5">

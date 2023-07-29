@@ -2,10 +2,9 @@
 
 import React from "react"
 import Section from "@/src/modules/dashboard/presentation/components/section"
-import { appPaths } from "@/src/modules/global/domain/objects/global"
+import {appPaths} from "@/src/modules/global/domain/objects/global"
 import PocContainer from "@/src/modules/global/presentation/components/poc-container"
 import PocDialogBox from "@/src/modules/global/presentation/components/poc-dialog-box"
-import PocLoader from "@/src/modules/global/presentation/components/poc-loader"
 import PocColDiv from "@/src/modules/global/presentation/poc-col-div"
 import RoleForm from "@/src/modules/role/presentation/components/role-form"
 import RoleFormTitle from "@/src/modules/role/presentation/components/role-form-title"
@@ -13,7 +12,8 @@ import RoleFormActions from "@/src/modules/role/presentation/components/role-nam
 import RoleNameField from "@/src/modules/role/presentation/components/role-name-field"
 import ScreenPermissionBox from "@/src/modules/role/presentation/components/screen-permission-box"
 import ScreenPermissionWrapper from "@/src/modules/role/presentation/components/screen-permission-wrapper"
-import useCreateEditRoleContainerActions from "@/src/modules/role/presentation/hooks/use-create-edit-role-container-actions"
+import useCreateEditRoleContainerActions
+  from "@/src/modules/role/presentation/hooks/use-create-edit-role-container-actions"
 
 interface ICreateEditRoleContainerProps {
   slug: string | null
@@ -44,7 +44,7 @@ export default function CreateEditRoleContainer({
     },
   } = useCreateEditRoleContainerActions({ slug })
 
-  if (loading || !groupedData || !groupedData.length) return <PocLoader />
+  if (loading || !groupedData || !groupedData.length) return null
 
   return (
     <PocContainer>

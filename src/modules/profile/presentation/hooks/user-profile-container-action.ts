@@ -1,18 +1,12 @@
 import {RefObject, useRef, useState} from "react"
-import {
-  IUserProfileContainerAction
-} from "@/src/modules/profile/domain/types/presentation/hook"
-import {
-  updateEmailAction,
-  updatePasswordAction,
-  updatePhoneAction
-} from "../../domain/actions";
-import {signOut, useSession} from "next-auth/react";
+import {IUserProfileContainerAction} from "@/src/modules/profile/domain/types/presentation/hook"
+import {useSession} from "next-auth/react";
 import {toast, ToastOptions} from "react-toastify";
-import {
-  IPasswordUpdateBody
-} from "@/src/modules/profile/domain/types/endpoints";
-import getHelpers from "@/src/modules/global/domain/utils/helpers";
+import {IPasswordUpdateBody} from "@/src/modules/profile/domain/types/endpoints";
+import {userInformationFormFields} from "@/src/modules/profile/domain/objects/page/profile";
+import {IUserInformationBoxProps} from "@/src/modules/profile/domain/types/presentation/component";
+import {updateEmailAction, updatePasswordAction, updatePhoneAction} from "../../domain/actions";
+
 
 const useUserProfileContainerAction = (): IUserProfileContainerAction => {
   const {data} = useSession()
@@ -82,9 +76,9 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
       }
       updatePasswordAction({body: JSON.stringify(bodyObject)})
         .then(() => {
-          const appUrl = getHelpers.getAppUrl()
-          // signOut({callbackUrl: `${appUrl}/login`}).then(() => null).catch(() => null)
-          toast.success("Password updated, Logging Out !!!", {toastId: passwordUpdateToast})
+          // const appUrl = getHelpers.getAppUrl()
+          // // signOut({callbackUrl: `${appUrl}/login`}).then(() => null).catch(() => null)
+          // toast.success("Password updated, Logging Out !!!", {toastId: passwordUpdateToast})
         })
         .catch(() => setLoading(false))
         .finally(() => setLoading(false))
@@ -93,10 +87,25 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
     }
   }
 
-
   const handlePasswordUpdateMode = (): void => {
     setPasswordEditMode(!passwordEditMode)
   }
+
+  const userInformationBoxProps: IUserInformationBoxProps = {
+    passwordEditMode,
+    user: data?.user,
+    phoneRef,
+    emailRef,
+    confirmPasswordRef,
+    newPasswordRef,
+    oldPasswordRef,
+    onEmailUpdate: handleEmailUpdate,
+    onPhoneUpdate: handlePhoneUpdate,
+    onPasswordEditMode: handlePasswordUpdateMode,
+    onPasswordUpdate: handlePasswordUpdate,
+    formFields: userInformationFormFields,
+  }
+
   return {
     data,
     emailRef,
@@ -109,7 +118,8 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
     handleEmailUpdate,
     handlePhoneUpdate,
     handlePasswordUpdate,
-    handlePasswordUpdateMode
+    handlePasswordUpdateMode,
+    userInformationBoxProps
   }
 }
 export default useUserProfileContainerAction

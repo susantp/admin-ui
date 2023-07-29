@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+import {Metadata} from "next"
 import DashboardContainer from "@/src/modules/dashboard/presentation/pages/dashboard-container"
 
 export const metadata: Metadata = {

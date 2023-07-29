@@ -1,5 +1,6 @@
 import {RefObject} from "react"
 import {Session} from "next-auth"
+import {IUserInformationBoxProps} from "@/src/modules/profile/domain/types/presentation/component";
 
 export interface IUserProfileContainerAction {
   data: Session | null
@@ -14,4 +15,5 @@ export interface IUserProfileContainerAction {
   phoneRef: RefObject<HTMLInputElement>
   loading: boolean
   passwordEditMode: boolean
+  userInformationBoxProps: IUserInformationBoxProps
 }

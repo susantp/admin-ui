@@ -27,7 +27,7 @@ interface InterfaceGetTempData {
   navigation: InterfaceNavigation[]
 }
 
-const useTempData = (): InterfaceGetTempData => {
+const tempData = (): InterfaceGetTempData => {
   const appUrl = getHelpers.getAppUrl()
   const people: InterfacePeople[] = [
     {
@@ -162,4 +162,4 @@ const useTempData = (): InterfaceGetTempData => {
 
   return {people, projects, pages, userNavigation, navigation}
 }
-export default useTempData
+export default tempData
