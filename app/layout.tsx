@@ -11,7 +11,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Providers from "@/app/providers"
 
 const font: NextFont = Roboto({
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",

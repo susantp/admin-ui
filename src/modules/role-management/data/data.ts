@@ -1,4 +1,4 @@
-import { Role } from "@/src/modules/role-management/domain/types/role"
+import { Role } from "@/src/modules/role-management/domain/types"
 
 export const roles: Role[] = [
   {
