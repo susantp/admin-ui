@@ -1,44 +1,22 @@
-import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
-import { authOptions } from "@/auth/domain/config/auth-options"
-import {
-  UserRegisterRequest,
-  UserRegisterResponse,
-} from "@/auth/domain/types/auth-endpoints"
-import { userEndpoints } from "@/src/modules/user-management/data/endpoints"
-import { User } from "@/src/modules/user-management/domain/types/user"
-import UserService from "@/src/modules/user-management/domain/types/user-service"
-import ApiClient from "@/src/utils/api-client"
-import { getServerSession } from "next-auth"
+"use server"
 
-import { DataResponse } from "@/components/data-table/data-response"
+import { usersDatasource } from "@/src/modules/user-management/data/users-datasource"
+import { User } from "@/src/modules/user-management/domain/types"
 
-export const userService: UserService = {
-  async fetchAllUsers(): Promise<User[]> {
-    const session = await getServerSession(authOptions)
-    const accessToken = session?.user.access
-    const headers = { "x-screen-id": "6d9478a4-572e-4d54-bd08-c40bbd0d2b80" }
-    const apiClient = new ApiClient({ accessToken, headers })
+import { DataQuery, DataResponse } from "@/components/data-table/data-response"
 
-    const response = await apiClient.get<DataResponse<User>>(
-      userEndpoints.allUsers
-    )
+export const fetchAllUsers = async (
+  query: DataQuery
+): Promise<DataResponse<User>> => usersDatasource.fetchAllUsers(query)
 
-    return response.results
-  },
+export const toggleIsActive = async (userId: string): Promise<void> => {
+  "use server"
 
-  async createUser(): Promise<void> {
-    const apiClient = new ApiClient()
+  return usersDatasource.toggleIsActive(userId)
+}
 
-    const response = await apiClient.post<
-      UserRegisterRequest,
-      UserRegisterResponse
-    >(authEndpoints.userRegister, {
-      username: "test.user",
-      password: "test@1234",
-      email: "test.user@gmail.com",
-      phone: "",
-    })
+export const toggleIsSuperUser = async (userId: string): Promise<void> => {
+  "use server"
 
-    // console.log("CREATE USER RESPONSE", response)
-  },
+  return usersDatasource.toggleIsSuperUser(userId)
 }

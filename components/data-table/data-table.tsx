@@ -21,16 +21,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { DataResponse } from "@/components/data-table/data-response"
+import { DataQuery, DataResponse } from "@/components/data-table/data-response"
 import { DataTablePagination } from "@/components/data-table/data-table-pagination"
 import { DataTableToolbar } from "@/components/data-table/data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  dataFn: (
-    pagination: PaginationState,
-    globalFilter: string
-  ) => Promise<DataResponse<TData> | null>
+  dataFn: (query: DataQuery) => Promise<DataResponse<TData> | null>
   label: string
 }
 
@@ -56,7 +53,11 @@ export function DataTable<TData, TValue>({
   const [globalFilter, setGlobalFilter] = React.useState("")
 
   useEffect(() => {
-    dataFn(pagination, globalFilter)
+    dataFn({
+      pageSize: pagination.pageSize,
+      pageIndex: pagination.pageIndex + 1,
+      globalFilter,
+    })
       .then((res) => {
         if (res) {
           setData(res.results)
