@@ -3,7 +3,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-  BarChartIcon,
   CalendarIcon,
   ChevronsLeftRight,
   FolderIcon,
@@ -21,19 +20,18 @@ export function Sidebar(): JSX.Element {
     { name: "Dashboard", href: "/", icon: <LayoutDashboardIcon /> },
     { name: "User Management", href: "/user-management", icon: <UserIcon /> },
     { name: "Role Management", href: "/role-management", icon: <FolderIcon /> },
-    { name: "Page Management", href: "/pages", icon: <CalendarIcon /> },
-    { name: "Reports", href: "/reports", icon: <BarChartIcon /> },
+    { name: "Screen Management", href: "/pages", icon: <CalendarIcon /> },
   ]
 
   return (
-    <aside className="relative p-2 w-80 text-primary-foreground">
+    <aside className="relative p-2 w-80 text-accent-foreground">
       <button
         className="absolute top-8 -right-1.5 bg-glass rounded-full p-1 cursor-pointer"
         type="button"
       >
         <ChevronsLeftRight className="w-4 h-4" />
       </button>
-      <div className="h-full bg-primary rounded-md p-2 flex flex-col justify-between">
+      <div className="h-full bg-accent rounded-md p-2 flex flex-col justify-between">
         <div className="space-y-6">
           <div className="flex items-center gap-4 p-2.5">
             <Image

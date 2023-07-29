@@ -2,10 +2,9 @@ import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
 import { userEndpoints } from "@/src/modules/user-management/data/endpoints"
 import { UsersDatasource } from "@/src/modules/user-management/data/types"
 import { User } from "@/src/modules/user-management/domain/types"
+import { createUrl } from "@/src/utils/helpers"
 
 import { DataQuery, DataResponse } from "@/components/data-table/data-response"
-
-const baseUrl = process.env.BACKEND_BASE_URL ?? ""
 
 export const usersDatasource: UsersDatasource = {
   async fetchAllUsers({
@@ -18,7 +17,7 @@ export const usersDatasource: UsersDatasource = {
     })
 
     const query = `?page=${pageIndex}&page_size=${pageSize}&q=${globalFilter}`
-    const url = new URL(`${baseUrl}${userEndpoints.allUsers}${query}`)
+    const url = createUrl(userEndpoints.allUsers + query)
 
     const response = await apiClient.get(url)
     return response.data as DataResponse<User>
@@ -29,9 +28,7 @@ export const usersDatasource: UsersDatasource = {
       "x-screen-id": "6d9478a4-572e-4d54-bd08-c40bbd0d2b80",
     })
 
-    const url = new URL(
-      `${baseUrl}${userEndpoints.userActiveDeactive.replace(":id", userId)}`
-    )
+    const url = createUrl(userEndpoints.userActiveDeactive(userId))
 
     await apiClient.post(url, {})
   },
@@ -41,9 +38,7 @@ export const usersDatasource: UsersDatasource = {
       "x-screen-id": "6d9478a4-572e-4d54-bd08-c40bbd0d2b80",
     })
 
-    const url = new URL(
-      `${baseUrl}${userEndpoints.userIsSuperuser.replace(":id", userId)}`
-    )
+    const url = createUrl(userEndpoints.userIsSuperuser(userId))
 
     await apiClient.post(url, {})
   },

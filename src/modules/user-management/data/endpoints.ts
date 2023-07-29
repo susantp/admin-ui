@@ -1,11 +1,7 @@
-interface UserEndpoints {
-  allUsers: string
-  userActiveDeactive: string
-  userIsSuperuser: string
-}
-
-export const userEndpoints: UserEndpoints = {
+export const userEndpoints = {
   allUsers: "admin/users/",
-  userActiveDeactive: "admin/user/:id/active-deactive/",
-  userIsSuperuser: "admin/user/:id/is-superuser/",
+  userActiveDeactive: (userId: string): string =>
+    `admin/user/${userId}/active-deactive/`,
+  userIsSuperuser: (userId: string): string =>
+    `admin/user/${userId}/is-superuser/`,
 }

@@ -13,3 +13,8 @@ export function formatDate(input: string | number): string {
     year: "numeric",
   })
 }
+
+export const createUrl = (endpoint: string): URL => {
+  const baseUrl = process.env.BACKEND_BASE_URL ?? "/api/"
+  return new URL(baseUrl + endpoint)
+}
