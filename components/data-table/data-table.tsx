@@ -28,13 +28,11 @@ import { DataTableToolbar } from "@/components/data-table/data-table-toolbar"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   dataFn: (query: DataQuery) => Promise<DataResponse<TData> | null>
-  label: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   dataFn,
-  label,
 }: DataTableProps<TData, TValue>): JSX.Element {
   const [data, setData] = React.useState<TData[]>([])
   const [pageCount, setPageCount] = React.useState(0)
@@ -101,7 +99,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} label={label} />
+      <DataTableToolbar table={table} />
       <div className="border rounded-md">
         <Table>
           <TableHeader>

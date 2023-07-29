@@ -1,8 +1,8 @@
 import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
+import { createUrl } from "@/src/common/utils/helpers"
 import { userEndpoints } from "@/src/modules/user-management/data/endpoints"
 import { UsersDatasource } from "@/src/modules/user-management/data/types"
 import { User } from "@/src/modules/user-management/domain/types"
-import { createUrl } from "@/src/utils/helpers"
 
 import { DataQuery, DataResponse } from "@/components/data-table/data-response"
 

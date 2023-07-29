@@ -12,25 +12,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Skeleton } from "@/components/ui/skeleton"
 
-export function UserCard(): JSX.Element {
+export function UserCard(): React.ReactElement {
   const session = useSession()
 
   const user = session.data?.user
   const name = [user?.firstName, user?.lastName].join(" ")
   const initials = [user?.firstName.at(0), user?.lastName.at(0)].join("")
 
+  if (!user) {
+    return (
+      <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
+        <Skeleton className="h-10 w-10 rounded-full" />
+        <div className="space-y-2 flex-grow">
+          <Skeleton className="h-2.5 w-[120px]" />
+          <Skeleton className="h-2.5 w-[80px]" />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="bg-glass rounded-md p-2.5 flex gap-4 items-center">
+        <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
           <Avatar>
             <AvatarImage src="/favico.ico" />
-            <AvatarFallback>{initials}</AvatarFallback>
+            <AvatarFallback className="text-primary">{initials}</AvatarFallback>
           </Avatar>
           <div className="text-left">
-            <h3 className="text-sm">{name}</h3>
-            <p className="text-xs">{user?.email}</p>
+            <h3 className="text-sm font-semibold">{name}</h3>
+            <p className="text-xs font-medium">{user?.email}</p>
           </div>
         </div>
       </DropdownMenuTrigger>

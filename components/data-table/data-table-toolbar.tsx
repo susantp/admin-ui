@@ -10,12 +10,10 @@ import { DataTableViewOptions } from "@/components/data-table/data-table-view-op
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
-  label?: string
 }
 
 export function DataTableToolbar<TData>({
   table,
-  label,
 }: DataTableToolbarProps<TData>): JSX.Element {
   const isFiltered =
     table.getState().columnFilters.length > 0 ||
@@ -25,7 +23,7 @@ export function DataTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder={`Filter ${label ?? ""}...`}
+          placeholder="Search..."
           value={
             table.getState().globalFilter !== ""
               ? String(table.getState().globalFilter)

@@ -4,7 +4,7 @@ import React from "react"
 import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Roboto } from "next/font/google"
-import { cn } from "@/src/utils/helpers"
+import { cn } from "@/src/common/utils/helpers"
 
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"

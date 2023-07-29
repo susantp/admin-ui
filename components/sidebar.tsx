@@ -17,10 +17,26 @@ export function Sidebar(): JSX.Element {
   const pathname = usePathname()
 
   const navigation = [
-    { name: "Dashboard", href: "/", icon: <LayoutDashboardIcon /> },
-    { name: "User Management", href: "/user-management", icon: <UserIcon /> },
-    { name: "Role Management", href: "/role-management", icon: <FolderIcon /> },
-    { name: "Screen Management", href: "/pages", icon: <CalendarIcon /> },
+    {
+      name: "Dashboard",
+      href: "/",
+      icon: <LayoutDashboardIcon className="w-5 h-5" />,
+    },
+    {
+      name: "User Management",
+      href: "/users",
+      icon: <UserIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Role Management",
+      href: "/roles",
+      icon: <FolderIcon className="w-5 h-5" />,
+    },
+    {
+      name: "Screen Management",
+      href: "/screens",
+      icon: <CalendarIcon className="w-5 h-5" />,
+    },
   ]
 
   return (
@@ -42,19 +58,21 @@ export function Sidebar(): JSX.Element {
               priority
             />
 
-            <h3 className="text-2xl font-semibold">SOA POC</h3>
+            <h1 className="text-2xl font-semibold">SOA POC</h1>
 
             <ModeToggle />
           </div>
 
           <ul className="flex flex-col space-y-2">
-            {" "}
+            <h6 className="px-4 text-muted-foreground font-medium uppercase text-sm tracking-widest">
+              Main Menu
+            </h6>
             {navigation.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`flex gap-4 whitespace-nowrap p-2.5 rounded-md ${
-                    pathname === item.href ? "bg-glass" : ""
+                  className={`flex gap-4 whitespace-nowrap py-2.5 px-4 rounded-md hover:bg-primary-foreground ${
+                    pathname === item.href ? "bg-primary-foreground" : ""
                   }`}
                 >
                   {item.icon}

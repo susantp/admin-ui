@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/auth/*": ["./src/modules/auth/*"]
+      "@/auth/*": ["./src/modules/auth/*"],
+      "@/screen-management/*": ["./src/modules/screen-management/*"]
     },
     "strictNullChecks": true
   },
