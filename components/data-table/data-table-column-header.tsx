@@ -1,5 +1,5 @@
 import React from "react"
-import { cn } from "@/src/utils/helpers"
+import { cn } from "@/src/common/utils/helpers"
 import { Column } from "@tanstack/react-table"
 import { ChevronsUpDown, EyeOff, SortAsc, SortDesc } from "lucide-react"
 
