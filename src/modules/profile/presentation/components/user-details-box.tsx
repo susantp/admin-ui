@@ -1,51 +1,63 @@
 import React, {ReactNode} from "react";
-import InputWithLabelIconAction
-  from "@/components/ui/input-with-label-icon-action";
-import userProfileContainerAction
-  from "@/src/modules/profile/presentation/hooks/user-profile-container-action";
+import userProfileContainerAction from "@/src/modules/profile/presentation/hooks/user-profile-container-action";
+import PocLoader from "@/src/modules/global/presentation/components/poc-loader";
+import getHelpers from "@/src/modules/global/domain/utils/helpers";
+import {Input} from "@/components/ui/input";
+import {IUserDetailResponse} from "@/src/modules/profile/domain/types/endpoints";
+import {FieldError} from "react-hook-form";
+
 
 export default function UserDetailsBox(): ReactNode {
-  const {userDetail} = userProfileContainerAction()
+    const {
+        userDetail,
+        userDetailRegister,
+        handleUserDetailSubmit,
+        onUserDetailUpdate,
+        userDetailFormError
+    } = userProfileContainerAction()
 
-  if (!userDetail) return null
-  const toSnakeCase = (camelCaseStr: string): string => camelCaseStr.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1_$2').toLowerCase()
-  const toTitleCase = (camelCaseStr: string): string => camelCaseStr
-    .replace(/([A-Z])/g, ' $1') // insert a space before all capital letters
-    .replace(/^./, (str) => {
-      return str.toUpperCase();
-    }) // capitalize the first character
-    .trim()
 
-  return (
-    <div className="flex flex-col gap-6" id="fields">
+    if (!userDetail) return <PocLoader/>
+    const {toTitleCase} = getHelpers
+    return (
+        <form onSubmit={handleUserDetailSubmit(onUserDetailUpdate)}>
+            <div className="flex flex-col gap-6" id="fields">
+                {
+                    Object.keys(userDetail).map((key) => {
+                        const titleCase = toTitleCase(key)
+                        const error: FieldError | undefined = userDetailFormError?.[key as keyof IUserDetailResponse]
+                        const defaultValue: string = userDetail[key as keyof IUserDetailResponse]
+                        return (
+                            <div className="flex flex-col gap-[4px]"
+                                 key={Math.random()}
+                                 id={`${key}-field`}>
+                                <label htmlFor={key}> {titleCase}
+                                    <Input defaultValue={defaultValue}  {...userDetailRegister(key, {
+                                        required: true,
+                                        maxLength: 30
+                                    })} />
+                                </label>
+                                {error?.type === "required" && (
+                                    <p role="alert" className="text-red-500 font-semibold">The {titleCase} must be
+                                        required.</p>
+                                )}
+                                {error?.type === "maxLength" && (
+                                    <p role="alert" className="text-red-500 font-semibold">The {titleCase} must be no
+                                        more than 30 characters long.</p>
+                                )}
+                            </div>
+                        )
+                    })
+                }
+                <div className="flex gap-[4px] justify-end"
+                     id="actionDiv">
+                    <button type="submit"
+                            className="bg-primary text-white rounded-lg px-7 py-3 ">
+                        <p className="text-md">Save</p>
+                    </button>
+                </div>
 
-      {
-
-        Object.keys(userDetail).map((key) => {
-          const snakeCase = toSnakeCase(key)
-          const titleCase = toTitleCase(key)
-          return (
-            <div className="flex flex-col gap-[4px]"
-                 key={Math.random()}
-                 id="firstName-field">
-              <InputWithLabelIconAction defaultValue={undefined}
-                                        disabled={false}
-                                        placeholderIcon={null}
-                                        label={titleCase} placeholder=""
-                                        type="text" id={snakeCase}
-                                        inputRef={null} action={undefined}/>
             </div>
-          )
-        })
-      }
-      <div className="flex gap-[4px] justify-end"
-           id="actionDiv">
-        <button type="button"
-                className="bg-primary text-white rounded-lg px-7 py-3 ">
-          <p className="text-md">Save</p>
-        </button>
-      </div>
-
-    </div>
-  )
+        </form>
+    )
 }

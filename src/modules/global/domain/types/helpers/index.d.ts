@@ -49,7 +49,8 @@ export interface InterfaceGetHelpers {
   getAppUrl: () => string
   composeRequestPath: ({ requestPath }: IComposeRequestPathParams) => URL
   getUniqueScreensFromPermissionsResponseData: (data: IPermission[]) => string[]
-  toTitleCase: (data: string) => string
+  toSnakeCase: (snakeString: string) => string
+  toTitleCase: (string: string) => string
   mapRolesData: (
     apiResponse: IRolesOriginalResponseData
   ) => IRolesMappedResponseData

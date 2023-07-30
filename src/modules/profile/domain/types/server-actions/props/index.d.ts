@@ -7,3 +7,6 @@ export interface IUpdatePhoneProps {
 export interface IUpdatePasswordProps {
   body: BodyInit
 }
+export interface IPostUserDetailProps{
+  body: BodyInit
+}

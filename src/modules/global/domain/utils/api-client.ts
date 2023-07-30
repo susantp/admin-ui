@@ -9,7 +9,7 @@ import {
 const handleResponse = async <T>(response: Response): Promise<T> => {
   // Check if status is 204 (No Content), then return noContentObject object as T
   if (!response.ok) {
-    throw new Error(`server fired.`)
+    throw new Error(`server fired. ${response.statusText}`)
   }
   if (response.status === 204) {
     const noContentObject: INoContentApiResponse = {
@@ -18,7 +18,7 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
     }
     return noContentObject as T
   }
-  if(response.status > 400){
+  if(response.status >= 400){
     throw new Error(`${response.statusText}`)
   }
   // If status is not 204, assume content exists and parse it

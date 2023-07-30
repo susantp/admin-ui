@@ -1,16 +1,15 @@
 import {
-  IUpdateEmailResponse,
-  IUpdatePasswordResponse,
-  IUpdatePhoneResponse
+    IUpdateEmailResponse,
+    IUpdatePasswordResponse,
+    IUpdatePhoneResponse
 } from "@/src/modules/profile/domain/types/endpoints/response"
 import {
-  IUpdateEmailProps,
-  IUpdatePasswordProps,
-  IUpdatePhoneProps
+    IPostUserDetailProps,
+    IUpdateEmailProps,
+    IUpdatePasswordProps,
+    IUpdatePhoneProps
 } from "@/src/modules/profile/domain/types/server-actions/props"
-import {
-  IUserDetailResponse, IUserDetailResponseCamelCase
-} from "@/src/modules/profile/domain/types/endpoints";
+import {IUserDetailResponse} from "@/src/modules/profile/domain/types/endpoints";
 
 export interface IProfileDataSource {
   updateEmailData: ({
@@ -22,5 +21,6 @@ export interface IProfileDataSource {
   updatePasswordData: ({
                       body
                     }: IUpdatePasswordProps) => Promise<IUpdatePasswordResponse | null>
-  getUserDetailData: () => Promise<IUserDetailResponseCamelCase|null>
+  getUserDetailData: () => Promise<IUserDetailResponse|null>
+  putUserDetailData: ({body}: IPostUserDetailProps) => Promise<IUserDetailResponse|null>
 }

@@ -6,5 +6,6 @@ export const profileEndpoints: IProfileEndpoints = {
   putEmail: "change-email/",
   putPhone: "change-phone/",
   postPassword: `${project}/change-password/`,
-  getUserDetail: "user-detail/"
+  getPostUserDetail: "user-detail/",
+  loggedInUserPostPassword: "logged-in-user/change-password/"
 }

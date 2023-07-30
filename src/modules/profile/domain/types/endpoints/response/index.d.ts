@@ -11,3 +11,5 @@ export interface IUpdatePasswordResponse {
   "otp": string
   "new_password": string
 }
+
+

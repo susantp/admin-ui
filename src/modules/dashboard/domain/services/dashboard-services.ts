@@ -14,7 +14,6 @@ export const fetchTopRoles = async ({
   xScreen,
 }: IServiceProps): Promise<ITopRolesResponseData[] | null> => {
   if (!xScreen) return null
-  console.log('on service', xScreen)
   const { id } = xScreen
   const clientConfig: RequestInit | null = await authenticClient({
     xScreen: id,
