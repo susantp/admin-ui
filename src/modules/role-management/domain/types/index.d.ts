@@ -1,7 +1,6 @@
 export interface Permission {
-  id: string
-  code: string
   screen: string
+  permissions: { id: string; code: string }[]
 }
 
 export interface Role {
