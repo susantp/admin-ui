@@ -62,4 +62,13 @@ export const roleDatasource: RoleDatasource = {
 
     return response.data as Role
   },
+
+  async deleteRole(roleId: string): Promise<void> {
+    const apiClient = await getAuthenticatedApiClient({
+      "x-screen-id": "236d1241-3baa-4f5c-8bf9-dc4c122ae4be",
+    })
+
+    const url = createUrl(roleEndpoints.deleteRole(roleId))
+    await apiClient.remove(url)
+  },
 }

@@ -9,4 +9,5 @@ export interface RoleDatasource {
   fetchRole: (roleId: string) => Promise<Role>
   postRole: (role: RoleFormValues) => Promise<Role>
   putRole: (roleId: string, role: RoleFormValues) => Promise<Role>
+  deleteRole: (roleId: string) => Promise<void>
 }

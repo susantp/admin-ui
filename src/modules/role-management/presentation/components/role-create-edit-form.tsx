@@ -62,7 +62,8 @@ export function RoleCreateEditForm({
       .then(() => {
         if (!roleId) form.reset()
         toast({
-          title: `Role ${roleId ? "updated" : "created"} successfully.`,
+          title: "Success",
+          description: `Role ${roleId ? "updated" : "created"} successfully.`,
         })
         router.back()
       })

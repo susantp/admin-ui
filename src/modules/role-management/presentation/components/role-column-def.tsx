@@ -1,12 +1,10 @@
 "use client"
 
 import React from "react"
-import Link from "next/link"
 import { Role } from "@/roles/domain/types"
+import RoleActions from "@/roles/presentation/components/role-actions"
 import { ColumnDef } from "@tanstack/react-table"
-import { KeyRoundIcon, TrashIcon, UsersIcon } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
+import { KeyRoundIcon, UsersIcon } from "lucide-react"
 
 export const roleColumnDef: ColumnDef<Role>[] = [
   {
@@ -34,19 +32,6 @@ export const roleColumnDef: ColumnDef<Role>[] = [
   {
     id: "actions",
     header: () => <div className="text-right">Actions</div>,
-    cell: ({ row }) => (
-      <div className="space-x-2 text-right">
-        <Link href={`/roles/${row.original.id}/edit/`}>
-          <Button size="sm">
-            <KeyRoundIcon className="mr-2 w-4 h-4" />
-            Manage Access
-          </Button>
-        </Link>
-        <Button size="sm" variant="destructive">
-          <TrashIcon className="mr-2 w-4 h-4" />
-          Delete
-        </Button>
-      </div>
-    ),
+    cell: ({ row }) => <RoleActions roleId={row.original.id} />,
   },
 ]

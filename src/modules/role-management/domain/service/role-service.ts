@@ -31,3 +31,6 @@ export const submitRoleAction = async ({
 
   return roleDatasource.postRole(role)
 }
+
+export const deleteRoleAction = async (roleId: string): Promise<void> =>
+  roleDatasource.deleteRole(roleId)
