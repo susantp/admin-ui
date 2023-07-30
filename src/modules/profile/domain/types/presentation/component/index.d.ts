@@ -19,7 +19,7 @@ export interface IProfileSectionWrapper {
 
 export interface IUserInformationBoxProps {
   formFields: IUserInformationFormFields
-  user: User
+  user: User | undefined
   onEmailUpdate: () => void
   onPhoneUpdate: () => void
   onPasswordEditMode: () => void

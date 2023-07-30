@@ -8,7 +8,9 @@ import {
 
 const handleResponse = async <T>(response: Response): Promise<T> => {
   // Check if status is 204 (No Content), then return noContentObject object as T
-
+  if (!response.ok) {
+    throw new Error(`server fired.`)
+  }
   if (response.status === 204) {
     const noContentObject: INoContentApiResponse = {
       message: "Successfully Deleted.",
@@ -21,10 +23,7 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
   }
   // If status is not 204, assume content exists and parse it
   const apiResponse: ApiResponse<T> = (await response.json()) as ApiResponse<T>
-  // console.log('on api client', apiResponse)
-  if (!response.ok) {
-    throw new Error(`${apiResponse.error}`)
-  }
+
   return apiResponse.data
 }
 

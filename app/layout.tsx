@@ -34,7 +34,7 @@ export default function RootLayout({children}: RootLayoutProps): ReactNode {
     >
     <Providers>{children}</Providers>
     <Toaster/>
-    <ToastContainer/>
+     <ToastContainer/>
     </body>
     </html>
   )

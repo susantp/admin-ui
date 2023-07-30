@@ -1,34 +1,18 @@
+"use client"
+
 import React, {ReactNode} from "react"
-import {
-  IUserInformationBoxProps
-} from "@/src/modules/profile/domain/types/presentation/component"
 import {Lock, Mail, Phone} from "lucide-react"
 
-import InputWithLabelIconAction
-  from "@/components/ui/input-with-label-icon-action"
+import InputWithLabelIconAction from "@/components/ui/input-with-label-icon-action"
+import useUserProfileContainerAction from "@/src/modules/profile/presentation/hooks/user-profile-container-action";
+import {userInformationFormFields} from "@/src/modules/profile/domain/objects/page/profile";
 
-export default function UserInformationBox({
-                                             formFields,
-                                             user,
-                                             onEmailUpdate,
-                                             onPhoneUpdate,
-                                             emailRef,
-                                             newPasswordRef,
-                                             oldPasswordRef,
-                                             phoneRef,
-                                             confirmPasswordRef,
-                                             passwordEditMode,
-                                             onPasswordEditMode,
-                                             onPasswordUpdate
-                                           }: IUserInformationBoxProps): ReactNode {
+export default function UserInformationBox(): ReactNode {
   const {
-    phone,
-    password,
-    email,
-    username,
-    newPassword,
-    confirmPassword
-  } = formFields
+    userInformationBoxProps
+  } = useUserProfileContainerAction()
+  const {user, onEmailUpdate, onPhoneUpdate, emailRef, newPasswordRef, oldPasswordRef, phoneRef, confirmPasswordRef, passwordEditMode, onPasswordEditMode, onPasswordUpdate} = userInformationBoxProps
+  const {username, newPassword, confirmPassword, password, email, phone,} = userInformationFormFields
   return (
     <div className="flex flex-col gap-6" id="fields">
       <div className="flex flex-col gap-[4px]" id={`${username.id}-field`}>

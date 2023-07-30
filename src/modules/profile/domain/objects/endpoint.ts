@@ -5,5 +5,6 @@ const project: string = getHelpers.getBackendProjectName()
 export const profileEndpoints: IProfileEndpoints = {
   putEmail: "change-email/",
   putPhone: "change-phone/",
-  postPassword: `${project}/change-password/`
+  postPassword: `${project}/change-password/`,
+  getUserDetail: "user-detail/"
 }
