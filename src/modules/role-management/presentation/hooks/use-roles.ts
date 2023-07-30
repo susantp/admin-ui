@@ -1,15 +1,43 @@
-import React, { useEffect } from "react"
-import { fetchAllPermissions } from "@/src/modules/role-management/domain/service/role-service"
-import { Permission } from "@/src/modules/role-management/domain/types"
+import React, { useEffect, useState } from "react"
+import {
+  fetchAllPermissionsAction,
+  fetchRoleAction,
+} from "@/roles/domain/service/role-service"
+import { PermissionGrouped } from "@/roles/domain/types"
+import { RoleFormValues } from "@/roles/presentation/components/form-config"
 
-export const useRoles = (): { permissions: Permission[] } => {
-  const [permissions, setPermissions] = React.useState<Permission[]>([])
+export const useRoles = (
+  roleId?: string
+): {
+  permissions: PermissionGrouped[]
+  defaultValues: RoleFormValues
+} => {
+  const [permissions, setPermissions] = React.useState<PermissionGrouped[]>([])
+  const [defaultValues, setDefaultValues] = useState<RoleFormValues>({
+    roleName: "",
+    permissions: [],
+  })
 
   useEffect(() => {
-    fetchAllPermissions()
-      .then((data) => setPermissions(data.results))
+    fetchAllPermissionsAction()
+      .then((data) => setPermissions(data))
       .catch(() => {})
   }, [])
 
-  return { permissions }
+  useEffect(() => {
+    if (roleId) {
+      fetchRoleAction(roleId)
+        .then((role) => {
+          const rolePermissions = role.permissions.map((p) => p.id)
+
+          setDefaultValues({
+            roleName: role.name,
+            permissions: rolePermissions,
+          })
+        })
+        .catch(() => {})
+    }
+  }, [roleId])
+
+  return { permissions, defaultValues }
 }

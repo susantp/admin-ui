@@ -1,13 +1,20 @@
 "use server"
 
-import { roleDatasource } from "@/src/modules/role-management/data/role-datasource"
-import { Permission, Role } from "@/src/modules/role-management/domain/types"
+import { roleDatasource } from "@/roles/data/role-datasource"
+import { mapPermissionToPermissionGroup } from "@/roles/domain/mapper"
+import { PermissionGrouped, Role } from "@/roles/domain/types"
 
 import { DataResponse } from "@/components/data-table/data-response"
 
-export const fetchAllRoles = async (): Promise<DataResponse<Role>> =>
+export const fetchAllRolesAction = async (): Promise<DataResponse<Role>> =>
   roleDatasource.fetchAllRoles()
 
-export const fetchAllPermissions = async (): Promise<
-  DataResponse<Permission>
-> => roleDatasource.fetchAllPermissions()
+export const fetchAllPermissionsAction = async (): Promise<
+  PermissionGrouped[]
+> => {
+  const permissions = await roleDatasource.fetchAllPermissions()
+  return mapPermissionToPermissionGroup(permissions)
+}
+
+export const fetchRoleAction = async (roleId: string): Promise<Role> =>
+  roleDatasource.fetchRole(roleId)

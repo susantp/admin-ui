@@ -1,7 +1,8 @@
 "use client"
 
 import React from "react"
-import { Role } from "@/src/modules/role-management/domain/types"
+import Link from "next/link"
+import { Role } from "@/roles/domain/types"
 import { ColumnDef } from "@tanstack/react-table"
 import { EyeIcon, KeyRoundIcon, TrashIcon, UsersIcon } from "lucide-react"
 
@@ -33,16 +34,18 @@ export const roleColumnDef: ColumnDef<Role>[] = [
   {
     id: "actions",
     header: () => <div className="text-right">Actions</div>,
-    cell: () => (
+    cell: ({ row }) => (
       <div className="space-x-2 text-right">
         <Button size="sm" variant="outline">
           <EyeIcon className="mr-2 w-4 h-4" />
           View
         </Button>
-        <Button size="sm">
-          <KeyRoundIcon className="mr-2 w-4 h-4" />
-          Manage Access
-        </Button>
+        <Link href={`/roles/${row.original.id}/edit/`}>
+          <Button size="sm">
+            <KeyRoundIcon className="mr-2 w-4 h-4" />
+            Manage Access
+          </Button>
+        </Link>
         <Button size="sm" variant="destructive">
           <TrashIcon className="mr-2 w-4 h-4" />
           Delete
