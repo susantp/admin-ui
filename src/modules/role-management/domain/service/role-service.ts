@@ -3,6 +3,7 @@
 import { roleDatasource } from "@/roles/data/role-datasource"
 import { mapPermissionToPermissionGroup } from "@/roles/domain/mapper"
 import { PermissionGrouped, Role } from "@/roles/domain/types"
+import { RoleFormValues } from "@/roles/presentation/components/form-config"
 
 import { DataResponse } from "@/components/data-table/data-response"
 
@@ -18,3 +19,15 @@ export const fetchAllPermissionsAction = async (): Promise<
 
 export const fetchRoleAction = async (roleId: string): Promise<Role> =>
   roleDatasource.fetchRole(roleId)
+
+export const submitRoleAction = async ({
+  roleId,
+  role,
+}: {
+  roleId?: string
+  role: RoleFormValues
+}): Promise<Role> => {
+  if (roleId) return roleDatasource.putRole(roleId, role)
+
+  return roleDatasource.postRole(role)
+}

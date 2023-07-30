@@ -1,6 +1,8 @@
 "use client"
 
 import React from "react"
+import { useRouter } from "next/navigation"
+import { submitRoleAction } from "@/roles/domain/service/role-service"
 import {
   formSchema,
   RoleFormValues,
@@ -34,6 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { toast } from "@/components/ui/use-toast"
 
 interface RoleCreateEditPageProps {
   roleId?: string
@@ -42,17 +45,29 @@ interface RoleCreateEditPageProps {
 export function RoleCreateEditForm({
   roleId,
 }: RoleCreateEditPageProps): React.ReactElement {
-  const onSubmit = (values: RoleFormValues): void => {
-    console.log("SUBMITTED", values)
-  }
-
+  const router = useRouter()
   const { permissions, defaultValues } = useRoles(roleId)
 
   const form = useForm<RoleFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues,
+    defaultValues: {
+      name: "",
+      permissions: [],
+    },
     values: defaultValues,
   })
+
+  const onSubmit = (values: RoleFormValues): void => {
+    submitRoleAction({ roleId, role: values })
+      .then(() => {
+        if (!roleId) form.reset()
+        toast({
+          title: `Role ${roleId ? "updated" : "created"} successfully.`,
+        })
+        router.back()
+      })
+      .catch(() => {})
+  }
 
   return (
     <Card>
@@ -64,7 +79,7 @@ export function RoleCreateEditForm({
           <CardContent className="space-y-6">
             <FormField
               control={form.control}
-              name="roleName"
+              name="name"
               render={({ field }): React.ReactElement => (
                 <FormItem>
                   <FormLabel>Role Name</FormLabel>

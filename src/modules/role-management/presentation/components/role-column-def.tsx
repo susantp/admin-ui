@@ -4,7 +4,7 @@ import React from "react"
 import Link from "next/link"
 import { Role } from "@/roles/domain/types"
 import { ColumnDef } from "@tanstack/react-table"
-import { EyeIcon, KeyRoundIcon, TrashIcon, UsersIcon } from "lucide-react"
+import { KeyRoundIcon, TrashIcon, UsersIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
@@ -36,10 +36,6 @@ export const roleColumnDef: ColumnDef<Role>[] = [
     header: () => <div className="text-right">Actions</div>,
     cell: ({ row }) => (
       <div className="space-x-2 text-right">
-        <Button size="sm" variant="outline">
-          <EyeIcon className="mr-2 w-4 h-4" />
-          View
-        </Button>
         <Link href={`/roles/${row.original.id}/edit/`}>
           <Button size="sm">
             <KeyRoundIcon className="mr-2 w-4 h-4" />

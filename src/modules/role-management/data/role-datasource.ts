@@ -1,6 +1,7 @@
 import { roleEndpoints } from "@/roles/data/role-endpoints"
 import { RoleDatasource } from "@/roles/data/types"
 import { Permission, Role } from "@/roles/domain/types"
+import { RoleFormValues } from "@/roles/presentation/components/form-config"
 import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
 import { createUrl } from "@/src/common/utils/helpers"
 
@@ -36,6 +37,28 @@ export const roleDatasource: RoleDatasource = {
 
     const url = createUrl(roleEndpoints.getRole(roleId))
     const response = await apiClient.get(url)
+
+    return response.data as Role
+  },
+
+  async postRole(role: RoleFormValues): Promise<Role> {
+    const apiClient = await getAuthenticatedApiClient({
+      "x-screen-id": "236d1241-3baa-4f5c-8bf9-dc4c122ae4be",
+    })
+
+    const url = createUrl(roleEndpoints.postRole)
+    const response = await apiClient.post(url, role)
+
+    return response.data as Role
+  },
+
+  async putRole(roleId: string, role: RoleFormValues): Promise<Role> {
+    const apiClient = await getAuthenticatedApiClient({
+      "x-screen-id": "236d1241-3baa-4f5c-8bf9-dc4c122ae4be",
+    })
+
+    const url = createUrl(roleEndpoints.putRole(roleId))
+    const response = await apiClient.put(url, role)
 
     return response.data as Role
   },

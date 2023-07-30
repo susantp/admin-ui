@@ -14,7 +14,7 @@ export const useRoles = (
 } => {
   const [permissions, setPermissions] = React.useState<PermissionGrouped[]>([])
   const [defaultValues, setDefaultValues] = useState<RoleFormValues>({
-    roleName: "",
+    name: "",
     permissions: [],
   })
 
@@ -31,7 +31,7 @@ export const useRoles = (
           const rolePermissions = role.permissions.map((p) => p.id)
 
           setDefaultValues({
-            roleName: role.name,
+            name: role.name,
             permissions: rolePermissions,
           })
         })

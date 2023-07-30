@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const formSchema = z.object({
-  roleName: z
+  name: z
     .string()
     .nonempty("Role name is required")
     .min(2, "Role name must be at least 2 characters.")
