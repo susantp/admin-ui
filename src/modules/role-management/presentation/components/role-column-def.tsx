@@ -3,11 +3,11 @@
 import React from "react"
 import { Role } from "@/src/modules/role-management/domain/types"
 import { ColumnDef } from "@tanstack/react-table"
-import { EditIcon, EyeIcon, KeyRoundIcon, UsersIcon } from "lucide-react"
+import { EyeIcon, KeyRoundIcon, TrashIcon, UsersIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
-export const columns: ColumnDef<Role>[] = [
+export const roleColumnDef: ColumnDef<Role>[] = [
   {
     accessorKey: "name",
     header: "Role",
@@ -39,13 +39,13 @@ export const columns: ColumnDef<Role>[] = [
           <EyeIcon className="mr-2 w-4 h-4" />
           View
         </Button>
-        <Button size="sm" variant="outline">
-          <EditIcon className="mr-2 w-4 h-4" />
-          Edit
-        </Button>
         <Button size="sm">
           <KeyRoundIcon className="mr-2 w-4 h-4" />
           Manage Access
+        </Button>
+        <Button size="sm" variant="destructive">
+          <TrashIcon className="mr-2 w-4 h-4" />
+          Delete
         </Button>
       </div>
     ),

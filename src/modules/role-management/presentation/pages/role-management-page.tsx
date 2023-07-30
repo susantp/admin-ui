@@ -1,7 +1,8 @@
 import React from "react"
+import Link from "next/link"
 import { fetchAllRoles } from "@/src/modules/role-management/domain/service/role-service"
-import { columns } from "@/src/modules/role-management/presentation/components/columns"
-import { PlusIcon } from "lucide-react"
+import { roleColumnDef } from "@/src/modules/role-management/presentation/components/role-column-def"
+import { PlusCircleIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -13,18 +14,20 @@ export default function RoleManagementPage(): React.ReactElement {
       <CardHeader>
         <div className="flex w-full justify-between">
           <div>
-            <h3 className="text-2xl font-medium">Role Management</h3>
+            <h1 className="text-2xl font-medium">Role Management</h1>
             <p className="text-muted-foreground">
               Add or edit user access roles
             </p>
           </div>
-          <Button className="w-fit place-self-end">
-            <PlusIcon className="mr-2 w-4 h-4" /> New Role
-          </Button>
+          <Link href="/roles/create">
+            <Button className="w-fit place-self-end">
+              <PlusCircleIcon className="mr-2 w-4 h-4" /> New Role
+            </Button>
+          </Link>
         </div>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} label="roles" dataFn={fetchAllRoles} />
+        <DataTable columns={roleColumnDef} dataFn={fetchAllRoles} />
       </CardContent>
     </Card>
   )
