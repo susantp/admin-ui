@@ -1,7 +1,7 @@
 "use server"
 
-import { screenDatasource } from "@/screen-management/data/screen-datasource"
-import { Screen } from "@/screen-management/domain/types"
+import { screenDatasource } from "@/screens/data/screen-datasource"
+import { Screen } from "@/screens/domain/types"
 
 import { DataResponse } from "@/components/data-table/data-response"
 

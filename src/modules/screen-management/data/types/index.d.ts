@@ -1,4 +1,4 @@
-import { Screen } from "@/screen-management/domain/types"
+import { Screen } from "@/screens/domain/types"
 
 import { DataResponse } from "@/components/data-table/data-response"
 

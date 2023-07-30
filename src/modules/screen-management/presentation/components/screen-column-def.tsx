@@ -1,4 +1,4 @@
-import { Screen } from "@/screen-management/domain/types"
+import { Screen } from "@/screens/domain/types"
 import { ColumnDef } from "@tanstack/react-table"
 
 export const screenColumnDef: ColumnDef<Screen>[] = [

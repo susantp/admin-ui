@@ -1,6 +1,6 @@
-import { screenEndpoints } from "@/screen-management/data/screen-endpoints"
-import { ScreenDatasource } from "@/screen-management/data/types"
-import { Screen } from "@/screen-management/domain/types"
+import { screenEndpoints } from "@/screens/data/screen-endpoints"
+import { ScreenDatasource } from "@/screens/data/types"
+import { Screen } from "@/screens/domain/types"
 import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
 import { createUrl } from "@/src/common/utils/helpers"
 

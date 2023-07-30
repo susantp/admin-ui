@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import ScreenManagementPage from "@/screen-management/presentation/pages/screen-management-page"
+import ScreenManagementPage from "@/screens/presentation/pages/screen-management-page"
 
 export const metadata: Metadata = {
   title: "Role Management",

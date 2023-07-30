@@ -23,6 +23,7 @@
       "@/*": ["./*"],
       "@/auth/*": ["./src/modules/auth/*"],
       "@/screen-management/*": ["./src/modules/screen-management/*"]
+      "@/screens/*": ["./src/modules/screen-management/*"]
     },
     "strictNullChecks": true
   },

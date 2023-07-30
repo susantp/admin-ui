@@ -1,6 +1,6 @@
 import React from "react"
-import { fetchAllScreensAction } from "@/screen-management/domain/screen-actions"
-import { screenColumnDef } from "@/screen-management/presentation/components/screen-column-def"
+import { fetchAllScreensAction } from "@/screens/domain/screen-actions"
+import { screenColumnDef } from "@/screens/presentation/components/screen-column-def"
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { DataTable } from "@/components/data-table/data-table"
