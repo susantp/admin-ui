@@ -18,7 +18,7 @@ import useProfileContainerRefCollection
 import getHelpers from "@/src/modules/global/domain/utils/helpers";
 
 const useUserProfileContainerAction = (): IUserProfileContainerAction => {
-    const {data, update} = useSession()
+    const {data} = useSession()
     const [loading, setLoading] = useState(false)
     const [passwordEditMode, setPasswordEditMode] = useState(false)
     const [userDetail, setUserDetail] = useState<IUserDetailResponse | undefined>(undefined)
@@ -35,6 +35,9 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
         formState: {errors: userDetailFormError}
     } = useForm<IUserDetailResponse>()
     const toasts = {
+        emailUpdate: {
+            options: {toastId: "EU-T"}
+        },
         phoneUpdate: {
             options: {toastId: "PHU-T"}
         },
@@ -71,7 +74,11 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
         updateEmailAction({
             body
         }).then(() => {
-            update({email: emailValue}).then((response) => console.log('session', response)).catch(() => null)
+            toast.success("Email updated, Logging Out in 5 seconds !!!", toasts.passwordUpdate.option)
+            setTimeout(() => {
+                const appUrl = getHelpers.getAppUrl()
+                signOut({callbackUrl: `${appUrl}/login`}).then(() => null).catch(() => null)
+            }, 5000)
         }).catch(() => null)
     }
 
@@ -101,11 +108,11 @@ const useUserProfileContainerAction = (): IUserProfileContainerAction => {
             updatePasswordAction({body: JSON.stringify(bodyObject)})
                 .then(() => {
                     setPasswordEditMode(false)
-                    const appUrl = getHelpers.getAppUrl()
-                    toast.success("Password updated, Logging Out in 4 seconds !!!", toasts.passwordUpdate.option)
-                    setTimeout(()=> {
+                    toast.success("Password updated, Logging Out in 5 seconds !!!", toasts.passwordUpdate.option)
+                    setTimeout(() => {
+                        const appUrl = getHelpers.getAppUrl()
                         signOut({callbackUrl: `${appUrl}/login`}).then(() => null).catch(() => null)
-                    }, 4000)
+                    }, 5000)
 
                 })
                 .catch((reason) => {

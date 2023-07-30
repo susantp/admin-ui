@@ -1,5 +1,3 @@
-"use client"
-
 import React, {ReactNode} from "react"
 import Section from "@/src/modules/dashboard/presentation/components/section"
 import PocContainer

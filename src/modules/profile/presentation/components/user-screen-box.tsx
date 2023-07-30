@@ -1,3 +1,5 @@
+"use client"
+
 import React, {ReactNode} from "react";
 import useSidebarDesktopActions
   from "@/src/modules/global/presentation/hooks/use-sidebar-desktop-actions";

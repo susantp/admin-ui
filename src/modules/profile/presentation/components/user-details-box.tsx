@@ -1,5 +1,7 @@
+"use client"
+
 import React, {ReactNode} from "react";
-import userProfileContainerAction from "@/src/modules/profile/presentation/hooks/user-profile-container-action";
+import useUserProfileContainerAction from "@/src/modules/profile/presentation/hooks/user-profile-container-action";
 import PocLoader from "@/src/modules/global/presentation/components/poc-loader";
 import getHelpers from "@/src/modules/global/domain/utils/helpers";
 import {Input} from "@/components/ui/input";
@@ -14,7 +16,7 @@ export default function UserDetailsBox(): ReactNode {
         handleUserDetailSubmit,
         onUserDetailUpdate,
         userDetailFormError
-    } = userProfileContainerAction()
+    } = useUserProfileContainerAction()
 
 
     if (!userDetail) return <PocLoader/>
