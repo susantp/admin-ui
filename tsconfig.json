@@ -23,7 +23,8 @@
       "@/*": ["./*"],
       "@/auth/*": ["./src/modules/auth/*"],
       "@/roles/*": ["./src/modules/role-management/*"],
-      "@/screens/*": ["./src/modules/screen-management/*"]
+      "@/screens/*": ["./src/modules/screen-management/*"],
+      "@/profile/*": ["./src/modules/user-profile/*"]
     },
     "strictNullChecks": true
   },

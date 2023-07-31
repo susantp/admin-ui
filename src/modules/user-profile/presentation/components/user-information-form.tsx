@@ -6,8 +6,8 @@ import {
   UserEmailValue,
   userPhoneSchema,
   UserPhoneValue,
-} from "@/src/modules/user-profile/presentation/components/form-config"
-import UserChangePasswordForm from "@/src/modules/user-profile/presentation/components/user-change-password-form"
+} from "@/profile/presentation/components/form-config"
+import UserChangePasswordForm from "@/profile/presentation/components/user-change-password-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { KeyIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -26,13 +26,25 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function UserInformationForm(): React.ReactElement {
+interface UserInformationFormProps {
+  profile?: UserProfile
+}
+
+export default function UserInformationForm({
+  profile,
+}: UserInformationFormProps): React.ReactElement {
   const emailForm = useForm<UserEmailValue>({
     resolver: zodResolver(userEmailSchema),
+    defaultValues: {
+      email: profile?.email,
+    },
   })
 
   const phoneForm = useForm<UserPhoneValue>({
     resolver: zodResolver(userPhoneSchema),
+    defaultValues: {
+      phone: profile?.phone,
+    },
   })
 
   const submitEmail = (value: UserEmailValue): void =>
@@ -46,7 +58,7 @@ export default function UserInformationForm(): React.ReactElement {
       <CardHeader className="space-y-6">
         <div className="space-y-2">
           <Label>Username</Label>
-          <Input disabled />
+          <Input disabled value={profile?.username} />
         </div>
         <Form {...emailForm}>
           <form onSubmit={emailForm.handleSubmit(submitEmail)}>

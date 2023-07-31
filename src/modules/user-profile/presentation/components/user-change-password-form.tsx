@@ -2,7 +2,7 @@ import React from "react"
 import {
   PasswordFormValues,
   passwordSchema,
-} from "@/src/modules/user-profile/presentation/components/form-config"
+} from "@/profile/presentation/components/form-config"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 

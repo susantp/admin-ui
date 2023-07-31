@@ -4,7 +4,7 @@ import React from "react"
 import {
   UserDetailsFormValues,
   userDetailsSchema,
-} from "@/src/modules/user-profile/presentation/components/form-config"
+} from "@/profile/presentation/components/form-config"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -19,20 +19,25 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
-export default function UserDetailsForm(): React.ReactElement {
+interface UserDetailsFormProps {
+  profile?: UserProfile
+  onSubmit: (values: UserDetailsFormValues) => void
+}
+
+export default function UserDetailsForm({
+  profile,
+  onSubmit,
+}: UserDetailsFormProps): React.ReactElement {
   const form = useForm<UserDetailsFormValues>({
     resolver: zodResolver(userDetailsSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      address: "",
+      firstName: profile?.firstName,
+      lastName: profile?.lastName,
+      address: profile?.address,
     },
   })
-
-  const onSubmit = (values: UserDetailsFormValues): void => {
-    console.log("USER DETAILS SUBMITTED", values)
-  }
 
   return (
     <Card>
@@ -79,6 +84,11 @@ export default function UserDetailsForm(): React.ReactElement {
                 </FormItem>
               )}
             />
+
+            <div className="space-y-2">
+              <Label>Designation</Label>
+              <Input disabled value={profile?.designation} />
+            </div>
           </CardHeader>
           <CardFooter>
             <Button>Update Details</Button>
