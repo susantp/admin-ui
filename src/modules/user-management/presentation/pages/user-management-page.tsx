@@ -9,10 +9,14 @@ export default function UserManagementPage(): React.ReactElement {
   return (
     <Card>
       <CardHeader>
-        <h2 className="text-3xl font-medium">Users</h2>
+        <h1 className="text-2xl font-medium">User Management</h1>
+        <p className="text-muted-foreground">
+          A list of all the users in the system including their name, title,
+          email and role
+        </p>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} dataFn={fetchAllUsers} label="users" />
+        <DataTable columns={columns} dataFn={fetchAllUsers} />
       </CardContent>
     </Card>
   )

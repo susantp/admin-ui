@@ -12,7 +12,7 @@ export default function RoleManagementPage(): React.ReactElement {
   return (
     <Card>
       <CardHeader>
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between items-end">
           <div>
             <h1 className="text-2xl font-medium">Role Management</h1>
             <p className="text-muted-foreground">

@@ -40,14 +40,8 @@ export function Sidebar(): JSX.Element {
   ]
 
   return (
-    <aside className="relative p-2 w-80 text-accent-foreground">
-      <button
-        className="absolute top-8 -right-1.5 bg-glass rounded-full p-1 cursor-pointer"
-        type="button"
-      >
-        <ChevronsLeftRight className="w-4 h-4" />
-      </button>
-      <div className="h-full bg-accent rounded-md p-2 flex flex-col justify-between">
+    <aside className="w-80 bg-accent rounded-md text-accent-foreground">
+      <div className="h-full  p-2 flex flex-col justify-between">
         <div className="space-y-6">
           <div className="flex items-center gap-4 p-2.5">
             <Image

@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import Link from "next/link"
 import { Bell, LogOut, User } from "lucide-react"
 import { useSession } from "next-auth/react"
 
@@ -47,11 +48,13 @@ export function UserCard(): React.ReactElement {
           </div>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>My Account</span>
-        </DropdownMenuItem>
+      <DropdownMenuContent className="w-56" align="end">
+        <Link href="/profile">
+          <DropdownMenuItem>
+            <User className="mr-2 h-4 w-4" />
+            <span>My Account</span>
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>
           <Bell className="mr-2 h-4 w-4" />
           <span>Notifications</span>
