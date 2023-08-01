@@ -1,7 +1,8 @@
 "use client"
 
 // Error components must be Client Components
-import React, { useEffect } from "react"
+import React, { ReactElement, useEffect } from "react"
+import { signOut } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 
@@ -10,10 +11,7 @@ interface IErrorPageProps {
   reset: () => void
 }
 
-export default function Error({
-  error,
-  reset,
-}: IErrorPageProps): React.ReactNode {
+export default function Error({ error, reset }: IErrorPageProps): ReactElement {
   useEffect(() => {
     // Log the error to an error reporting service
   }, [error])
@@ -28,9 +26,17 @@ export default function Error({
         <p className="mb-2.5">{error.message}</p>
         <p className="text-gray-400">Stack Trace:</p>
         <p className="text-sm">{error.stack}</p>
-        <Button onClick={(): void => reset()} variant="outline">
-          Try again
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={(): void => reset()} variant="outline">
+            Try again
+          </Button>
+          <Button
+            onClick={async (): Promise<void> => signOut()}
+            variant="secondary"
+          >
+            Sign out
+          </Button>
+        </div>
       </div>
     </div>
   )

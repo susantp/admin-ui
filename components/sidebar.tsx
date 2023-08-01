@@ -1,7 +1,11 @@
-import React from "react"
+"use client"
+
+import React, { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
+import { useAtomValue } from "jotai"
 import {
   CalendarIcon,
   FolderIcon,
@@ -12,8 +16,10 @@ import {
 import { ModeToggle } from "@/components/mode-toggle"
 import { UserCard } from "@/components/user-card"
 
-export function Sidebar(): JSX.Element {
+export function Sidebar(): ReactElement {
   const pathname = usePathname()
+
+  const screens = useAtomValue(userScreensAtom)
 
   const navigation = [
     {
@@ -60,19 +66,26 @@ export function Sidebar(): JSX.Element {
             <h6 className="px-4 text-muted-foreground font-medium uppercase text-sm tracking-widest">
               Main Menu
             </h6>
-            {navigation.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.href}
-                  className={`flex gap-4 whitespace-nowrap py-2.5 px-4 rounded-md hover:bg-primary-foreground ${
-                    pathname === item.href ? "bg-primary-foreground" : ""
-                  }`}
-                >
-                  {item.icon}
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+            {screens.map((screen) => {
+              const item =
+                navigation.find((x) => x.name === screen.name) ?? navigation[0]
+
+              if (screen.permissions.length === 0) return null
+
+              return (
+                <li key={screen.id}>
+                  <Link
+                    href={item.href}
+                    className={`flex gap-4 whitespace-nowrap py-2.5 px-4 rounded-md hover:bg-primary-foreground ${
+                      pathname === item.href ? "bg-primary-foreground" : ""
+                    }`}
+                  >
+                    {item.icon}
+                    {item.name}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
 

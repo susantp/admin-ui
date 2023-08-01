@@ -33,7 +33,7 @@ export const useAuth = (): {
         }
         toast({
           title: "Success",
-          description: "Signed in successfully. Redirecting...",
+          description: "Signed in successfully.",
         })
         router.replace(res?.url ?? "/")
       })
