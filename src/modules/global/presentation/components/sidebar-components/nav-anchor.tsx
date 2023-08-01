@@ -6,6 +6,8 @@ import {
   IScreen
 } from "@/src/modules/global/domain/types/repository/global-repository"
 import getHelpers from "@/src/modules/global/domain/utils/helpers"
+import {useSetAtom} from "jotai";
+import {currentScreenAtom} from "@/src/modules/global/presentation/state/global-states";
 
 interface INavigationAnchorProps {
   screen: IScreen
@@ -22,10 +24,11 @@ export default function NavAnchor({
                                     inactiveColorCss,
                                     iconColorCss
                                   }: INavigationAnchorProps): ReactNode {
-  const pathname = usePathname()
+    const pathname = usePathname()
+    const setCurrentScreen = useSetAtom(currentScreenAtom)
   return (
     <Link
-      key={screen.name}
+      onClick={():void => setCurrentScreen(screen)}
       href={`/${screen.slug}`}
       className={getHelpers.joinClasses(
         pathname.includes(screen.slug)
