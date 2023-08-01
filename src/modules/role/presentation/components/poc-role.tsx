@@ -25,9 +25,11 @@ export default function PocRole({
             </div>
 
             <div className="flex gap-2 justify-between items-center">
-                <Link href={appPaths.editRole.path(id)} className="primaryButtonStyle">
-                    Edit
-                </Link>
+                <Restricted to="EDIT">
+                    <Link href={appPaths.editRole.path(id)} className="primaryButtonStyle">
+                        Edit
+                    </Link>
+                </Restricted>
                 <Restricted to="DELETE">
                     <button
                         type="button"
