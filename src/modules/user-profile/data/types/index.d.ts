@@ -13,3 +13,8 @@ type UserDetailResponse = {
 }
 
 type UserDetailRequest = Partial<UserDetailResponse>
+
+interface PasswordUpdateRequest {
+  old_password: string
+  new_password: string
+}

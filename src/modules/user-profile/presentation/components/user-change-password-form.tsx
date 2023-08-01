@@ -3,6 +3,7 @@ import {
   PasswordFormValues,
   passwordSchema,
 } from "@/profile/presentation/components/form-config"
+import { useProfileActions } from "@/profile/presentation/hooks/use-profile-actions"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -25,17 +26,16 @@ import {
 import { Input } from "@/components/ui/input"
 
 export default function UserChangePasswordForm(): React.ReactElement {
+  const { isLoading, submitPassword } = useProfileActions()
+
   const form = useForm<PasswordFormValues>({
     resolver: zodResolver(passwordSchema),
   })
 
-  const onSubmit = (values: PasswordFormValues): void =>
-    console.log("Password Change", values)
-
   return (
     <Card>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(submitPassword)}>
           <CardHeader>
             <CardTitle>Change Password</CardTitle>
           </CardHeader>
@@ -90,7 +90,7 @@ export default function UserChangePasswordForm(): React.ReactElement {
             />
           </CardContent>
           <CardFooter>
-            <Button>Update Password</Button>
+            <Button disabled={isLoading}>Update Password</Button>
           </CardFooter>
         </form>
       </Form>

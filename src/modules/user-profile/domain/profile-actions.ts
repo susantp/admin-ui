@@ -2,6 +2,9 @@
 
 import {
   fetchUserProfileService,
+  updateEmailService,
+  updatePasswordService,
+  updatePhoneService,
   updateUserDetailService,
 } from "@/profile/data/profile-services"
 import { UserDetailsFormValues } from "@/profile/presentation/components/form-config"
@@ -20,3 +23,13 @@ export const updateUserDetailAction = (
 
   return updateUserDetailService(details)
 }
+
+export const updateEmailAction = (email: string): Promise<void> =>
+  updateEmailService(email)
+
+export const updatePhoneAction = (phone: string): Promise<void> =>
+  updatePhoneService(phone)
+
+export const updatePasswordAction = (
+  data: PasswordUpdateRequest
+): Promise<void> => updatePasswordService(data)

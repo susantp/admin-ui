@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card"
 
 export default function UserProfilePage(): React.ReactElement {
-  const { profile, submitUserDetails } = useProfile()
+  const { profile } = useProfile()
 
   return (
     <Card className="h-full bg-accent p-4 space-y-6 overflow-auto">
@@ -33,9 +33,7 @@ export default function UserProfilePage(): React.ReactElement {
           <CardDescription>Details information about the user</CardDescription>
         </CardHeader>
         {!profile && <FormSkeleton />}
-        {profile && (
-          <UserDetailsForm profile={profile} onSubmit={submitUserDetails} />
-        )}
+        {profile && <UserDetailsForm profile={profile} />}
       </section>
       <section className="grid lg:grid-cols-2 gap-2">
         <CardHeader>

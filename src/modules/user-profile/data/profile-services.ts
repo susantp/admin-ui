@@ -45,3 +45,23 @@ export const updateUserDetailService = async (
     designation: userDetails.designation,
   }
 }
+
+export const updateEmailService = async (email: string): Promise<void> => {
+  const apiClient = await getAuthenticatedApiClient()
+
+  await apiClient.put(createUrl(profileEndpoints.putChangeEmail), { email })
+}
+
+export const updatePhoneService = async (phone: string): Promise<void> => {
+  const apiClient = await getAuthenticatedApiClient()
+
+  await apiClient.put(createUrl(profileEndpoints.putChangePhone), { phone })
+}
+
+export const updatePasswordService = async (
+  data: PasswordUpdateRequest
+): Promise<void> => {
+  const apiClient = await getAuthenticatedApiClient()
+
+  await apiClient.put(createUrl(profileEndpoints.putChangePassword), data)
+}

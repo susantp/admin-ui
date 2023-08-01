@@ -5,7 +5,9 @@ import {
   UserDetailsFormValues,
   userDetailsSchema,
 } from "@/profile/presentation/components/form-config"
+import { useProfileActions } from "@/profile/presentation/hooks/use-profile-actions"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
 import { Button } from "@/components/ui/button"
@@ -23,13 +25,12 @@ import { Label } from "@/components/ui/label"
 
 interface UserDetailsFormProps {
   profile?: UserProfile
-  onSubmit: (values: UserDetailsFormValues) => void
 }
 
 export default function UserDetailsForm({
   profile,
-  onSubmit,
 }: UserDetailsFormProps): React.ReactElement {
+  const { isLoading, submitUserDetails } = useProfileActions()
   const form = useForm<UserDetailsFormValues>({
     resolver: zodResolver(userDetailsSchema),
     defaultValues: {
@@ -42,7 +43,7 @@ export default function UserDetailsForm({
   return (
     <Card>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(submitUserDetails)}>
           <CardHeader className="space-y-6">
             <FormField
               control={form.control}
@@ -91,7 +92,10 @@ export default function UserDetailsForm({
             </div>
           </CardHeader>
           <CardFooter>
-            <Button>Update Details</Button>
+            <Button disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Update Details
+            </Button>
           </CardFooter>
         </form>
       </Form>
