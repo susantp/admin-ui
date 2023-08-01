@@ -2,6 +2,7 @@ import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { deleteRoleAction } from "@/roles/domain/service/role-service"
+import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { KeyRoundIcon, TrashIcon } from "lucide-react"
 
 import {
@@ -27,55 +28,59 @@ function RoleActions({ roleId }: RoleActionsProps): React.ReactElement {
 
   return (
     <div className="space-x-2 text-right">
-      <Link href={`/roles/${roleId}/edit/`}>
-        <Button size="sm">
-          <KeyRoundIcon className="mr-2 w-4 h-4" />
-          Manage Access
-        </Button>
-      </Link>
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button size="sm" variant="destructive">
-            <TrashIcon className="mr-2 w-4 h-4" />
-            Delete
+      <Restricted to="UPDATE">
+        <Link href={`/roles/${roleId}/edit/`}>
+          <Button size="sm">
+            <KeyRoundIcon className="mr-2 w-4 h-4" />
+            Manage Access
           </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you sure you want to delete this role?
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={(): void => {
-                deleteRoleAction(roleId)
-                  .then(() => {
-                    toast({
-                      title: "Success",
-                      description: "Role deleted successfully",
-                    })
-                    router.refresh()
-                  })
-                  .catch(() => {
-                    toast({
-                      title: "Failed",
-                      description: "Something went wrong.",
-                      variant: "destructive",
-                    })
-                  })
-              }}
-            >
+        </Link>
+      </Restricted>
+      <Restricted to="DELETE">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button size="sm" variant="destructive">
+              <TrashIcon className="mr-2 w-4 h-4" />
               Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                Are you sure you want to delete this role?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={(): void => {
+                  deleteRoleAction(roleId)
+                    .then(() => {
+                      toast({
+                        title: "Success",
+                        description: "Role deleted successfully",
+                      })
+                      router.refresh()
+                    })
+                    .catch(() => {
+                      toast({
+                        title: "Failed",
+                        description: "Something went wrong.",
+                        variant: "destructive",
+                      })
+                    })
+                }}
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </Restricted>
     </div>
   )
 }

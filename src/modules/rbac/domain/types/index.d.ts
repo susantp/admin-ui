@@ -5,3 +5,5 @@ export interface UserScreen {
   members: number
   permissions: []
 }
+
+type AllowedPermissions = "CREATE" | "READ" | "UPDATE" | "DELETE"

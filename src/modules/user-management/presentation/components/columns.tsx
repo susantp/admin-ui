@@ -1,6 +1,7 @@
 "use client"
 
-import React from "react"
+import React, { useContext } from "react"
+import PermissionContext from "@/src/modules/rbac/domain/permission-context"
 import {
   toggleIsActive,
   toggleIsSuperUser,
@@ -55,14 +56,18 @@ export const columns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }): React.ReactElement => {
-      const isActive = row.getValue<boolean>("status")
+      const userId = row.original.id
+      const isActive = row.original.is_active
+
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const [value, setValue] = React.useState(isActive)
-      const userId = row.original.id
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { isAllowedTo } = useContext(PermissionContext)
 
       return (
         <Switch
           checked={value}
+          disabled={!isAllowedTo("UPDATE")}
           onCheckedChange={async (): Promise<void> => {
             try {
               await toggleIsActive(userId)
@@ -86,14 +91,18 @@ export const columns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title="Is Admin?" />
     ),
     cell: ({ row }): React.ReactElement => {
-      const isAdmin = row.getValue<boolean>("is_superuser")
+      const userId = row.original.id
+      const isAdmin = row.original.is_superuser
+
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const [value, setValue] = React.useState(isAdmin)
-      const userId = row.original.id
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { isAllowedTo } = useContext(PermissionContext)
 
       return (
         <Switch
           checked={value}
+          disabled={!isAllowedTo("UPDATE")}
           onCheckedChange={async (): Promise<void> => {
             try {
               await toggleIsSuperUser(userId)
@@ -117,6 +126,12 @@ export const columns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title="Roles" />
     ),
     cell: ({ row }): JSX.Element => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { isAllowedTo } = useContext(PermissionContext)
+
+      if (!isAllowedTo("UPDATE"))
+        return <span>{row.getValue<string[]>("roles")}</span>
+
       const options = [
         { value: "Customer", label: "Customer" },
         { value: "Admin", label: "Admin" },

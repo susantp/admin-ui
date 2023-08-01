@@ -4,8 +4,11 @@ import React, { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
-import { useAtomValue } from "jotai"
+import {
+  currentScreenAtom,
+  userScreensAtom,
+} from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
+import { useAtomValue, useSetAtom } from "jotai"
 import {
   CalendarIcon,
   FolderIcon,
@@ -20,6 +23,7 @@ export function Sidebar(): ReactElement {
   const pathname = usePathname()
 
   const screens = useAtomValue(userScreensAtom)
+  const setCurrentScreen = useSetAtom(currentScreenAtom)
 
   const navigation = [
     {
@@ -76,6 +80,7 @@ export function Sidebar(): ReactElement {
                 <li key={screen.id}>
                   <Link
                     href={item.href}
+                    onClick={(): void => setCurrentScreen(screen)}
                     className={`flex gap-4 whitespace-nowrap py-2.5 px-4 rounded-md hover:bg-primary-foreground ${
                       pathname === item.href ? "bg-primary-foreground" : ""
                     }`}

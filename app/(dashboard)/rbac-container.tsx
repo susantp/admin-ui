@@ -1,12 +1,13 @@
 "use client"
 
-import React, { ReactElement, ReactNode } from "react"
+import React, { ReactNode } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { UserScreen } from "@/src/modules/rbac/domain/types"
 import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
 import { useHydrateAtoms } from "jotai/utils"
 
 import { Button } from "@/components/ui/button"
+import RBACProvider from "@/app/(dashboard)/rbac-provider"
 
 interface RBACContainerProps {
   children: ReactNode
@@ -16,7 +17,7 @@ interface RBACContainerProps {
 export default function RBACContainer({
   children,
   screens,
-}: RBACContainerProps): ReactElement {
+}: RBACContainerProps): ReactNode {
   useHydrateAtoms([[userScreensAtom, screens]])
 
   const pathname = usePathname()
@@ -25,7 +26,11 @@ export default function RBACContainer({
   const screen = screens.find((s) => pathname.startsWith(`/${s.slug}`))
 
   if (screen?.permissions.length !== 0) {
-    return <div>{children}</div>
+    return (
+      <RBACProvider permissions={screen?.permissions ?? []}>
+        {children}
+      </RBACProvider>
+    )
   }
 
   return (

@@ -2,6 +2,7 @@ import React from "react"
 import Link from "next/link"
 import { fetchAllRolesAction } from "@/roles/domain/service/role-service"
 import { roleColumnDef } from "@/roles/presentation/components/role-column-def"
+import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { PlusCircleIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -19,15 +20,19 @@ export default function RoleManagementPage(): React.ReactElement {
               Add or edit user access roles
             </p>
           </div>
-          <Link href="/roles/create/">
-            <Button className="w-fit place-self-end">
-              <PlusCircleIcon className="mr-2 w-4 h-4" /> New Role
-            </Button>
-          </Link>
+          <Restricted to="CREATE">
+            <Link href="/roles/create/">
+              <Button className="w-fit place-self-end">
+                <PlusCircleIcon className="mr-2 w-4 h-4" /> New Role
+              </Button>
+            </Link>
+          </Restricted>
         </div>
       </CardHeader>
       <CardContent>
-        <DataTable columns={roleColumnDef} dataFn={fetchAllRolesAction} />
+        <Restricted to="READ">
+          <DataTable columns={roleColumnDef} dataFn={fetchAllRolesAction} />
+        </Restricted>
       </CardContent>
     </Card>
   )
