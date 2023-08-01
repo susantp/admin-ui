@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { Bell, LogOut, User } from "lucide-react"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -60,7 +60,7 @@ export function UserCard(): React.ReactElement {
           <span>Notifications</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={(): Promise<undefined> => signOut()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

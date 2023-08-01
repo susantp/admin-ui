@@ -11,9 +11,7 @@ export const useProfile = (): {
       .then((res) => {
         setProfile(res)
       })
-      .catch(() => {
-        console.log("Could not fetch User Profile")
-      })
+      .catch(() => {})
   }, [])
 
   return { profile }

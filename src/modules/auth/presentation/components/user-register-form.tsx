@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-import { useRouter, useSearchParams } from "next/navigation"
 import { Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -14,18 +13,10 @@ export default function UserRegisterForm(): JSX.Element {
   const emailRef: React.RefObject<HTMLInputElement> = React.useRef(null)
   const phoneRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  function onSubmit(event: React.SyntheticEvent): void {
-    event.preventDefault()
-
-    // TODO: Add registration functionality after finalizing all the fields.
-  }
+  const [isLoading] = React.useState<boolean>(false)
 
   return (
-    <form onSubmit={onSubmit}>
+    <form>
       <div className="grid gap-2">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="username">
