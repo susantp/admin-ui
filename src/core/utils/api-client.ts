@@ -5,8 +5,15 @@ export const getApiClient = (headers?: HeadersInit): ApiClient => {
     input: RequestInfo | URL,
     init?: RequestInit | undefined
   ): Promise<ApiResponse> => {
-    const response = await fetch(input, init)
-    return (await response.json()) as ApiResponse
+    try {
+      const response = await fetch(input, init)
+      return (await response.json()) as ApiResponse
+    } catch (error) {
+      if (error instanceof TypeError) {
+        throw Error("Could not connect to the server.")
+      }
+      throw Error("Something went wrong!")
+    }
   }
 
   const get = async (endpoint: URL): Promise<ApiResponse> =>
