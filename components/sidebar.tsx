@@ -74,8 +74,6 @@ export function Sidebar(): JSX.Element {
             ))}
           </ul>
         </div>
-
-        <UserCard />
       </div>
     </aside>
   )
