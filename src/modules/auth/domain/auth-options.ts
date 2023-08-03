@@ -1,20 +1,14 @@
-import ApiClient from "@/src/utils/api-client"
 import jwtDecode from "jwt-decode"
 import { AuthOptions, User } from "next-auth"
 import { JWT } from "next-auth/jwt"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { signOut } from "next-auth/react"
 
-import { authConfig } from "@/modules/auth/domain/config/auth-config"
-import { authEndpoints } from "@/modules/auth/domain/config/auth-endpoints"
 import {
-  LoggedInUserResponse,
-  RefreshTokenRequest,
-  RefreshTokenResponse,
-  UserDetailResponse,
-  UserLoginRequest,
-  UserLoginResponse,
-} from "@/modules/auth/domain/types/auth-endpoints"
+  loginService,
+  refreshTokenService,
+} from "@/modules/auth/data/auth-service"
+import { authConfig } from "@/modules/auth/domain/auth-config"
 import { TokenPayload } from "@/modules/auth/domain/types/nextauth"
 
 const credentialProvider = CredentialsProvider({
@@ -23,48 +17,20 @@ const credentialProvider = CredentialsProvider({
   authorize: async (credentials) => {
     if (!credentials) return null
 
-    const { username, password } = credentials
+    const tokens = await loginService(credentials)
 
-    try {
-      const tokens = await new ApiClient().post<
-        UserLoginRequest,
-        UserLoginResponse
-      >(authEndpoints.userLogin, {
-        username,
-        password,
-      })
-
-      const apiClient = new ApiClient({ accessToken: tokens.access })
-      const loggedInUser = await apiClient.get<LoggedInUserResponse>(
-        authEndpoints.loggedInUser
-      )
-      const userDetails = await apiClient.get<UserDetailResponse>(
-        authEndpoints.userDetail
-      )
-
-      const user: User = {
-        ...loggedInUser,
-        firstName: userDetails.first_name,
-        lastName: userDetails.last_name,
-        address: userDetails.address1,
-        ...tokens,
-      }
-
-      return user
-    } catch (_) {
-      return Promise.reject(
-        Error("Your sign in request failed. Please try again.")
-      )
+    const user: User = {
+      id: "user",
+      ...tokens,
     }
+
+    return user
   },
 })
 
 const refreshAccessToken = async (token: JWT): Promise<JWT> => {
   try {
-    const newTokens = await new ApiClient().post<
-      RefreshTokenRequest,
-      RefreshTokenResponse
-    >(authEndpoints.refreshToken, {
+    const newTokens = await refreshTokenService({
       access: token.access,
       refresh: token.refresh,
     })
@@ -104,19 +70,13 @@ export const authOptions: AuthOptions = {
       if (Math.floor(Date.now() / 1000) < token.access_exp) return token
 
       if (Math.floor(Date.now()) / 1000 > token.refresh_exp) {
-        await signOut({ redirect: false })
-        throw Error("Token Expired")
+        await signOut()
       }
 
       return refreshAccessToken(token)
     },
     session: async ({ session, token }) => {
       session.user.id = token.sub
-      session.user.firstName = token.firstName
-      session.user.lastName = token.lastName
-      session.user.username = token.username
-      session.user.phone = token.phone
-      session.user.address = token.address
       session.user.access = token.access
       session.user.refresh = token.refresh
       session.user.access_exp = token.access_exp

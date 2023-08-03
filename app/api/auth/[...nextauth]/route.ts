@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 
-import { authOptions } from "@/modules/auth/domain/config/auth-options"
+import { authOptions } from "@/modules/auth/domain/auth-options"
 
 const handler: unknown = NextAuth(authOptions)
 

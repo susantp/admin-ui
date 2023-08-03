@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 
-import { authConfig } from "@/modules/auth/domain/config/auth-config"
+import { authConfig } from "@/modules/auth/domain/auth-config"
 import UserRegisterForm from "@/modules/auth/presentation/components/user-register-form"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 

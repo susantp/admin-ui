@@ -1,7 +1,7 @@
 import React from "react"
 import Image from "next/image"
 
-import { authConfig } from "@/modules/auth/domain/config/auth-config"
+import { authConfig } from "@/modules/auth/domain/auth-config"
 
 interface AuthLayoutProps {
   children: React.ReactNode

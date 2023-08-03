@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 
 import { signIn } from "next-auth/react"
 
-import { authConfig } from "@/modules/auth/domain/config/auth-config"
+import { authConfig } from "@/modules/auth/domain/auth-config"
 import { LoginFormValues } from "@/modules/auth/presentation/components/form-config"
 import { toast } from "@/components/ui/use-toast"
 
@@ -31,12 +31,13 @@ export const useAuth = (): {
             description: res.error,
             variant: "destructive",
           })
+        } else {
+          toast({
+            title: "Success",
+            description: "Signed in successfully.",
+          })
+          router.replace(res?.url ?? "/")
         }
-        toast({
-          title: "Success",
-          description: "Signed in successfully.",
-        })
-        router.replace(res?.url ?? "/")
       })
       .catch(() => {})
       .finally(() => setIsLoading(false))
