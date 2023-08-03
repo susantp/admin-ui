@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useContext } from "react"
+
 import PermissionContext from "@/src/modules/rbac/domain/permission-context"
 import {
   toggleIsActive,

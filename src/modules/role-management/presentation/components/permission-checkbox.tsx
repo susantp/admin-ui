@@ -1,4 +1,5 @@
 import React from "react"
+
 import { PermissionGrouped } from "@/roles/domain/types"
 
 import { Checkbox } from "@/components/ui/checkbox"

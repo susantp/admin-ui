@@ -2,6 +2,7 @@
 
 import React, { ReactNode } from "react"
 import { usePathname, useRouter } from "next/navigation"
+
 import { UserScreen } from "@/src/modules/rbac/domain/types"
 import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
 import { useHydrateAtoms } from "jotai/utils"

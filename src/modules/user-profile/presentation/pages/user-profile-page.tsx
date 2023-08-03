@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+
 import FormSkeleton from "@/profile/presentation/components/form-skeleton"
 import UserAccessInformation from "@/profile/presentation/components/user-access-information"
 import UserDetailsForm from "@/profile/presentation/components/user-details-form"

@@ -2,6 +2,7 @@
 
 // Error components must be Client Components
 import React, { ReactElement, useEffect } from "react"
+
 import { signOut } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"

@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+
 import ScreenManagementPage from "@/screens/presentation/pages/screen-management-page"
 
 export const metadata: Metadata = {

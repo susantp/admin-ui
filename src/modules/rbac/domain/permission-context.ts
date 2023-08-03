@@ -1,4 +1,5 @@
 import { createContext } from "react"
+
 import { AllowedPermissions } from "@/src/modules/rbac/domain/types"
 
 export interface PermissionContextProps {

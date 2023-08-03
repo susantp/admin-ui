@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react"
+
 import { fetchUserScreensAction } from "@/src/modules/rbac/domain/rbac-actions"
 
 import { Sidebar } from "@/components/sidebar"

@@ -1,4 +1,5 @@
 import React from "react"
+
 import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { fetchAllUsers } from "@/src/modules/user-management/domain/service/user-service"
 import { columns } from "@/src/modules/user-management/presentation/components/columns"

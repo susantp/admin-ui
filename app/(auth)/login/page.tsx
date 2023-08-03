@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+
 import LoginPage from "@/auth/presentation/pages/login-page"
 
 export const metadata: Metadata = {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+
 import { fetchUserProfileAction } from "@/profile/domain/profile-actions"
 
 export const useProfile = (): {

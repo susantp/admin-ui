@@ -1,4 +1,5 @@
 import React from "react"
+
 import { fetchAllScreensAction } from "@/screens/domain/screen-actions"
 import { screenColumnDef } from "@/screens/presentation/components/screen-column-def"
 import Restricted from "@/src/modules/rbac/presentation/components/restricted"

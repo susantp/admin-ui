@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+
 import { authConfig } from "@/auth/domain/config/auth-config"
 import { LoginFormValues } from "@/auth/presentation/components/form-config"
 import { signIn } from "next-auth/react"

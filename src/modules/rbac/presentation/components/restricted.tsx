@@ -1,6 +1,7 @@
 "use client"
 
 import { ReactNode, useContext } from "react"
+
 import PermissionContext from "@/src/modules/rbac/domain/permission-context"
 import { AllowedPermissions } from "@/src/modules/rbac/domain/types"
 
