@@ -66,7 +66,7 @@ export function Sidebar(): JSX.Element {
                 <Link
                   href={item.href}
                   className={`flex gap-4 whitespace-nowrap py-2.5 px-4 rounded-md hover:bg-primary-foreground ${
-                    pathname === item.href ? "bg-primary-foreground" : ""
+                    pathname === item.href ? "bg-primary-foreground text-primary font-medium" : ""
                   }`}
                 >
                   {item.icon}

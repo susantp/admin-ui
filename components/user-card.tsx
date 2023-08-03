@@ -24,7 +24,7 @@ export function UserCard(): React.ReactElement {
 
   if (!user) {
     return (
-      <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
+      <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-card text-primary">
         <Skeleton className="h-10 w-10 rounded-full" />
         <div className="space-y-2 flex-grow">
           <Skeleton className="h-2.5 w-[120px]" />
@@ -37,7 +37,7 @@ export function UserCard(): React.ReactElement {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
+        <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-card text-primary">
           <Avatar>
             <AvatarImage src="/favico.ico" />
             <AvatarFallback className="text-primary">{initials}</AvatarFallback>
