@@ -53,8 +53,6 @@ export function Sidebar(): JSX.Element {
             />
 
             <h1 className="text-2xl font-semibold">SOA POC</h1>
-
-            <ModeToggle />
           </div>
 
           <ul className="flex flex-col space-y-2">
