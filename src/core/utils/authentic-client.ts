@@ -1,6 +1,6 @@
 import { authOptions } from "@/auth/domain/config/auth-options"
-import { ApiClient, AuthenticClientHeaders } from "@/src/common/types"
-import { getApiClient } from "@/src/common/utils/get-api-client"
+import { ApiClient, AuthenticClientHeaders } from "@/src/core/types"
+import { getApiClient } from "@/src/core/utils/get-api-client"
 import { getServerSession } from "next-auth"
 
 export const getAuthenticatedApiClient = async (

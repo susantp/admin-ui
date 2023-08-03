@@ -1,4 +1,4 @@
-import { ApiClient, ApiResponse } from "@/src/common/types"
+import { ApiClient, ApiResponse } from "@/src/core/types"
 
 export const handleResponse = async (
   response: Response

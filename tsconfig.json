@@ -21,6 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
+      "@/core/*": ["./src/core/*"],
+      "@/modules/*": ["./src/modules/*"],
       "@/auth/*": ["./src/modules/auth/*"],
       "@/roles/*": ["./src/modules/role-management/*"],
       "@/screens/*": ["./src/modules/screen-management/*"],

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { cn } from "@/src/common/utils/helpers"
+import { cn } from "@/src/core/utils/helpers"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 

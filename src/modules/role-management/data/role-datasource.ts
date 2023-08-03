@@ -2,8 +2,8 @@ import { roleEndpoints } from "@/roles/data/role-endpoints"
 import { RoleDatasource } from "@/roles/data/types"
 import { Permission, Role } from "@/roles/domain/types"
 import { RoleFormValues } from "@/roles/presentation/components/form-config"
-import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
-import { createUrl } from "@/src/common/utils/helpers"
+import { getAuthenticatedApiClient } from "@/src/core/utils/authentic-client"
+import { createUrl } from "@/src/core/utils/helpers"
 
 import { DataResponse } from "@/components/data-table/data-response"
 

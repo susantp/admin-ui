@@ -1,6 +1,6 @@
 import { profileEndpoints } from "@/profile/data/profile-endpoints"
-import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
-import { createUrl } from "@/src/common/utils/helpers"
+import { getAuthenticatedApiClient } from "@/src/core/utils/authentic-client"
+import { createUrl } from "@/src/core/utils/helpers"
 
 export const fetchUserProfileService = async (): Promise<UserProfile> => {
   const apiClient = await getAuthenticatedApiClient()
