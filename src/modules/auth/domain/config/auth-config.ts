@@ -1,4 +1,4 @@
-import { AuthConfig } from "@/auth/domain/types/auth-config"
+import { AuthConfig } from "@/modules/auth/domain/types/auth-config"
 
 export const authConfig: AuthConfig = {
   credentialId: "credentials",

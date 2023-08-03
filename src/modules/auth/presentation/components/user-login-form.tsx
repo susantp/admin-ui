@@ -2,15 +2,15 @@
 
 import React, { ReactElement } from "react"
 
-import {
-  loginFormSchema,
-  LoginFormValues,
-} from "@/auth/presentation/components/form-config"
-import { useAuth } from "@/auth/presentation/hooks/use-auth"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import {
+  loginFormSchema,
+  LoginFormValues,
+} from "@/modules/auth/presentation/components/form-config"
+import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
 import { Button } from "@/components/ui/button"
 import {
   Form,

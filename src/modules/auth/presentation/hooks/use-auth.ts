@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 
-import { authConfig } from "@/auth/domain/config/auth-config"
-import { LoginFormValues } from "@/auth/presentation/components/form-config"
 import { signIn } from "next-auth/react"
 
+import { authConfig } from "@/modules/auth/domain/config/auth-config"
+import { LoginFormValues } from "@/modules/auth/presentation/components/form-config"
 import { toast } from "@/components/ui/use-toast"
 
 export const useAuth = (): {

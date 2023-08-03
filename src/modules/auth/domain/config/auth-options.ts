@@ -1,5 +1,12 @@
-import { authConfig } from "@/auth/domain/config/auth-config"
-import { authEndpoints } from "@/auth/domain/config/auth-endpoints"
+import ApiClient from "@/src/utils/api-client"
+import jwtDecode from "jwt-decode"
+import { AuthOptions, User } from "next-auth"
+import { JWT } from "next-auth/jwt"
+import CredentialsProvider from "next-auth/providers/credentials"
+import { signOut } from "next-auth/react"
+
+import { authConfig } from "@/modules/auth/domain/config/auth-config"
+import { authEndpoints } from "@/modules/auth/domain/config/auth-endpoints"
 import {
   LoggedInUserResponse,
   RefreshTokenRequest,
@@ -7,14 +14,8 @@ import {
   UserDetailResponse,
   UserLoginRequest,
   UserLoginResponse,
-} from "@/auth/domain/types/auth-endpoints"
-import { TokenPayload } from "@/auth/domain/types/nextauth"
-import ApiClient from "@/src/utils/api-client"
-import jwtDecode from "jwt-decode"
-import { AuthOptions, User } from "next-auth"
-import { JWT } from "next-auth/jwt"
-import CredentialsProvider from "next-auth/providers/credentials"
-import { signOut } from "next-auth/react"
+} from "@/modules/auth/domain/types/auth-endpoints"
+import { TokenPayload } from "@/modules/auth/domain/types/nextauth"
 
 const credentialProvider = CredentialsProvider({
   id: authConfig.credentialId,

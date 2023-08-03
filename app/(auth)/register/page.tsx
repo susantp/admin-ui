@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import RegisterPage from "@/auth/presentation/pages/register-page"
+import RegisterPage from "@/modules/auth/presentation/pages/register-page"
 
 export const metadata: Metadata = {
   title: "Create an account",
