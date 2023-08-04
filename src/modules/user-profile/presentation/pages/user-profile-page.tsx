@@ -2,12 +2,11 @@
 
 import React from "react"
 
-import FormSkeleton from "@/profile/presentation/components/form-skeleton"
-import UserAccessInformation from "@/profile/presentation/components/user-access-information"
-import UserDetailsForm from "@/profile/presentation/components/user-details-form"
-import UserInformationForm from "@/profile/presentation/components/user-information-form"
-import { useProfile } from "@/profile/presentation/hooks/use-profile"
-
+import FormSkeleton from "@/modules/user-profile/presentation/components/form-skeleton"
+import UserAccessInformation from "@/modules/user-profile/presentation/components/user-access-information"
+import UserDetailsForm from "@/modules/user-profile/presentation/components/user-details-form"
+import UserInformationForm from "@/modules/user-profile/presentation/components/user-information-form"
+import { useProfile } from "@/modules/user-profile/presentation/hooks/use-profile"
 import {
   Card,
   CardDescription,

@@ -2,15 +2,15 @@
 
 import React from "react"
 
-import {
-  UserDetailsFormValues,
-  userDetailsSchema,
-} from "@/profile/presentation/components/form-config"
-import { useProfileActions } from "@/profile/presentation/hooks/use-profile-actions"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import {
+  UserDetailsFormValues,
+  userDetailsSchema,
+} from "@/modules/user-profile/presentation/components/form-config"
+import { useProfileActions } from "@/modules/user-profile/presentation/hooks/use-profile-actions"
 import { Button } from "@/components/ui/button"
 import { Card, CardFooter, CardHeader } from "@/components/ui/card"
 import {

@@ -7,19 +7,25 @@ import { UserScreen } from "@/src/modules/rbac/domain/types"
 import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
 import { useHydrateAtoms } from "jotai/utils"
 
+import { profileAtom } from "@/modules/user-profile/presentation/atoms/profile-atom"
 import { Button } from "@/components/ui/button"
-import RBACProvider from "@/app/(dashboard)/rbac-provider"
+import RBACProvider from "@/app/(protected)/rbac-provider"
 
 interface RBACContainerProps {
   children: ReactNode
+  profile: UserProfile
   screens: UserScreen[]
 }
 
 export default function RBACContainer({
   children,
+  profile,
   screens,
 }: RBACContainerProps): ReactNode {
-  useHydrateAtoms([[userScreensAtom, screens]])
+  useHydrateAtoms([
+    [profileAtom, profile],
+    [userScreensAtom, screens],
+  ])
 
   const pathname = usePathname()
   const router = useRouter()

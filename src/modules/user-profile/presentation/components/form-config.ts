@@ -54,6 +54,7 @@ export const passwordSchema = z
     if (confirmPassword !== password) {
       ctx.addIssue({
         code: "custom",
+        path: ["confirmPassword"],
         message: "The passwords did not match",
       })
     }

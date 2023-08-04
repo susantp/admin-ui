@@ -3,7 +3,5 @@ export const profileEndpoints = {
   putChangeEmail: "change-email/",
   putChangePhone: "change-phone/",
   putChangePassword: `logged-in-user/change-password/`,
-  getUserDetail: `user-detail/`,
-  postUserDetail: `user-detail/`,
-  putUserDetail: `user-detail/`,
+  userDetail: `user-detail/`,
 }

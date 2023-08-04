@@ -1,13 +1,13 @@
 import React from "react"
 
-import {
-  PasswordFormValues,
-  passwordSchema,
-} from "@/profile/presentation/components/form-config"
-import { useProfileActions } from "@/profile/presentation/hooks/use-profile-actions"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
+import {
+  PasswordFormValues,
+  passwordSchema,
+} from "@/modules/user-profile/presentation/components/form-config"
+import { useProfileActions } from "@/modules/user-profile/presentation/hooks/use-profile-actions"
 import { Button } from "@/components/ui/button"
 import {
   Card,

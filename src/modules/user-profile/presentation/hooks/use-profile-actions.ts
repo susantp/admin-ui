@@ -1,33 +1,37 @@
 import { useState } from "react"
 
+import { signOut } from "next-auth/react"
+
 import {
   updateEmailAction,
   updatePasswordAction,
   updatePhoneAction,
   updateUserDetailAction,
-} from "@/profile/domain/profile-actions"
+} from "@/modules/user-profile/domain/profile-actions"
 import {
   PasswordFormValues,
   UserDetailsFormValues,
   UserEmailValue,
   UserPhoneValue,
-} from "@/profile/presentation/components/form-config"
-import { signOut } from "next-auth/react"
-
+} from "@/modules/user-profile/presentation/components/form-config"
 import { toast } from "@/components/ui/use-toast"
 
 export const useProfileActions = (): {
   isLoading: boolean
+  createUserDetails: (values: UserDetailsFormValues) => void
   submitUserDetails: (values: UserDetailsFormValues) => void
   submitPassword: (values: PasswordFormValues) => void
-  submitEmail: (email: UserEmailValue) => void
-  submitPhone: (phone: UserPhoneValue) => void
+  submitEmail: (value: UserEmailValue) => void
+  submitPhone: (value: UserPhoneValue) => void
 } => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const submitUserDetails = (values: UserDetailsFormValues): void => {
+  const updateUserDetails = (
+    values: UserDetailsFormValues,
+    action?: "CREATE" | "UPDATE"
+  ): void => {
     setIsLoading(true)
-    updateUserDetailAction(values)
+    updateUserDetailAction(values, action)
       .then(() => {
         toast({
           title: "Success",
@@ -42,6 +46,12 @@ export const useProfileActions = (): {
       )
       .finally(() => setIsLoading(false))
   }
+
+  const createUserDetails = (values: UserDetailsFormValues): void =>
+    updateUserDetails(values, "CREATE")
+
+  const submitUserDetails = (values: UserDetailsFormValues): void =>
+    updateUserDetails(values, "UPDATE")
 
   const submitEmail = (value: UserEmailValue): void => {
     setIsLoading(true)
@@ -106,6 +116,7 @@ export const useProfileActions = (): {
 
   return {
     isLoading,
+    createUserDetails,
     submitUserDetails,
     submitEmail,
     submitPhone,

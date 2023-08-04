@@ -18,19 +18,6 @@ export interface RegisterRequest {
 
 export type RegisterResponse = LoginResponse
 
-export interface LoggedInUserResponse {
-  id: string
-  email: string
-  phone: string
-  username: string
-}
-
-export interface UserDetailResponse {
-  first_name: string
-  last_name: string
-  address1: string
-}
-
 export interface RefreshTokenRequest {
   refresh: string
   access: string
