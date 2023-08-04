@@ -3,13 +3,18 @@ import { useRouter, useSearchParams } from "next/navigation"
 
 import { signIn } from "next-auth/react"
 
+import { registerAction } from "@/modules/auth/domain/auth-actions"
 import { authConfig } from "@/modules/auth/domain/auth-config"
-import { LoginFormValues } from "@/modules/auth/presentation/components/form-config"
+import {
+  LoginFormValues,
+  RegisterFormValues,
+} from "@/modules/auth/presentation/components/form-config"
 import { toast } from "@/components/ui/use-toast"
 
 export const useAuth = (): {
   isLoading: boolean
   loginUser: (values: LoginFormValues) => void
+  registerUser: (values: RegisterFormValues) => void
 } => {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -33,7 +38,7 @@ export const useAuth = (): {
           })
         } else {
           toast({
-            title: "Success",
+            title: "Sign in success.",
             description: "Signed in successfully.",
           })
           router.replace(res?.url ?? "/")
@@ -43,5 +48,44 @@ export const useAuth = (): {
       .finally(() => setIsLoading(false))
   }
 
-  return { isLoading, loginUser }
+  const registerUser = (values: RegisterFormValues): void => {
+    setIsLoading(true)
+    registerAction({
+      username: values.username,
+      password: values.password,
+      email: values.email,
+      phone: values.phone,
+    })
+      .then(() => {
+        signIn(authConfig.credentialId, {
+          redirect: false,
+          username: values.username,
+          password: values.password,
+        })
+          .then((res) => {
+            if (res?.error) {
+              router.replace("/login")
+              return
+            }
+
+            toast({
+              title: "Registration success",
+              description: "You have been successfully registered.",
+            })
+            router.replace("/profile")
+          })
+          .catch(() => {})
+          .finally(() => setIsLoading(false))
+      })
+      .catch((error: Error) => {
+        toast({
+          title: "Registration failed",
+          description: error.message,
+          variant: "destructive",
+        })
+        setIsLoading(false)
+      })
+  }
+
+  return { isLoading, loginUser, registerUser }
 }

@@ -8,7 +8,7 @@ export interface LoginResponse {
   refresh: string
 }
 
-export interface UserRegisterRequest {
+export interface RegisterRequest {
   id?: string
   username: string
   password: string
@@ -16,7 +16,7 @@ export interface UserRegisterRequest {
   phone: string
 }
 
-export type UserRegisterResponse = LoginResponse
+export type RegisterResponse = LoginResponse
 
 export interface LoggedInUserResponse {
   id: string

@@ -6,6 +6,8 @@ import {
   LoginResponse,
   RefreshTokenRequest,
   RefreshTokenResponse,
+  RegisterRequest,
+  RegisterResponse,
 } from "@/modules/auth/domain/types"
 
 export const loginService = async (
@@ -36,4 +38,19 @@ export const refreshTokenService = async (
   if (response.status !== 200) throw Error("Token expired")
 
   return response.data as RefreshTokenResponse
+}
+
+export const registerService = async (
+  details: RegisterRequest
+): Promise<RegisterResponse> => {
+  const apiClient = getApiClient()
+
+  const response = await apiClient.post(
+    createUrl(authEndpoints.userRegister),
+    details
+  )
+
+  if (response.status === 201) return response.data as RegisterResponse
+
+  throw Error("Could not create user.")
 }
