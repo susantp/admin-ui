@@ -54,7 +54,6 @@ export function Sidebar(): JSX.Element {
 
             <h1 className="text-2xl font-semibold">SOA POC</h1>
           </div>
-
           <ul className="flex flex-col space-y-2">
             <h6 className="px-4 text-muted-foreground font-medium uppercase text-sm tracking-widest">
               Main Menu

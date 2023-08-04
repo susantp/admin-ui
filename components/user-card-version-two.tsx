@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import {DropdownMenuTrigger} from "@radix-ui/react-dropdown-menu";
-import {LogOut, User} from "lucide-react";
+import {LogOut, User, User2Icon} from "lucide-react";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 
@@ -29,10 +29,11 @@ function UserDropdown({initials, name, email}: IUserDropdownProps): ReactNode {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Button variant="ghost" size="sm" className="h-8 w-8 px-0 ring-0">
-          <Avatar>
+          {/* <Avatar>
             <AvatarImage src="/favico.ico"/>
             <AvatarFallback className="text-primary">{initials}</AvatarFallback>
-          </Avatar>
+          </Avatar> */}
+          <User2Icon/>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 mt-2" align="end">
