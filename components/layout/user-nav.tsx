@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 
-import { Bell, LogOut, User, UserIcon } from "lucide-react"
+import { LogOutIcon, UserIcon } from "lucide-react"
 import { signOut } from "next-auth/react"
 
 import { useProfile } from "@/modules/user-profile/presentation/hooks/use-profile"
@@ -12,12 +12,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function UserCard(): React.ReactElement {
+export function UserNav(): React.ReactElement {
   const { profile } = useProfile()
 
   if (!profile) {
@@ -48,33 +49,32 @@ export function UserCard(): React.ReactElement {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
-          <Avatar>
-            <AvatarImage src="/favico.ico" />
-            <AvatarFallback className="text-primary">
-              {initials !== "" ? initials : <UserIcon className="w-5 h-5" />}
-            </AvatarFallback>
-          </Avatar>
-          <div className="text-left">
-            <h3 className="text-sm font-semibold">{name}</h3>
-            <p className="text-xs font-medium">{profile?.email}</p>
-          </div>
-        </div>
+        <Avatar>
+          <AvatarImage src="/favico.ico" />
+          <AvatarFallback className="text-sm">
+            {initials !== "" ? initials : <UserIcon className="w-5 h-5" />}
+          </AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
+        <DropdownMenuLabel>
+          <div className="flex flex-col space-y-1  font-normal ">
+            <p className="text-sm leading-none">{name || profile.username}</p>
+            <p className="text-xs text-muted-foreground leading-none">
+              {profile.email}
+            </p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
         <Link href="/profile">
           <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
+            <UserIcon className="mr-2 h-4 w-4" />
             <span>My Account</span>
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>
-          <Bell className="mr-2 h-4 w-4" />
-          <span>Notifications</span>
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={(): Promise<undefined> => signOut()}>
-          <LogOut className="mr-2 h-4 w-4" />
+          <LogOutIcon className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
