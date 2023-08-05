@@ -17,7 +17,7 @@ interface RBACContainerProps {
   screens: UserScreen[]
 }
 
-export default function RBACContainer({
+export default function StateProvider({
   children,
   profile,
   screens,

@@ -18,7 +18,7 @@ export default function UserProfilePage(): React.ReactElement {
   const { profile } = useProfile()
 
   return (
-    <Card className="h-full bg-accent p-4 space-y-6 overflow-auto">
+    <Card className="h-full w-full bg-accent p-4 space-y-6 overflow-auto">
       <section className="grid lg:grid-cols-2 gap-2">
         <CardHeader>
           <CardTitle>User Information</CardTitle>

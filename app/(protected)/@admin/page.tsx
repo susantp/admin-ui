@@ -1,8 +1,6 @@
 import React, { ReactElement } from "react"
 import Image from "next/image"
 
-import { UserCard } from "@/components/user-card"
-
 export default function Home(): ReactElement {
   return (
     <div className="flex flex-col items-center justify-around h-full">
@@ -16,8 +14,6 @@ export default function Home(): ReactElement {
           priority
         />
       </div>
-
-      <UserCard />
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
