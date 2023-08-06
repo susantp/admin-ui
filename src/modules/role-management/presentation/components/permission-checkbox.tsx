@@ -1,7 +1,6 @@
 import React from "react"
 
-import { PermissionGrouped } from "@/roles/domain/types"
-
+import { PermissionGrouped } from "@/modules/role-management/domain/types"
 import { Checkbox } from "@/components/ui/checkbox"
 
 interface PermissionCheckboxProps {

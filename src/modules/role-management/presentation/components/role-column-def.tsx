@@ -2,10 +2,11 @@
 
 import React from "react"
 
-import { Role } from "@/roles/domain/types"
-import RoleActions from "@/roles/presentation/components/role-actions"
 import { ColumnDef } from "@tanstack/react-table"
 import { KeyRoundIcon, UsersIcon } from "lucide-react"
+
+import { Role } from "@/modules/role-management/domain/types"
+import RoleActions from "@/modules/role-management/presentation/components/role-actions"
 
 export const roleColumnDef: ColumnDef<Role>[] = [
   {

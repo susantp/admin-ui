@@ -1,7 +1,7 @@
 import React from "react"
 import { Metadata } from "next"
 
-import { RoleCreateEditForm } from "@/roles/presentation/components/role-create-edit-form"
+import { RoleCreateEditForm } from "@/modules/role-management/presentation/components/role-create-edit-form"
 
 export const metadata: Metadata = {
   title: "Add Role",

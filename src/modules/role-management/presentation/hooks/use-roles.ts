@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react"
 import {
   fetchAllPermissionsAction,
   fetchRoleAction,
-} from "@/roles/domain/service/role-service"
-import { PermissionGrouped } from "@/roles/domain/types"
-import { RoleFormValues } from "@/roles/presentation/components/form-config"
+} from "@/modules/role-management/domain/role-actions"
+import { PermissionGrouped } from "@/modules/role-management/domain/types"
+import { RoleFormValues } from "@/modules/role-management/presentation/components/form-config"
 
 export const useRoles = (
   roleId?: string
