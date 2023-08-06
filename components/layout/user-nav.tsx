@@ -51,7 +51,7 @@ export function UserNav(): React.ReactElement {
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src="/favico.ico" />
-          <AvatarFallback className="text-sm">
+          <AvatarFallback className="text-sm bg-background">
             {initials !== "" ? initials : <UserIcon className="w-5 h-5" />}
           </AvatarFallback>
         </Avatar>

@@ -32,7 +32,7 @@ export default async function Home(): Promise<ReactElement> {
         <CardHeader>
           <CardTitle>Top Roles</CardTitle>
         </CardHeader>
-        <CardContent className="grid grid-cols-3 gap-4">
+        <CardContent className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
           {roles.map((role) => (
             <Card className="flex place-items-center gap-4">
               <CardHeader className="bg-primary-foreground rounded">

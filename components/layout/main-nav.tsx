@@ -1,10 +1,11 @@
 import React, { ReactElement } from "react"
 
-import { BellIcon, MenuIcon } from "lucide-react"
+import { MenuIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ModeToggle } from "@/components/layout/mode-toggle"
+import Notifications from "@/components/layout/notifications"
 import SidebarMobile from "@/components/layout/sidebar-mobile"
 import { UserNav } from "@/components/layout/user-nav"
 
@@ -24,9 +25,7 @@ export default function MainNav(): ReactElement {
         </Sheet>
       </div>
       <div className="flex space-x-4 place-items-center">
-        <Button variant="ghost" className="px-0 w-10 h-10 ring-0">
-          <BellIcon />
-        </Button>
+        <Notifications />
         <ModeToggle />
         <UserNav />
       </div>
