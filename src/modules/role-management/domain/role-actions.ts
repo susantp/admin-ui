@@ -5,6 +5,7 @@ import {
   fetchAllPermissionsService,
   fetchAllRolesService,
   fetchRoleService,
+  fetchTopRolesService,
   postRoleService,
   putRoleService,
 } from "@/modules/role-management/data/role-services"
@@ -15,6 +16,9 @@ import { DataResponse } from "@/components/data-table/data-response"
 
 export const fetchAllRolesAction = async (): Promise<DataResponse<Role>> =>
   fetchAllRolesService()
+
+export const fetchTopRolesAction = async (): Promise<Role[]> =>
+  fetchTopRolesService()
 
 export const fetchAllPermissionsAction = async (): Promise<
   PermissionGrouped[]

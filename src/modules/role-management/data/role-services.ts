@@ -16,6 +16,17 @@ export const fetchAllRolesService = async (): Promise<DataResponse<Role>> => {
   return response.data as DataResponse<Role>
 }
 
+export const fetchTopRolesService = async (): Promise<Role[]> => {
+  const apiClient = await getAuthenticatedApiClient({
+    "x-screen-id": "abc85e92-1826-4680-bc69-fdc5d5381f3e",
+  })
+
+  const url = createUrl(roleEndpoints.getTopRoles)
+  const response = await apiClient.get(url)
+
+  return response.data as Role[]
+}
+
 export const fetchAllPermissionsService = async (): Promise<Permission[]> => {
   const apiClient = await getAuthenticatedApiClient({
     "x-screen-id": "abc85e92-1826-4680-bc69-fdc5d5381f3e",

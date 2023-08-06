@@ -10,7 +10,7 @@ import { UserNav } from "@/components/layout/user-nav"
 
 export default function MainNav(): ReactElement {
   return (
-    <nav className="flex place-items-center place-content-between py-2.5 px-5">
+    <nav className="flex place-items-center place-content-between py-3 px-5 bg-secondary rounded-md">
       <div>
         <Sheet>
           <SheetTrigger asChild>
