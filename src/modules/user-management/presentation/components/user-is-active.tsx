@@ -23,7 +23,7 @@ export default function UserIsActive({
     setValue(isActive)
   }, [isActive])
 
-  if (!isAllowedTo)
+  if (!isAllowedTo("UPDATE"))
     return (
       <span>
         {value ? (

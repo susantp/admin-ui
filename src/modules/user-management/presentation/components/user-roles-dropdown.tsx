@@ -29,7 +29,7 @@ export default function UserRolesDropdown({
     setRole(selected)
   }, [user])
 
-  if (!isAllowedTo) return <span>{user.roles.toString()}</span>
+  if (!isAllowedTo("UPDATE")) return <span>{user.roles.toString()}</span>
 
   return (
     <Combobox

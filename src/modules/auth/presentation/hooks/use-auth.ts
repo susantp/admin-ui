@@ -72,7 +72,7 @@ export const useAuth = (): {
               title: "Registration success",
               description: "You have been successfully registered.",
             })
-            router.replace("/profile")
+            router.replace("/")
           })
           .catch(() => {})
           .finally(() => setIsLoading(false))

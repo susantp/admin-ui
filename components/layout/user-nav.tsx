@@ -73,7 +73,9 @@ export function UserNav(): React.ReactElement {
           </DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={(): Promise<undefined> => signOut()}>
+        <DropdownMenuItem
+          onClick={(): Promise<undefined> => signOut({ callbackUrl: "/" })}
+        >
           <LogOutIcon className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
