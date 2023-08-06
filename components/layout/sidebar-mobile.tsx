@@ -1,6 +1,6 @@
 "use client"
 
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -8,8 +8,6 @@ import { usePathname } from "next/navigation"
 import { useAtomValue, useSetAtom } from "jotai"
 import {
   CalendarIcon,
-  ChevronsLeftIcon,
-  ChevronsRightIcon,
   FolderIcon,
   LayoutDashboardIcon,
   UserIcon,
@@ -19,11 +17,8 @@ import {
   currentScreenAtom,
   userScreensAtom,
 } from "@/modules/rbac/presentation/atoms/rbac-atoms"
-import { Button } from "@/components/ui/button"
 
-export function Sidebar(): ReactElement {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
-
+export default function SidebarMobile(): ReactElement {
   const pathname = usePathname()
 
   const screens = useAtomValue(userScreensAtom)
@@ -53,12 +48,8 @@ export function Sidebar(): ReactElement {
   ]
 
   return (
-    <aside
-      className={`hidden md:block ${
-        isCollapsed || "w-80"
-      } rounded-md bg-secondary text-secondary-foreground`}
-    >
-      <div className="h-full p-2 flex flex-col justify-between">
+    <aside className="bg-secondary text-secondary-foreground h-full min-w-[320px]">
+      <div className="h-full p-4 flex flex-col justify-between">
         <div className="space-y-6">
           <div className="flex flex-1 space-x-2 place-items-center">
             <Image
@@ -70,16 +61,11 @@ export function Sidebar(): ReactElement {
               className="w-10 h-10 object-contain"
             />
 
-            <h1 className="text-2xl font-medium" hidden={isCollapsed}>
-              SOA POC
-            </h1>
+            <h1 className="text-2xl font-medium">SOA POC</h1>
           </div>
 
           <ul className="space-y-2">
-            <h6
-              className="p-2 text-muted-foreground uppercase tracking-widest text-sm font-medium"
-              hidden={isCollapsed}
-            >
+            <h6 className="p-2 text-muted-foreground uppercase tracking-widest text-sm font-medium">
               Main Menu
             </h6>
             {screens.map((screen) => {
@@ -99,21 +85,13 @@ export function Sidebar(): ReactElement {
                     }`}
                   >
                     {item.icon}
-                    {isCollapsed || screen.name}
+                    {screen.name}
                   </Link>
                 </li>
               )
             })}
           </ul>
         </div>
-
-        <Button
-          variant="ghost"
-          className="w-10 h-10 px-0 text-center"
-          onClick={(): void => setIsCollapsed(!isCollapsed)}
-        >
-          {isCollapsed ? <ChevronsRightIcon /> : <ChevronsLeftIcon />}
-        </Button>
       </div>
     </aside>
   )
