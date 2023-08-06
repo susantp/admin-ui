@@ -4,6 +4,7 @@ import React from "react"
 
 import { KeyIcon } from "lucide-react"
 
+import { UserProfile } from "@/modules/user-profile/domain/types"
 import UserChangePasswordForm from "@/modules/user-profile/presentation/components/user-change-password-form"
 import UserEmailForm from "@/modules/user-profile/presentation/components/user-email-form"
 import UserPhoneForm from "@/modules/user-profile/presentation/components/user-phone-form"

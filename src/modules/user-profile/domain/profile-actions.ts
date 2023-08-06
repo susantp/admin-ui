@@ -7,6 +7,11 @@ import {
   updatePhoneService,
   updateUserDetailService,
 } from "@/modules/user-profile/data/profile-services"
+import {
+  PasswordUpdateRequest,
+  UserDetailRequest,
+} from "@/modules/user-profile/data/types"
+import { UserProfile } from "@/modules/user-profile/domain/types"
 import { UserDetailsFormValues } from "@/modules/user-profile/presentation/components/form-config"
 
 export const fetchUserProfileAction = (): Promise<UserProfile> =>

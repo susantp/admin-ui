@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import { UserProfile } from "@/modules/user-profile/domain/types"
 import {
   UserDetailsFormValues,
   userDetailsSchema,
@@ -41,10 +42,20 @@ export default function UserDetailsForm({
     },
   })
 
+  const newProfile =
+    profile?.firstName === "" &&
+    profile?.lastName === "" &&
+    profile?.address === "" &&
+    profile?.designation === ""
+
   return (
     <Card>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitUserDetails)}>
+        <form
+          onSubmit={form.handleSubmit((values) =>
+            submitUserDetails(values, newProfile)
+          )}
+        >
           <CardHeader className="space-y-6">
             <FormField
               control={form.control}
@@ -53,7 +64,7 @@ export default function UserDetailsForm({
                 <FormItem>
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John" {...field} />
+                    <Input placeholder="First Name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -66,7 +77,7 @@ export default function UserDetailsForm({
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Doe" {...field} />
+                    <Input placeholder="Last Name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -89,7 +100,11 @@ export default function UserDetailsForm({
 
             <div className="space-y-2">
               <Label>Designation</Label>
-              <Input disabled value={profile?.designation} />
+              <Input
+                disabled
+                placeholder="Designation"
+                value={profile?.designation}
+              />
             </div>
           </CardHeader>
           <CardFooter>

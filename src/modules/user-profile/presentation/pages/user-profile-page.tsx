@@ -7,18 +7,13 @@ import UserAccessInformation from "@/modules/user-profile/presentation/component
 import UserDetailsForm from "@/modules/user-profile/presentation/components/user-details-form"
 import UserInformationForm from "@/modules/user-profile/presentation/components/user-information-form"
 import { useProfile } from "@/modules/user-profile/presentation/hooks/use-profile"
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function UserProfilePage(): React.ReactElement {
   const { profile } = useProfile()
 
   return (
-    <Card className="h-full w-full bg-accent p-4 space-y-6 overflow-auto">
+    <div className="h-full bg-secondary p-4 space-y-6 overflow-auto">
       <section className="grid lg:grid-cols-2 gap-2">
         <CardHeader>
           <CardTitle>User Information</CardTitle>
@@ -44,6 +39,6 @@ export default function UserProfilePage(): React.ReactElement {
         </CardHeader>
         <UserAccessInformation />
       </section>
-    </Card>
+    </div>
   )
 }

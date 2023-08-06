@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import { useSetAtom } from "jotai"
 import { signOut } from "next-auth/react"
 
 import {
@@ -8,6 +9,7 @@ import {
   updatePhoneAction,
   updateUserDetailAction,
 } from "@/modules/user-profile/domain/profile-actions"
+import { profileAtom } from "@/modules/user-profile/presentation/atoms/profile-atom"
 import {
   PasswordFormValues,
   UserDetailsFormValues,
@@ -18,24 +20,36 @@ import { toast } from "@/components/ui/use-toast"
 
 export const useProfileActions = (): {
   isLoading: boolean
-  createUserDetails: (values: UserDetailsFormValues) => void
-  submitUserDetails: (values: UserDetailsFormValues) => void
+  submitUserDetails: (
+    values: UserDetailsFormValues,
+    newProfile: boolean
+  ) => void
   submitPassword: (values: PasswordFormValues) => void
   submitEmail: (value: UserEmailValue) => void
   submitPhone: (value: UserPhoneValue) => void
 } => {
+  const setProfile = useSetAtom(profileAtom)
   const [isLoading, setIsLoading] = useState(false)
 
-  const updateUserDetails = (
+  const submitUserDetails = (
     values: UserDetailsFormValues,
-    action?: "CREATE" | "UPDATE"
+    newProfile: boolean
   ): void => {
     setIsLoading(true)
-    updateUserDetailAction(values, action)
+    updateUserDetailAction(values, newProfile ? "CREATE" : "UPDATE")
       .then(() => {
         toast({
           title: "Success",
           description: "User details updated successfully.",
+        })
+        setProfile((prev) => {
+          if (!prev) return prev
+          return {
+            ...prev,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+          }
         })
       })
       .catch(() =>
@@ -47,21 +61,23 @@ export const useProfileActions = (): {
       .finally(() => setIsLoading(false))
   }
 
-  const createUserDetails = (values: UserDetailsFormValues): void =>
-    updateUserDetails(values, "CREATE")
-
-  const submitUserDetails = (values: UserDetailsFormValues): void =>
-    updateUserDetails(values, "UPDATE")
-
   const submitEmail = (value: UserEmailValue): void => {
     setIsLoading(true)
     updateEmailAction(value.email)
-      .then(() =>
+      .then(() => {
         toast({
           title: "Success",
           description: "Email updated successfully.",
         })
-      )
+        setProfile((prev) => {
+          if (prev)
+            return {
+              ...prev,
+              email: value.email,
+            }
+          return prev
+        })
+      })
       .catch(() =>
         toast({
           title: "Failure",
@@ -75,12 +91,20 @@ export const useProfileActions = (): {
   const submitPhone = (value: UserPhoneValue): void => {
     setIsLoading(true)
     updatePhoneAction(value.phone)
-      .then(() =>
+      .then(() => {
         toast({
           title: "Success",
           description: "Phone updated successfully.",
         })
-      )
+        setProfile((prev) => {
+          if (prev)
+            return {
+              ...prev,
+              phone: value.phone,
+            }
+          return prev
+        })
+      })
       .catch(() =>
         toast({
           title: "Failure",
@@ -116,7 +140,6 @@ export const useProfileActions = (): {
 
   return {
     isLoading,
-    createUserDetails,
     submitUserDetails,
     submitEmail,
     submitPhone,

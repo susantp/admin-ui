@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import { UserProfile } from "@/modules/user-profile/domain/types"
 import {
   userPhoneSchema,
   UserPhoneValue,

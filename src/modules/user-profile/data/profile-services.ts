@@ -2,6 +2,13 @@ import { getAuthenticatedApiClient } from "@/src/core/utils/authentic-client"
 import { createUrl } from "@/src/core/utils/helpers"
 
 import { profileEndpoints } from "@/modules/user-profile/data/profile-endpoints"
+import {
+  LoggedInUserResponse,
+  PasswordUpdateRequest,
+  UserDetailRequest,
+  UserDetailResponse,
+} from "@/modules/user-profile/data/types"
+import { UserProfile } from "@/modules/user-profile/domain/types"
 
 export const fetchUserProfileService = async (): Promise<UserProfile> => {
   const apiClient = await getAuthenticatedApiClient()

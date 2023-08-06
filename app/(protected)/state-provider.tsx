@@ -7,6 +7,7 @@ import { UserScreen } from "@/src/modules/rbac/domain/types"
 import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
 import { useHydrateAtoms } from "jotai/utils"
 
+import { UserProfile } from "@/modules/user-profile/domain/types"
 import { profileAtom } from "@/modules/user-profile/presentation/atoms/profile-atom"
 import { Button } from "@/components/ui/button"
 import RBACProvider from "@/app/(protected)/rbac-provider"
