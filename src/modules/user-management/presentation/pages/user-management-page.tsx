@@ -1,19 +1,17 @@
-import React from "react"
+import React, { ReactElement } from "react"
 
 import Restricted from "@/src/modules/rbac/presentation/components/restricted"
-import { fetchAllUsers } from "@/src/modules/user-management/domain/service/user-service"
-import { columns } from "@/src/modules/user-management/presentation/components/columns"
 import { PlusCircleIcon } from "lucide-react"
 
+import UsersTable from "@/modules/user-management/presentation/components/users-table"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { DataTable } from "@/components/data-table/data-table"
 
-export default function UserManagementPage(): React.ReactElement {
+export default function UserManagementPage(): ReactElement {
   return (
     <Card>
       <CardHeader>
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between items-end">
           <div>
             <h1 className="text-2xl font-medium">User Management</h1>
             <p className="text-muted-foreground">
@@ -30,9 +28,7 @@ export default function UserManagementPage(): React.ReactElement {
         </div>
       </CardHeader>
       <CardContent>
-        <Restricted to="READ">
-          <DataTable columns={columns} dataFn={fetchAllUsers} />
-        </Restricted>
+        <UsersTable />
       </CardContent>
     </Card>
   )
