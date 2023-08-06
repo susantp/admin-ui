@@ -67,7 +67,7 @@ export function Sidebar(): ReactElement {
               width={28}
               height={28}
               priority
-              className="w-10 h-10 object-contain"
+              className="w-10 p-2 object-contain"
             />
 
             <h1 className="text-2xl font-medium" hidden={isCollapsed}>
@@ -94,8 +94,9 @@ export function Sidebar(): ReactElement {
                   <Link
                     href={item.slug}
                     onClick={(): void => setCurrentScreen(screen)}
-                    className={`flex p-2.5 gap-4 hover:bg-background/50 rounded-md place-items-center whitespace-nowrap ${
-                      pathname === item.slug && "bg-background/50"
+                    className={`flex p-2.5 gap-4 hover:bg-primary-foreground rounded-md place-items-center whitespace-nowrap ${
+                      pathname === item.slug &&
+                      "bg-primary-foreground text-primary"
                     }`}
                   >
                     {item.icon}
