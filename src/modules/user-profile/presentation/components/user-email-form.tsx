@@ -32,8 +32,8 @@ export default function UserEmailForm({
 
   const form = useForm<UserEmailValue>({
     resolver: zodResolver(userEmailSchema),
-    defaultValues: {
-      email: profile?.email,
+    values: {
+      email: profile?.email ?? "",
     },
   })
 

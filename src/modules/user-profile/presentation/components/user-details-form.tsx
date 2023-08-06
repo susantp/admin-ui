@@ -35,10 +35,10 @@ export default function UserDetailsForm({
   const { isLoading, submitUserDetails } = useProfileActions()
   const form = useForm<UserDetailsFormValues>({
     resolver: zodResolver(userDetailsSchema),
-    defaultValues: {
-      firstName: profile?.firstName,
-      lastName: profile?.lastName,
-      address: profile?.address,
+    values: {
+      firstName: profile?.firstName ?? "",
+      lastName: profile?.lastName ?? "",
+      address: profile?.address ?? "",
     },
   })
 

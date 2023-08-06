@@ -32,8 +32,8 @@ export default function UserPhoneForm({
 
   const form = useForm<UserPhoneValue>({
     resolver: zodResolver(userPhoneSchema),
-    defaultValues: {
-      phone: profile?.phone,
+    values: {
+      phone: profile?.phone ?? "",
     },
   })
 
