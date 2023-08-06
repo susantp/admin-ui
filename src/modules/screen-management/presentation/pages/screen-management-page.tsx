@@ -1,10 +1,10 @@
 import React from "react"
 
-import { fetchAllScreensAction } from "@/screens/domain/screen-actions"
-import { screenColumnDef } from "@/screens/presentation/components/screen-column-def"
 import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { PlusCircleIcon } from "lucide-react"
 
+import { fetchAllScreensAction } from "@/modules/screen-management/domain/screen-actions"
+import { screenColumnDef } from "@/modules/screen-management/presentation/components/screen-column-def"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { DataTable } from "@/components/data-table/data-table"
@@ -13,7 +13,7 @@ export default function ScreenManagementPage(): React.ReactElement {
   return (
     <Card>
       <CardHeader>
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between items-end">
           <div>
             <h3 className="text-2xl font-medium">Screen Management</h3>
             <p className="text-muted-foreground">Add or edit app screens</p>
