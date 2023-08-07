@@ -1,91 +1,106 @@
 "use client"
 
-import React from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import React, { ReactElement } from "react"
+
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
+import { useForm } from "react-hook-form"
 
+import {
+  registerFormSchema,
+  RegisterFormValues,
+} from "@/modules/auth/presentation/components/form-config"
+import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
 import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
-export default function UserRegisterForm(): JSX.Element {
-  const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
-  const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
-  const emailRef: React.RefObject<HTMLInputElement> = React.useRef(null)
-  const phoneRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+export default function UserRegisterForm(): ReactElement {
+  const { isLoading, registerUser } = useAuth()
 
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  function onSubmit(event: React.SyntheticEvent): void {
-    event.preventDefault()
-
-    // TODO: Add registration functionality after finalizing all the fields.
-  }
+  const form = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerFormSchema),
+  })
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className="grid gap-2">
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="username">
-            Username
-          </Label>
-          <Input
-            id="username"
-            type="text"
-            ref={usernameRef}
-            placeholder="Username"
-          />
-        </div>
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="password">
-            Password
-          </Label>
-          <Input
-            id="password"
-            type="password"
-            ref={passwordRef}
-            placeholder="Password"
-          />
-        </div>
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="password1">
-            Confirm Password
-          </Label>
-          <Input
-            id="password1"
-            type="password"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="email">
-            Email
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            ref={emailRef}
-            placeholder="Email Address"
-          />
-        </div>
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="phone">
-            Phone
-          </Label>
-          <Input
-            id="phone"
-            type="tel"
-            ref={phoneRef}
-            placeholder="Phone Number"
-          />
-        </div>
-        <Button>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(registerUser)} className="space-y-2">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Username" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="E-mail" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Phone" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button disabled={isLoading} className="w-full">
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Register
         </Button>
-      </div>
-    </form>
+      </form>
+    </Form>
   )
 }

@@ -1,89 +1,65 @@
 "use client"
 
-import React from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { authConfig } from "@/auth/domain/config/auth-config"
+import React, { ReactElement } from "react"
+
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
-import { signIn } from "next-auth/react"
+import { useForm } from "react-hook-form"
 
+import {
+  loginFormSchema,
+  LoginFormValues,
+} from "@/modules/auth/presentation/components/form-config"
+import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
 import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { toast } from "@/components/ui/use-toast"
 
-export default function UserLoginForm(): JSX.Element {
-  const {
-    loginForm: { emailField, passwordField, actionBtn },
-  } = authConfig
-  const usernameRef: React.RefObject<HTMLInputElement> = React.useRef(null)
-  const passwordRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+export default function UserLoginForm(): ReactElement {
+  const { isLoading, loginUser } = useAuth()
 
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  async function onSubmit(event: React.SyntheticEvent): Promise<void> {
-    event.preventDefault()
-
-    setIsLoading(true)
-
-    const username: string = usernameRef.current?.value ?? ""
-    const password: string = passwordRef.current?.value ?? ""
-
-    const signInResult = await signIn(authConfig.credentialId, {
-      redirect: false,
-      username,
-      password,
-      callbackUrl: searchParams.get("from") ?? "/",
-    })
-
-    setIsLoading(false)
-
-    if (!signInResult?.error) {
-      toast({
-        title: "Success",
-        description: "Signed in successfully. Redirecting...",
-      })
-      router.replace(signInResult?.url ?? "/")
-    } else {
-      toast({
-        title: "Sign in failed.",
-        description: signInResult.error,
-        variant: "destructive",
-      })
-    }
-  }
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginFormSchema),
+  })
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className="grid gap-2">
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="username">
-            {emailField.label}
-          </Label>
-          <Input
-            id={emailField.id}
-            type={emailField.type}
-            ref={usernameRef}
-            placeholder={emailField.placeHolder}
-          />
-        </div>
-        <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="password">
-            {passwordField.label}
-          </Label>
-          <Input
-            id={passwordField.id}
-            type={passwordField.type}
-            ref={passwordRef}
-            placeholder={passwordField.placeHolder}
-          />
-        </div>
-        <Button disabled={isLoading}>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(loginUser)} className="space-y-2">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Username" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }): ReactElement => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button disabled={isLoading} className="w-full">
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {actionBtn.label}
+          Login
         </Button>
-      </div>
-    </form>
+      </form>
+    </Form>
   )
 }

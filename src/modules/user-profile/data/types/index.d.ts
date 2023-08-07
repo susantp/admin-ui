@@ -1,15 +1,20 @@
-interface LoggedInUserResponse {
+export interface LoggedInUserResponse {
   id: string
   username: string
   email: string
   phone: string
 }
 
-type UserDetailResponse = {
+export type UserDetailResponse = {
   first_name: string
   last_name: string
   address1: string
   designation: string
 }
 
-type UserDetailRequest = Partial<UserDetailResponse>
+export type UserDetailRequest = Partial<UserDetailResponse>
+
+export interface PasswordUpdateRequest {
+  old_password: string
+  new_password: string
+}

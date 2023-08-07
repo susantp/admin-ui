@@ -4,7 +4,8 @@ import React from "react"
 import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Roboto } from "next/font/google"
-import { cn } from "@/src/common/utils/helpers"
+
+import { cn } from "@/src/core/utils/helpers"
 
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -30,11 +31,12 @@ export default function RootLayout({
   children,
 }: RootLayoutProps): React.ReactElement {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${font.className} ${cn(
           "min-h-screen bg-background antialiased overflow-hidden"
         )}`}
+        suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>{children}</Providers>

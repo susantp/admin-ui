@@ -2,15 +2,16 @@
 
 import React from "react"
 import { useRouter } from "next/navigation"
-import { submitRoleAction } from "@/roles/domain/service/role-service"
-import {
-  formSchema,
-  RoleFormValues,
-} from "@/roles/presentation/components/form-config"
-import { useRoles } from "@/roles/presentation/hooks/use-roles"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
+import { submitRoleAction } from "@/modules/role-management/domain/role-actions"
+import {
+  formSchema,
+  RoleFormValues,
+} from "@/modules/role-management/presentation/components/form-config"
+import { useRoles } from "@/modules/role-management/presentation/hooks/use-roles"
 import { Button } from "@/components/ui/button"
 import {
   Card,

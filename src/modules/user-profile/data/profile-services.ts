@@ -1,6 +1,14 @@
-import { profileEndpoints } from "@/profile/data/profile-endpoints"
-import { getAuthenticatedApiClient } from "@/src/common/utils/authentic-client"
-import { createUrl } from "@/src/common/utils/helpers"
+import { getAuthenticatedApiClient } from "@/src/core/utils/authentic-client"
+import { createUrl } from "@/src/core/utils/helpers"
+
+import { profileEndpoints } from "@/modules/user-profile/data/profile-endpoints"
+import {
+  LoggedInUserResponse,
+  PasswordUpdateRequest,
+  UserDetailRequest,
+  UserDetailResponse,
+} from "@/modules/user-profile/data/types"
+import { UserProfile } from "@/modules/user-profile/domain/types"
 
 export const fetchUserProfileService = async (): Promise<UserProfile> => {
   const apiClient = await getAuthenticatedApiClient()
@@ -9,7 +17,7 @@ export const fetchUserProfileService = async (): Promise<UserProfile> => {
     createUrl(profileEndpoints.getLoggedInUser)
   )
   const userDetailsResponse = await apiClient.get(
-    createUrl(profileEndpoints.getUserDetail)
+    createUrl(profileEndpoints.userDetail)
   )
 
   const loggedInUser = loggedInUserResponse.data as LoggedInUserResponse
@@ -28,14 +36,19 @@ export const fetchUserProfileService = async (): Promise<UserProfile> => {
 }
 
 export const updateUserDetailService = async (
-  details: UserDetailRequest
+  details: UserDetailRequest,
+  action?: "CREATE" | "UPDATE"
 ): Promise<Partial<UserProfile>> => {
   const apiClient = await getAuthenticatedApiClient()
+  const url = createUrl(profileEndpoints.userDetail)
 
-  const response = await apiClient.put(
-    createUrl(profileEndpoints.putUserDetail),
-    details
-  )
+  let response
+
+  if (action === "CREATE") {
+    response = await apiClient.post(url, details)
+  } else {
+    response = await apiClient.put(url, details)
+  }
 
   const userDetails = response.data as UserDetailResponse
   return {
@@ -44,4 +57,24 @@ export const updateUserDetailService = async (
     address: userDetails.address1,
     designation: userDetails.designation,
   }
+}
+
+export const updateEmailService = async (email: string): Promise<void> => {
+  const apiClient = await getAuthenticatedApiClient()
+
+  await apiClient.put(createUrl(profileEndpoints.putChangeEmail), { email })
+}
+
+export const updatePhoneService = async (phone: string): Promise<void> => {
+  const apiClient = await getAuthenticatedApiClient()
+
+  await apiClient.put(createUrl(profileEndpoints.putChangePhone), { phone })
+}
+
+export const updatePasswordService = async (
+  data: PasswordUpdateRequest
+): Promise<void> => {
+  const apiClient = await getAuthenticatedApiClient()
+
+  await apiClient.put(createUrl(profileEndpoints.putChangePassword), data)
 }

@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@/src/common/utils/helpers"
+
+import { cn } from "@/src/core/utils/helpers"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 

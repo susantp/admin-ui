@@ -21,10 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/auth/*": ["./src/modules/auth/*"],
-      "@/roles/*": ["./src/modules/role-management/*"],
-      "@/screens/*": ["./src/modules/screen-management/*"],
-      "@/profile/*": ["./src/modules/user-profile/*"]
+      "@/core/*": ["./src/core/*"],
+      "@/modules/*": ["./src/modules/*"],
     },
     "strictNullChecks": true
   },

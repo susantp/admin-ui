@@ -1,5 +1,6 @@
 import React from "react"
-import { generateUuidv4 } from "@/src/common/utils/helpers"
+
+import { generateUuidv4 } from "@/src/core/utils/helpers"
 
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"

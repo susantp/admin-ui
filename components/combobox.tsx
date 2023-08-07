@@ -1,5 +1,8 @@
-import React from "react"
-import { cn } from "@/src/common/utils/helpers"
+"use client"
+
+import React, { ReactElement, useState } from "react"
+
+import { cn } from "@/src/core/utils/helpers"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -10,30 +13,35 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-interface Option {
+export interface Option {
   label: string
   value: string
 }
 
 interface ComboboxProps {
-  value: string
   options: Option[]
+  selected?: Option
+  onSelectedChange: (value: Option) => void
 }
 
-export function Combobox({ value, options }: ComboboxProps): JSX.Element {
-  const [open, setOpen] = React.useState<boolean>(false)
-  const [currentValue, setValue] = React.useState<string>(value)
+export function Combobox({
+  selected,
+  options,
+  onSelectedChange,
+}: ComboboxProps): ReactElement {
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button
           variant="outline"
+          size="sm"
           role="combobox"
           aria-expanded={open}
           className=""
         >
-          {currentValue}
+          {selected?.label}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -44,14 +52,16 @@ export function Combobox({ value, options }: ComboboxProps): JSX.Element {
               <CommandItem
                 key={option.value}
                 onSelect={(): void => {
-                  setValue(option.value)
                   setOpen(false)
+                  onSelectedChange(option)
                 }}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    currentValue === option.value ? "opacity-100" : "opacity-0"
+                    selected?.value === option.value
+                      ? "opacity-100"
+                      : "opacity-0"
                   )}
                 />
                 {option.label}

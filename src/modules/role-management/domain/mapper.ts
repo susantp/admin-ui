@@ -3,7 +3,7 @@ import {
   PermissionGrouped,
   Role,
   RoleGrouped,
-} from "@/roles/domain/types"
+} from "@/modules/role-management/domain/types"
 
 export const mapPermissionToPermissionGroup = (
   permissions: Permission[]

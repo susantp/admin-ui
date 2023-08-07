@@ -1,22 +1,34 @@
-import React from "react"
-import { fetchAllUsers } from "@/src/modules/user-management/domain/service/user-service"
-import { columns } from "@/src/modules/user-management/presentation/components/columns"
+import React, { ReactElement } from "react"
 
+import Restricted from "@/src/modules/rbac/presentation/components/restricted"
+import { PlusCircleIcon } from "lucide-react"
+
+import UsersTable from "@/modules/user-management/presentation/components/users-table"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { DataTable } from "@/components/data-table/data-table"
 
-export default function UserManagementPage(): React.ReactElement {
+export default function UserManagementPage(): ReactElement {
   return (
     <Card>
       <CardHeader>
-        <h1 className="text-2xl font-medium">User Management</h1>
-        <p className="text-muted-foreground">
-          A list of all the users in the system including their name, title,
-          email and role
-        </p>
+        <div className="flex w-full justify-between items-end">
+          <div>
+            <h1 className="text-2xl font-medium">User Management</h1>
+            <p className="text-muted-foreground">
+              A list of all the users in the system including their name, title,
+              email and role
+            </p>
+          </div>
+          <Restricted to="CREATE">
+            <Button>
+              <PlusCircleIcon className="mr-2 w-4 h-4" />
+              New User
+            </Button>
+          </Restricted>
+        </div>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} dataFn={fetchAllUsers} />
+        <UsersTable />
       </CardContent>
     </Card>
   )

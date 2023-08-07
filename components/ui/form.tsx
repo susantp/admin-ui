@@ -1,5 +1,6 @@
 import * as React from "react"
-import { cn } from "@/src/common/utils/helpers"
+
+import { cn } from "@/src/core/utils/helpers"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
 import {
