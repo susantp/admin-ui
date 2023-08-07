@@ -1,6 +1,9 @@
-import React, { ReactElement } from "react"
+"use client"
 
-import { MenuIcon } from "lucide-react"
+import React, { ReactElement } from "react"
+import { usePathname } from "next/navigation"
+
+import { HomeIcon, MenuIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -10,6 +13,8 @@ import SidebarMobile from "@/components/layout/sidebar-mobile"
 import { UserNav } from "@/components/layout/user-nav"
 
 export default function MainNav(): ReactElement {
+  const pathname = usePathname()
+
   return (
     <nav className="flex place-items-center place-content-between py-3 px-5 bg-secondary rounded-md">
       <div>
@@ -23,6 +28,25 @@ export default function MainNav(): ReactElement {
             <SidebarMobile />
           </SheetContent>
         </Sheet>
+        <div className="flex place-items-center space-x-4">
+          <HomeIcon className="w-4 h-4" />
+          {pathname.split("/").map((x) => {
+            if (x) {
+              return (
+                <>
+                  <span>/</span>
+                  {x && (
+                    <span>
+                      {x.at(0)?.toUpperCase()}
+                      {x.slice(1)}
+                    </span>
+                  )}
+                </>
+              )
+            }
+            return <span />
+          })}
+        </div>
       </div>
       <div className="flex space-x-4 place-items-center">
         <Notifications />

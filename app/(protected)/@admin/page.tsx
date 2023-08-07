@@ -29,7 +29,7 @@ export default async function Home(): Promise<ReactElement> {
   return (
     <div className="flex flex-col h-full space-y-2">
       {roles && (
-        <Card className="bg-secondary border-0">
+        <Card className="">
           <CardHeader>
             <CardTitle>Top Roles</CardTitle>
           </CardHeader>
@@ -50,52 +50,54 @@ export default async function Home(): Promise<ReactElement> {
       )}
 
       {users && (
-        <Card className="bg-secondary border-0 h-full">
+        <Card className="h-full">
           <CardHeader>
             <CardTitle>Top Users</CardTitle>
           </CardHeader>
           <CardContent>
-            <Table className="bg-background rounded-md">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Username</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Phone</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Role</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {users.results.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell>
-                      {user.username}
-                      <br />
-                      <span className="text-muted-foreground">
-                        {user.email}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      {user.detail?.first_name} {user.detail?.last_name}
-                      <br />
-                      <span className="text-muted-foreground">
-                        {user.detail?.designation}
-                      </span>
-                    </TableCell>
-                    <TableCell>{user.phone}</TableCell>
-                    <TableCell>
-                      {user.is_active ? (
-                        <Badge>Active</Badge>
-                      ) : (
-                        <Badge variant="destructive">Inactive</Badge>
-                      )}
-                    </TableCell>
-
-                    <TableCell>{user.roles}</TableCell>
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Username</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Phone</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Role</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {users.results.map((user) => (
+                    <TableRow key={user.id}>
+                      <TableCell>
+                        {user.username}
+                        <br />
+                        <span className="text-muted-foreground">
+                          {user.email}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        {user.detail?.first_name} {user.detail?.last_name}
+                        <br />
+                        <span className="text-muted-foreground">
+                          {user.detail?.designation}
+                        </span>
+                      </TableCell>
+                      <TableCell>{user.phone}</TableCell>
+                      <TableCell>
+                        {user.is_active ? (
+                          <Badge>Active</Badge>
+                        ) : (
+                          <Badge variant="destructive">Inactive</Badge>
+                        )}
+                      </TableCell>
+
+                      <TableCell>{user.roles}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </CardContent>
         </Card>
       )}
