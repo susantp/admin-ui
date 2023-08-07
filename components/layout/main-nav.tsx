@@ -17,7 +17,7 @@ export default function MainNav(): ReactElement {
 
   return (
     <nav className="flex place-items-center place-content-between py-3 px-5 bg-secondary rounded-md">
-      <div>
+      <div className="flex place-items-center space-x-4">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" className="px-0 w-10 h-10 ring-0 md:hidden">
@@ -28,7 +28,7 @@ export default function MainNav(): ReactElement {
             <SidebarMobile />
           </SheetContent>
         </Sheet>
-        <div className="flex place-items-center space-x-4">
+        <div className="flex place-items-center space-x-2">
           <HomeIcon className="w-4 h-4" />
           {pathname.split("/").map((x) => {
             if (x) {
