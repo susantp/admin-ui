@@ -3,12 +3,13 @@
 import React, { ReactNode } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
-import { UserScreen } from "@/src/modules/rbac/domain/types"
-import { userScreensAtom } from "@/src/modules/rbac/presentation/atoms/rbac-atoms"
 import { useHydrateAtoms } from "jotai/utils"
 
+import { UserScreen } from "@/modules/rbac/domain/types"
+import { userScreensAtom } from "@/modules/rbac/presentation/atoms/rbac-atoms"
 import { UserProfile } from "@/modules/user-profile/domain/types"
 import { profileAtom } from "@/modules/user-profile/presentation/atoms/profile-atom"
+
 import { Button } from "@/components/ui/button"
 import RBACProvider from "@/app/(protected)/rbac-provider"
 

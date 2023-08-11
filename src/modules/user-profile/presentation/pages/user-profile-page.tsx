@@ -7,6 +7,7 @@ import UserAccessInformation from "@/modules/user-profile/presentation/component
 import UserDetailsForm from "@/modules/user-profile/presentation/components/user-details-form"
 import UserInformationForm from "@/modules/user-profile/presentation/components/user-information-form"
 import { useProfile } from "@/modules/user-profile/presentation/hooks/use-profile"
+
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function UserProfilePage(): React.ReactElement {

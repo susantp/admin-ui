@@ -2,8 +2,9 @@
 
 import * as React from "react"
 
-import { cn } from "@/src/core/utils/helpers"
 import * as SliderPrimitive from "@radix-ui/react-slider"
+
+import { cn } from "@/core/utils/helpers"
 
 const Slider = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Root>,

@@ -9,6 +9,7 @@ import {
   LoginFormValues,
   RegisterFormValues,
 } from "@/modules/auth/presentation/components/form-config"
+
 import { toast } from "@/components/ui/use-toast"
 
 export const useAuth = (): {

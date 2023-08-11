@@ -2,6 +2,7 @@ import { getAuthenticatedApiClient } from "@/core/utils/authentic-client"
 import { createUrl } from "@/core/utils/helpers"
 import { screenEndpoints } from "@/modules/screen-management/data/screen-endpoints"
 import { Screen } from "@/modules/screen-management/domain/types"
+
 import { DataResponse } from "@/components/data-table/data-response"
 
 export const fetchAllScreensService = async (): Promise<

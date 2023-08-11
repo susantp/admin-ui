@@ -2,6 +2,7 @@ import React, { ReactElement, ReactNode } from "react"
 
 import { fetchUserScreensAction } from "@/modules/rbac/domain/rbac-actions"
 import { fetchUserProfileAction } from "@/modules/user-profile/domain/profile-actions"
+
 import MainNav from "@/components/layout/main-nav"
 import { Sidebar } from "@/components/layout/sidebar"
 import StateProvider from "@/app/(protected)/state-provider"

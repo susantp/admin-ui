@@ -19,6 +19,7 @@ module.exports = {
     "^@/config/(.*)$",
     "^@/core/(.*)$",
     "^@/modules/(.*)$",
+    "",
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/styles/(.*)$",

@@ -2,8 +2,9 @@
 
 import React, { ReactElement, useState } from "react"
 
-import { cn } from "@/src/core/utils/helpers"
 import { Check, ChevronsUpDown } from "lucide-react"
+
+import { cn } from "@/core/utils/helpers"
 
 import { Button } from "@/components/ui/button"
 import { Command, CommandGroup, CommandItem } from "@/components/ui/command"

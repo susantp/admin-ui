@@ -11,6 +11,7 @@ import {
   currentScreenAtom,
   userScreensAtom,
 } from "@/modules/rbac/presentation/atoms/rbac-atoms"
+
 import { navigationItems } from "@/components/layout/navigation-items"
 
 export default function SidebarMobile(): ReactElement {

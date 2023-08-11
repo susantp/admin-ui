@@ -2,9 +2,10 @@
 
 import * as React from "react"
 
-import { cn } from "@/src/core/utils/helpers"
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
+
+import { cn } from "@/core/utils/helpers"
 
 const ContextMenu = ContextMenuPrimitive.Root
 

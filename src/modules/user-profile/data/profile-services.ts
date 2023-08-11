@@ -1,6 +1,5 @@
-import { getAuthenticatedApiClient } from "@/src/core/utils/authentic-client"
-import { createUrl } from "@/src/core/utils/helpers"
-
+import { getAuthenticatedApiClient } from "@/core/utils/authentic-client"
+import { createUrl } from "@/core/utils/helpers"
 import { profileEndpoints } from "@/modules/user-profile/data/profile-endpoints"
 import {
   LoggedInUserResponse,

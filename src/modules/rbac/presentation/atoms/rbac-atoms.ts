@@ -1,5 +1,6 @@
-import { UserScreen } from "@/src/modules/rbac/domain/types"
 import { atom } from "jotai"
+
+import { UserScreen } from "@/modules/rbac/domain/types"
 
 export const userScreensAtom = atom<UserScreen[]>([])
 
