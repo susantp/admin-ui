@@ -25,6 +25,7 @@ export const fetchUserProfileService = async (): Promise<UserProfile> => {
   return {
     id: loggedInUser.id,
     username: loggedInUser.username,
+    isAdmin: loggedInUser.is_superuser,
     firstName: userDetails.first_name,
     lastName: userDetails.last_name,
     email: loggedInUser.email,
