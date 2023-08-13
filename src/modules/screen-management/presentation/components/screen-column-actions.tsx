@@ -1,9 +1,12 @@
+"use client"
+
 import React, { ReactElement } from "react"
 
 import { KeyRoundIcon, Trash2Icon } from "lucide-react"
 
 import { Screen } from "@/modules/screen-management/domain/types"
 import ScreenForm from "@/modules/screen-management/presentation/components/screen-form"
+import { useScreenActions } from "@/modules/screen-management/presentation/hooks/use-screen-actions"
 
 import {
   AlertDialog,
@@ -23,6 +26,8 @@ interface ScreenColumnActionsProps {
 export default function ScreenColumnActions({
   screen,
 }: ScreenColumnActionsProps): ReactElement {
+  const { deleteScreen } = useScreenActions()
+
   return (
     <div className="space-x-2">
       <Dialog>
@@ -49,7 +54,9 @@ export default function ScreenColumnActions({
           <span className="font-medium">{screen.name}</span>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Delete</AlertDialogAction>
+            <AlertDialogAction onClick={(): void => deleteScreen(screen.id)}>
+              Delete
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

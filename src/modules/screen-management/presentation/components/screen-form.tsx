@@ -35,12 +35,17 @@ interface ScreenFormProps {
 }
 
 export default function ScreenForm({ screen }: ScreenFormProps): ReactElement {
-  const { submitScreen } = useScreenActions()
+  const { createScreen, updateScreen } = useScreenActions()
 
   const form = useForm<ScreenFormValues>({
     resolver: zodResolver(screenFormSchema),
     values: screen,
   })
+
+  const onSubmit = (values: ScreenFormValues): void => {
+    if (screen) updateScreen(values, screen.id)
+    else createScreen(values)
+  }
 
   return (
     <Card>
@@ -48,7 +53,7 @@ export default function ScreenForm({ screen }: ScreenFormProps): ReactElement {
         <CardHeader>
           <CardTitle>{screen ? "Edit" : "Create"} Screen</CardTitle>
         </CardHeader>
-        <form onSubmit={form.handleSubmit(submitScreen)}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="space-y-6">
             <FormField
               control={form.control}
