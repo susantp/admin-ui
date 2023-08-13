@@ -5,9 +5,11 @@ import { PlusCircleIcon } from "lucide-react"
 import Restricted from "@/modules/rbac/presentation/components/restricted"
 import { fetchAllScreensAction } from "@/modules/screen-management/domain/screen-actions"
 import { screenColumnDef } from "@/modules/screen-management/presentation/components/screen-column-def"
+import ScreenForm from "@/modules/screen-management/presentation/components/screen-form"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { DataTable } from "@/components/data-table/data-table"
 
 export default function ScreenManagementPage(): React.ReactElement {
@@ -20,10 +22,17 @@ export default function ScreenManagementPage(): React.ReactElement {
             <p className="text-muted-foreground">Add or edit app screens</p>
           </div>
           <Restricted to="CREATE">
-            <Button>
-              <PlusCircleIcon className="mr-2 w-4 h-4" />
-              New Screen
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>
+                  <PlusCircleIcon className="mr-2 w-4 h-4" />
+                  New Screen
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="p-0">
+                <ScreenForm />
+              </DialogContent>
+            </Dialog>
           </Restricted>
         </div>
       </CardHeader>
