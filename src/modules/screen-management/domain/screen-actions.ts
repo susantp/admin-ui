@@ -5,5 +5,6 @@ import { Screen } from "@/modules/screen-management/domain/types"
 
 import { DataResponse } from "@/components/data-table/data-response"
 
-export const fetchAllScreensAction = async (): Promise<DataResponse<Screen>> =>
-  fetchAllScreensService()
+export const fetchAllScreensAction = async (
+  screenId: string
+): Promise<DataResponse<Screen>> => fetchAllScreensService(screenId)

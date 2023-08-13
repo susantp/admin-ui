@@ -1,11 +1,13 @@
+"use client"
+
 import React from "react"
 
 import { PlusCircleIcon } from "lucide-react"
 
 import Restricted from "@/modules/rbac/presentation/components/restricted"
-import { fetchAllScreensAction } from "@/modules/screen-management/domain/screen-actions"
 import { screenColumnDef } from "@/modules/screen-management/presentation/components/screen-column-def"
 import ScreenForm from "@/modules/screen-management/presentation/components/screen-form"
+import { useScreenActions } from "@/modules/screen-management/presentation/hooks/use-screen-actions"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -13,6 +15,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { DataTable } from "@/components/data-table/data-table"
 
 export default function ScreenManagementPage(): React.ReactElement {
+  const { fetchScreens } = useScreenActions()
+
   return (
     <Card>
       <CardHeader>
@@ -38,7 +42,7 @@ export default function ScreenManagementPage(): React.ReactElement {
       </CardHeader>
       <CardContent>
         <Restricted to="READ">
-          <DataTable columns={screenColumnDef} dataFn={fetchAllScreensAction} />
+          <DataTable columns={screenColumnDef} dataFn={fetchScreens} />
         </Restricted>
       </CardContent>
     </Card>

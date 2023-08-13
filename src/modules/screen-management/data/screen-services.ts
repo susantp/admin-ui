@@ -5,11 +5,11 @@ import { Screen } from "@/modules/screen-management/domain/types"
 
 import { DataResponse } from "@/components/data-table/data-response"
 
-export const fetchAllScreensService = async (): Promise<
-  DataResponse<Screen>
-> => {
+export const fetchAllScreensService = async (
+  screenId: string
+): Promise<DataResponse<Screen>> => {
   const apiClient = await getAuthenticatedApiClient({
-    "x-screen-id": "efc830e6-2030-4057-bd10-6e715ae1352c",
+    "x-screen-id": screenId,
   })
 
   const url = createUrl(screenEndpoints.getScreens)
