@@ -17,10 +17,12 @@
   "ignorePatterns": ["/*.config.js", "/*.config.ts", "/*-generator.js"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": ["error", {"props": false}],
     "@typescript-eslint/no-misused-promises": "warn",
 
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-non-null-assertion": "warn",
     "@typescript-eslint/explicit-function-return-type": "error",

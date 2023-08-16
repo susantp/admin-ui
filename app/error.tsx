@@ -1,34 +1,41 @@
 "use client"
 
 // Error components must be Client Components
-import React, { useEffect } from "react"
+import React, { ReactElement, useEffect } from "react"
+
+import { signOut } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 
-export default function Error({
-  error,
-  reset,
-}: {
+interface ErrorPageProps {
   error: Error
   reset: () => void
-}): JSX.Element {
+}
+
+export default function ErrorPage({
+  error,
+  reset,
+}: ErrorPageProps): ReactElement {
   useEffect(() => {
     // Log the error to an error reporting service
   }, [error])
 
   return (
     <div className="grid place-items-center h-screen container">
-      <div className="flex flex-col place-items-center">
-        <h2 className="text-destructive text-2xl mb-5">
-          Something went wrong!
-        </h2>
-        <p className="text-destructive">{error.name}</p>
-        <p className="mb-2.5">{error.message}</p>
-        <p className="text-gray-400">Stack Trace:</p>
-        <p className="text-sm">{error.stack}</p>
-        <Button onClick={(): void => reset()} variant="outline">
-          Try again
-        </Button>
+      <div className="flex flex-col place-items-center space-y-4">
+        <h2 className="text-destructive text-2xl">Something went wrong!</h2>
+        <p>We are very sorry for the inconvenience.</p>
+        <div className="flex gap-2">
+          <Button onClick={(): void => reset()} variant="outline">
+            Try again
+          </Button>
+          <Button
+            onClick={async (): Promise<void> => signOut()}
+            variant="secondary"
+          >
+            Sign out
+          </Button>
+        </div>
       </div>
     </div>
   )

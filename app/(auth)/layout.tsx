@@ -1,12 +1,15 @@
 import React from "react"
 import Image from "next/image"
-import { authConfig } from "@/auth/domain/config/auth-config"
+
+import { authConfig } from "@/modules/auth/domain/auth-config"
 
 interface AuthLayoutProps {
   children: React.ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps): JSX.Element {
+export default function AuthLayout({
+  children,
+}: AuthLayoutProps): React.ReactNode {
   const {
     pageTitle,
     logo: { path, altText, width, height },
@@ -21,7 +24,7 @@ export default function AuthLayout({ children }: AuthLayoutProps): JSX.Element {
           height={height}
           priority
         />
-        <h2 className="text-3xl font-semibold text-center">{pageTitle}</h2>
+        <h1 className="text-3xl font-medium text-center">{pageTitle}</h1>
       </div>
       {children}
       <div />

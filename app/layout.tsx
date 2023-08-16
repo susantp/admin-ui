@@ -1,13 +1,22 @@
 import "@/styles/globals.css"
+
 import React from "react"
 import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
-import { Inter } from "next/font/google"
+import { Roboto } from "next/font/google"
+
+import { cn } from "@/src/core/utils/helpers"
 
 import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/theme-provider"
 import Providers from "@/app/providers"
 
-const inter: NextFont = Inter({ subsets: ["latin"] })
+const font: NextFont = Roboto({
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Frontend Boilerplate NextJS",
@@ -18,14 +27,21 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
+export default function RootLayout({
+  children,
+}: RootLayoutProps): React.ReactElement {
   return (
-    <html lang="en" className="" suppressHydrationWarning>
-      <body className={`${inter.className} bg-background`}>
-        <main>
+    <html lang="en">
+      <body
+        className={`${font.className} ${cn(
+          "min-h-screen bg-background antialiased overflow-hidden"
+        )}`}
+        suppressHydrationWarning
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>{children}</Providers>
-        </main>
-        <Toaster />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

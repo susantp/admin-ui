@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/auth/*": ["./src/modules/auth/*"]
+      "@/core/*": ["./src/core/*"],
+      "@/modules/*": ["./src/modules/*"],
     },
     "strictNullChecks": true
   },
