@@ -3,6 +3,7 @@ export interface LoggedInUserResponse {
   username: string
   email: string
   phone: string
+  is_superuser: boolean
 }
 
 export type UserDetailResponse = {

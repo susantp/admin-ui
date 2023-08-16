@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from "react"
 
 import PermissionContext, {
   PermissionContextProps,
-} from "@/src/modules/rbac/domain/permission-context"
+} from "@/modules/rbac/domain/permission-context"
 
 interface RBACProviderProps {
   permissions: string[]

@@ -3,6 +3,7 @@ import React, { ReactElement, useContext, useEffect, useState } from "react"
 import PermissionContext from "@/modules/rbac/domain/permission-context"
 import { User } from "@/modules/user-management/domain/types"
 import { toggleIsActiveAction } from "@/modules/user-management/domain/user-actions"
+
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { toast } from "@/components/ui/use-toast"

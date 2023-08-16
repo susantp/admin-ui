@@ -8,6 +8,7 @@ import {
   passwordSchema,
 } from "@/modules/user-profile/presentation/components/form-config"
 import { useProfileActions } from "@/modules/user-profile/presentation/hooks/use-profile-actions"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,

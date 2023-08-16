@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react"
 
-import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { PlusCircleIcon } from "lucide-react"
 
+import Restricted from "@/modules/rbac/presentation/components/restricted"
 import UsersTable from "@/modules/user-management/presentation/components/users-table"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 

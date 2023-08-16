@@ -2,10 +2,11 @@ import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { KeyRoundIcon, TrashIcon } from "lucide-react"
 
+import Restricted from "@/modules/rbac/presentation/components/restricted"
 import { deleteRoleAction } from "@/modules/role-management/domain/role-actions"
+
 import {
   AlertDialog,
   AlertDialogAction,

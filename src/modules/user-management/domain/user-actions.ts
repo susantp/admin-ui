@@ -8,6 +8,7 @@ import {
   toggleIsSuperUserService,
 } from "@/modules/user-management/data/user-services"
 import { User } from "@/modules/user-management/domain/types"
+
 import { DataQuery, DataResponse } from "@/components/data-table/data-response"
 
 export const fetchAllUsersAction = async (

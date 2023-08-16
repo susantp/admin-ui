@@ -2,8 +2,8 @@
 
 import { ReactNode, useContext } from "react"
 
-import PermissionContext from "@/src/modules/rbac/domain/permission-context"
-import { AllowedPermissions } from "@/src/modules/rbac/domain/types"
+import PermissionContext from "@/modules/rbac/domain/permission-context"
+import { AllowedPermissions } from "@/modules/rbac/domain/types"
 
 interface RestrictedProps {
   to: AllowedPermissions

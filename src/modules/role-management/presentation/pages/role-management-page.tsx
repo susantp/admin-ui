@@ -1,11 +1,12 @@
 import React from "react"
 import Link from "next/link"
 
-import Restricted from "@/src/modules/rbac/presentation/components/restricted"
 import { PlusCircleIcon } from "lucide-react"
 
+import Restricted from "@/modules/rbac/presentation/components/restricted"
 import { fetchAllRolesAction } from "@/modules/role-management/domain/role-actions"
 import { roleColumnDef } from "@/modules/role-management/presentation/components/role-column-def"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { DataTable } from "@/components/data-table/data-table"

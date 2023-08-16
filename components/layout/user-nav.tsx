@@ -7,6 +7,7 @@ import { LogOutIcon, UserIcon } from "lucide-react"
 import { signOut } from "next-auth/react"
 
 import { useProfile } from "@/modules/user-profile/presentation/hooks/use-profile"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
