@@ -33,3 +33,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ide
+.idea
+# Sentry Auth Token
+.sentryclirc
+package-lock.json
+pnpm-lock.yaml
+.env
