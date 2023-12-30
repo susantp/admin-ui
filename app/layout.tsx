@@ -1,0 +1,28 @@
+import "@/styles/globals.css"
+import React from "react"
+import { Metadata } from "next"
+import { NextFont } from "next/dist/compiled/@next/font"
+import { Inter } from "next/font/google"
+
+import Providers from "@/app/providers"
+
+const inter: NextFont = Inter({ subsets: ["latin"] })
+
+export const metadata: Metadata = {
+  title: "Frontend Boilerplate NextJS",
+  description: "Frontend boilerplate application using NextJS",
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}): JSX.Element {
+  return (
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  )
+}
