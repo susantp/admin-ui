@@ -1,26 +1,50 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Starting the Server
 
-First, run the development server:
+Starting the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to view the application.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Linter & Formatters
+* `.eslintrc.json`- Linting Rules
+  * JavaScrip Styles - [Airbnb](https://github.com/airbnb/javascript)
+  * TypeScript Styles - [typescript-eslint](https://typescript-eslint.io/rules/)
+* `.eslintignore` - Exclude files/folders to be checked by eslint
+* `prettier.config.js`- Formatting rules
+  * [Prettier Reference](https://prettier.io/docs/en/options.html)
+* `.prettierignore` - Exclude files/folders to be checked by prettier
+* `.editorconfig` - Editor configurations
+  * [Specification](https://spec.editorconfig.org/)
+* `.commitlint.config.js` - Commit message semantics
+  * [Rules Reference](https://commitlint.js.org/#/reference-rules)
+* `tsconfig.json` - TypeScript Compilation Rules
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+# Check for linting errors
+npm run lint
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# To fix violated lints
+npm run lint --fix
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Check formatting errors
+npm run format:check
+
+# Fix formatting errors
+npm run format:write
+```
+
+### Commit Hooks
+[Husky Documentation](https://typicode.github.io/husky/)
+
+## Tailwind
+Update configuration at `tailwind.config.js`
+
+[Tailwind Documentation](https://tailwindcss.com/docs/installation)
 
 ## Learn More
 
