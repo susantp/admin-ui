@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "filenames"],
   "extends": [
     "next/core-web-vitals",
     "airbnb",
@@ -14,33 +14,21 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["/*.config.js"],
+  "ignorePatterns": ["/*.config.js", "/*.config.ts", "/*-generator.js"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": ["error", {"props": false}],
+    "@typescript-eslint/no-misused-promises": "warn",
 
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-non-null-assertion": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-non-null-assertion": "warn",
     "@typescript-eslint/explicit-function-return-type": "error",
-    "@typescript-eslint/explicit-member-accessibility": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/no-empty-function": "error",
     "@typescript-eslint/no-misused-new": "error",
-    "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-var-requires": "error",
-    "@typescript-eslint/triple-slash-reference": "error",
-    "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/typedef": [
-      "error",
-      {
-        "arrayDestructuring": true,
-        "arrowParameter": true,
-        "memberVariableDeclaration": true,
-        "objectDestructuring": true,
-        "parameter": true,
-        "propertyDeclaration": true,
-        "variableDeclaration": true
-      }
-    ]
+
+    "filenames/match-regex": [2, "^[a-z]+(-[a-z]+)*(.d)?$", true]
   }
 }
