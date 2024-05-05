@@ -1,8 +1,8 @@
-const projectName = process.env.BACKEND_PROJECT_NAME ?? "poc"
+const projectName = process.env.BACKEND_PROJECT_NAME ?? "auth-management"
 
 export const authEndpoints = {
-  userLogin: `${projectName}/user/login/`,
-  userRegister: `${projectName}/user/register/`,
+  userLogin: `${projectName}/login/`,
+  userRegister: `${projectName}/register/`,
   refreshToken: `${projectName}/refresh-token/`,
   loggedInUser: "logged-in-user/",
   userDetail: "user-detail/",

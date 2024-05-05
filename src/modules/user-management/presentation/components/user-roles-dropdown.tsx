@@ -28,7 +28,7 @@ export default function UserRolesDropdown({
   useEffect(() => {
     const selected = roleOptions.find((r) => r.label === user.roles[0])
     setRole(selected)
-  }, [user])
+  }, [user, roleOptions])
 
   if (!isAllowedTo("UPDATE")) return <span>{user.roles.toString()}</span>
 

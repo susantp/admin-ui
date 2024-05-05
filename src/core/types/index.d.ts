@@ -1,8 +1,7 @@
 export interface ApiResponse {
-  message: string
   data: T
   status: number
-  error: string
+  code: number
 }
 
 export interface ApiClient {
