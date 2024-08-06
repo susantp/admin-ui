@@ -1,9 +1,9 @@
-const projectName = process.env.BACKEND_PROJECT_NAME ?? "auth-management"
+const modulePath = "/api/v1/auth"
 
 export const authEndpoints = {
-  userLogin: `${projectName}/login/`,
-  userRegister: `${projectName}/register/`,
-  refreshToken: `${projectName}/refresh-token/`,
+  userLogin: `${modulePath}/login/credentials`,
+  userRegister: `${modulePath}/register/`,
+  refreshToken: `${modulePath}/refresh-token/`,
   loggedInUser: "logged-in-user/",
   userDetail: "user-detail/",
 }

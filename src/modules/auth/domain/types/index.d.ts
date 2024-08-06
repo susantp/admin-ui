@@ -1,9 +1,16 @@
 export interface LoginRequest {
   username: string
   password: string
+  redirect: boolean | undefined
+  callbackUrl?: string | undefined
 }
 
 export interface LoginResponse {
+  data: TokenResponse
+  status: string | number
+}
+
+export interface TokenResponse {
   access: string
   refresh: string
 }
@@ -25,4 +32,8 @@ export interface RefreshTokenRequest {
 
 export interface RefreshTokenResponse {
   access: string
+}
+
+export interface AuthEndpoints {
+  [key: string]: string
 }

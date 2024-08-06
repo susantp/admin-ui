@@ -9,6 +9,7 @@ import {
   refreshTokenService,
 } from "@/modules/auth/data/auth-service"
 import { authConfig } from "@/modules/auth/domain/auth-config"
+import { TokenResponse } from "@/modules/auth/domain/types"
 import { TokenPayload } from "@/modules/auth/domain/types/nextauth"
 
 const credentialProvider = CredentialsProvider({
@@ -17,7 +18,7 @@ const credentialProvider = CredentialsProvider({
   authorize: async (credentials) => {
     if (!credentials) return null
 
-    const tokens = await loginService(credentials)
+    const tokens: TokenResponse = await loginService(credentials)
 
     const user: User = {
       id: "user",

@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 
 import { signIn } from "next-auth/react"
 
-import { registerAction } from "@/modules/auth/domain/auth-actions"
+import { actionLogin, registerAction } from "@/modules/auth/domain/auth-actions"
 import { authConfig } from "@/modules/auth/domain/auth-config"
 import {
   LoginFormValues,
@@ -24,28 +24,27 @@ export const useAuth = (): {
 
   const loginUser = (values: LoginFormValues): void => {
     setIsLoading(true)
-    signIn(authConfig.credentialId, {
-      redirect: false,
-      username: values.username,
-      password: values.password,
-      callbackUrl: searchParams.get("from") ?? "/",
-    })
+    //   const formData = {
+    //     'redirect': "false",
+    //     'email': values.username,
+    //     'password': values.password,
+    //     'callbackUrl': searchParams.get("from") ?? "/",
+    // }
+    actionLogin(JSON.stringify(values))
       .then((res) => {
-        if (res?.error) {
-          toast({
-            title: "Sign in failed",
-            description: res.error,
-            variant: "destructive",
-          })
-        } else {
-          toast({
-            title: "Sign in success.",
-            description: "Signed in successfully.",
-          })
-          router.replace(res?.url ?? "/")
-        }
+        toast({
+          title: "Sign in success.",
+          description: "Signed in successfully.",
+        })
+        router.replace(res?.callbackurl ?? "/")
       })
-      .catch(() => {})
+      .catch((e) => {
+        toast({
+          title: "Sign in failed",
+          description: e.message,
+          variant: "destructive",
+        })
+      })
       .finally(() => setIsLoading(false))
   }
 

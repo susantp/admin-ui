@@ -1,14 +1,20 @@
-export interface ApiResponse {
+export interface ApiResponse<T> {
   data: T
   status: number
-  code: number
+}
+
+export interface ErrorResponse {
+  error: string
 }
 
 export interface ApiClient {
-  get: (endpoint: URL) => Promise<ApiResponse>
-  post: <T>(endpoint: URL, data: T) => Promise<ApiResponse>
-  put: <T>(endpoint: URL, data: T) => Promise<ApiResponse>
-  remove: (endpoint: URL) => Promise<ApiResponse>
+  get: <ResponseT>(endpoint: URL) => Promise<ResponseT>
+  post: <ResponseT>() => Promise<ResponseT>
+  put: <RequestT, ResponseT>(
+    endpoint: URL,
+    data: RequestT
+  ) => Promise<ResponseT>
+  remove: <ResponseT>(endpoint: URL) => Promise<ResponseT>
 }
 
 export interface AuthenticClientHeaders {

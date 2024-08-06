@@ -1,13 +1,16 @@
 import { ApiClient, ApiResponse } from "@/core/types"
 
-export const getApiClient = (headers?: HeadersInit): ApiClient => {
-  const makeRequest = async (
-    input: RequestInfo | URL,
-    init?: RequestInit | undefined
-  ): Promise<ApiResponse> => {
+export const getApiClient = (
+  endpoint: URL,
+  request: RequestInit
+): ApiClient => {
+  const makeRequest = async <ResponseT>(
+    request: RequestInit
+  ): Promise<ResponseT> => {
+    console.log(request)
     try {
-      const response = await fetch(input, init)
-      return (await response.json()) as ApiResponse
+      const response: Response = await fetch(endpoint, request)
+      return (await response.json()) as ResponseT
     } catch (error) {
       if (error instanceof TypeError) {
         throw Error("Could not connect to the server.")
@@ -16,22 +19,21 @@ export const getApiClient = (headers?: HeadersInit): ApiClient => {
     }
   }
 
-  const get = async (endpoint: URL): Promise<ApiResponse> =>
-    makeRequest(endpoint, {
-      headers,
-    })
+  const get = async <ResponseT>(): Promise<ResponseT> =>
+    makeRequest({ ...request })
 
-  const post = async <T>(endpoint: URL, data: T): Promise<ApiResponse> =>
-    makeRequest(endpoint, {
+  const post = async <ResponseT>(): Promise<ResponseT> => {
+    return makeRequest<ApiResponse<ResponseT>>({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...headers,
+        Accept: "application/json",
       },
-      body: JSON.stringify(data),
+      ...request,
     })
+  }
 
-  const put = async <T>(endpoint: URL, data: T): Promise<ApiResponse> =>
+  const put = async <ResponseT>(endpoint: URL, data: T): Promise<ResponseT> =>
     makeRequest(endpoint, {
       method: "PUT",
       headers: {
@@ -41,7 +43,7 @@ export const getApiClient = (headers?: HeadersInit): ApiClient => {
       body: JSON.stringify(data),
     })
 
-  const remove = async (endpoint: URL): Promise<ApiResponse> =>
+  const remove = async <ResponseT>(endpoint: URL): Promise<ResponseT> =>
     makeRequest(endpoint, {
       method: "DELETE",
       headers,
