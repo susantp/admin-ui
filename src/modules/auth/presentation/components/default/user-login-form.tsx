@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
+import { actionLogin } from "@/modules/auth/domain/auth-actions"
 import {
   loginFormSchema,
   LoginFormValues,
@@ -34,7 +35,7 @@ export default function UserLoginForm(): ReactElement {
       <form onSubmit={form.handleSubmit(loginUser)} className="space-y-2">
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }): ReactElement => (
             <FormItem>
               <FormControl>

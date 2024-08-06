@@ -1,16 +1,22 @@
-import React, { ReactElement } from "react"
+import React from "react"
 import Link from "next/link"
 
 import { authConfig } from "@/modules/auth/domain/auth-config"
-import UserLoginForm from "@/modules/auth/presentation/components/user-login-form"
+import UserRegisterForm from "@/modules/auth/presentation/components/default/user-register-form"
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
-export default function LoginPage(): ReactElement {
+export default function RegisterPage(): JSX.Element {
   const {
-    loginForm: { formTitle, formSubtitle, helperLinkLabel },
-    registerForm,
-    passwordRecovery,
+    registerForm: {
+      formSubtitle,
+      formTitle,
+      privacy,
+      helperLinkLabel,
+      privacyTermsText,
+      terms,
+    },
+    loginForm,
   } = authConfig
   return (
     <Card className="p-8 space-y-6">
@@ -21,21 +27,31 @@ export default function LoginPage(): ReactElement {
         </div>
       </CardHeader>
       <CardContent>
-        <UserLoginForm />
+        <UserRegisterForm />
       </CardContent>
       <CardFooter className="flex-col space-y-2.5">
         <p className="px-8 text-center text-sm text-muted-foreground">
+          {privacyTermsText} <br />
           <Link
-            href={passwordRecovery.path}
+            href={terms.path}
             className="hover:text-brand underline underline-offset-4"
           >
-            {passwordRecovery.label}
+            {terms.label}
           </Link>
+          {" and "}
+          <Link
+            href={privacy.path}
+            className="hover:text-brand underline underline-offset-4"
+          >
+            {privacy.label}
+          </Link>
+          .
         </p>
         <p className="px-8 text-center text-sm text-muted-foreground">
+          Already have an account?
           <Link
-            href={registerForm.path}
-            className="hover:text-brand underline underline-offset-4"
+            href={loginForm.path}
+            className="hover:text-brand underline underline-offset-4 px-1"
           >
             {helperLinkLabel}
           </Link>
