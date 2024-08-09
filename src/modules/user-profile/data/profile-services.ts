@@ -1,3 +1,4 @@
+import { getApiClient } from "@/core/utils/api-client"
 import { getAuthenticatedApiClient } from "@/core/utils/authentic-client"
 import { createUrl } from "@/core/utils/helpers"
 import { profileEndpoints } from "@/modules/user-profile/data/profile-endpoints"
@@ -10,14 +11,12 @@ import {
 import { UserProfile } from "@/modules/user-profile/domain/types"
 
 export const fetchUserProfileService = async (): Promise<UserProfile> => {
-  const apiClient = await getAuthenticatedApiClient()
-
-  const loggedInUserResponse = await apiClient.get(
+  const loggedInUserResponse = await getApiClient(
     createUrl(profileEndpoints.getLoggedInUser)
-  )
-  const userDetailsResponse = await apiClient.get(
+  ).get()
+  const userDetailsResponse = await getApiClient(
     createUrl(profileEndpoints.userDetail)
-  )
+  ).get()
 
   const loggedInUser = loggedInUserResponse.data as LoggedInUserResponse
   const userDetails = userDetailsResponse.data as UserDetailResponse

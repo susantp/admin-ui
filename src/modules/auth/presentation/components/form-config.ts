@@ -1,11 +1,12 @@
 import { z } from "zod"
 
 export const loginFormSchema = z.object({
-  email: z
+  email: z.string().email("Does not look like an email.").trim(),
+  password: z
     .string()
-    .nonempty("Email can not be empty")
-    .min(3, "Email must be at least 3 characters"),
-  password: z.string().nonempty("Password can not be empty."),
+    .min(8, "Must be 8 character long.")
+    .max(15, "Only 15 character allowed.")
+    .trim(),
 })
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>
@@ -14,11 +15,9 @@ export const registerFormSchema = z
   .object({
     username: z
       .string({ required_error: "Username is required" })
-      .nonempty("Username can not be empty")
       .min(3, "Username must be at least 3 characters"),
     password: z
       .string({ required_error: "Password is required" })
-      .nonempty("Password cannot be empty")
       .min(8)
       .refine((password) => {
         const upperCaseRegex = /[A-Z]/
@@ -36,14 +35,13 @@ export const registerFormSchema = z
 
     confirmPassword: z
       .string({ required_error: "Confirm Password is required" })
-      .nonempty("Confirm Password cannot be empty"),
+      .min(8, "Confirm Password cannot be empty"),
     email: z
       .string({ required_error: "Email is required" })
-      .nonempty("Email cannot be empty")
-      .email("Not a valid email address"),
+      .email("Does not look like an email"),
     phone: z
       .string({ required_error: "Phone is required" })
-      .nonempty("Phone cannot be empty")
+      .min(1)
       .regex(
         /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
         "Not a valid phone number"

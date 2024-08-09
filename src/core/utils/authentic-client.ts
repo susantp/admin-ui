@@ -1,19 +1,21 @@
+import { NextRequest } from "next/server"
+
 import { getServerSession } from "next-auth"
+import { getToken } from "next-auth/jwt"
 
 import { ApiClient, AuthenticClientHeaders } from "@/core/types"
 import { getApiClient } from "@/core/utils/api-client"
+import { getAuthToken } from "@/modules/auth/data/auth-service"
 import { authOptions } from "@/modules/auth/domain/auth-options"
 
 export const getAuthenticatedApiClient = async (
   headers?: AuthenticClientHeaders
 ): Promise<ApiClient> => {
-  const session = await getServerSession(authOptions)
-  const accessToken = session?.user.access
+  const accessToken = getAuthToken()
 
   if (!accessToken) throw new Error("Unauthenticated")
-
   const headersInit: HeadersInit = {
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken.value}`,
   }
 
   if (headers) {
@@ -21,6 +23,8 @@ export const getAuthenticatedApiClient = async (
       if (value) headersInit[key] = String(value)
     })
   }
-
-  return getApiClient(headersInit)
+  const requestInit: RequestInit = {
+    headers: { ...headersInit },
+  }
+  return getApiClient("", requestInit)
 }
