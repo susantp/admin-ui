@@ -1,40 +1,28 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-import { getToken } from "next-auth/jwt"
-import { withAuth } from "next-auth/middleware"
+export function middleware(request: NextRequest) {
+  const { pathname, search, searchParams } = request.nextUrl
+  const fromEncoded = encodeURIComponent(pathname + search)
+  const token = request.cookies.get("token")
+  const redirectUrl = new URL("/", request.url)
+  const loginUrl = new URL(`/login?from=${fromEncoded}`, request.url)
+  const isAuthentic = !!token
+  const isLoginRegisterPage = ["/login", "/register"].includes(pathname)
 
-export default withAuth(
-  async (req) => {
-    const token = await getToken({ req })
-    const isAuth = !!token
-    const isAuthPage = ["/login", "/register"].includes(req.nextUrl.pathname)
-
-    if (isAuthPage) {
-      if (isAuth) {
-        return NextResponse.redirect(new URL("/", req.url))
-      }
-
-      return null
-    }
-
-    if (isAuth) return null
-
-    const { pathname, search } = req.nextUrl
-    const from = pathname + search
-    const redirectUrl = new URL(
-      `/login?from=${encodeURIComponent(from)}`,
-      req.url
-    )
-    return NextResponse.redirect(redirectUrl)
-  },
-  {
-    callbacks: {
-      async authorized() {
-        return Promise.resolve(true)
+  if (!isAuthentic && !isLoginRegisterPage)
+    return NextResponse.redirect(loginUrl)
+  if (isAuthentic && isLoginRegisterPage) {
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set("Authorization", `Bearer ${token}`)
+    const response = NextResponse
+    response.next({
+      request: {
+        headers: requestHeaders,
       },
-    },
+    })
+    return response.redirect(redirectUrl)
   }
-)
+}
 
 export const config = {
   matcher: [

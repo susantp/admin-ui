@@ -11,8 +11,7 @@ export interface LoginResponse {
 }
 
 export interface TokenResponse {
-  access: string
-  refresh: string
+  token: string
 }
 
 export interface RegisterRequest {

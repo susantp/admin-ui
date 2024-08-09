@@ -1,17 +1,20 @@
 "use server"
 
-import { loginService, registerService } from "@/modules/auth/data/auth-service"
+import { ApiResponse, ErrorResponse } from "@/core/types"
+import { loginService } from "@/modules/auth/data/auth-service"
 import {
   LoginRequest,
   RegisterRequest,
   RegisterResponse,
+  TokenResponse,
 } from "@/modules/auth/domain/types"
 import { LoginFormValues } from "@/modules/auth/presentation/components/form-config"
 
-export const actionRegister = (
-  details: RegisterRequest
-): Promise<RegisterResponse> => registerService(details)
+export const actionRegister = (details: RegisterRequest) =>
+  Promise.resolve("hey")
 
-export const actionLogin = async (loginRequest: BodyInit) => {
+export const actionLogin = async (
+  loginRequest: BodyInit
+): Promise<ErrorResponse | TokenResponse> => {
   return loginService(loginRequest)
 }

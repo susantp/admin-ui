@@ -31,7 +31,7 @@ export default function RootLayout({
   children,
 }: RootLayoutProps): React.ReactElement {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${font.className} ${cn(
           "min-h-screen bg-background antialiased overflow-hidden"

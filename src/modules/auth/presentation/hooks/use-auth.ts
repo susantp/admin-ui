@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 
 import { signIn } from "next-auth/react"
 
-import { actionLogin, registerAction } from "@/modules/auth/domain/auth-actions"
+import { actionLogin, actionRegister } from "@/modules/auth/domain/auth-actions"
 import { authConfig } from "@/modules/auth/domain/auth-config"
 import {
   LoginFormValues,
@@ -24,19 +24,15 @@ export const useAuth = (): {
 
   const loginUser = (values: LoginFormValues): void => {
     setIsLoading(true)
-    //   const formData = {
-    //     'redirect': "false",
-    //     'email': values.username,
-    //     'password': values.password,
-    //     'callbackUrl': searchParams.get("from") ?? "/",
-    // }
     actionLogin(JSON.stringify(values))
       .then((res) => {
         toast({
           title: "Sign in success.",
           description: "Signed in successfully.",
         })
-        router.replace(res?.callbackurl ?? "/")
+
+        alert("success login")
+        // router.replace(values.callbackurl ?? "/")
       })
       .catch((e) => {
         toast({
@@ -50,7 +46,7 @@ export const useAuth = (): {
 
   const registerUser = (values: RegisterFormValues): void => {
     setIsLoading(true)
-    registerAction({
+    actionRegister({
       username: values.username,
       password: values.password,
       email: values.email,
