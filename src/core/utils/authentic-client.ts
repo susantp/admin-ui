@@ -26,5 +26,5 @@ export const getAuthenticatedApiClient = async (
   const requestInit: RequestInit = {
     headers: { ...headersInit },
   }
-  return getApiClient("", requestInit)
+  return getApiClient(new URL(''), requestInit)
 }

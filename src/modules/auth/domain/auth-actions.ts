@@ -8,7 +8,7 @@ import {
   RegisterResponse,
   TokenResponse,
 } from "@/modules/auth/domain/types"
-import { LoginFormValues } from "@/modules/auth/presentation/components/form-config"
+import { LoginFormValues } from "@/modules/auth/config/form-config"
 
 export const actionRegister = (details: RegisterRequest) =>
   Promise.resolve("hey")

@@ -8,7 +8,7 @@ import { authConfig } from "@/modules/auth/domain/auth-config"
 import {
   LoginFormValues,
   RegisterFormValues,
-} from "@/modules/auth/presentation/components/form-config"
+} from "@/modules/auth/config/form-config"
 
 import { toast } from "@/components/ui/use-toast"
 
