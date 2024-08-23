@@ -6,12 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 
-import { actionLogin } from "@/modules/auth/domain/auth-actions"
 import {
   loginFormSchema,
   LoginFormValues,
-} from "@/modules/auth/presentation/components/form-config"
+} from "@/modules/auth/config/form-config"
 import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
+import loginForm from "@/modules/auth/presentation/models/loginForm"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -29,17 +29,19 @@ export default function UserLoginForm(): ReactElement {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
   })
+  const { fields, action } = loginForm
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(loginUser)} className="space-y-2">
         <FormField
           control={form.control}
-          name="email"
+          // @ts-ignore
+          name={fields.email.id}
           render={({ field }): ReactElement => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Username" {...field} />
+                <Input placeholder={fields.email.placeHolder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -47,11 +49,16 @@ export default function UserLoginForm(): ReactElement {
         />
         <FormField
           control={form.control}
-          name="password"
+          // @ts-ignore
+          name={fields.password.id}
           render={({ field }): ReactElement => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Password" type="password" {...field} />
+                <Input
+                  placeholder={fields.password.placeHolder}
+                  type={fields.password.type}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -59,7 +66,7 @@ export default function UserLoginForm(): ReactElement {
         />
         <Button disabled={isLoading} className="w-full">
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Login
+          {action.button.label}
         </Button>
       </form>
     </Form>

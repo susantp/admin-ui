@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import {
   registerFormSchema,
   RegisterFormValues,
-} from "@/modules/auth/presentation/components/form-config"
+} from "@/modules/auth/config/form-config"
 import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
 
 import { Button } from "@/components/ui/button"
