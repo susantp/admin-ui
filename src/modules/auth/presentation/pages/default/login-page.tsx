@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react"
-import { cookies } from "next/headers"
 
 import LoginFormHead from "@/modules/auth/presentation/components/default/LoginFormHead"
 import LoginHelperDiv from "@/modules/auth/presentation/components/default/LoginHelperDiv"
@@ -7,7 +6,7 @@ import UserLoginForm from "@/modules/auth/presentation/components/default/user-l
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
-const LoginPage = (): ReactElement => {
+function LoginPage(): ReactElement {
   return (
     <Card className="p-8 space-y-6">
       <CardHeader>
@@ -22,4 +21,5 @@ const LoginPage = (): ReactElement => {
     </Card>
   )
 }
+
 export default LoginPage

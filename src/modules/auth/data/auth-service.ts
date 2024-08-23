@@ -1,11 +1,10 @@
 import { cookies } from "next/headers"
 import { NextRequest } from "next/server"
 
-import { ErrorResponse } from "@/core/types"
+import { ApiResponse } from "@/core/types"
 import { getApiClient } from "@/core/utils/api-client"
 import { createUrl } from "@/core/utils/helpers"
 import { authEndpoints } from "@/modules/auth/data/auth-endpoints"
-import { TokenResponse } from "@/modules/auth/domain/types"
 
 const tokenKey: any = "token"
 
@@ -25,21 +24,23 @@ const deleteAuthToken = () => {
   return cookies().delete(tokenKey)
 }
 
-export const loginService = async (
-  credentials: BodyInit
-): Promise<TokenResponse | ErrorResponse> => {
-  const apiClient = getApiClient(createUrl(authEndpoints.userLogin))
+export const loginService = async (credentials: BodyInit): Promise<string> => {
+  const client = getApiClient(createUrl(authEndpoints.userLogin))
+  const response = await client.post<ApiResponse>(credentials)
 
-  const response = await apiClient.post<TokenResponse | ErrorResponse>(
-    credentials
-  )
+  console.log(response)
 
-  if (response.status == "fail")
-    throw Error("error" in response.data ? response.data.error : "")
-  const { data } = response
-  if ("token" in data) {
+  if (response.metaData.error.length > 0) throw Error(response.metaData.error)
+
+  const {
+    data: { message, payload },
+  } = response
+
+  if (!("token" in payload)) {
+    throw Error(response.metaData.error)
+  } else {
     deleteAuthToken()
-    setAuthToken(data.token)
+    setAuthToken(payload.token)
+    return message
   }
-  return response.data
 }

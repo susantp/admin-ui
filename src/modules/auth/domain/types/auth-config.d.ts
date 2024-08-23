@@ -1,9 +1,7 @@
-
 export interface InterfacePasswordRecovery {
   label: string
   path: string
 }
-
 
 export interface InterfaceRegisterForm extends InterfaceAuthForm {
   terms: {

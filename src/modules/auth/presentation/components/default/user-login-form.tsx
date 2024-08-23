@@ -36,7 +36,7 @@ export default function UserLoginForm(): ReactElement {
       <form onSubmit={form.handleSubmit(loginUser)} className="space-y-2">
         <FormField
           control={form.control}
-          // @ts-ignore
+          // @ts-expect-error  Type string is not assignable to type "email" | "password" though value is correct
           name={fields.email.id}
           render={({ field }): ReactElement => (
             <FormItem>
@@ -49,7 +49,7 @@ export default function UserLoginForm(): ReactElement {
         />
         <FormField
           control={form.control}
-          // @ts-ignore
+          // @ts-expect-error  Type string is not assignable to type "email" | "password" though value is correct
           name={fields.password.id}
           render={({ field }): ReactElement => (
             <FormItem>

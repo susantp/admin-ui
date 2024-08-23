@@ -3,12 +3,12 @@ import { useRouter, useSearchParams } from "next/navigation"
 
 import { signIn } from "next-auth/react"
 
-import { actionLogin, actionRegister } from "@/modules/auth/domain/auth-actions"
-import { authConfig } from "@/modules/auth/domain/auth-config"
 import {
   LoginFormValues,
   RegisterFormValues,
 } from "@/modules/auth/config/form-config"
+import { actionLogin, actionRegister } from "@/modules/auth/domain/auth-actions"
+import { authConfig } from "@/modules/auth/domain/auth-config"
 
 import { toast } from "@/components/ui/use-toast"
 

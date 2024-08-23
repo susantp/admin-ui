@@ -13,19 +13,19 @@ const loginForm: IForm = {
       type: "password",
       label: "Password",
       placeHolder: "Password",
-    }
+    },
   },
   action: {
     path: "/login",
     button: {
       label: "Login",
-    }
+    },
   },
-  meta:{
+  meta: {
     title: "Welcome back",
     subtitle: "Enter your credentials to sign in to your account",
     helperLinkLabel: "Register",
-  }
+  },
 }
 
 export default loginForm

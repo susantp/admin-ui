@@ -1,7 +1,4 @@
-import { put } from "@jridgewell/set-array"
-
-import { ApiClient, ApiResponse, ErrorResponse } from "@/core/types"
-import { TokenResponse } from "@/modules/auth/domain/types"
+import { ApiClient, ApiResponse } from "@/core/types"
 
 export const getApiClient = (
   endpoint: URL,
@@ -10,7 +7,7 @@ export const getApiClient = (
   const makeRequest = async <T>(
     method: string,
     body?: BodyInit
-  ): Promise<ApiResponse<T>> => {
+  ): Promise<T> => {
     const headers = {
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -23,7 +20,7 @@ export const getApiClient = (
     }
     try {
       const response: Response = await fetch(endpoint, requestConfig)
-      return await response.json()
+      return (await response.json()) as T
     } catch (error) {
       if (error instanceof TypeError) {
         throw Error("Could not connect to the server.")
@@ -32,9 +29,8 @@ export const getApiClient = (
     }
   }
 
-  const get = <T>(): Promise<ApiResponse<T>> => makeRequest<T>("GET")
-  const post = <T>(body?: any): Promise<ApiResponse<T>> =>
-    makeRequest<T>("POST", body)
+  const get = <T>(): Promise<T> => makeRequest<T>("GET")
+  const post = <T>(body?: any): Promise<T> => makeRequest<T>("POST", body)
 
   // const put = async <ResponseT>(endpoint: URL, data: T): Promise<ResponseT> =>
   //   makeRequest(endpoint, {

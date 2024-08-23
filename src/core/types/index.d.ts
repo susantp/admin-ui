@@ -1,6 +1,12 @@
-export interface ApiResponse<T> {
-  data: T
-  status: string
+export interface ApiResponse {
+  data: {
+    message: string
+    payload: object
+  }
+  metaData: {
+    error: string
+    errorCode: string | number
+  }
 }
 
 export interface ErrorResponse {
@@ -8,13 +14,10 @@ export interface ErrorResponse {
 }
 
 export interface ApiClient {
-  get: <ResponseT>() => Promise<ApiResponse<ResponseT>>
-  post: <ResponseT>(body: BodyInit) => Promise<ApiResponse<ResponseT>>
-  put?: <RequestT, ResponseT>(
-    endpoint: URL,
-    data: RequestT
-  ) => Promise<ResponseT>
-  remove?: <ResponseT>(endpoint: URL) => Promise<ResponseT>
+  get: <ResponseT>() => Promise<ResponseT>
+  post: <ResponseT>(body: BodyInit) => Promise<ResponseT>
+  put?: <ResponseT>(body: BodyInit) => Promise<ResponseT>
+  remove?: <ResponseT>() => Promise<ResponseT>
 }
 
 export interface AuthenticClientHeaders {
