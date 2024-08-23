@@ -1,5 +1,5 @@
 export interface IForm {
-  fields: ILoginFormFields|IRegisterFormFields
+  fields: ILoginFormFields | IRegisterFormFields
   action: ILoginAction
   meta: ILoginFormMeta
 }
