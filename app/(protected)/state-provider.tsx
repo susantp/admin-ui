@@ -3,6 +3,7 @@
 import React, { ReactNode, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
+import RBACProvider from "@/app/(protected)/rbac-provider"
 import { useSetAtom } from "jotai"
 import { useHydrateAtoms } from "jotai/utils"
 
@@ -15,7 +16,6 @@ import { UserProfile } from "@/modules/user-profile/domain/types"
 import { profileAtom } from "@/modules/user-profile/presentation/atoms/profile-atom"
 
 import { Button } from "@/components/ui/button"
-import RBACProvider from "@/app/(protected)/rbac-provider"
 
 interface RBACContainerProps {
   children: ReactNode

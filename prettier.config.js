@@ -1,4 +1,4 @@
-/** @type {import('prettier').Config} */
+/** @type {import("prettier").Config} */
 module.exports = {
   endOfLine: "lf",
   semi: false,
@@ -23,7 +23,7 @@ module.exports = {
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/styles/(.*)$",
-    "^@/app/(.*)$",
+    "^@/defaultLayout/(.*)$",
     "",
     "^[./]",
   ],
