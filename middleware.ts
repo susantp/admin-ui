@@ -1,27 +1,34 @@
 import { NextRequest, NextResponse } from "next/server"
 
-export function middleware(request: NextRequest) {
-  const { pathname, search, searchParams } = request.nextUrl
-  const fromEncoded = encodeURIComponent(pathname + search)
-  const token = request.cookies.get("token")
-  const redirectUrl = new URL("/", request.url)
-  const loginUrl = new URL(`/login?from=${fromEncoded}`, request.url)
-  const isAuthentic = !!token
-  const isLoginRegisterPage = ["/login", "/register"].includes(pathname)
+import { actionGetAuthToken } from "@/modules/login/domain/auth-actions"
 
-  if (!isAuthentic && !isLoginRegisterPage)
+export async function middleware(request: NextRequest): Promise<NextResponse> {
+  const { nextUrl } = request
+
+  const fromUrl = nextUrl.pathname + nextUrl.search
+  const serverToken = await actionGetAuthToken()
+  const loginUrl = new URL(`/login`, request.url)
+
+  const isAuthentic = !!serverToken
+  const isRegisterPage = ["/register"].includes(nextUrl.pathname)
+  const isLoginPage = ["/login"].includes(nextUrl.pathname)
+
+  if (!isAuthentic && !isRegisterPage && !isLoginPage) {
+    loginUrl.searchParams.append("from", fromUrl)
     return NextResponse.redirect(loginUrl)
-  if (isAuthentic && isLoginRegisterPage) {
+  }
+
+  if (isAuthentic && isRegisterPage && isLoginPage) {
     const requestHeaders = new Headers(request.headers)
-    requestHeaders.set("Authorization", `Bearer ${token}`)
-    const response = NextResponse
-    response.next({
+    requestHeaders.set("Authorization", `Bearer ${serverToken?.value}`)
+    NextResponse.next({
       request: {
         headers: requestHeaders,
       },
     })
-    return response.redirect(redirectUrl)
+    return NextResponse.redirect(new URL("/", request.url))
   }
+  return NextResponse.next()
 }
 
 export const config = {
