@@ -5,11 +5,12 @@ import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Roboto } from "next/font/google"
 
+import Providers from "@/app/providers"
+
 import { cn } from "@/core/utils/helpers"
 
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
-import Providers from "@/app/providers"
 
 const font: NextFont = Roboto({
   weight: ["400", "500", "700"],
