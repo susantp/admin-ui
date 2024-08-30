@@ -3,26 +3,13 @@
 import React, { ReactElement, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 
-import { useAtomValue, useSetAtom } from "jotai"
 import { ChevronsLeftIcon, ChevronsRightIcon } from "lucide-react"
 
-import {
-  currentScreenAtom,
-  userScreensAtom,
-} from "@/modules/rbac/presentation/atoms/rbac-atoms"
-
 import { Button } from "@/components/ui/button"
-import { navigationItems } from "@/components/layout/navigation-items"
 
 export function Sidebar(): ReactElement {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
-
-  const pathname = usePathname()
-
-  const screens = useAtomValue(userScreensAtom)
-  const setCurrentScreen = useSetAtom(currentScreenAtom)
 
   return (
     <aside
@@ -54,29 +41,14 @@ export function Sidebar(): ReactElement {
             >
               Main Menu
             </h6>
-            {screens.map((screen) => {
-              if (screen.permissions.length === 0) return null
-
-              const item =
-                navigationItems.find((nav) => nav.name === screen.name) ??
-                navigationItems[0]
-
-              return (
-                <li key={screen.id}>
-                  <Link
-                    href={item.slug}
-                    onClick={(): void => setCurrentScreen(screen)}
-                    className={`flex p-2.5 gap-4 hover:bg-primary-foreground rounded-md place-items-center whitespace-nowrap ${
-                      pathname === item.slug &&
-                      "bg-primary-foreground text-primary"
-                    }`}
-                  >
-                    {item.icon}
-                    {isCollapsed || screen.name}
-                  </Link>
-                </li>
-              )
-            })}
+            <li key="screenID">
+              <Link
+                href="javscript::void"
+                className="flex p-2.5 gap-4 hover:bg-primary-foreground rounded-md place-items-center whitespace-nowrap text-primary"
+              >
+                icon
+              </Link>
+            </li>
           </ul>
         </div>
 
