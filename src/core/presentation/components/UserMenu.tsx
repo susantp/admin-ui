@@ -32,7 +32,7 @@ export function UserMenu(): React.ReactElement {
         <Avatar>
           <AvatarImage src="/favico.ico" />
           <AvatarFallback className="text-sm bg-background">
-            <UserIcon className="w-5 h-5" />
+            <UserIcon className="w-5 h-5 text-primary" />
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
