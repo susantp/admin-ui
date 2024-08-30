@@ -1,67 +1,54 @@
 import React, { ReactElement } from "react"
 import Image from "next/image"
-import Link from "next/link"
 
-import { LayoutDashboardIcon } from "lucide-react"
+import { LayoutDashboardIcon, ListOrderedIcon, ShirtIcon } from "lucide-react"
 
-function BrandDiv(): ReactElement {
-  return (
-    <div className="flex space-x-2 justify-center md:justify-start">
-      <Image
-        src="/images/yomari_192.png"
-        alt="Next.js Logo"
-        width={28}
-        height={28}
-        priority
-        className="w-10 p-2 object-contain"
-      />
+import MenuItem from "@/core/presentation/components/MenuItem"
 
-      <h1 className="text-2xl font-medium hidden place-content-center md:block lg:block">
-        SOA POC
-      </h1>
-    </div>
-  )
+import { Separator } from "@/components/ui/separator"
+
+interface BrandDivProps {
+  label: string
 }
 
-function MenuItem({
-  label,
-  path,
-  icon,
-}: {
-  label: string
-  path: string
-  icon: ReactElement
-}): ReactElement {
+function BrandDiv({ label }: BrandDivProps): ReactElement {
   return (
-    <Link
-      href={path}
-      className="flex p-2.5 gap-4 whitespace-nowrap text-primary bg-primary-background rounded-md hover:bg-primary-foreground "
-    >
-      {icon}
-      <span className="hidden md:block lg:block">{label}</span>
-    </Link>
+    <div className="flex flex-col">
+      <div className="flex flex-row items-center space-x-2">
+        <Image
+          src="/images/yomari_192.png"
+          alt="Next.js Logo"
+          width={28}
+          height={28}
+          priority
+          className="w-10 p-2 object-contain"
+        />
+
+        <div className="gap-y-1 hidden place-content-center md:flex lg:flex md:flex-col lg:flex-col">
+          <h1 className="text-2xl font-medium ">{label}</h1>
+          <span className="text-accent-foreground text-xs">
+            shop.larashops.com
+          </span>
+        </div>
+      </div>
+    </div>
   )
 }
 
 export function Sidebar(): ReactElement {
   return (
-    <aside className="w-16 md:w-64 rounded-md bg-secondary text-secondary-foreground">
-      <div className="space-y-6">
-        <BrandDiv />
-        <div className="flex flex-col">
-          <MenuItem label="Dashboard" path="/" icon={<LayoutDashboardIcon />} />
-          <MenuItem
-            label="Products"
-            path="/products"
-            icon={<LayoutDashboardIcon />}
-          />
-          <MenuItem
-            label="Orders"
-            path="/orders"
-            icon={<LayoutDashboardIcon />}
-          />
-        </div>
+    <div className="space-y-6 py-3">
+      <BrandDiv label="Gravity Shop" />
+      <Separator />
+      <div className="flex flex-col gap-y-2">
+        <MenuItem
+          label="Dashboard"
+          path="/dashboard"
+          icon={<LayoutDashboardIcon />}
+        />
+        <MenuItem label="Products" path="/products" icon={<ShirtIcon />} />
+        <MenuItem label="Orders" path="/orders" icon={<ListOrderedIcon />} />
       </div>
-    </aside>
+    </div>
   )
 }
