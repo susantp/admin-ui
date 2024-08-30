@@ -1,12 +1,12 @@
 import React from "react"
 import { Metadata } from "next"
 
-import UserProfilePage from "@/modules/user-profile/presentation/pages/user-profile-page"
+import DefaultUserProfile from "@/modules/user-profile/presentation/pages/default/DefaultUserProfile"
 
 export const metadata: Metadata = {
   title: "UserData Profile",
 }
 
 export default function Page(): React.ReactElement {
-  return <UserProfilePage />
+  return <DefaultUserProfile />
 }
