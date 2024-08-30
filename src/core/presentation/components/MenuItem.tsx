@@ -24,7 +24,7 @@ export default function MenuItem({
       className={cn(
         "flex p-2.5 gap-4 whitespace-nowrap text-primary-foreground bg-primary rounded-md ",
         pathname.split("/")[1].includes(path.split("/")[1])
-          ? "bg-secondary text-secondary-foreground"
+          ? "bg-secondary"
           : ""
       )}
     >
