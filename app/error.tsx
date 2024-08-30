@@ -3,8 +3,6 @@
 // Error components must be Client Components
 import React, { ReactElement, useEffect } from "react"
 
-import { signOut } from "next-auth/react"
-
 import { Button } from "@/components/ui/button"
 
 interface ErrorPageProps {
@@ -29,12 +27,7 @@ export default function ErrorPage({
           <Button onClick={(): void => reset()} variant="outline">
             Try again
           </Button>
-          <Button
-            onClick={async (): Promise<void> => signOut()}
-            variant="secondary"
-          >
-            Sign out
-          </Button>
+          {/* <Button variant="secondary">Sign out</Button> */}
         </div>
       </div>
     </div>

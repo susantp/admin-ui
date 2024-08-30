@@ -14,11 +14,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   await actionSetAuthToken(searchParams.get("token"))
-  //TODO fetch user
-  //TODO set user to cookie
+  // TODO fetch user
+  // TODO set user to cookie
 
   redirectUrl.searchParams.delete("token")
   redirectUrl.pathname = "/profile"
-
   return NextResponse.redirect(redirectUrl)
 }

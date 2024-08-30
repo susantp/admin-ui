@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react"
 import Link from "next/link"
 
@@ -15,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function UserNav(): React.ReactElement {
+export function UserMenu(): React.ReactElement {
   // if (!profile) {
   //   return (
   //     <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
@@ -41,9 +39,9 @@ export function UserNav(): React.ReactElement {
       <DropdownMenuContent className="w-56" align="end">
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1  font-normal ">
-            <p className="text-sm leading-none">name || profile.username</p>
+            <p className="text-sm leading-none">vendor</p>
             <p className="text-xs text-muted-foreground leading-none">
-              profile.email
+              vendor@gmail.com
             </p>
           </div>
         </DropdownMenuLabel>
