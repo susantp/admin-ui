@@ -6,12 +6,12 @@ import { cookies } from "next/headers"
 import { ApiResponse } from "@/core/data"
 import { getApiClient } from "@/core/data/api-client"
 import { createUrl } from "@/core/utils/helpers"
-import { authEndpoints } from "@/modules/login/data/auth-endpoints"
+import { authEndpoints } from "@/modules/login/config/auth-endpoints"
 
 const tokenKey: string = "token"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function actionSetAuthToken(token: any): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/require-await
+export const actionSetAuthToken = async (token: any): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cookieOptions: any = {
     httpOnly: true,
@@ -25,6 +25,7 @@ export async function actionSetAuthToken(token: any): Promise<void> {
 
 export const actionGetAuthToken = async (): Promise<
   RequestCookie | undefined
+  // eslint-disable-next-line @typescript-eslint/require-await
 > => cookies().get(tokenKey)
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const actionDeleteAuthToken = async () => cookies().delete(tokenKey)
