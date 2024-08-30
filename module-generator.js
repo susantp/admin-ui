@@ -16,14 +16,20 @@ function createModule(moduleName) {
   fs.mkdirSync(modulePath)
 
   const structure = [
-    { path: "data/", file: "[module]-service.ts" },
-    { path: "data/", file: "[module]-endpoints.ts" },
+    { path: "config/", file: "[module]-config.ts" },
     { path: "domain/types", file: "[module].d.ts" },
     { path: "domain/", file: "[module]-actions.ts" },
     { path: "presentation/components" },
-    { path: "presentation/pages", file: "[module]-page.tsx" },
-    { path: "presentation/hooks", file: "use-[module].ts" },
-    { path: "presentation/atoms", file: "[module]-atom.ts" },
+    { path: "presentation/components/default" },
+    { path: "presentation/components/default/client" },
+    { path: "presentation/components/default/server" },
+    { path: "presentation/pages" },
+    { path: "presentation/pages/default" },
+    { path: "presentation/hooks" },
+    { path: "presentation/layouts" },
+    { path: "presentation/layouts/default" },
+    { path: "presentation/models" },
+    { path: "presentation/models/default" },
   ]
 
   structure.forEach((folder) => {
