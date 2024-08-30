@@ -1,5 +1,3 @@
-"use client"
-
 import React, { ReactElement } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -25,20 +23,23 @@ function BrandDiv(): ReactElement {
   )
 }
 
-function MenuItem(): ReactElement {
+function MenuItem({
+  label,
+  path,
+  icon,
+}: {
+  label: string
+  path: string
+  icon: ReactElement
+}): ReactElement {
   return (
-    <li
-      key="screenID"
-      className="w-full flex justify-center md:justify-start bg-primary-background rounded-md hover:bg-primary-foreground"
+    <Link
+      href={path}
+      className="flex p-2.5 gap-4 whitespace-nowrap text-primary bg-primary-background rounded-md hover:bg-primary-foreground "
     >
-      <Link
-        href="javscript::void"
-        className="flex p-2.5 gap-4 whitespace-nowrap text-primary"
-      >
-        <LayoutDashboardIcon />
-        <span className="hidden md:block lg:block">menu name</span>
-      </Link>
-    </li>
+      {icon}
+      <span className="hidden md:block lg:block">{label}</span>
+    </Link>
   )
 }
 
@@ -47,11 +48,19 @@ export function Sidebar(): ReactElement {
     <aside className="w-16 md:w-64 rounded-md bg-secondary text-secondary-foreground">
       <div className="space-y-6">
         <BrandDiv />
-        <ul className="flex flex-col">
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
-        </ul>
+        <div className="flex flex-col">
+          <MenuItem label="Dashboard" path="/" icon={<LayoutDashboardIcon />} />
+          <MenuItem
+            label="Products"
+            path="/products"
+            icon={<LayoutDashboardIcon />}
+          />
+          <MenuItem
+            label="Orders"
+            path="/orders"
+            icon={<LayoutDashboardIcon />}
+          />
+        </div>
       </div>
     </aside>
   )
