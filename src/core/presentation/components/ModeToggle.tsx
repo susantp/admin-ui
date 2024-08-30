@@ -30,7 +30,7 @@ export function ModeToggle(): ReactElement {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="text-primary-foreground">
         <DropdownMenuItem onClick={(): void => setTheme("light")}>
           <Sun className="mr-2 h-4 w-4" />
           <span>Light</span>

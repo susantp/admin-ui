@@ -31,12 +31,12 @@ export function UserMenu(): React.ReactElement {
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src="/favico.ico" />
-          <AvatarFallback className="text-sm bg-background">
-            <UserIcon className="w-5 h-5 text-primary" />
+          <AvatarFallback className="text-sm bg-primary">
+            <UserIcon className="w-5 h-5 text-primary-foreground" />
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent className="w-56 text-primary-foreground" align="end">
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1  font-normal ">
             <p className="text-sm leading-none">vendor</p>
