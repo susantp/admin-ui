@@ -46,17 +46,12 @@ export function UserMenu(): React.ReactElement {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/profile">
-          <DropdownMenuItem>
-            <UserIcon className="mr-2 h-4 w-4" />
-            <span>My Account</span>
+        <Link href="/logout">
+          <DropdownMenuItem className="cursor-pointer">
+            <LogOutIcon className="mr-2 h-4 w-4" />
+            <span>Log out</span>
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <LogOutIcon className="mr-2 h-4 w-4" />
-          <span>Log out</span>
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

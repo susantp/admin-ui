@@ -1,19 +1,21 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { actionSetAuthToken } from "@/modules/login/domain/auth-actions"
+import { actionSetAuthToken } from "@/modules/auth/domain/cookie-service"
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const {
     nextUrl: { searchParams },
   } = request
-  const redirectUrl = new URL(request.nextUrl)
 
-  if (!searchParams.get("token")) {
+  const redirectUrl = new URL(request.nextUrl)
+  const paramToken: string | null = searchParams.get("token")
+
+  if (!paramToken) {
     redirectUrl.pathname = "/login"
     return NextResponse.redirect(redirectUrl)
   }
 
-  await actionSetAuthToken(searchParams.get("token"))
+  await actionSetAuthToken(paramToken)
   // TODO fetch user
   // TODO set user to cookie
 

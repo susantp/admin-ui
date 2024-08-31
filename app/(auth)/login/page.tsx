@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import DefaultLoginPage from "@/modules/login/presentation/pages/default/DefaultLoginPage"
+import DefaultLoginPage from "@/modules/auth/presentation/pages/default/DefaultLoginPage"
 
 export const metadata: Metadata = {
   title: "Login",

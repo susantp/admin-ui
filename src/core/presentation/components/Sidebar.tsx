@@ -1,7 +1,12 @@
 import React, { ReactElement } from "react"
 import Image from "next/image"
 
-import { LayoutDashboardIcon, ListOrderedIcon, ShirtIcon } from "lucide-react"
+import {
+  LayoutDashboardIcon,
+  ListOrderedIcon,
+  ShirtIcon,
+  User2Icon,
+} from "lucide-react"
 
 import MenuItem from "@/core/presentation/components/MenuItem"
 
@@ -48,6 +53,7 @@ export function Sidebar(): ReactElement {
         />
         <MenuItem label="Products" path="/products" icon={<ShirtIcon />} />
         <MenuItem label="Orders" path="/orders" icon={<ListOrderedIcon />} />
+        <MenuItem label="Profile" path="/profile" icon={<User2Icon />} />
       </div>
     </div>
   )
