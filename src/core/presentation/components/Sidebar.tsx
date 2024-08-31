@@ -45,7 +45,7 @@ export function Sidebar(): ReactElement {
     <div className="space-y-6 py-3">
       <BrandDiv label="Gravity Shop" />
       <Separator />
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-4">
         <MenuItem
           label="Dashboard"
           path="/dashboard"

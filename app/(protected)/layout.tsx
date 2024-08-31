@@ -18,7 +18,7 @@ function MainContent({ children }: ParentProps): ReactElement {
 export default function MainLayout({ children }: ParentProps): ReactElement {
   return (
     <div className="min-h-screen flex max-h-screen overflow-hidden p-2 space-x-2">
-      <aside className="w-16 md:w-64 rounded-md bg-primary text-primary-foreground px-1 md:px-3 lg:px-6">
+      <aside className="w-16 md:w-64 rounded-md bg-primary text-primary-foreground px-1 md:px-4">
         <Sidebar />
       </aside>
       <div className="flex flex-col flex-1 space-y-2">
