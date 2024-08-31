@@ -1,9 +1,5 @@
 import { ILayout } from "@/modules/auth/presentation/models/default/index"
 
-
-
-
-
 const defaultLayout: ILayout = {
   logo: {
     path: "/images/lis.png",
