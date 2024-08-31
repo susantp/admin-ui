@@ -46,7 +46,10 @@ export default function Notifications(): ReactElement {
           <BellIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-96 text-primary-foreground" align="end">
+      <DropdownMenuContent
+        className="w-96 text-secondary-foreground"
+        align="end"
+      >
         <DropdownMenuLabel className="flex place-content-between place-items-center py-0">
           <p>Notifications</p>
           <Button variant="link" size="sm" className="p-0 text-xs">

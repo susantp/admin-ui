@@ -36,7 +36,10 @@ export function UserMenu(): React.ReactElement {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 text-primary-foreground" align="end">
+      <DropdownMenuContent
+        className="w-56 text-secondary-foreground"
+        align="end"
+      >
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1  font-normal ">
             <p className="text-sm leading-none">vendor</p>
