@@ -22,7 +22,7 @@ export default function MenuItem({
     <Link
       href={path}
       className={cn(
-        "flex p-2.5 gap-4 whitespace-nowrap text-primary-foreground bg-primary rounded-md justify-center md:justify-start ",
+        "flex p-4 gap-4 whitespace-nowrap text-primary-foreground bg-primary rounded-md justify-center md:justify-start ",
         pathname.split("/")[1].includes(path.split("/")[1])
           ? "bg-muted text-secondary-foreground"
           : ""
