@@ -1,4 +1,5 @@
 import { ApiClient } from "@/core/data/index"
+import { actionGetAuthToken } from "@/modules/auth/domain/cookie-service"
 
 export const getApiClient = (
   endpoint: URL,
@@ -8,16 +9,19 @@ export const getApiClient = (
     method: string,
     body?: BodyInit
   ): Promise<T> => {
-    const headers = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      ...requestInit.headers,
-    }
+    const headers: Headers = new Headers(requestInit.headers)
+    headers.set("Accept", "application/json")
+    headers.set("Content-Type", "application/json")
+    headers.set(
+      "Authorization",
+      "Bearer ".concat((await actionGetAuthToken()) ?? "")
+    )
     const requestConfig: RequestInit = {
       method,
       headers,
       body: body ?? undefined,
     }
+    console.log(requestConfig.headers)
     try {
       const response: Response = await fetch(endpoint, requestConfig)
       return (await response.json()) as T

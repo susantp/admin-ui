@@ -1,3 +1,3 @@
-import DefaultLayout from "@/modules/login/presentation/layouts/default/DefaultLayout"
+import DefaultLayout from "@/modules/auth/presentation/layouts/default/DefaultLayout"
 
 export default DefaultLayout
