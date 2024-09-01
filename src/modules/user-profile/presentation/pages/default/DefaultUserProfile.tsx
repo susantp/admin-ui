@@ -1,6 +1,8 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, Suspense } from "react"
 
 import FormSkeleton from "@/core/presentation/components/FormSkeleton"
+import UserInformationForm from "@/modules/user-profile/components/server/UserInformation"
+import { actionGetUser } from "@/modules/user-profile/domain/actions"
 
 import {
   Card,
@@ -9,36 +11,26 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export default function DefaultUserProfile(): ReactElement {
-  // const profile = {}
+export default async function DefaultUserProfile(): Promise<ReactElement> {
+  const user = await actionGetUser()
   return (
     <div className="h-full p-4 space-y-6 overflow-auto ">
-      <Card className="flex w-full">
-        <CardHeader className=" w-5/12">
-          <CardTitle>User Information</CardTitle>
-          <CardDescription>Basic Information about the user</CardDescription>
+      <Card className="flex w-full bg-primary border-0 shadow-none">
+        <CardHeader className="w-5/12 text-primary-foreground">
+          <CardTitle className="text-3xl">User Information</CardTitle>
+          <CardDescription className="text-secondary-foreground text-sm">
+            Update your account&apos;s profile information and email address
+          </CardDescription>
         </CardHeader>
-        <FormSkeleton classes="p-4 space-y-6 border-0 w-7/12" />
-        {/* {!profile && <FormSkeleton />} */}
-        {/* {profile && <UserInformationForm profile={profile} />} */}
+        <Suspense
+          fallback={<FormSkeleton classes="p-4 space-y-6 border-0 w-7/12" />}
+        >
+          <UserInformationForm
+            user={user}
+            classes="p-4 space-y-6 border-0 w-7/12"
+          />
+        </Suspense>
       </Card>
-      {/* <section className="grid lg:grid-cols-2 gap-2"> */}
-      {/*   <CardHeader> */}
-      {/*     <CardTitle>User Details</CardTitle> */}
-      {/*     <CardDescription>Details information about the user</CardDescription> */}
-      {/*   </CardHeader> */}
-      {/*   /!* {!profile && <FormSkeleton />} *!/ */}
-      {/*   /!* {profile && <UserDetailsForm profile={profile} />} *!/ */}
-      {/* </section> */}
-      {/* <section className="grid lg:grid-cols-2 gap-2"> */}
-      {/*   <CardHeader> */}
-      {/*     <CardTitle>Screen Access Information</CardTitle> */}
-      {/*     <CardDescription> */}
-      {/*       Information about the screens accessed by the user */}
-      {/*     </CardDescription> */}
-      {/*   </CardHeader> */}
-      {/*   /!* <UserAccessInformation /> *!/ */}
-      {/* </section> */}
     </div>
   )
 }

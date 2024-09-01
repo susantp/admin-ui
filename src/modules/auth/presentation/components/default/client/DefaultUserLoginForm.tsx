@@ -30,7 +30,6 @@ export default function DefaultUserLoginForm(): ReactElement {
     resolver: zodResolver(loginFormSchema),
   })
   const { fields, action } = defaultUserLoginForm
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(loginUser)} className="space-y-2">

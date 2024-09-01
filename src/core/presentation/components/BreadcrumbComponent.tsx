@@ -22,7 +22,10 @@ export default function BreadcrumbComponent(): ReactElement {
         {pathArray.map(
           (item, i) =>
             i !== 0 && (
-              <>
+              <span
+                key={item}
+                className="inline-flex items-center gap-1.5 text-sm text-primary-foreground"
+              >
                 <BreadcrumbItem className="text-sm text-primary-foreground">
                   <BreadcrumbLink href={"/".concat(item)}>
                     {capitalizeFirstLetter(item)}
@@ -31,7 +34,7 @@ export default function BreadcrumbComponent(): ReactElement {
                 {i !== pathArray.length - 1 && (
                   <BreadcrumbSeparator className="text-sm text-primary-foreground" />
                 )}
-              </>
+              </span>
             )
         )}
       </BreadcrumbList>
