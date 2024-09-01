@@ -1,10 +1,4 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
 import { v4 } from "uuid"
-
-export function cn(...inputs: ClassValue[]): string {
-  return twMerge(clsx(inputs))
-}
 
 export function formatDate(input: string | number): string {
   const date: Date = new Date(input)
@@ -22,3 +16,6 @@ export const createUrl = (path: string): URL => {
 }
 
 export const generateUuidv4 = (): string => v4()
+
+export const capitalizeFirstLetter = (str: string): string =>
+  str.charAt(0).toUpperCase().concat(str.slice(1))

@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import {
   loginFormSchema,
   LoginFormValues,
-} from "@/modules/auth/config/form-config"
+} from "@/modules/auth/config/form-definitions"
 import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
 import defaultUserLoginForm from "@/modules/auth/presentation/models/default/defaultUserLoginForm"
 

@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Roboto } from "next/font/google"
 
-import { cn } from "@/core/utils/helpers"
+import { cn } from "@/lib/utils"
 
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"

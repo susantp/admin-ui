@@ -7,14 +7,6 @@ interface ParentProps {
   children: ReactNode
 }
 
-function MainContent({ children }: ParentProps): ReactElement {
-  return (
-    <main className="flex flex-col flex-1 overflow-auto rounded-md">
-      {children}
-    </main>
-  )
-}
-
 export default function MainLayout({ children }: ParentProps): ReactElement {
   return (
     <div className="min-h-screen flex max-h-screen overflow-hidden p-2 space-x-2">
@@ -23,7 +15,9 @@ export default function MainLayout({ children }: ParentProps): ReactElement {
       </aside>
       <div className="flex flex-col flex-1 space-y-2">
         <TopNavigation />
-        <MainContent>{children}</MainContent>
+        <main className="flex flex-col flex-1 overflow-auto rounded-md bg-primary">
+          {children}
+        </main>
       </div>
     </div>
   )

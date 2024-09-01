@@ -2,10 +2,9 @@
 
 import * as React from "react"
 
+import { cn } from "@/lib/utils"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
-
-import { cn } from "@/core/utils/helpers"
 
 import { buttonVariants } from "@/components/ui/button"
 
@@ -61,6 +60,7 @@ function Calendar({
     />
   )
 }
+
 Calendar.displayName = "Calendar"
 
 export { Calendar }

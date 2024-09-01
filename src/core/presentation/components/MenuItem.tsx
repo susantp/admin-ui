@@ -4,7 +4,7 @@ import React, { ReactElement } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { cn } from "@/core/utils/helpers"
+import { cn } from "@/lib/utils"
 
 interface MenuItemProps {
   label: string

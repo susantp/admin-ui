@@ -1,4 +1,4 @@
-import { LoginFormValues } from "@/modules/auth/config/form-config"
+import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 
 export interface IDefaultLoginHooks {
   isLoading: boolean
