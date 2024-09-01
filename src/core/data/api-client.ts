@@ -12,16 +12,19 @@ export const getApiClient = (
     const headers: Headers = new Headers(requestInit.headers)
     headers.set("Accept", "application/json")
     headers.set("Content-Type", "application/json")
-    headers.set(
-      "Authorization",
-      "Bearer ".concat((await actionGetAuthToken()) ?? "")
-    )
+    const authToken: string | undefined = await actionGetAuthToken()
+    if (authToken !== undefined) {
+      headers.set(
+        "Authorization",
+        "Bearer ".concat((await actionGetAuthToken()) ?? "")
+      )
+    }
+
     const requestConfig: RequestInit = {
       method,
       headers,
       body: body ?? undefined,
     }
-    console.log(requestConfig.headers)
     try {
       const response: Response = await fetch(endpoint, requestConfig)
       return (await response.json()) as T
