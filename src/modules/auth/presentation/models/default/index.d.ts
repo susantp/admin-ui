@@ -62,3 +62,7 @@ export interface ILayout {
   logo: ILogo
   meta: ILayoutFormMeta
 }
+
+export interface ILogoutParams {
+  revokeAll: boolean
+}

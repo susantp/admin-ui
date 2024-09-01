@@ -9,6 +9,7 @@ import {
 } from "@/modules/auth/domain/auth-actions"
 import { actionDeleteAuthToken } from "@/modules/auth/domain/cookie-service"
 import { IDefaultLoginHooks } from "@/modules/auth/presentation/hooks/index"
+import { ILogoutParams } from "@/modules/auth/presentation/models/default"
 
 import { toast } from "@/components/ui/use-toast"
 
@@ -35,7 +36,7 @@ export const useAuth = (): IDefaultLoginHooks => {
       })
       .finally(() => setIsLoading(false))
   }
-  const logoutUser = (values: { revokeAll: boolean }): void => {
+  const logoutUser = (values: ILogoutParams): void => {
     setIsLoading(true)
     actionLogout(JSON.stringify(values))
       .then((res) => {

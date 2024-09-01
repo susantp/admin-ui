@@ -33,6 +33,15 @@ export interface RefreshTokenResponse {
   access: string
 }
 
-export interface AuthEndpoints {
-  [key: string]: string
+export interface IEndPointCollection {
+  socialLoginProvider: {
+    [key: string]: {
+      redirectUrl: string
+    }
+  }
+  userLogin: string
+  userLogout: string
+  userRegister: string
+  refreshToken: string
+  loggedInUser: string
 }

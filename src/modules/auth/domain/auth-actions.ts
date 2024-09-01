@@ -9,10 +9,11 @@ import {
   actionSetAuthToken,
 } from "@/modules/auth/domain/cookie-service"
 
+const { userLogin, socialLoginProvider, userLogout } = authEndpoints
 export const actionLogin = async (credentials: BodyInit): Promise<string> => {
-  const response = await getApiClient(
-    createUrl(authEndpoints.userLogin)
-  ).post<ApiResponse>(credentials)
+  const response = await getApiClient(createUrl(userLogin)).post<ApiResponse>(
+    credentials
+  )
 
   if (response.metaData.error.length > 0) throw Error(response.metaData.error)
 
@@ -30,7 +31,7 @@ export const actionLogin = async (credentials: BodyInit): Promise<string> => {
 }
 
 export const actionLogout = async (body: BodyInit): Promise<string> =>
-  getApiClient(createUrl(authEndpoints.userLogout))
+  getApiClient(createUrl(userLogout))
     .post<ApiResponse>(body)
     .then((response) => {
       if (response.metaData.error.length > 0)
@@ -38,13 +39,14 @@ export const actionLogout = async (body: BodyInit): Promise<string> =>
       const { data } = response
       return data.message
     })
-    .catch((error: Error) => {
+    .catch(async (error: Error) => {
+      await actionDeleteAuthToken()
       throw Error(error.message)
     })
 
 export const actionGetLoginProviderLink = async (): Promise<string> => {
   const response = await getApiClient(
-    createUrl(authEndpoints.socialLoginProvider.github.redirectUrl)
+    createUrl(socialLoginProvider.github.redirectUrl)
   ).get<ApiResponse>()
 
   if (response.metaData.error.length > 0) throw Error(response.metaData.error)
