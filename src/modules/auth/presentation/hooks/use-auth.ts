@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-import { LoginFormValues } from "@/modules/auth/config/form-config"
+import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 import {
   actionGetLoginProviderLink,
   actionLogin,
@@ -24,7 +24,7 @@ export const useAuth = (): IDefaultLoginHooks => {
           title: "Sign in success.",
           description: "Signed in successfully.",
         })
-        // router.replace(values.callbackurl ?? "/")
+        router.replace(process.env.NEXT_REDIRECT_URL ?? "/profile")
       })
       .catch((e: Error) => {
         toast({

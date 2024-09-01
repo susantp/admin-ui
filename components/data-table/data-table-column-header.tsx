@@ -1,9 +1,8 @@
 import React from "react"
 
+import { cn } from "@/lib/utils"
 import { Column } from "@tanstack/react-table"
 import { ChevronsUpDown, EyeOff, SortAsc, SortDesc } from "lucide-react"
-
-import { cn } from "@/core/utils/helpers"
 
 import { Button } from "@/components/ui/button"
 import {
