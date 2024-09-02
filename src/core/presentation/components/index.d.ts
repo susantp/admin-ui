@@ -1,4 +1,4 @@
 export interface ErrorPageProps {
-  error: Error
-  reset: () => void
+  error?: Error
+  reset?: () => void
 }

@@ -23,7 +23,7 @@ import {
 import { Input } from "@/components/ui/input"
 
 export default function DefaultUserRegisterForm(): ReactElement {
-  const { isLoading, registerUser } = useAuth()
+  const { isLoading } = useAuth()
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
@@ -31,7 +31,7 @@ export default function DefaultUserRegisterForm(): ReactElement {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(registerUser)} className="space-y-2">
+      <form className="space-y-2">
         <FormField
           control={form.control}
           name="username"

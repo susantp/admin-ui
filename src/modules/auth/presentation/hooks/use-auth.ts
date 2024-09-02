@@ -8,12 +8,12 @@ import {
   actionLogout,
 } from "@/modules/auth/domain/auth-actions"
 import { actionDeleteAuthToken } from "@/modules/auth/domain/cookie-service"
-import { IDefaultLoginHooks } from "@/modules/auth/presentation/hooks/index"
+import { IUseAuthHooks } from "@/modules/auth/presentation/hooks/index"
 import { ILogoutParams } from "@/modules/auth/presentation/models/default"
 
 import { toast } from "@/components/ui/use-toast"
 
-export const useAuth = (): IDefaultLoginHooks => {
+export const useAuth = (): IUseAuthHooks => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
@@ -30,7 +30,6 @@ export const useAuth = (): IDefaultLoginHooks => {
       .catch((e: Error) => {
         toast({
           title: "Sign in failed",
-          description: e.message,
           variant: "destructive",
         })
       })
@@ -51,7 +50,6 @@ export const useAuth = (): IDefaultLoginHooks => {
       .catch((e: Error) => {
         toast({
           title: "Sign out failed",
-          description: e.message,
           variant: "destructive",
         })
       })
@@ -66,7 +64,6 @@ export const useAuth = (): IDefaultLoginHooks => {
       .catch((e: Error) => {
         toast({
           title: "Sign in failed",
-          description: e.message,
           variant: "destructive",
         })
       })

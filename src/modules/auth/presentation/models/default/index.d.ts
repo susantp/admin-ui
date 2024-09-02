@@ -1,3 +1,5 @@
+import { IInputField } from "@/core/presentation/models"
+
 export interface IForm {
   fields: ILoginFormFields | IRegisterFormFields
   action: ILoginAction
@@ -15,13 +17,6 @@ export interface IRegisterFormFields {
   password: IInputField
   password_confirmation: IInputField
   phone: IInputField
-}
-
-export interface IInputField {
-  label: string
-  id: string
-  type: string
-  placeHolder: string
 }
 
 interface ILoginFormMeta {
