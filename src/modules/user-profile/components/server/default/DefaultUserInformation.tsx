@@ -1,26 +1,14 @@
 import React, { ReactElement } from "react"
 
-import { IUser } from "@/modules/user-profile/presentation/models/default"
+import FieldSection from "@/core/presentation/components/FieldSection"
+import { IUserInformationProps } from "@/modules/user-profile/components"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-interface IUserInformationProps {
-  user: IUser
-  classes: string
-}
-
-interface IFieldSectionProps {
-  children: React.ReactNode[]
-}
-
-function FieldSection({ children }: IFieldSectionProps): ReactElement {
-  return <div className="flex flex-col gap-y-2 w-1/2">{children}</div>
-}
-
-export default function UserInformation({
+export default function DefaultUserInformation({
   user,
   classes,
 }: IUserInformationProps): ReactElement {

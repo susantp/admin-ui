@@ -39,21 +39,5 @@ export const getApiClient = (
   const get = <T>(): Promise<T> => makeRequest<T>("GET")
   const post = <T>(body: BodyInit): Promise<T> => makeRequest<T>("POST", body)
 
-  // const put = async <ResponseT>(endpoint: URL, data: T): Promise<ResponseT> =>
-  //   makeRequest(endpoint, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       ...headers,
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //
-  // const remove = async <ResponseT>(endpoint: URL): Promise<ResponseT> =>
-  //   makeRequest(endpoint, {
-  //     method: "DELETE",
-  //     headers,
-  //   })
-
   return { get, post }
 }
