@@ -6,9 +6,11 @@ export interface IUserInformationProps {
   user: IUser
   classes: string
 }
+
 export interface IResetPasswordProps {
   classes: string
 }
+
 export interface IFieldSectionProps {
   children: React.ReactNode[]
 }

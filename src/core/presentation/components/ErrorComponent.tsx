@@ -19,14 +19,13 @@ export default function ErrorComponent(): ReactElement {
           <p className="text-md">{errorMessage}</p>
         </CardContent>
         <CardFooter className="flex flex-col justify-center gap-y-2">
-          <Button className="text-secondary dark:text-primary-foreground p-6 text-lg hover:bg-accent">
+          <Button className="text-secondary dark:text-primary-foreground p-6 text-lg hover:bg-accent-foreground">
             Call Support
           </Button>
-          <Link
-            className="text-secondary dark:text-primary-foreground hover:bg-red-600 hover:text-white p-6 text-lg"
-            href="/logout"
-          >
-            Logout
+          <Link href="/logout">
+            <Button className="text-secondary dark:text-primary-foreground hover:bg-red-600 hover:text-white p-6 text-lg">
+              Logout
+            </Button>
           </Link>
         </CardFooter>
       </Card>

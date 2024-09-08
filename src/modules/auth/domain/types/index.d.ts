@@ -44,4 +44,6 @@ export interface IEndPointCollection {
   userRegister: string
   refreshToken: string
   loggedInUser: string
+  authCheck: string
+  getCsrfCookie: string
 }
