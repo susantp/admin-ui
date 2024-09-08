@@ -36,8 +36,9 @@ export const getApiClient = (
     }
   }
 
-  const get = <T>(): Promise<T> => makeRequest<T>("GET")
-  const post = <T>(body: BodyInit): Promise<T> => makeRequest<T>("POST", body)
+  const get = <TResponse>(): Promise<TResponse> => makeRequest<TResponse>("GET")
+  const post = <TResponse>(body: BodyInit): Promise<TResponse> =>
+    makeRequest<TResponse>("POST", body)
 
   return { get, post }
 }

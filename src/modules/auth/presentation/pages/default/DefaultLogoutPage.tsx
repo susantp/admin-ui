@@ -13,6 +13,7 @@ export default function DefaultLogoutPage(): ReactElement {
       <Button
         size="lg"
         variant="default"
+        className="bg-accent hover:bg-accent-foreground"
         onClick={() => logoutUser({ revokeAll: false })}
       >
         Logout from this devices

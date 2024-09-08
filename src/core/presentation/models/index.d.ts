@@ -4,3 +4,9 @@ export interface IInputField {
   type: string
   placeHolder: string
 }
+
+export interface IAppError {
+  error: string
+  errorCode: number | string
+  executionTime?: number
+}

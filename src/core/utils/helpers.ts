@@ -19,3 +19,5 @@ export const generateUuidv4 = (): string => v4()
 
 export const capitalizeFirstLetter = (str: string): string =>
   str.charAt(0).toUpperCase().concat(str.slice(1))
+
+export const tokenKey: string = "token"

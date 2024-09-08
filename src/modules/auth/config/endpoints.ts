@@ -1,8 +1,8 @@
 import { IEndPointCollection } from "@/modules/auth/domain/types"
 
-const modulePath = "/api/v1/auth"
+const modulePath = "/api/v1/vendor/auth"
 
-export const authEndpoints: IEndPointCollection = {
+export const endpoints: IEndPointCollection = {
   socialLoginProvider: {
     github: {
       redirectUrl: `${modulePath}/login/social?provider=github`,
@@ -13,4 +13,6 @@ export const authEndpoints: IEndPointCollection = {
   userRegister: `${modulePath}/register/`,
   refreshToken: `${modulePath}/refresh-token/`,
   loggedInUser: "logged-in-user/",
+  authCheck: `${modulePath}/check/`,
+  getCsrfCookie: "/sanctum/csrf-cookie",
 }

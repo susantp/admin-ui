@@ -1,11 +1,6 @@
 import React, { ReactElement, Suspense } from "react"
 
 import FormSkeleton from "@/core/presentation/components/FormSkeleton"
-import DefaultPasswordResetForm from "@/modules/user-profile/components/server/default/DefaultPasswordResetForm"
-import UserInformationForm from "@/modules/user-profile/components/server/default/DefaultUserInformation"
-import NoFeatureAvailable from "@/modules/user-profile/components/server/default/NoFeatureAvailable"
-import { actionGetUser } from "@/modules/user-profile/domain/actions"
-import { IUser } from "@/modules/user-profile/presentation/models/default"
 
 import {
   Card,
@@ -14,8 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export default async function DefaultUserProfile(): Promise<ReactElement> {
-  const user: IUser = await actionGetUser()
+export default function DefaultUserProfile(): ReactElement {
   return (
     <div className="h-full p-4 space-y-6 overflow-auto ">
       <Card className="flex w-full bg-primary border-0 shadow-none">
@@ -28,10 +22,10 @@ export default async function DefaultUserProfile(): Promise<ReactElement> {
         <Suspense
           fallback={<FormSkeleton classes="p-4 space-y-6 border-0 w-7/12" />}
         >
-          <UserInformationForm
-            user={user}
-            classes="p-4 space-y-6 border-0 w-7/12"
-          />
+          {/* <UserInformationForm */}
+          {/*   user={user} */}
+          {/*   classes="p-4 space-y-6 border-0 w-7/12" */}
+          {/* /> */}
         </Suspense>
       </Card>
 
@@ -42,15 +36,15 @@ export default async function DefaultUserProfile(): Promise<ReactElement> {
             Update your account&apos;s password
           </CardDescription>
         </CardHeader>
-        {user.authType === "credentials" ? (
-          <Suspense
-            fallback={<FormSkeleton classes="p-4 space-y-6 border-0 w-7/12" />}
-          >
-            <DefaultPasswordResetForm classes="p-4 space-y-6 border-0 w-7/12" />
-          </Suspense>
-        ) : (
-          <NoFeatureAvailable classes="p-4 space-y-6 border-0 w-7/12" />
-        )}
+        {/* {user.authType === "credentials" ? ( */}
+        {/*   <Suspense */}
+        {/*     fallback={<FormSkeleton classes="p-4 space-y-6 border-0 w-7/12" />} */}
+        {/*   > */}
+        {/*     <DefaultPasswordResetForm classes="p-4 space-y-6 border-0 w-7/12" /> */}
+        {/*   </Suspense> */}
+        {/* ) : ( */}
+        {/*   <NoFeatureAvailable classes="p-4 space-y-6 border-0 w-7/12" /> */}
+        {/* )} */}
       </Card>
     </div>
   )

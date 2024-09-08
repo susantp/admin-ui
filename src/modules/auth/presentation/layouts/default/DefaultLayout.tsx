@@ -12,7 +12,6 @@ export default function DefaultLayout({
 }: DefaultLayoutProps): React.ReactNode {
   const {
     logo: { path, altText, height, width },
-    meta: { title },
   } = defaultLayout
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-evenly">
@@ -24,7 +23,6 @@ export default function DefaultLayout({
           height={height}
           priority
         />
-        <h1 className="text-3xl font-medium text-center">{title}</h1>
       </div>
       {children}
       <div />

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 
+import { redirectPaths } from "@/core/presentation/models/redirectPaths"
 import { actionSetAuthToken } from "@/modules/auth/domain/cookie-service"
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const paramToken: string | null = searchParams.get("token")
 
   if (!paramToken) {
-    redirectUrl.pathname = "/login"
+    redirectUrl.pathname = redirectPaths.login
     return NextResponse.redirect(redirectUrl)
   }
 

@@ -11,14 +11,21 @@ export const useProfile = (): IUseProfileHooks => {
   const passwordReset = (values: ResetPasswordFormValues): void => {
     setIsLoading(true)
     actionResetPassword(JSON.stringify(values))
-      .then((message: string) => {
+      .then((response) => {
+        if (response.metaData.error.length > 0) {
+          toast({
+            title: response.metaData.error,
+            description: "Password reset failed",
+            variant: "destructive",
+          })
+          return
+        }
         toast({
           title: "Password reset successfully",
-          description: message,
           variant: "default",
         })
       })
-      .catch((e: Error) => {
+      .catch(() => {
         toast({
           title: "Password reset unsuccessful",
           variant: "destructive",
