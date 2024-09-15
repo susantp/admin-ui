@@ -16,6 +16,7 @@ export interface IMetaData {
 
 export interface ICredentialsLoginPayload {
   token: string
+  expiration: number
 }
 
 export interface IRedirectPayload {

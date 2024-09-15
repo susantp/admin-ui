@@ -1,13 +1,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-import {
-  ApiResponse,
-  ICredentialsLoginPayload,
-  IData,
-  IMetaData,
-  IRedirectPayload,
-} from "@/core/data"
+import { ApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
 import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 import {
   actionGetLoginProviderLink,
@@ -25,30 +19,24 @@ export const useAuth = (): IUseAuthHooks => {
 
   const loginUser = (values: LoginFormValues): void => {
     setIsLoading(true)
-    actionLogin(JSON.stringify(values))
-      .then(
-        (response: ApiResponse<IData<ICredentialsLoginPayload>, IMetaData>) => {
-          if (response.metaData.error.length > 0) {
-            toast({
-              title: "Sign in failed",
-              variant: "destructive",
-              description: response.metaData.error,
-            })
-            return
-          }
-          toast({
-            title: response.data.message,
-            variant: "default",
-            description: "Sign in successfully.",
-          })
-          router.replace(process.env.NEXT_REDIRECT_URL ?? "/dashboard")
+    actionLogin(values)
+      .then((response) => {
+        toast({
+          title: "Success",
+          variant: "default",
+          description: "redirecting to dashboard",
+        })
+        router.replace(process.env.NEXT_REDIRECT_URL ?? "/dashboard")
+      })
+      .catch((e) => {
+        let description: string = "Please contact support"
+        if (e instanceof Error) {
+          description = e.message
         }
-      )
-      .catch(() => {
         toast({
           title: "Sign in failed",
           variant: "destructive",
-          description: "Please contact support",
+          description,
         })
       })
       .finally(() => setIsLoading(false))

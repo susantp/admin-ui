@@ -21,3 +21,26 @@ export const capitalizeFirstLetter = (str: string): string =>
   str.charAt(0).toUpperCase().concat(str.slice(1))
 
 export const tokenKey: string = "token"
+export const appHeaders = {
+  _token: "",
+  setToken: (newToken: string): void => {
+    if (newToken && newToken.length > 0) {
+      // eslint-disable-next-line no-underscore-dangle
+      appHeaders._token = newToken
+    }
+  },
+  all: (): Headers => {
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    })
+    // eslint-disable-next-line no-underscore-dangle
+    if (appHeaders._token.length > 0) {
+      // eslint-disable-next-line no-underscore-dangle
+      headers.set("Authorization", `Bearer ${appHeaders._token}`)
+    }
+
+    return headers
+  },
+}
+export default appHeaders
