@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { actionGetAuthToken } from "@/modules/auth/domain/cookie-service"
+import { auth } from "@/modules/auth/config/auth"
 
-export async function middleware(request: NextRequest): Promise<NextResponse> {
+export default auth((request) => {
   const { nextUrl } = request
 
   const fromUrl = nextUrl.pathname + nextUrl.search
-  const serverToken = await actionGetAuthToken()
   const loginUrl = new URL(`/login`, request.url)
 
-  const isAuthentic = !!serverToken
+  const isAuthentic = !!request.auth
   const isRegisterPage = ["/register"].includes(nextUrl.pathname)
   const isLoginPage = ["/login"].includes(nextUrl.pathname)
 
@@ -17,20 +16,13 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     loginUrl.searchParams.append("from", fromUrl)
     return NextResponse.redirect(loginUrl)
   }
-
   if (isAuthentic && (isRegisterPage || isLoginPage)) {
-    request.headers.set("Authorization", "Bearer ".concat(serverToken ?? ""))
-
-    NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    })
-
-    return NextResponse.redirect(new URL("/profile", request.url))
+    return NextResponse.redirect(
+      new URL(process.env.NEXT_PUBLIC_REDIRECT_URL ?? "/dashboard", request.url)
+    )
   }
   return NextResponse.next()
-}
+})
 
 export const config = {
   matcher: [

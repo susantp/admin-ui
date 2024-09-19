@@ -1,7 +1,13 @@
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import {
+  redirect,
+  useParams,
+  useRouter,
+  useSearchParams,
+} from "next/navigation"
 
 import { ApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
+import ErrorCodes from "@/core/data/errorCodes"
 import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 import {
   actionGetLoginProviderLink,
@@ -16,27 +22,26 @@ import { toast } from "@/components/ui/use-toast"
 export const useAuth = (): IUseAuthHooks => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-
+  const urlParams = useSearchParams()
   const loginUser = (values: LoginFormValues): void => {
     setIsLoading(true)
     actionLogin(values)
-      .then((response) => {
+      .then(() => {
         toast({
           title: "Success",
           variant: "default",
-          description: "redirecting to dashboard",
         })
-        router.replace(process.env.NEXT_REDIRECT_URL ?? "/dashboard")
+        router.replace(
+          urlParams.get("from") ??
+            process.env.NEXT_PUBLIC_REDIRECT_URL ??
+            "/dashboard"
+        )
       })
-      .catch((e) => {
-        let description: string = "Please contact support"
-        if (e instanceof Error) {
-          description = e.message
-        }
+      .catch(() => {
         toast({
-          title: "Sign in failed",
+          title: "Failure",
           variant: "destructive",
-          description,
+          description: ErrorCodes.ERROR_AUTH,
         })
       })
       .finally(() => setIsLoading(false))

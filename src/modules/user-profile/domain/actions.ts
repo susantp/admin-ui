@@ -20,7 +20,9 @@ export const actionGetUser = async (): Promise<IUser | IMetaData> => {
   return data.payload.user as IUser
 }
 
-export const actionResetPassword = async (body: BodyInit): Promise<string> => {
+export const actionResetPassword = async (
+  body: BodyInit
+): Promise<ApiResponse<IData<[]>, IMetaData>> => {
   const response = await getApiClient(createUrl(resetPassword)).post<
     ApiResponse<IData<[]>, IMetaData>
   >(body)

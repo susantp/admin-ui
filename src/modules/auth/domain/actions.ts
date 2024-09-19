@@ -3,14 +3,15 @@
 import { isRedirectError } from "next/dist/client/components/redirect"
 import { redirect } from "next/navigation"
 
-import { AuthError } from "next-auth"
+import CallbackRouteError from "next-auth"
 
 import { ApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
 import { getApiClient } from "@/core/data/api-client"
+import ErrorCodes from "@/core/data/errorCodes"
 import { responseTamperedError } from "@/core/presentation/models/errors"
 import { redirectPaths } from "@/core/presentation/models/redirectPaths"
 import { createUrl } from "@/core/utils/helpers"
-import { signIn } from "@/modules/auth/config/auth"
+import { signIn, signOut } from "@/modules/auth/config/auth"
 import { endpoints } from "@/modules/auth/config/endpoints"
 import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 import { actionDeleteAuthToken } from "@/modules/auth/domain/cookie-service"
@@ -32,28 +33,14 @@ export const actionLogin = async (values: LoginFormValues): Promise<void> => {
     email: values.email,
     password: values.password,
   }).catch((error) => {
-    if (error instanceof AuthError) {
-      throw new Error(error.cause?.err?.message)
-    }
-    if (isRedirectError(error)) {
-      throw new Error(error.message)
-    }
-
-    throw new Error("Unexpected error")
+    throw Error(ErrorCodes.ERROR_AUTH)
   })
 }
 
-export const actionLogout = async (
-  body: BodyInit
-): Promise<ApiResponse<IData<[]>, IMetaData> | null> => {
-  const response = await getApiClient(createUrl(userLogout)).post<
-    ApiResponse<IData<[]>, IMetaData>
-  >(body)
-  if (response.metaData.error.length > 0) {
-    await actionDeleteAuthToken()
-    return redirect(redirectPaths.login)
-  }
-  return response
+export const actionLogout = async (body: BodyInit): Promise<void> => {
+  await signOut({
+    redirectTo: "/login",
+  })
 }
 
 export const actionGetLoginProviderLink = async (): Promise<
