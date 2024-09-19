@@ -11,7 +11,6 @@ export interface IData<TPayload> {
 export interface IMetaData {
   error: string
   errorCode: string | number
-  executionTime: number
 }
 
 export interface ICredentialsLoginPayload {

@@ -28,7 +28,6 @@ const credentialProvider = CredentialsProvider({
     if (response.metaData.error.length > 0) {
       throw new Error(response.metaData.error)
     }
-
     return response.data.payload
   },
 })
