@@ -1,6 +1,7 @@
 import { User } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GitHub from "next-auth/providers/github"
+import Twitter from "next-auth/providers/twitter"
 
 import {
   ApiResponse,
@@ -21,7 +22,6 @@ const credentialProvider = CredentialsProvider({
 
   async authorize(credentials): Promise<User> {
     const data = JSON.stringify(credentials)
-
     const response = await getApiClient(createUrl(endpoints.userLogin)).post<
       ApiResponse<IData<ICredentialsLoginPayload>, IMetaData>
     >(data)
@@ -33,5 +33,6 @@ const credentialProvider = CredentialsProvider({
   },
 })
 
-const providers = [credentialProvider, GitHub]
+const providers = [credentialProvider, GitHub, Twitter]
+
 export default providers
