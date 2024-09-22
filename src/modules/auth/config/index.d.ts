@@ -16,3 +16,8 @@ declare module "next-auth" {
     expiration: number
   }
 }
+
+export interface IAuthProvider {
+  name: string
+  id: string
+}

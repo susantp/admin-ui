@@ -1,9 +1,15 @@
 import NextAuth from "next-auth"
 
-import providers from "@/modules/auth/config/auth-providers"
+import providerConfig from "@/modules/auth/config/providerConfig"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers,
+  debug: process.env.NODE_ENV !== "production",
+  pages: {
+    signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     jwt({ token, user, trigger }) {
       if (trigger) {
@@ -21,4 +27,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session
     },
   },
+  ...providerConfig,
 })

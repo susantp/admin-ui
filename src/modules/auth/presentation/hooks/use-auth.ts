@@ -1,10 +1,5 @@
 import { useState } from "react"
-import {
-  redirect,
-  useParams,
-  useRouter,
-  useSearchParams,
-} from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 import { ApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
 import ErrorCodes from "@/core/data/errorCodes"
@@ -15,7 +10,6 @@ import {
   actionLogout,
 } from "@/modules/auth/domain/actions"
 import { IUseAuthHooks } from "@/modules/auth/presentation/hooks/index"
-import { ILogoutParams } from "@/modules/auth/presentation/models/default"
 
 import { toast } from "@/components/ui/use-toast"
 
@@ -46,9 +40,9 @@ export const useAuth = (): IUseAuthHooks => {
       })
       .finally(() => setIsLoading(false))
   }
-  const logoutUser = (values: ILogoutParams): void => {
+  const logoutUser = (): void => {
     setIsLoading(true)
-    actionLogout(JSON.stringify(values))
+    actionLogout()
       .then(() => {
         toast({
           title: "Log out successfully.",

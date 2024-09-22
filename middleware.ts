@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
+import { redirectPaths } from "@/core/presentation/models/redirectPaths"
 import { auth } from "@/modules/auth/config/auth"
 
 export default auth((request) => {
@@ -11,6 +12,7 @@ export default auth((request) => {
   const isAuthentic = !!request.auth
   const isRegisterPage = ["/register"].includes(nextUrl.pathname)
   const isLoginPage = ["/login"].includes(nextUrl.pathname)
+  const redirectedFromPath = loginUrl.searchParams.get("from")
 
   if (!isAuthentic && !isRegisterPage && !isLoginPage) {
     loginUrl.searchParams.append("from", fromUrl)
@@ -18,7 +20,7 @@ export default auth((request) => {
   }
   if (isAuthentic && (isRegisterPage || isLoginPage)) {
     return NextResponse.redirect(
-      new URL(process.env.NEXT_PUBLIC_REDIRECT_URL ?? "/dashboard", request.url)
+      new URL(redirectedFromPath ?? redirectPaths.profile, request.url)
     )
   }
   return NextResponse.next()
