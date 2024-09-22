@@ -5,7 +5,7 @@ import providers from "@/modules/auth/config/auth-providers"
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers,
   callbacks: {
-    jwt({ token, user, trigger, account }) {
+    jwt({ token, user, trigger }) {
       if (trigger) {
         if (user) {
           token.id = user.id
