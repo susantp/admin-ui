@@ -1,5 +1,6 @@
 import { User } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GitHub from "next-auth/providers/github"
 
 import {
   ApiResponse,
@@ -32,5 +33,5 @@ const credentialProvider = CredentialsProvider({
   },
 })
 
-const providers = [credentialProvider]
+const providers = [credentialProvider, GitHub]
 export default providers
