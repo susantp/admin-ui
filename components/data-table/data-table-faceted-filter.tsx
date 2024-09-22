@@ -1,9 +1,8 @@
 import * as React from "react"
 
+import { cn } from "@/lib/utils"
 import { Column } from "@tanstack/react-table"
 import { Check, LucideIcon, PlusCircle } from "lucide-react"
-
-import { cn } from "@/core/utils/helpers"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

@@ -1,92 +1,80 @@
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 
-import { signIn } from "next-auth/react"
-
-import { registerAction } from "@/modules/auth/domain/auth-actions"
-import { authConfig } from "@/modules/auth/domain/auth-config"
+import { ApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
+import ErrorCodes from "@/core/data/errorCodes"
+import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 import {
-  LoginFormValues,
-  RegisterFormValues,
-} from "@/modules/auth/presentation/components/form-config"
+  actionGetLoginProviderLink,
+  actionLogin,
+  actionLogout,
+} from "@/modules/auth/domain/actions"
+import { IUseAuthHooks } from "@/modules/auth/presentation/hooks/index"
 
 import { toast } from "@/components/ui/use-toast"
 
-export const useAuth = (): {
-  isLoading: boolean
-  loginUser: (values: LoginFormValues) => void
-  registerUser: (values: RegisterFormValues) => void
-} => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
+export const useAuth = (): IUseAuthHooks => {
   const [isLoading, setIsLoading] = useState(false)
-
+  const router = useRouter()
+  const urlParams = useSearchParams()
   const loginUser = (values: LoginFormValues): void => {
     setIsLoading(true)
-    signIn(authConfig.credentialId, {
-      redirect: false,
-      username: values.username,
-      password: values.password,
-      callbackUrl: searchParams.get("from") ?? "/",
-    })
-      .then((res) => {
-        if (res?.error) {
-          toast({
-            title: "Sign in failed",
-            description: res.error,
-            variant: "destructive",
-          })
-        } else {
-          toast({
-            title: "Sign in success.",
-            description: "Signed in successfully.",
-          })
-          router.replace(res?.url ?? "/")
-        }
+    actionLogin(values)
+      .then(() => {
+        toast({
+          title: "Success",
+          variant: "default",
+        })
+        router.replace(
+          urlParams.get("from") ??
+            process.env.NEXT_PUBLIC_REDIRECT_URL ??
+            "/dashboard"
+        )
+      })
+      .catch(() => {
+        toast({
+          title: "Failure",
+          variant: "destructive",
+          description: ErrorCodes.ERROR_AUTH,
+        })
+      })
+      .finally(() => setIsLoading(false))
+  }
+  const logoutUser = (): void => {
+    setIsLoading(true)
+    actionLogout()
+      .then(() => {
+        toast({
+          title: "Log out successfully.",
+        })
       })
       .catch(() => {})
       .finally(() => setIsLoading(false))
   }
-
-  const registerUser = (values: RegisterFormValues): void => {
+  const getLoginProviderLink = (): void => {
     setIsLoading(true)
-    registerAction({
-      username: values.username,
-      password: values.password,
-      email: values.email,
-      phone: values.phone,
-    })
-      .then(() => {
-        signIn(authConfig.credentialId, {
-          redirect: false,
-          username: values.username,
-          password: values.password,
-        })
-          .then((res) => {
-            if (res?.error) {
-              router.replace("/login")
-              return
-            }
-
-            toast({
-              title: "Registration success",
-              description: "You have been successfully registered.",
-            })
-            router.replace("/")
-          })
-          .catch(() => {})
-          .finally(() => setIsLoading(false))
-      })
-      .catch((error: Error) => {
+    actionGetLoginProviderLink()
+      .then((response: ApiResponse<IData<IRedirectPayload>, IMetaData>) => {
+        if ("redirectUrl" in response.data.payload) {
+          const { redirectUrl } = response.data.payload
+          window.open(redirectUrl, "_self")
+          return
+        }
         toast({
-          title: "Registration failed",
-          description: error.message,
+          title: "Sign in failed",
           variant: "destructive",
+          description: response.metaData.error,
         })
-        setIsLoading(false)
       })
+      .catch(() => {
+        toast({
+          title: "Sign in failed",
+          variant: "destructive",
+          description: "please contact support",
+        })
+      })
+      .finally(() => setIsLoading(false))
   }
 
-  return { isLoading, loginUser, registerUser }
+  return { isLoading, loginUser, getLoginProviderLink, logoutUser }
 }

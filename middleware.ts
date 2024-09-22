@@ -1,40 +1,30 @@
 import { NextResponse } from "next/server"
 
-import { getToken } from "next-auth/jwt"
-import { withAuth } from "next-auth/middleware"
+import { redirectPaths } from "@/core/presentation/models/redirectPaths"
+import { auth } from "@/modules/auth/config/auth"
 
-export default withAuth(
-  async (req) => {
-    const token = await getToken({ req })
-    const isAuth = !!token
-    const isAuthPage = ["/login", "/register"].includes(req.nextUrl.pathname)
+export default auth((request) => {
+  const { nextUrl } = request
 
-    if (isAuthPage) {
-      if (isAuth) {
-        return NextResponse.redirect(new URL("/", req.url))
-      }
+  const fromUrl = nextUrl.pathname + nextUrl.search
+  const loginUrl = new URL(`/login`, request.url)
 
-      return null
-    }
+  const isAuthentic = !!request.auth
+  const isRegisterPage = ["/register"].includes(nextUrl.pathname)
+  const isLoginPage = ["/login"].includes(nextUrl.pathname)
+  const redirectedFromPath = loginUrl.searchParams.get("from")
 
-    if (isAuth) return null
-
-    const { pathname, search } = req.nextUrl
-    const from = pathname + search
-    const redirectUrl = new URL(
-      `/login?from=${encodeURIComponent(from)}`,
-      req.url
-    )
-    return NextResponse.redirect(redirectUrl)
-  },
-  {
-    callbacks: {
-      async authorized() {
-        return Promise.resolve(true)
-      },
-    },
+  if (!isAuthentic && !isRegisterPage && !isLoginPage) {
+    loginUrl.searchParams.append("from", fromUrl)
+    return NextResponse.redirect(loginUrl)
   }
-)
+  if (isAuthentic && (isRegisterPage || isLoginPage)) {
+    return NextResponse.redirect(
+      new URL(redirectedFromPath ?? redirectPaths.profile, request.url)
+    )
+  }
+  return NextResponse.next()
+})
 
 export const config = {
   matcher: [

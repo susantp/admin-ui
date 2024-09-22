@@ -1,11 +1,17 @@
 export interface LoginRequest {
   username: string
   password: string
+  redirect: boolean | undefined
+  callbackUrl?: string | undefined
 }
 
 export interface LoginResponse {
-  access: string
-  refresh: string
+  data: TokenResponse
+  status: string | number
+}
+
+export interface TokenResponse {
+  token: string
 }
 
 export interface RegisterRequest {
@@ -25,4 +31,19 @@ export interface RefreshTokenRequest {
 
 export interface RefreshTokenResponse {
   access: string
+}
+
+export interface IEndPointCollection {
+  socialLoginProvider: {
+    [key: string]: {
+      redirectUrl: string
+    }
+  }
+  userLogin: string
+  userLogout: string
+  userRegister: string
+  refreshToken: string
+  loggedInUser: string
+  authCheck: string
+  getCsrfCookie: string
 }

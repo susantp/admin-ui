@@ -5,11 +5,10 @@ import { Metadata } from "next"
 import { NextFont } from "next/dist/compiled/@next/font"
 import { Roboto } from "next/font/google"
 
-import { cn } from "@/core/utils/helpers"
+import { cn } from "@/lib/utils"
 
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
-import Providers from "@/app/providers"
 
 const font: NextFont = Roboto({
   weight: ["400", "500", "700"],
@@ -31,7 +30,7 @@ export default function RootLayout({
   children,
 }: RootLayoutProps): React.ReactElement {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${font.className} ${cn(
           "min-h-screen bg-background antialiased overflow-hidden"
@@ -39,7 +38,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Providers>{children}</Providers>
+          {children}
           <Toaster />
         </ThemeProvider>
       </body>

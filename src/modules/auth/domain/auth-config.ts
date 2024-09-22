@@ -1,6 +1,4 @@
-import { AuthConfig } from "@/modules/auth/domain/types/auth-config"
-
-export const authConfig: AuthConfig = {
+export const authConfig = {
   credentialId: "credentials",
   pageTitle: "SOA POC",
   logo: {
@@ -14,8 +12,8 @@ export const authConfig: AuthConfig = {
     path: "/register",
   },
   loginForm: {
-    helperLinkLabel: "Don't have an account? Register",
-    path: "/login",
+    helperLinkLabel: "Register",
+    path: "/auth",
     formTitle: "Welcome back",
     formSubtitle: "Enter your credentials to sign in to your account",
     emailField: {
@@ -35,7 +33,7 @@ export const authConfig: AuthConfig = {
     },
   },
   registerForm: {
-    helperLinkLabel: "Already have an account? Log In",
+    helperLinkLabel: "Log In",
     path: "/register",
     actionBtn: {
       label: "Register",

@@ -1,35 +1,24 @@
 import React, { ReactElement, ReactNode } from "react"
 
-import { fetchUserScreensAction } from "@/modules/rbac/domain/rbac-actions"
-import { fetchUserProfileAction } from "@/modules/user-profile/domain/profile-actions"
+import { Sidebar } from "@/core/presentation/components/Sidebar"
+import TopNavigation from "@/core/presentation/components/TopNavigation"
 
-import MainNav from "@/components/layout/main-nav"
-import { Sidebar } from "@/components/layout/sidebar"
-import StateProvider from "@/app/(protected)/state-provider"
-
-interface DashboardLayoutProps {
+interface ParentProps {
   children: ReactNode
-  admin: ReactNode
 }
 
-export default async function DashboardLayout({
-  children,
-  admin,
-}: DashboardLayoutProps): Promise<ReactElement> {
-  const profile = await fetchUserProfileAction()
-  const screens = await fetchUserScreensAction()
-
+export default function MainLayout({ children }: ParentProps): ReactElement {
   return (
-    <StateProvider screens={screens ?? []} profile={profile}>
-      <div className="min-h-screen flex max-h-screen overflow-hidden p-2 space-x-2">
-        {profile.isAdmin && <Sidebar />}
-        <div className="flex flex-col flex-1 space-y-2">
-          <MainNav />
-          <main className="flex flex-col flex-1 overflow-auto rounded-md">
-            {profile.isAdmin ? admin : children}
-          </main>
-        </div>
+    <div className="min-h-screen flex max-h-screen overflow-hidden p-2 space-x-2">
+      <aside className="w-16 md:w-64 rounded-md bg-primary text-primary-foreground px-1 md:px-4">
+        <Sidebar />
+      </aside>
+      <div className="flex flex-col flex-1 space-y-2">
+        <TopNavigation />
+        <main className="flex flex-col flex-1 overflow-auto rounded-md bg-primary">
+          {children}
+        </main>
       </div>
-    </StateProvider>
+    </div>
   )
 }
