@@ -9,21 +9,10 @@ import { Button } from "@/components/ui/button"
 export default function DefaultLogoutPage(): ReactElement {
   const { logoutUser } = useAuth()
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col gap-y-2">
-      <Button
-        size="lg"
-        variant="default"
-        className="bg-accent hover:bg-accent-foreground"
-        onClick={() => logoutUser({ revokeAll: false })}
-      >
-        Logout from this devices
-      </Button>
-      <Button
-        size="lg"
-        variant="destructive"
-        onClick={() => logoutUser({ revokeAll: true })}
-      >
-        Logout from all devices
+    <div className="w-full h-full flex justify-center items-center flex-col gap-y-4">
+      <h1 className="text-2xl">Are you sure you want to logout ?</h1>
+      <Button size="lg" variant="destructive" onClick={logoutUser}>
+        Logout
       </Button>
     </div>
   )
