@@ -46,4 +46,5 @@ export interface IEndPointCollection {
   loggedInUser: string
   authCheck: string
   getCsrfCookie: string
+  login: string
 }

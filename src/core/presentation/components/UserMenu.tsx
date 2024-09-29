@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
 
@@ -14,18 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function UserMenu(): React.ReactElement {
-  // if (!profile) {
-  //   return (
-  //     <div className="min-w-[200px] rounded-md p-2.5 flex gap-4 items-center bg-primary-foreground text-primary">
-  //       <Skeleton className="h-10 w-10 rounded-full" />
-  //       <div className="space-y-2 flex-grow">
-  //         <Skeleton className="h-2.5 w-[120px]" />
-  //         <Skeleton className="h-2.5 w-[80px]" />
-  //       </div>
-  //     </div>
-  //   )
-  // }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

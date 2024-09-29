@@ -11,7 +11,7 @@ export function formatDate(input: string | number): string {
 
 export const createUrl = (path: string): URL => {
   const baseUrl =
-    process.env.BACKEND_BASE_URL ?? "http://local-ne.techbizz.local"
+    process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://local-ne.techbizz.local"
   return new URL(baseUrl + path)
 }
 

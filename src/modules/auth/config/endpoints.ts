@@ -15,4 +15,5 @@ export const endpoints: IEndPointCollection = {
   loggedInUser: "logged-in-user/",
   authCheck: `${modulePath}/check/`,
   getCsrfCookie: "/sanctum/csrf-cookie",
+  login: `${modulePath}/vendor/login/credentials`,
 }

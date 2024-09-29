@@ -1,9 +1,7 @@
 import React, { ReactElement } from "react"
 import Link from "next/link"
 
-import providerMap from "@/modules/auth/config/auth-providers"
 import { authConfig } from "@/modules/auth/domain/auth-config"
-import DefaultLoginProviders from "@/modules/auth/presentation/components/default/client/DefaultLoginProviders"
 import defaultUserLoginForm from "@/modules/auth/presentation/models/default/defaultUserLoginForm"
 
 export default function DefaultLoginHelperDiv(): ReactElement {
@@ -14,8 +12,6 @@ export default function DefaultLoginHelperDiv(): ReactElement {
 
   return (
     <>
-      {providerMap && <DefaultLoginProviders />}
-
       <p className="px-8 text-center text-sm text-muted-foreground">
         <Link
           href={passwordRecovery.path}
