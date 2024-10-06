@@ -3,7 +3,10 @@
 import React from "react"
 import Link from "next/link"
 
+import Loading from "@/app/(protected)/loading"
 import { LogOutIcon, UserIcon } from "lucide-react"
+
+import { useAuth } from "@/modules/auth/presentation/hooks/auth"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -16,6 +19,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function UserMenu(): React.ReactElement {
+  const { user } = useAuth({
+    middleware: "auth",
+    redirectIfAuthenticated: "/login",
+  })
+  if (!user) return <Loading />
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -32,9 +40,9 @@ export function UserMenu(): React.ReactElement {
       >
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1  font-normal ">
-            <p className="text-sm leading-none">vendor</p>
+            <p className="text-sm leading-none">{user.name}</p>
             <p className="text-xs text-muted-foreground leading-none">
-              vendor@gmail.com
+              {user.email}
             </p>
           </div>
         </DropdownMenuLabel>

@@ -33,11 +33,11 @@ export default function DefaultUserLoginForm(): ReactElement {
   })
   const [shouldRemember, setShouldRemember] = useState(false)
   const [errors, setErrors] = useState([])
-  const [status, setStatus] = useState(null)
+  const [status, setStatus] = useState(false)
   const { fields, action } = defaultUserLoginForm
   const submitForm = async (values: LoginFormValues) => {
     const { email, password } = values
-    await login({
+    login({
       email,
       password,
       setErrors,

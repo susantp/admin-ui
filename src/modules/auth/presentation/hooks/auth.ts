@@ -1,21 +1,32 @@
-import { useEffect } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 
-import { AxiosError } from "axios"
+import { AxiosError, AxiosResponse } from "axios"
 import useSWR from "swr"
 
 import axios from "@/core/lib/axios"
 import { endpoints } from "@/modules/auth/config/endpoints"
+import { IUseAuth } from "@/modules/auth/presentation/hooks/index"
+import { IUser } from "@/modules/user-profile/presentation/models/default"
 
 interface IUseAuthProps {
   middleware: string
   redirectIfAuthenticated?: string
 }
 
+interface IProps {
+  email?: string
+  password?: string
+  password_confirmation?: string
+  name?: string
+  setErrors: Dispatch<SetStateAction<never[]>>
+  setStatus: Dispatch<SetStateAction<boolean>>
+}
+
 export const useAuth = ({
   middleware,
   redirectIfAuthenticated,
-}: IUseAuthProps) => {
+}: IUseAuthProps): IUseAuth => {
   const router = useRouter()
   const params = useParams()
 
@@ -23,7 +34,7 @@ export const useAuth = ({
     data: user,
     error,
     mutate,
-  } = useSWR("/api/user", () =>
+  } = useSWR<IUser, Error>("/api/user", () =>
     axios
       .get("/api/user")
       .then((res) => res?.data)
@@ -34,9 +45,9 @@ export const useAuth = ({
       })
   )
 
-  const csrf = () => axios.get(endpoints.getCsrfCookie)
+  const csrf = (): Promise<AxiosResponse> => axios.get(endpoints.getCsrfCookie)
 
-  const register = async ({ setErrors, ...props }) => {
+  const register = async ({ setErrors, ...props }: IProps): Promise<void> => {
     await csrf()
 
     setErrors([])
@@ -51,10 +62,14 @@ export const useAuth = ({
       })
   }
 
-  const login = async ({ setErrors, setStatus, ...props }) => {
+  const login = async ({
+    setErrors,
+    setStatus,
+    ...props
+  }: IProps): Promise<void> => {
     await csrf()
     setErrors([])
-    setStatus(null)
+    setStatus(false)
 
     axios
       .post(endpoints.login, props)
@@ -66,11 +81,11 @@ export const useAuth = ({
       })
   }
 
-  const forgotPassword = async ({ setErrors, setStatus, email }) => {
+  const forgotPassword = async ({ setErrors, setStatus, email }: IProps) => {
     await csrf()
 
     setErrors([])
-    setStatus(null)
+    setStatus(false)
 
     axios
       .post("/forgot-password", { email })
