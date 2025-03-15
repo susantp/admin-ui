@@ -10,7 +10,7 @@ import { IUseAuth } from "@/modules/auth/presentation/hooks/index"
 import { IUser } from "@/modules/user-profile/presentation/models/default"
 
 interface IUseAuthProps {
-  middleware: string
+  middleware?: string
   redirectIfAuthenticated?: string
 }
 
@@ -36,10 +36,11 @@ export const useAuth = ({
     mutate,
   } = useSWR<IUser, Error>("/api/user", () =>
     axios
-      .get("/api/user")
-      .then((res) => res?.data)
+      .get(endpoints.loggedInUser)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      .then((response: AxiosResponse) => response?.data)
       .catch((resError: AxiosError) => {
-        if (resError?.status !== 409) throw error
+        if (resError?.status !== 409) throw resError
 
         router.push("/verify-email")
       })
@@ -47,18 +48,24 @@ export const useAuth = ({
 
   const csrf = (): Promise<AxiosResponse> => axios.get(endpoints.getCsrfCookie)
 
-  const register = async ({ setErrors, ...props }: IProps): Promise<void> => {
+  const register = async ({
+    setErrors,
+    setStatus,
+    ...props
+  }: IProps): Promise<void> => {
     await csrf()
 
     setErrors([])
+    setStatus(false)
 
     axios
       .post("/register", props)
       .then(() => mutate())
-      .catch((error) => {
-        if (error.response.status !== 422) throw error
+      .catch((errorRes: AxiosError) => {
+        if (errorRes?.response?.status !== 422) throw errorRes
 
-        setErrors(error.response.data.errors)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        setErrors(errorRes?.response?.data?.errors)
       })
   }
 
@@ -74,10 +81,10 @@ export const useAuth = ({
     axios
       .post(endpoints.login, props)
       .then(() => mutate())
-      .catch((error) => {
-        if (error?.response?.metaData.status !== 422) throw error
-
-        setErrors(error.response.data.errors)
+      .catch((axiosError: AxiosError) => {
+        if (axiosError.status !== 422) throw axiosError
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        setErrors(axiosError?.response?.data?.message)
       })
   }
 
@@ -89,7 +96,7 @@ export const useAuth = ({
 
     axios
       .post("/forgot-password", { email })
-      .then((response) => setStatus(response.data.status))
+      .then((response: AxiosResponse) => setStatus(response.data.status))
       .catch((error) => {
         if (error.response.status !== 422) throw error
 
@@ -115,7 +122,7 @@ export const useAuth = ({
       })
   }
 
-  const resendEmailVerification = ({ setStatus }) => {
+  const resendEmailVerification = async ({ setStatus }) => {
     axios
       .post("/email/verification-notification")
       .then((response) => setStatus(response.data.status))
@@ -123,7 +130,7 @@ export const useAuth = ({
 
   const logout = async () => {
     if (!error) {
-      await axios.post("/logout").then(() => mutate())
+      await axios.post(endpoints.logout).then(() => mutate())
     }
 
     window.location.pathname = "/login"
@@ -133,8 +140,14 @@ export const useAuth = ({
     if (middleware === "guest" && redirectIfAuthenticated && user)
       router.push(redirectIfAuthenticated)
     if (window.location.pathname === "/verify-email" && user?.email_verified_at)
-      router.push(redirectIfAuthenticated)
-    if (middleware === "auth" && error) logout()
+      if (redirectIfAuthenticated != null) {
+        router.push(redirectIfAuthenticated)
+      }
+    if (middleware === "auth" && error) {
+      logout()
+        .then(() => null)
+        .catch(() => null)
+    }
   }, [user, error])
 
   return {

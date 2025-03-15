@@ -1,6 +1,6 @@
 "use client"
 
-import React, { ReactElement } from "react"
+import React, { ReactElement, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
@@ -10,7 +10,7 @@ import {
   registerFormSchema,
   RegisterFormValues,
 } from "@/modules/auth/config/form-definitions"
-import { useAuth } from "@/modules/auth/presentation/hooks/use-auth"
+import { useAuth } from "@/modules/auth/presentation/hooks/auth"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -23,12 +23,28 @@ import {
 import { Input } from "@/components/ui/input"
 
 export default function DefaultUserRegisterForm(): ReactElement {
-  const { isLoading } = useAuth()
+  const { register } = useAuth({
+    middleware: "guest",
+    redirectIfAuthenticated: "/profile",
+  })
+  const [errors, setErrors] = useState([])
+  const [status, setStatus] = useState(false)
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
   })
+  const submitForm = async (values: RegisterFormValues) => {
+    const { email, password } = values
 
+    await register({
+      email,
+      password,
+      setErrors,
+      setStatus,
+    })
+
+    return 1
+  }
   return (
     <Form {...form}>
       <form className="space-y-2">
@@ -97,8 +113,8 @@ export default function DefaultUserRegisterForm(): ReactElement {
           )}
         />
 
-        <Button disabled={isLoading} className="w-full">
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        <Button disabled={status} className="w-full">
+          {status && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Register
         </Button>
       </form>

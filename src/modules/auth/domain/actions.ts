@@ -1,14 +1,14 @@
 "use server"
 
-import { ApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
+import { IApiResponse, IData, IMetaData, IRedirectPayload } from "@/core/data"
 import { getApiClient } from "@/core/data/api-client"
 import ErrorCodes from "@/core/data/errorCodes"
 import { responseTamperedError } from "@/core/presentation/models/errors"
 import { createUrl } from "@/core/utils/helpers"
-import { signIn, signOut } from "@/modules/auth/config/auth"
 import { endpoints } from "@/modules/auth/config/endpoints"
 import { LoginFormValues } from "@/modules/auth/config/form-definitions"
 import LoginProviderEnum from "@/modules/auth/data/login.provider.enum"
+import { signIn, signOut } from "@/modules/auth/config/auth"
 
 const { socialLoginProvider } = endpoints
 
@@ -41,11 +41,11 @@ export const actionLogout = async (): Promise<void> => {
 }
 
 export const actionGetLoginProviderLink = async (): Promise<
-  ApiResponse<IData<IRedirectPayload>, IMetaData>
+  IApiResponse<IData<IRedirectPayload>, IMetaData>
 > => {
   const response = await getApiClient(
     createUrl(socialLoginProvider.github.redirectUrl)
-  ).get<ApiResponse<IData<IRedirectPayload>, IMetaData>>()
+  ).get<IApiResponse<IData<IRedirectPayload>, IMetaData>>()
 
   if (response.metaData.error.length > 0) {
     return response

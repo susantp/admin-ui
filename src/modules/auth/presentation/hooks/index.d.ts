@@ -11,7 +11,7 @@ export interface IUseAuthHooks {
 
 export interface IUseAuth {
   user: IUser | undefined
-  register: () => Promise<void>
+  register: ({ email, password, setErrors, setStatus }: IProps) => Promise<void>
   login: ({ email, password, setErrors, setStatus }: IProps) => void
   forgotPassword: () => void
   resetPassword: () => void

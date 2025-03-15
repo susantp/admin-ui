@@ -37,12 +37,15 @@ export default function DefaultUserLoginForm(): ReactElement {
   const { fields, action } = defaultUserLoginForm
   const submitForm = async (values: LoginFormValues) => {
     const { email, password } = values
+
     login({
       email,
       password,
       setErrors,
       setStatus,
     })
+
+    return 1
   }
   return (
     <Form {...form}>

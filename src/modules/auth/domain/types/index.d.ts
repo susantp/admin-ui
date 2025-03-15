@@ -39,12 +39,11 @@ export interface IEndPointCollection {
       redirectUrl: string
     }
   }
-  userLogin: string
-  userLogout: string
-  userRegister: string
+  
   refreshToken: string
   loggedInUser: string
   authCheck: string
   getCsrfCookie: string
   login: string
+  logout: string
 }

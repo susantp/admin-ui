@@ -1,4 +1,4 @@
-export interface ApiResponse<TData, TMetaData> {
+export interface IApiResponse<TData, TMetaData> {
   data: TData
   metaData: TMetaData
 }
